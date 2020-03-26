@@ -3,8 +3,8 @@
 #include "MemLeaks.h"
 
 #include "External_Libraries/SDL/include/SDL.h"
-#pragma comment( lib, "SDL/libx86/SDL2.lib")
-#pragma comment( lib, "SDL/libx86/SDL2main.lib")
+#pragma comment( lib, "External_Libraries/SDL/libx86/SDL2.lib")
+#pragma comment( lib, "External_Libraries/SDL/libx86/SDL2main.lib")
 
 
 enum class main_states
