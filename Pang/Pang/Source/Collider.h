@@ -12,10 +12,12 @@ struct Collider
 		NONE = -1,
 		WALL,
 		PLAYER,
-		ENEMY,
 		PLAYER_SHOT,
-		ENEMY_SHOT,
-		MECH,
+		ENEMY,
+		/*VERY_SMALL_BALLOON,
+		SMALL_BALLOON,
+		BIG_BALLOON,
+		VERY_BIG_BALLOON,*/
 
 		MAX
 	};

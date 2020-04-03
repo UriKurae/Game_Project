@@ -31,7 +31,7 @@ ModulePlayer::ModulePlayer()
 
 ModulePlayer::~ModulePlayer()
 {
-
+	
 }
 
 bool ModulePlayer::Start()
@@ -45,9 +45,10 @@ bool ModulePlayer::Start()
 
 	laserFx = App->audio->LoadFx("Assets/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/explosion.wav");
-
-	position.x = 150;
-	position.y = 120;
+	
+	//SET SPAWN POSITION FOR PLAYER
+	position.x = (SCREEN_WIDTH / 2) - 20;
+	position.y = SCREEN_HEIGHT-40;
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 23, 32 }, Collider::Type::PLAYER, this);
 
@@ -56,9 +57,6 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
-	// Moving the player with the camera scroll
-	//App->player->position.x += 1;
-
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x -= speed;
@@ -69,6 +67,7 @@ update_status ModulePlayer::Update()
 		position.x += speed;
 	}
 
+	//DO WHEN STAIRS
 	/*if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y += speed;

@@ -24,7 +24,7 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Backgrounds/Ankor Watt(Day).png");
+	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Fuji(Day).png");
 	App->audio->PlayMusic("Assets/stage1.ogg", 1.0f);
 
 	//Bottomside collider
