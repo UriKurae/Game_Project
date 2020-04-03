@@ -57,7 +57,7 @@ private:
 
 public:
 	//Template particle for an explosion
-	Particle explosion;
+	Particle balloonExplosion;
 
 	//Template particle for a laser
 	Particle laser;

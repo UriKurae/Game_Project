@@ -14,19 +14,19 @@
 ModulePlayer::ModulePlayer()
 {
 	// idle animation - just one sprite
-	idleAnim.PushBack({ 66, 1, 32, 14 });
+	idleAnim.PushBack({ 0, 110, 26, 32 });
 
 	// move upwards
-	upAnim.PushBack({ 100, 1, 32, 14 });
+	/*upAnim.PushBack({ 100, 1, 32, 14 });
 	upAnim.PushBack({ 132, 0, 32, 14 });
 	upAnim.loop = false;
-	upAnim.speed = 0.1f;
+	upAnim.speed = 0.1f;*/
 
 	// Move down
-	downAnim.PushBack({ 33, 1, 32, 14 });
+	/*downAnim.PushBack({ 33, 1, 32, 14 });
 	downAnim.PushBack({ 0, 1, 32, 14 });
 	downAnim.loop = false;
-	downAnim.speed = 0.1f;
+	downAnim.speed = 0.1f;*/
 }
 
 ModulePlayer::~ModulePlayer()
@@ -40,7 +40,7 @@ bool ModulePlayer::Start()
 
 	bool ret = true;
 
-	texture = App->textures->Load("Assets/ship.png");
+	texture = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
 	currentAnimation = &idleAnim;
 
 	laserFx = App->audio->LoadFx("Assets/laser.wav");
@@ -49,7 +49,7 @@ bool ModulePlayer::Start()
 	position.x = 150;
 	position.y = 120;
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+	collider = App->collisions->AddCollider({ position.x, position.y, 23, 32 }, Collider::Type::PLAYER, this);
 
 	return ret;
 }
@@ -57,7 +57,7 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	// Moving the player with the camera scroll
-	App->player->position.x += 1;
+	//App->player->position.x += 1;
 
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
@@ -69,7 +69,7 @@ update_status ModulePlayer::Update()
 		position.x += speed;
 	}
 
-	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	/*if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y += speed;
 		if (currentAnimation != &downAnim)
@@ -77,9 +77,9 @@ update_status ModulePlayer::Update()
 			downAnim.Reset();
 			currentAnimation = &downAnim;
 		}
-	}
+	}*/
 
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+/*	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y -= speed;
 		if (currentAnimation != &upAnim)
@@ -87,7 +87,7 @@ update_status ModulePlayer::Update()
 			upAnim.Reset();
 			currentAnimation = &upAnim;
 		}
-	}
+	}*/
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
@@ -129,11 +129,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == collider && destroyed == false)
 	{
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
+		/*App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 		App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, Collider::Type::NONE, 14);
 		App->particles->AddParticle(App->particles->explosion, position.x - 7, position.y + 12, Collider::Type::NONE, 40);
 		App->particles->AddParticle(App->particles->explosion, position.x + 5, position.y - 5, Collider::Type::NONE, 28);
-		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);
+		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);*/
 
 		App->audio->PlayFx(explosionFx);
 

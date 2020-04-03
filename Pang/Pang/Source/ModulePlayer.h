@@ -48,8 +48,9 @@ public:
 
 	// A set of animations
 	Animation idleAnim;
-	Animation upAnim;
-	Animation downAnim;
+	Animation left;
+	Animation right;
+	Animation dead;
 
 	// The player's collider
 	Collider* collider = nullptr;
