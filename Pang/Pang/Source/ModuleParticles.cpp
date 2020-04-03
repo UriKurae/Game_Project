@@ -22,7 +22,15 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/particles.png");
+	texture = App->textures->Load("Assets/Items&Weapons/Harpoon1.png");
+
+	//Harpoon shot particle
+	harpoonShot[0].anim.PushBack({ 8,55, 9, 34 });
+	harpoonShot[1].anim.PushBack({25, 53, 9, 36 });
+	harpoonShot[2].anim.PushBack({42, 51, 9, 38 });
+	harpoonShot[3].anim.PushBack({59, 48, 9, 41 });
+
+
 
 	// Explosion particle
 	/*explosion.anim.PushBack({274, 296, 33, 30});
@@ -34,11 +42,11 @@ bool ModuleParticles::Start()
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.3f;*/
 
-	laser.anim.PushBack({ 232, 103, 16, 12 });
+	/*laser.anim.PushBack({ 232, 103, 16, 12 });
 	laser.anim.PushBack({ 249, 103, 16, 12 });
 	laser.speed.x = 5;
 	laser.lifetime = 180;
-	laser.anim.speed = 0.2f;
+	laser.anim.speed = 0.2f;*/
 
 	return true;
 }

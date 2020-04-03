@@ -50,7 +50,7 @@ public:
 	Animation idleAnim;
 	Animation left;
 	Animation right;
-	Animation dead;
+	//Animation dead;
 
 	// The player's collider
 	Collider* collider = nullptr;

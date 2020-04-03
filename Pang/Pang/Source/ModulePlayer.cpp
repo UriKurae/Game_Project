@@ -16,17 +16,22 @@ ModulePlayer::ModulePlayer()
 	// idle animation - just one sprite
 	idleAnim.PushBack({ 0, 110, 26, 32 });
 
-	// move upwards
-	/*upAnim.PushBack({ 100, 1, 32, 14 });
-	upAnim.PushBack({ 132, 0, 32, 14 });
-	upAnim.loop = false;
-	upAnim.speed = 0.1f;*/
+	// move left
+	left.PushBack({379, 0, 30, 31});
+	left.PushBack({416, 0, 28, 31});
+	left.PushBack({448, 0, 30, 32});
+	left.PushBack({482, 0, 30, 31});
+	left.PushBack({516, 0, 30, 32});
+	left.speed = 0.1f;
 
-	// Move down
-	/*downAnim.PushBack({ 33, 1, 32, 14 });
-	downAnim.PushBack({ 0, 1, 32, 14 });
-	downAnim.loop = false;
-	downAnim.speed = 0.1f;*/
+	//move right
+	right.PushBack({0, 0, 30, 32});
+	right.PushBack({33, 0, 30, 32});
+	right.PushBack({68, 0, 30, 32});
+	right.PushBack({102, 0, 28, 32});
+	right.PushBack({136, 0, 30, 32});
+	right.speed = 0.1f;
+	
 }
 
 ModulePlayer::~ModulePlayer()
@@ -48,7 +53,7 @@ bool ModulePlayer::Start()
 	
 	//SET SPAWN POSITION FOR PLAYER
 	position.x = (SCREEN_WIDTH / 2) - 20;
-	position.y = SCREEN_HEIGHT-40;
+	position.y = SCREEN_HEIGHT - 40;
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 23, 32 }, Collider::Type::PLAYER, this);
 
@@ -60,11 +65,24 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x -= speed;
+
+		if (currentAnimation != &left)
+		{
+			left.Reset();
+			currentAnimation = &left;
+		}
 	}
 
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x += speed;
+
+		if (currentAnimation != &right)
+		{
+			//right.Reset();
+			currentAnimation = &right;
+		}
+
 	}
 
 	//DO WHEN STAIRS
@@ -78,7 +96,7 @@ update_status ModulePlayer::Update()
 		}
 	}*/
 
-/*	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+	/*if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y -= speed;
 		if (currentAnimation != &upAnim)
@@ -90,15 +108,23 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
+		for (int i = 0; i < 3; ++i)
+		{
+			idleAnim.Reset();
+			currentAnimation = &idleAnim;
+			App->particles->harpoonShot[i].lifetime = 10;
+			App->particles->AddParticle(App->particles->harpoonShot[i], position.x+10, position.y-37, Collider::Type::PLAYER_SHOT);
+			
+		
+		}
 		App->audio->PlayFx(laserFx);
 	}
 
 	// If no up/down movement detected, set the current animation back to idle
-	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE)
+	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE)
 		currentAnimation = &idleAnim;
-
+		
 	collider->SetPos(position.x, position.y);
 
 	currentAnimation->Update();
