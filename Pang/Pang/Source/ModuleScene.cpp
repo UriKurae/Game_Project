@@ -41,7 +41,7 @@ bool ModuleScene::Start()
 
 
 	//ADD ENEMIES
-
+	App->collisions->AddCollider({ 6, 1, 48, 40 }, Collider::Type::BALLOON);
 	
 
 	return ret;

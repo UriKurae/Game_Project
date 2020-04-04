@@ -1,9 +1,12 @@
-#ifndef __ENEMY_BROWNSHIP_H__
-#define __ENEMY_BROWNSHIP_H__
+#ifndef __ENEMY_BALLOON_H__
+#define __ENEMY_BALLOON_H__
 
 #include "Enemy.h"
 #include "Path.h"
 #include "Application.h"
+#include "ModuleTextures.h"
+
+struct SDL_Texture;
 
 class Enemy_Balloon : public Enemy
 {
@@ -26,7 +29,7 @@ private:
 	
 	// This enemy has one sprite and one frame
 	// We are keeping it an animation for consistency with other enemies
-	Animation fly;
+	Animation balloonAnim;
 };
 
 #endif // __ENEMY_BROWNSHIP_H__

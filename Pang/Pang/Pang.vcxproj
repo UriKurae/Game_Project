@@ -22,6 +22,7 @@
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\Enemy_Balloon.h" />
     <ClInclude Include="Source\Enemy_BrownShip.h" />
     <ClInclude Include="Source\Enemy_Mech.h" />
     <ClInclude Include="Source\Enemy_RedBird.h" />
@@ -46,6 +47,7 @@
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\Enemy_Balloon.cpp" />
     <ClCompile Include="Source\Enemy_BrownShip.cpp" />
     <ClCompile Include="Source\Enemy_Mech.cpp" />
     <ClCompile Include="Source\Enemy_RedBird.cpp" />
