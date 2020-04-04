@@ -3,7 +3,6 @@
 
 #include "Enemy.h"
 #include "Path.h"
-#include "Application.h"
 #include "ModuleTextures.h"
 
 struct SDL_Texture;

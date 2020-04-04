@@ -27,7 +27,6 @@ bool ModuleScene::Start()
 	fgTexture = App->textures->Load("Assets/Foregrounds/Foreground Mt.Fuji(Day).png"); //fg on 1st Level is invisible
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Fuji(Day).png");
 
-
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 1.0f);
 
 	//Walls collider
@@ -37,11 +36,11 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 376, 0, 8, 308 }, Collider::Type::WALL);
 
 	//ADD COLLIDERS
-	
 
 
 	//ADD ENEMIES
-	App->collisions->AddCollider({ 6, 1, 48, 40 }, Collider::Type::BALLOON);
+	App->enemies->AddEnemy(ENEMY_TYPE::BALLOON, 100, 100);
+
 	
 
 	return ret;
@@ -53,6 +52,6 @@ update_status ModuleScene::PostUpdate()
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
 	App->render->Blit(fgTexture, 0, 0, NULL);
-
+	//App->render->Blit(balloon, 50, 50, NULL);
 	return update_status::UPDATE_CONTINUE;
 }

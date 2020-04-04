@@ -41,6 +41,14 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY_SHOT] = false;*/
 
+	matrix[Collider::Type::BALLOON][Collider::Type::WALL] = false;
+	matrix[Collider::Type::BALLOON][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::BALLOON][Collider::Type::PLAYER_SHOT] = true;
+	matrix[Collider::Type::BALLOON][Collider::Type::BALLOON] = false;
+	matrix[Collider::Type::BALLOON][Collider::Type::ENEMY] = false;
+
+
+
 
 }
 
@@ -137,9 +145,9 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::PLAYER_SHOT: // yellow
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 			break;
-			/*case Collider::Type::ENEMY_SHOT: // magenta
+			case Collider::Type::BALLOON: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
-			break;*/
+			break;
 		}
 	}
 }
