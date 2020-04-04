@@ -14,7 +14,10 @@ public:
 	// Creates animation and movement data and the collider
 	Enemy_Balloon(int x, int y);
 
-	
+	float speedY = 0.0f;
+	float gravity = 0.1f;
+	float speedX = 1.0f;
+
 
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
