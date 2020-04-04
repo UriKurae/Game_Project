@@ -93,8 +93,8 @@ bool ModuleAudio::PlayMusic(const char* path, float fade_time)
 	}
 
 	music = Mix_LoadMUS(path);
-	Mix_VolumeMusic(40);
-
+	Mix_VolumeMusic(20);
+	
 	if(music == NULL)
 	{
 		LOG("Cannot load music %s. Mix_GetError(): %s\n", path, Mix_GetError());
@@ -154,6 +154,7 @@ bool ModuleAudio::PlayFx(uint index, int repeat)
 	
 	if(soundFx[index] != nullptr)
 	{
+		Mix_VolumeChunk(soundFx[index], 5000);
 		Mix_PlayChannel(-1, soundFx[index], repeat);
 		ret = true;
 	}
