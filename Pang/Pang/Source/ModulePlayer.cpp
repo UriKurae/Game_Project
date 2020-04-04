@@ -48,8 +48,8 @@ bool ModulePlayer::Start()
 	texture = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
 	currentAnimation = &idleAnim;
 
-	laserFx = App->audio->LoadFx("Assets/laser.wav");
-	explosionFx = App->audio->LoadFx("Assets/explosion.wav");
+	HarpoonFx = App->audio->LoadFx("Assets/Sound/FX/NormalShoot.wav");
+
 	
 	//SET SPAWN POSITION FOR PLAYER
 	position.x = (SCREEN_WIDTH / 2) - 20;
@@ -85,7 +85,7 @@ update_status ModulePlayer::Update()
 
 	}
 
-	//DO WHEN STAIRS
+	//DO IF AND WHEN STAIRS ARE IMPLEMENTED
 	/*if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y += speed;
@@ -108,16 +108,20 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
+		App->audio->PlayFx(HarpoonFx);
+
 		for (int i = 0; i < 3; ++i)
 		{
+			/*
 			idleAnim.Reset();
 			currentAnimation = &idleAnim;
-			App->particles->harpoonShot[i].lifetime = 10;
-			App->particles->AddParticle(App->particles->harpoonShot[i], position.x+10, position.y-37, Collider::Type::PLAYER_SHOT);
-			
-		
+			*/
+			for (int i = 0; i < 25; i++)
+			{
+				App->particles->harpoonShot[i].lifetime = 10; //Was 10 
+				App->particles->AddParticle(App->particles->harpoonShot[i], position.x + 10, position.y - 37, Collider::Type::PLAYER_SHOT);
+			}		
 		}
-		App->audio->PlayFx(laserFx);
 	}
 
 	// If no up/down movement detected, set the current animation back to idle
@@ -159,6 +163,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->particles->AddParticle(App->particles->explosion, position.x - 7, position.y + 12, Collider::Type::NONE, 40);
 		App->particles->AddParticle(App->particles->explosion, position.x + 5, position.y - 5, Collider::Type::NONE, 28);
 		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);*/
+
 
 		App->audio->PlayFx(explosionFx);
 

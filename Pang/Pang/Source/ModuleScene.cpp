@@ -26,8 +26,9 @@ bool ModuleScene::Start()
 
 	fgTexture = App->textures->Load("Assets/Foregrounds/Foreground Mt.Fuji(Day).png"); //fg on 1st Level is invisible
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Fuji(Day).png");
-	
-	App->audio->PlayMusic("Assets/stage1.ogg", 1.0f);
+
+
+	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 1.0f);
 
 	//Walls collider
 	App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);

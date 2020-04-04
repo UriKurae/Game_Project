@@ -8,7 +8,7 @@
 
 ModuleCollisions::ModuleCollisions()
 {
-	for(uint i = 0; i < MAX_COLLIDERS; ++i)
+	for(uint i = 0; i < MAX_COLLIDERS; ++i) //Assign nullptr to all colliders at the constructor.
 		colliders[i] = nullptr;
 
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
