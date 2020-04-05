@@ -42,7 +42,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY_SHOT] = false;*/
 
 	matrix[Collider::Type::BALLOON][Collider::Type::WALL] = false;
-	matrix[Collider::Type::BALLOON][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::BALLOON][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::BALLOON][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::BALLOON][Collider::Type::BALLOON] = false;
 	matrix[Collider::Type::BALLOON][Collider::Type::ENEMY] = false;

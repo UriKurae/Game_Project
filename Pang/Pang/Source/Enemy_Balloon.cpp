@@ -16,21 +16,30 @@ Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x,y)
 
 void Enemy_Balloon::Update()
 {
+	balloonBounce();
+	 
+	Enemy::Update();
+}
+
+void Enemy_Balloon::balloonBounce()
+{
 	//PHYSICS MOTIONS
+
+	//TODO PHYSICS, IMPLEMENT RIGHT, LEFT AND TOP HIT WITH THE BALLOON, SHOULD NOT GAIN SPEED.
 	if (position.y < (SCREEN_HEIGHT - 40))
 	{
 
-	position.x += speedX;
-	position.y -= (speedY + gravity);
-	speedY -= gravity;
-		 
+		position.x += speedX;
+		position.y -= (speedY + gravity);
+		speedY -= gravity;
+
 	}
 	else if (position.y >= (SCREEN_HEIGHT - 40))
 	{
 		speedY = 4.5f;
 		position.y -= speedY;
 	}
-    if (position.x >= SCREEN_WIDTH-50)
+	if (position.x >= SCREEN_WIDTH - 50)
 	{
 		speedX = -speedX;
 	}
@@ -38,7 +47,4 @@ void Enemy_Balloon::Update()
 	{
 		speedX = 1.0f;
 	}
-	//TODO PHYSICS, IMPLEMENT RIGHT, LEFT AND TOP HIT WITH THE BALLOON, SHOULD NOT GAIN SPEED.
-
-	Enemy::Update();
 }

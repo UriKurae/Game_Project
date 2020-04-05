@@ -14,9 +14,7 @@ public:
 	// Creates animation and movement data and the collider
 	Enemy_Balloon(int x, int y);
 
-	float speedY = 0.0f;
-	float gravity = 0.1f;
-	float speedX = 1.0f;
+	
 
 
 	// The enemy is going to follow the different steps in the path
@@ -28,7 +26,14 @@ private:
 	// And an animation for each step
 	Path path;
 
+	//balloon motions
+	float speedY = 0.0f;
+	float gravity = 0.1f;
+	float speedX = 1.0f;
 	
+	void balloonBounce();
+
+
 	// This enemy has one sprite and one frame
 	// We are keeping it an animation for consistency with other enemies
 	Animation balloonAnim;

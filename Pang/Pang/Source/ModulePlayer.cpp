@@ -79,7 +79,7 @@ update_status ModulePlayer::Update()
 
 		if (currentAnimation != &right)
 		{
-			//right.Reset();
+			right.Reset();
 			currentAnimation = &right;
 		}
 
@@ -124,6 +124,14 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	//Detect when A and D are pressed at the same time and set the current animation to idle
+	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT &&
+		App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	{
+		//idleAnim.Reset();
+		currentAnimation = &idleAnim;
+		position.x += speed;
+	}
 	// If no up/down movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE)
