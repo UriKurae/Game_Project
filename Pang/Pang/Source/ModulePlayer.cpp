@@ -118,8 +118,8 @@ update_status ModulePlayer::Update()
 			*/
 			for (int i = 0; i < 25; i++)
 			{
-				App->particles->harpoonShot[i].lifetime = 10; //Was 10 
-				App->particles->AddParticle(App->particles->harpoonShot[i], position.x + 10, position.y - 37, Collider::Type::PLAYER_SHOT);
+				App->particles->harpoonShot.lifetime = 10; //Was 10 
+				App->particles->AddParticle(App->particles->harpoonShot, position.x+10, position.y - 37, Collider::Type::PLAYER_SHOT);
 			}		
 		}
 	}
@@ -130,7 +130,7 @@ update_status ModulePlayer::Update()
 	{
 		//idleAnim.Reset();
 		currentAnimation = &idleAnim;
-		position.x += speed;
+		position.x = position.x;
 	}
 	// If no up/down movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
@@ -173,7 +173,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);*/
 
 
-		App->audio->PlayFx(explosionFx);
+		//App->audio->PlayFx(explosionFx);
 
 		destroyed = true;
 	}
