@@ -6,7 +6,11 @@
 Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x,y)
 {
 	
-	balloonAnim.PushBack({ 1, 6, 48, 40 });
+	balloonAnim.PushBack({ 207,112, 48, 40 });
+	balloonDeath.PushBack({4,141,48,40});
+	balloonDeath.PushBack({60,148,28,24});
+	balloonDeath.PushBack({144,136,48,46});
+	balloonDeath.speed = 0.1f;
 
 	currentAnim = &balloonAnim;
 
@@ -17,6 +21,8 @@ Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x,y)
 void Enemy_Balloon::Update()
 {
 	balloonBounce();
+	
+	
 	 
 	Enemy::Update();
 }

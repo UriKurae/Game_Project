@@ -116,11 +116,26 @@ update_status ModulePlayer::Update()
 		currentAnimation = &shotAnim;
 		App->audio->PlayFx(HarpoonFx);
 
-		App->particles->harpoonShot[0].position.y = position.y;
+
+		int movY = 15;
+		int lifeTimeT = 40;
+		
 		for (int i = 0; i < 25; i++)
 		{
-			App->particles->harpoonShot[i].lifetime = 10; //Was 10
-			App->particles->AddParticle(App->particles->harpoonShot[i], position.x + 10, position.y - 37, Collider::Type::PLAYER_SHOT);	
+			if (i == 0)
+			{
+				App->particles->harpoonShot[i].lifetime = lifeTimeT; //Was 10
+				App->particles->AddParticle(App->particles->harpoonShot[i], position.x + 10, position.y - movY, Collider::Type::PLAYER_SHOT);
+			}
+			else 
+			{
+
+			App->particles->harpoonShot[i].lifetime = lifeTimeT; //Was 10
+			App->particles->AddParticle(App->particles->harpoonShot[i-1], position.x + 10, position.y - movY, Collider::Type::PLAYER_SHOT);	
+			}
+			
+			movY += 20;
+			lifeTimeT -= 2;
 		}
 	}
 
