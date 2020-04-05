@@ -32,6 +32,12 @@ ModulePlayer::ModulePlayer()
 	rightAnim.PushBack({136, 0, 30, 32});
 	rightAnim.speed = 0.1f;
 
+	//left death animation
+	deadAnimLeft.PushBack({ 69, 110 ,41, 30 });
+
+	//right death animation
+	deadAnimRight.PushBack({ 120, 110, 41, 30 });
+
 	//shot animation
 	shotAnim.PushBack({ 32, 113, 27, 29 });
 	
@@ -182,11 +188,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == collider && destroyed == false)
 	{
-		if (c1->type == Collider::Type::WALL && c2->type == Collider::Type::PLAYER)
-		{
-			destroyed = false;
-			position.x = SCREEN_WIDTH - 8;
-		}
+		/*
+		currentAnimation = &deadAnimLeft;
+		destroyed = true;
+		*/
 
 		/*App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 		App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, Collider::Type::NONE, 14);

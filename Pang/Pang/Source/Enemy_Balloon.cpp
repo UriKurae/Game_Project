@@ -55,21 +55,3 @@ void Enemy_Balloon::balloonBounce()
 	}
 }
 
-void Enemy_Balloon::OnCollision(Collider* c1, Collider* c2)
-{
-	if (c1->type == Collider::Type::WALL && c2->type == Collider::Type::PLAYER)
-	{
-		position.x = position.x;
-	}
-
-
-
-
-	if (c1->type == Collider::Type::BALLOON && c2->type == Collider::Type::PLAYER_SHOT)
-	{
-		currentAnim = &balloonDeath;
-	}
-
-
-
-}

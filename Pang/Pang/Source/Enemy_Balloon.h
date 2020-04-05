@@ -14,7 +14,7 @@ public:
 	// Creates animation and movement data and the collider
 	Enemy_Balloon(int x, int y);
 
-	void OnCollision(Collider* c1, Collider* c2);
+	//virtual void OnCollision(Collider* collider);
 
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step

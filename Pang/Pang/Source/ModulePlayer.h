@@ -51,7 +51,8 @@ public:
 	Animation leftAnim;
 	Animation rightAnim;
 	Animation shotAnim;
-	Animation deadAnim;
+	Animation deadAnimLeft;
+	Animation deadAnimRight;
 
 	// The player's collider
 	Collider* collider = nullptr;
