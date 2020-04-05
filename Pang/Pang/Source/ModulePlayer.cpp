@@ -151,6 +151,7 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE)
 		currentAnimation = &idleAnim;
+
 		
 	collider->SetPos(position.x, position.y);
 
@@ -181,6 +182,12 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == collider && destroyed == false)
 	{
+		if (c1->type == Collider::Type::WALL && c2->type == Collider::Type::PLAYER)
+		{
+			destroyed = false;
+			position.x = SCREEN_WIDTH - 8;
+		}
+
 		/*App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 		App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, Collider::Type::NONE, 14);
 		App->particles->AddParticle(App->particles->explosion, position.x - 7, position.y + 12, Collider::Type::NONE, 40);
@@ -190,6 +197,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		//App->audio->PlayFx(explosionFx);
 
-		destroyed = true;
+		//destroyed = true;
 	}
 }
