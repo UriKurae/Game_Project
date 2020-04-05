@@ -52,6 +52,6 @@ update_status ModuleScene::PostUpdate()
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
 	App->render->Blit(fgTexture, 0, 0, NULL);
-	//App->render->Blit(balloon, 50, 50, NULL);
+
 	return update_status::UPDATE_CONTINUE;
 }

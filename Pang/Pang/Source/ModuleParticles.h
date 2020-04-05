@@ -60,7 +60,7 @@ public:
 	Particle balloonExplosion;
 
 	//Template for the harpoon shot
-	Particle harpoonShot;
+	Particle harpoonShot[25];
 
 	//Template particle for a laser
 	Particle laser;
