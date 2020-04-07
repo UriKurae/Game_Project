@@ -30,10 +30,10 @@ bool ModuleScene::Start()
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 1.0f);
 
 	//Walls collider
-	App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 0, 0, 8, 308 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 0, 0, 384, 8 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 376, 0, 8, 308 }, Collider::Type::WALL);
+	collider = App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);
+	collider2 = App->collisions->AddCollider({ 0, 0, 8, 308 }, Collider::Type::WALL);
+	collider3 = App->collisions->AddCollider({ 0, 0, 384, 8 }, Collider::Type::WALL);
+	collider4 = App->collisions->AddCollider({ 376, 0, 8, 308 }, Collider::Type::WALL);
 
 	//ADD COLLIDERS
 

@@ -7,6 +7,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
+#include "ModuleScene.h"
 
 #include "SDL/include/SDL_scancode.h"
 
@@ -130,8 +131,8 @@ update_status ModulePlayer::Update()
 		{
 			if (i == 0)
 			{
-				App->particles->harpoonShot[i].lifetime = lifeTimeT; //Was 10
-				App->particles->AddParticle(App->particles->harpoonShot[i], position.x + 10, position.y - movY, Collider::Type::PLAYER_SHOT);
+				App->particles->harpoonShot[0].lifetime = lifeTimeT; //Was 10
+				App->particles->AddParticle(App->particles->harpoonShot[0], position.x + 10, position.y - movY, Collider::Type::PLAYER_SHOT);
 			}
 			else 
 			{
@@ -186,12 +187,21 @@ update_status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1 == collider && destroyed == false)
+	if (c1 == collider)
 	{
+		if (c2 == App->scene->collider2) {
+			position.x += 0.001;
+		}
+
+		if (c2 == App->scene->collider4) {
+			position.x -= 0.001;
+		}
 		/*
 		currentAnimation = &deadAnimLeft;
 		destroyed = true;
 		*/
+		
+		
 
 		/*App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 		App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, Collider::Type::NONE, 14);

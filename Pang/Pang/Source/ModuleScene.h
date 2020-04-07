@@ -5,6 +5,7 @@
 #include "Animation.h"
 
 struct SDL_Texture;
+struct Collider;
 
 class ModuleScene : public Module
 {
@@ -36,6 +37,11 @@ public:
 	SDL_Texture* starsTexture = nullptr;
 
 	SDL_Texture* balloon = nullptr;
+
+	Collider* collider = nullptr;
+	Collider* collider2 = nullptr;
+	Collider* collider3 = nullptr;
+	Collider* collider4 = nullptr;
 };
 
 #endif
