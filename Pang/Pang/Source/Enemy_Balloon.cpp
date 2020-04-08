@@ -1,7 +1,8 @@
 #include "Enemy_Balloon.h"
-
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModuleParticles.h"
+#include "ModuleScene.h"
 
 Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x,y)
 {
@@ -14,16 +15,14 @@ Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x,y)
 
 	currentAnim = &balloonAnim;
 
-	collider = App->collisions->AddCollider({ 0, 0, 48, 40 }, Collider::Type::BALLOON, (Module*)App->enemies);
-
+	collider = App->collisions->AddCollider({ 50, 50, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
+	colliderHarpoon = App->particles->harpoonShot->collider;
 }
 
 void Enemy_Balloon::Update()
 {
 	balloonBounce();
-	
-	
-	 
+	OnCollision(collider);
 	Enemy::Update();
 }
 
@@ -55,3 +54,9 @@ void Enemy_Balloon::balloonBounce()
 	}
 }
 
+void Enemy_Balloon::OnCollision(Collider* c2) {
+	SDL_Rect r = this->collider->rect;
+	if (c2->Intersects(r)) {
+		collider = App->collisions->AddCollider({ 50, 50, 2, 2 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
+	}
+}

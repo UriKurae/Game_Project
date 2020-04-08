@@ -39,7 +39,7 @@ bool ModuleScene::Start()
 
 
 	//ADD ENEMIES
-	App->enemies->AddEnemy(ENEMY_TYPE::BALLOON, 50, 20);
+	App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, 50, 20);
 
 	
 

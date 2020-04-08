@@ -153,7 +153,7 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case ENEMY_TYPE::MECH:
 					enemies[i] = new Enemy_Mech(info.x, info.y);
 					break;
-				case ENEMY_TYPE::BALLOON:
+				case ENEMY_TYPE::BIGBALLOON:
 					enemies[i] = new Enemy_Balloon(info.x, info.y);
 			}
 			enemies[i]->texture = texture;
