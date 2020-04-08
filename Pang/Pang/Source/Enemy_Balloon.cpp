@@ -14,9 +14,10 @@ Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x,y)
 	balloonDeath.speed = 0.1f;
 
 	currentAnim = &balloonAnim;
-
-	collider = App->collisions->AddCollider({ 50, 50, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
-	colliderHarpoon = App->particles->harpoonShot->collider;
+	/*if (collider->type == Collider::BIG_BALLOON) {
+		collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
+	}*/
+		
 }
 
 void Enemy_Balloon::Update()
@@ -55,8 +56,8 @@ void Enemy_Balloon::balloonBounce()
 }
 
 void Enemy_Balloon::OnCollision(Collider* c2) {
-	SDL_Rect r = this->collider->rect;
+	/*SDL_Rect r = this->collider->rect;
 	if (c2->Intersects(r)) {
 		collider = App->collisions->AddCollider({ 50, 50, 2, 2 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
-	}
+	}*/
 }

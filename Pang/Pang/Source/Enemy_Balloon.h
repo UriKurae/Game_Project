@@ -31,7 +31,7 @@ private:
 	float speedX = 1.0f;
 	
 	void balloonBounce();
-	Collider* colliderHarpoon;
+
 	void OnCollision(Collider* c1) override;
 	// This enemy has one sprite and one frame
 	// We are keeping it an animation for consistency with other enemies
