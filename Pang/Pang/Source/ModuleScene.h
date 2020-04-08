@@ -39,9 +39,10 @@ public:
 	SDL_Texture* balloon = nullptr;
 
 	Collider* collider = nullptr;
-	Collider* collider2 = nullptr;
-	Collider* collider3 = nullptr;
-	Collider* collider4 = nullptr;
+	Collider* rightWall = nullptr;
+	Collider* leftWall = nullptr;
+	Collider* upperWall = nullptr;
+	Collider* lowerWall = nullptr;
 };
 
 #endif

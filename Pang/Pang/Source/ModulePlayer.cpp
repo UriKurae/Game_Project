@@ -23,7 +23,7 @@ ModulePlayer::ModulePlayer()
 	leftAnim.PushBack({448, 0, 30, 32});
 	leftAnim.PushBack({482, 0, 30, 31});
 	leftAnim.PushBack({516, 0, 30, 32});
-	leftAnim.speed = 0.1f;
+	leftAnim.speed = 0.3f;
 
 	//move right
 	rightAnim.PushBack({0, 0, 30, 32});
@@ -31,7 +31,7 @@ ModulePlayer::ModulePlayer()
 	rightAnim.PushBack({68, 0, 30, 32});
 	rightAnim.PushBack({102, 0, 28, 32});
 	rightAnim.PushBack({136, 0, 30, 32});
-	rightAnim.speed = 0.1f;
+	rightAnim.speed = 0.3f;
 
 	//left death animation
 	deadAnimLeft.PushBack({ 69, 110 ,41, 30 });
@@ -189,12 +189,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == collider)
 	{
-		if (c2 == App->scene->collider2) {
-			position.x += 0.001;
+		if (c2 == App->scene->leftWall) {
+			position.x = 6;
 		}
 
-		if (c2 == App->scene->collider4) {
-			position.x -= 0.001;
+		if (c2 == App->scene->rightWall) {
+			position.x =SCREEN_WIDTH-33;
+			
 		}
 		/*
 		currentAnimation = &deadAnimLeft;
