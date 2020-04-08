@@ -22,16 +22,32 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/Items&Weapons/Harpoon1.png");
+	texture = App->textures->Load("Assets/Items&Weapons/Harpoon4.png");
 
 	//Harpoon shot particle
-	harpoonShot[0].anim.PushBack({8, 55, 9, 16 });
-	harpoonShot[1].anim.PushBack({8, 70, 7, 12 });
-	harpoonShot[2].anim.PushBack({144, 64, 7, 11 });
-	harpoonShot[3].anim.PushBack({59, 48, 9, 41 });
-	harpoonShot[4].anim.PushBack({59, 48, 9, 41 });
-	harpoonShot[5].anim.PushBack({59, 48, 9, 41 });
-	harpoonShot[6].anim.PushBack({59, 48, 9, 41 });
+	harpoonShot[0].anim.PushBack({ 4, 53, 9, 34 });
+	harpoonShot[1].anim.PushBack({ 21, 51, 9, 36 });
+	harpoonShot[2].anim.PushBack({ 38, 49, 9, 38 });
+	harpoonShot[3].anim.PushBack({ 55, 46, 9, 41 });
+	harpoonShot[4].anim.PushBack({ 72, 44, 9, 43 });
+	harpoonShot[5].anim.PushBack({ 89, 42, 9, 45 });
+	harpoonShot[6].anim.PushBack({ 106, 40, 9, 47 });
+	harpoonShot[7].anim.PushBack({ 123, 37, 9, 50 });
+	harpoonShot[8].anim.PushBack({ 140, 35, 9, 52 });
+	harpoonShot[9].anim.PushBack({ 157, 33, 9, 54 });
+	harpoonShot[10].anim.PushBack({ 174, 31, 9, 56 });
+	harpoonShot[11].anim.PushBack({ 191, 28, 9, 59 });
+	harpoonShot[12].anim.PushBack({ 208, 26, 9, 61 });
+	harpoonShot[13].anim.PushBack({ 225, 24, 9, 63 });
+	harpoonShot[14].anim.PushBack({ 242, 22, 9, 65 });
+	harpoonShot[15].anim.PushBack({ 259, 19, 9, 68 });
+	harpoonShot[16].anim.PushBack({ 276, 17, 9, 70 });
+	harpoonShot[17].anim.PushBack({ 293, 15, 9, 72 });
+	harpoonShot[18].anim.PushBack({ 310, 13, 9, 74 });
+	harpoonShot[19].anim.PushBack({ 327, 10, 9, 77 });
+	harpoonShot[20].anim.PushBack({ 344, 8, 9, 79 });
+	harpoonShot[21].anim.PushBack({ 361, 6, 9, 81 });
+	harpoonShot[22].anim.PushBack({ 378, 4, 9, 83 });
 	harpoonShot->anim.speed = 0.1f;
 
 

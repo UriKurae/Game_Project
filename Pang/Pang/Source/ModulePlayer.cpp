@@ -127,7 +127,7 @@ update_status ModulePlayer::Update()
 		int movY = 15;
 		int lifeTimeT = 40;
 		
-		for (int i = 0; i < 25; i++)
+		for (int i = 0; i < 23; i++)
 		{
 			if (i == 0)
 			{
