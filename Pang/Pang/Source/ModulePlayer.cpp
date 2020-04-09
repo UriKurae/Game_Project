@@ -131,7 +131,7 @@ update_status ModulePlayer::Update()
 		{
 			if (i == 0)
 			{
-				App->particles->harpoonShot[0].lifetime = lifeTimeT; //Was 10
+				App->particles->harpoonShot[0].lifetime = lifeTimeT; //Was 10 //Clase a part per fer el gancho sencer.
 				App->particles->AddParticle(App->particles->harpoonShot[0], position.x + 10, position.y - movY, Collider::Type::PLAYER_SHOT);
 			}
 			else 
