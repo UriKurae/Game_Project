@@ -39,7 +39,8 @@ bool ModuleScene::Start()
 
 
 	//ADD ENEMIES
-	App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, 50, 20);
+	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
+
 	//TODO BALLOON crear dos balloons petits com el balon normal i cada un amb un velocitat inicial diferent.
 
 	

@@ -47,9 +47,6 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::VERY_BIG_BALLOON] = false;
 	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::ENEMY] = false;
 
-
-
-
 }
 
 // Destructor
