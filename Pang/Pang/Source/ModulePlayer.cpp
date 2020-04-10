@@ -210,7 +210,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 
 		if (c2 == App->scene->rightWall) {
-			position.x = SCREEN_WIDTH-33;
+			position.x = SCREEN_WIDTH - 33;
 			
 		}
 		/*

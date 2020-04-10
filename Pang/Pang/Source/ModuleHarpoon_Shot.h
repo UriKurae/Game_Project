@@ -17,10 +17,12 @@ public:
 
 	float speed = 1.5f;
 
+	bool destroyed = false;
+
 	//texture for all the harpoons sprites
 	SDL_Texture* texture = nullptr;
 
-	Animation harpoonShot[25];
+	Animation harpoonShot[70];
 
 	Animation* currentAnimation = nullptr;
 
