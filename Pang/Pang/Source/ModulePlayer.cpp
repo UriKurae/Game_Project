@@ -123,9 +123,9 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		ModuleHarpoon harpoon;
+		/*ModuleHarpoon harpoon;
 		
-		currentAnimation = harpoon.harpoonShot;
+		currentAnimation = harpoon.harpoonShot;*/
 		
 		
 		

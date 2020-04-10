@@ -22,7 +22,7 @@ public:
 	//texture for all the harpoons sprites
 	SDL_Texture* texture = nullptr;
 
-	Animation harpoonShot[70];
+	Animation harpoonShot;
 
 	Animation* currentAnimation = nullptr;
 
