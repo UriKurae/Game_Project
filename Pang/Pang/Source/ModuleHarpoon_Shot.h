@@ -2,9 +2,10 @@
 
 #include "Animation.h"
 #include "Module.h"
-#include"p2Point.h"
+#include "p2Point.h"
 
 struct SDL_Texture;
+struct Collider;
 
 class ModuleHarpoon : public Module
 {
@@ -32,9 +33,9 @@ public:
 	//load all textures
 	bool Start();
 
-	update_status Update();
+	update_status Update() override;
 
-	update_status PostUpdate();
+	update_status PostUpdate() override;
 
 	void OnCollision(Collider* c1, Collider* c2) override;
 

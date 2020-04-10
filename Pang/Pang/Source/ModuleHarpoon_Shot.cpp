@@ -90,7 +90,7 @@ update_status ModuleHarpoon::PostUpdate()
 	return ret;
 }
 
-void OnCollision(Collider* c1, Collider* c2)
+void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 {
 
 
