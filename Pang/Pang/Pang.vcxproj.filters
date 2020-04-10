@@ -105,6 +105,9 @@
     <ClInclude Include="Source\Enemy_Balloon.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ModuleHarpoon_Shot.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -172,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="Source\Enemy_Balloon.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleHarpoon_Shot.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

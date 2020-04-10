@@ -8,6 +8,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
 #include "ModuleScene.h"
+#include "ModuleHarpoon_Shot.h"
 
 #include "SDL/include/SDL_scancode.h"
 
@@ -41,6 +42,8 @@ ModulePlayer::ModulePlayer()
 
 	//shot animation
 	shotAnim.PushBack({ 32, 113, 27, 29 });
+	
+
 	
 }
 
@@ -120,7 +123,20 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		currentAnimation = &shotAnim;
+		ModuleHarpoon harpoon;
+		
+		currentAnimation = harpoon.harpoonShot;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*currentAnimation = &shotAnim;
 		App->audio->PlayFx(HarpoonFx);
 
 
@@ -143,7 +159,7 @@ update_status ModulePlayer::Update()
 			
 			movY += 20;
 			lifeTimeT -= 2;
-		}
+		}*/
 	}
 
 	//Detect when A and D are pressed at the same time and set the current animation to idle

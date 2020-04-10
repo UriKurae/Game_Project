@@ -11,6 +11,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleCollisions.h"
 #include "ModuleRender.h"
+#include "ModuleHarpoon_Shot.h"
 
 Application::Application()
 {
@@ -24,12 +25,14 @@ Application::Application()
 
 	modules[4] = scene = new ModuleScene();
 	modules[5] = player = new ModulePlayer();
-	modules[6] = particles = new ModuleParticles();
-	modules[7] = enemies = new ModuleEnemies();
+	modules[6] = harpoon = new ModuleHarpoon();
+	modules[7] = particles = new ModuleParticles();
+	modules[8] = enemies = new ModuleEnemies();
 
-	modules[8] = collisions = new ModuleCollisions();
+	modules[9] = collisions = new ModuleCollisions();
 
-	modules[9] = render = new ModuleRender();
+	modules[10] = render = new ModuleRender();
+
 }
 
 Application::~Application()

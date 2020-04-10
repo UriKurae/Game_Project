@@ -11,6 +11,11 @@ void Collider::SetPos(int x, int y)
 	rect.y = y;
 }
 
+void Collider::SetH(int h)
+{
+	rect.h = h;
+}
+
 bool Collider::Intersects(const SDL_Rect& r) const
 {
 	return (rect.x < r.x + r.w &&
