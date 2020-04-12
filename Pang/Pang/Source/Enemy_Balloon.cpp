@@ -6,6 +6,8 @@
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
 
+
+
 Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x,y)
 {
 	
@@ -16,14 +18,24 @@ Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x,y)
 	balloonDeath.speed = 0.1f;
 
 	currentAnim = &balloonAnim;
+	
+	if (tipoBalloon == ENEMY_TYPE::BIGBALLOON)
+	{
+		collider = App->collisions->AddCollider({ 200, 0, 32, 26 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
+		balloonAnim.PushBack({ 257,119, 32, 26 });
+	}else
+	{
 	collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
+	}
+	
+	
 		
 }
 
 void Enemy_Balloon::Update()
 {
 	balloonBounce();
-
+	
 	Enemy::Update();
 }
 
@@ -56,9 +68,11 @@ void Enemy_Balloon::balloonBounce()
 }
 
 void Enemy_Balloon::OnCollision(Collider* c2) {
-	/*SDL_Rect r = this->collider->rect;
+	SDL_Rect r = this->collider->rect;
 	if (c2->Intersects(r)) {
-		App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, position.x, position.y);
-		collider = App->collisions->AddCollider({ 0, 0, 2, 2 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
-	}*/
+		
+		tipoBalloon = ENEMY_TYPE::BIGBALLOON;
+		App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON,position.x, position.y);
+		//collider = App->collisions->AddCollider({ 200, 0, 100, 100 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
+	}
 }

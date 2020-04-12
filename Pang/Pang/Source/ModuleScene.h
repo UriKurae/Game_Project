@@ -20,6 +20,7 @@ public:
 	// Loads the necessary textures for the map background
 	bool Start() override;
 
+	update_status Update() override;
 
 	// Called at the end of the application loop.
 	// Performs the render call of all the parts of the scene's background
@@ -37,6 +38,7 @@ public:
 	SDL_Texture* starsTexture = nullptr;
 
 	SDL_Texture* balloon = nullptr;
+	//Enemy_Balloon* enemy1 = nullptr; Esto da errores 
 
 	Collider* collider = nullptr;
 	Collider* rightWall = nullptr;

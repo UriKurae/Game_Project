@@ -6,6 +6,8 @@
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
+#include "Enemy_Balloon.h"
+
 
 ModuleScene::ModuleScene()
 {
@@ -36,10 +38,12 @@ bool ModuleScene::Start()
 	rightWall = App->collisions->AddCollider({ 376, 0, 8, 308 }, Collider::Type::WALL);
 
 	//ADD COLLIDERS
-
+	//collider = App->collisions->AddCollider({0, 0, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
 
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
+	
+
 
 	//TODO BALLOON crear dos balloons petits com el balon normal i cada un amb un velocitat inicial diferent.
 
@@ -48,6 +52,11 @@ bool ModuleScene::Start()
 	return ret;
 }
 
+update_status ModuleScene::Update()
+{
+	
+	return update_status::UPDATE_CONTINUE;
+}
 // Update: draw background
 update_status ModuleScene::PostUpdate()
 {

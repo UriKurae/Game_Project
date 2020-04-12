@@ -19,16 +19,18 @@ public:
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
 	void Update() override;
+
+	//balloon motions
+	float speedY = 0.0f;
+	float gravity = 0.1f;
+	float speedX = 1.0f;
 	
 private:
 	// A set of steps that define the position in the screen
 	// And an animation for each step
 	Path path;
 
-	//balloon motions
-	float speedY = 0.0f;
-	float gravity = 0.1f;
-	float speedX = 1.0f;
+	
 	
 	void balloonBounce();
 
@@ -37,6 +39,7 @@ private:
 	// We are keeping it an animation for consistency with other enemies
 	Animation balloonAnim;
 	Animation balloonDeath;
+	enum class ENEMY_TYPE tipoBalloon;
 };
 
 #endif // __ENEMY_BROWNSHIP_H__
