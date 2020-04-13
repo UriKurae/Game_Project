@@ -213,7 +213,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			position.x = SCREEN_WIDTH - 33;
 			
 		}
-		/*
+		/* IMPORTANT TO KILL THE PLAYER
 		currentAnimation = &deadAnimLeft;
 		destroyed = true;
 		*/

@@ -37,8 +37,10 @@ private:
 	void OnCollision(Collider* c1) override;
 	// This enemy has one sprite and one frame
 	// We are keeping it an animation for consistency with other enemies
-	Animation balloonAnim;
-	Animation testBalloon;
+	Animation veryBigBalloonAnim;
+	Animation bigBalloonAnim;
+	Animation smallBalloonAnim;
+	Animation verySmallBalloonAnim;
 	Animation balloonDeath;
 	enum class ENEMY_TYPE tipoBalloon;
 

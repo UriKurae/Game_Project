@@ -47,6 +47,24 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::VERY_BIG_BALLOON] = false;
 	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::ENEMY] = false;
 
+	matrix[Collider::Type::BIG_BALLOON][Collider::Type::WALL] = false;
+	matrix[Collider::Type::BIG_BALLOON][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::BIG_BALLOON][Collider::Type::PLAYER_SHOT] = true;
+	matrix[Collider::Type::BIG_BALLOON][Collider::Type::VERY_BIG_BALLOON] = false;
+	matrix[Collider::Type::BIG_BALLOON][Collider::Type::ENEMY] = false;   
+
+	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::WALL] = false;
+	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::PLAYER_SHOT] = true;
+	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::VERY_BIG_BALLOON] = false;
+	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::ENEMY] = false;
+
+	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::WALL] = false;
+	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::PLAYER_SHOT] = true;
+	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::VERY_BIG_BALLOON] = false;
+	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::ENEMY] = false;
+
 }
 
 // Destructor
@@ -145,8 +163,14 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::VERY_BIG_BALLOON: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
-			case Collider::Type::BIG_BALLOON: // magenta
-				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+			case Collider::Type::BIG_BALLOON: // red
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+			break;
+			case Collider::Type::SMALL_BALLOON: //green
+				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
+				break;
+			case Collider::Type::VERY_SMALL_BALLOON: //blue
+				App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
 				break;
 		}
 	}

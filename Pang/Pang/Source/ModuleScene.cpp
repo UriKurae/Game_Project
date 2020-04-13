@@ -42,6 +42,7 @@ bool ModuleScene::Start()
 
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
+	App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, 0, 0);
 	
 
 
