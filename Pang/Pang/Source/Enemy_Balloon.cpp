@@ -5,12 +5,13 @@
 #include "ModuleScene.h"
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
+#include <stdio.h>
 
 
 
-Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x,y)
+Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE tipe) : Enemy(x,y)
 {
-	
+	tipoBalloon = tipe;
 	balloonAnim.PushBack({ 207,112, 48, 40 });
 	balloonDeath.PushBack({4,141,48,40});
 	balloonDeath.PushBack({60,148,28,24});
@@ -19,13 +20,27 @@ Enemy_Balloon::Enemy_Balloon(int x, int y) : Enemy(x,y)
 
 	currentAnim = &balloonAnim;
 	
-	if (tipoBalloon == ENEMY_TYPE::BIGBALLOON)
+	if (tipoBalloon == ENEMY_TYPE::BIGBALLOON)//CLEAN ALL PRINTFS AND GET RID OF THE STDIO.H
 	{
+		printf("holaBIG BALLOON");
 		collider = App->collisions->AddCollider({ 200, 0, 32, 26 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
 		balloonAnim.PushBack({ 257,119, 32, 26 });
-	}else
+		currentAnim = &balloonAnim;
+
+	}else if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
-	collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
+		printf("hola VERY BIG BALLOON");
+		collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
+	}
+	else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON)
+	{
+		printf("hola SMALL BALLOON");
+		collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
+	}
+	else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON)
+	{
+		printf("hola VERY SMALL BALLOON");
+		collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
 	}
 	
 	
@@ -71,7 +86,6 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 	SDL_Rect r = this->collider->rect;
 	if (c2->Intersects(r)) {
 		
-		tipoBalloon = ENEMY_TYPE::BIGBALLOON;
 		App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON,position.x, position.y);
 		//collider = App->collisions->AddCollider({ 200, 0, 100, 100 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
 	}

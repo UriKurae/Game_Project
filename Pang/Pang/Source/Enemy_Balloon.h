@@ -12,7 +12,7 @@ class Enemy_Balloon : public Enemy
 public:
 	// Constructor (x y coordinates in the world)
 	// Creates animation and movement data and the collider
-	Enemy_Balloon(int x, int y);
+	Enemy_Balloon(int x, int y, enum class ENEMY_TYPE tipe);
 
 	//virtual void OnCollision(Collider* collider);
 
