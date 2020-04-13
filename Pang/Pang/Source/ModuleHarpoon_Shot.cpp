@@ -143,12 +143,10 @@ update_status ModuleHarpoon::PostUpdate()
 
 void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1 == collider) {
-		if (c2 == App->scene->upperWall) {
-			destroyed = true;
-		}
+	SDL_Rect r = App->scene->upperWall->rect;
+	if (c1->Intersects(r)) {
+		delete collider;
+		currentAnimation = nullptr;
+		destroyed = true;
 	}
-
-
-
 }

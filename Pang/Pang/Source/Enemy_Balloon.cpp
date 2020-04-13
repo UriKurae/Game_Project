@@ -103,7 +103,6 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 		else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON)
 		{
 		App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x, position.y);
-		delete App->harpoon->collider;
 		}
 		else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON)
 		{
