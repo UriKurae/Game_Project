@@ -26,19 +26,27 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 
 	currentAnim = &veryBigBalloonAnim;
 	
-	if (tipoBalloon == ENEMY_TYPE::BIGBALLOON)//CLEAN ALL PRINTFS AND GET RID OF THE STDIO.H
+	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
+	{
+	printf("hola VERY BIG BALLOON");
+	collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
+	currentAnim = &veryBigBalloonAnim;
+	}
+
+	else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON)//CLEAN ALL PRINTFS AND GET RID OF THE STDIO.H
 	{
 		printf("holaBIG BALLOON");
 
-		collider = App->collisions->AddCollider({ 200, 0, 32, 26 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 32, 26 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
 		
 		currentAnim = &bigBalloonAnim;
 
-	}else if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
+	}
+	else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
 	{
-		printf("hola VERY BIG BALLOON");
-		collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
-		currentAnim = &veryBigBalloonAnim;
+		printf("hola BIG BALLOON 2");
+		collider = App->collisions->AddCollider({ position.x, position.y, 32, 26 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
+		currentAnim = &bigBalloonAnim;
 	}
 	else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON)
 	{
@@ -46,7 +54,20 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 		collider = App->collisions->AddCollider({ position.x, position.y, 16, 14 }, Collider::Type::SMALL_BALLOON, (Module*)App->enemies);
 		currentAnim = &smallBalloonAnim;
 	}
+	else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
+	{
+		printf("hola SMALL BALLOON");
+		collider = App->collisions->AddCollider({ position.x, position.y, 16, 14 }, Collider::Type::SMALL_BALLOON, (Module*)App->enemies);
+		currentAnim = &smallBalloonAnim;
+	}
 	else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON)
+	{
+		printf("hola VERY SMALL BALLOON");
+		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
+		currentAnim = &verySmallBalloonAnim;
+	}
+
+	else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
 	{
 		printf("hola VERY SMALL BALLOON");
 		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
@@ -64,10 +85,18 @@ void Enemy_Balloon::Update()
 void Enemy_Balloon::balloonBounce()
 {
 	//PHYSICS MOTIONS
-	position.x += speedX;
-	position.y -= (speedY + gravity);
-	speedY -= gravity;
 
+	if (tipoBalloon == ENEMY_TYPE::BIGBALLOON2 || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2 || tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2) {
+		position.x -= speedX;
+		position.y -= (speedY + gravity);
+		speedY -= gravity;
+	}
+	else {
+		position.x += speedX;
+		position.y -= (speedY + gravity);
+		speedY -= gravity;
+	}
+	
 	//TODO PHYSICS, IMPLEMENT RIGHT, LEFT AND TOP HIT WITH THE BALLOON, SHOULD NOT GAIN SPEED.
 }
 
@@ -103,14 +132,17 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 			if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 			{
 				App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, position.x, position.y);
+				App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON2, position.x, position.y);
 			}
-			else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON)
+			else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON || tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
 			{
 				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x, position.y);
+				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, position.x, position.y);
 			}
-			else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON)
+			else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
 			{
 				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x, position.y);
+				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON2, position.x, position.y);
 			}
 		}
 	}

@@ -159,11 +159,20 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case ENEMY_TYPE::BIGBALLOON:
 					enemies[i] = new Enemy_Balloon(info.x, info.y, ENEMY_TYPE::BIGBALLOON);
 					break;
+				case ENEMY_TYPE::BIGBALLOON2:
+					enemies[i] = new Enemy_Balloon(info.x, info.y, ENEMY_TYPE::BIGBALLOON2);
+					break;
 				case ENEMY_TYPE::SMALLBALLOON:
 					enemies[i] = new Enemy_Balloon(info.x, info.y, ENEMY_TYPE::SMALLBALLOON);
 					break;
+				case ENEMY_TYPE::SMALLBALLOON2:
+					enemies[i] = new Enemy_Balloon(info.x, info.y, ENEMY_TYPE::SMALLBALLOON2);
+					break;
 				case ENEMY_TYPE::VERYSMALLBALLOON:
 					enemies[i] = new Enemy_Balloon(info.x, info.y, ENEMY_TYPE::VERYSMALLBALLOON);
+					break;
+				case ENEMY_TYPE::VERYSMALLBALLOON2:
+					enemies[i] = new Enemy_Balloon(info.x, info.y, ENEMY_TYPE::VERYSMALLBALLOON2);
 					break;
 			}
 			enemies[i]->texture = texture;
