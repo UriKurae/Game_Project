@@ -78,10 +78,6 @@ update_status Application::Update()
  
 bool Application::CleanUp()
 {
-	bool ret = true;
-
-	for (int i = NUM_MODULES - 1; i >= 0 && ret; --i)
-		ret = modules[i]->CleanUp();
-
-	return ret;
+	for (int i = NUM_MODULES - 1; i >= 0; --i)
+		return modules[i]->CleanUp();
 }
