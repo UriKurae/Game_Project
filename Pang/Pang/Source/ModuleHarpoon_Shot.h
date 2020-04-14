@@ -28,7 +28,7 @@ public:
 
 	Animation* currentAnimation = nullptr;
 
-	Collider* collider = nullptr;
+	Collider* colliderH = nullptr;
 
 public:
 	ModuleHarpoon();

@@ -52,8 +52,6 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE tipe) : Enemy(x
 		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
 		currentAnim = &verySmallBalloonAnim;
 	}
-	
-	
 		
 }
 
@@ -68,20 +66,24 @@ void Enemy_Balloon::balloonBounce()
 {
 	//PHYSICS MOTIONS
 	
+	position.x += speedX;
+	position.y -= (speedY + gravity);
+	speedY -= gravity;
+
 	//TODO PHYSICS, IMPLEMENT RIGHT, LEFT AND TOP HIT WITH THE BALLOON, SHOULD NOT GAIN SPEED.
-	if (position.y < (SCREEN_HEIGHT - 40))
+	/*if (position.y < (SCREEN_HEIGHT - 40))
 	{
 
 		position.x += speedX;
 		position.y -= (speedY + gravity);
 		speedY -= gravity;
 
-	}
-	else if (position.y >= (SCREEN_HEIGHT - 40))
+	}*/
+	/*else if (position.y >= (SCREEN_HEIGHT - 40))
 	{
 		speedY = 4.5f;
 		position.y -= speedY;
-	}
+	}*/
 	if (position.x >= SCREEN_WIDTH - 50)
 	{
 		speedX = -speedX;
@@ -94,21 +96,31 @@ void Enemy_Balloon::balloonBounce()
 
 void Enemy_Balloon::OnCollision(Collider* c2) {
 	SDL_Rect r = this->collider->rect;
-	if (c2->Intersects(r)) {
-		
-		if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
-		{
-		App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON,position.x, position.y);
+	if (c2 == App->scene->lowerWall) {
+		if (c2->Intersects(r)) {
+			/*speedY = 4.5f;
+			position.y -= speedY;*/
+			position.x = 0;
+			position.y = 0;
 		}
-		else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON)
-		{
-		App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x, position.y);
+	}
+
+	if (c2 == App->harpoon->colliderH) {
+		if (c2->Intersects(r)) {
+
+			if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
+			{
+				App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, position.x, position.y);
+			}
+			else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON)
+			{
+				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x, position.y);
+			}
+			else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON)
+			{
+				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x, position.y);
+			}
 		}
-		else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON)
-		{
-		App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x, position.y);
-			
-		}
-		
+
 	}
 }

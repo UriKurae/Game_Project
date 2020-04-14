@@ -119,20 +119,18 @@ update_status ModuleHarpoon::Update()
 		x = App->player->position.x;
 		y = App->player->position.y - 2;
 		destroyed = false;
-		collider = App->collisions->AddCollider({ x, y, 9, h }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
+		colliderH = App->collisions->AddCollider({ x, y, 9, h }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
 		increment = true;
 	}
 	
 	if (increment == true) {
 		y -= 1;
 		h += 1;
-
-		collider->SetH(h);
-		collider->SetPos(x, y);
+		currentAnimation = &harpoonShot;
+		colliderH->SetH(h);
+		colliderH->SetPos(x, y);
 	}
 		
-	
-	harpoonShot.Update();
 
 	return ret;
 }
@@ -155,7 +153,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 {
 	SDL_Rect r = App->scene->upperWall->rect;
 	if (c1->Intersects(r)) {
-		delete collider;
+		delete colliderH;
 		currentAnimation = nullptr;
 		destroyed = true;
 		increment = false;

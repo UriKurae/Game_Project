@@ -33,6 +33,10 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::VERY_BIG_BALLOON] = true;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::BIG_BALLOON] = true;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::SMALL_BALLOON] = true;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::VERY_SMALL_BALLOON] = true;
 	//matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_SHOT] = false;
 
 	/*matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = true;
@@ -41,7 +45,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY_SHOT] = false;*/
 
-	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::WALL] = false;
+	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::WALL] = true;
 	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::VERY_BIG_BALLOON] = false;
@@ -50,7 +54,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::VERY_SMALL_BALLOON] = false;
 	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::ENEMY] = false;
 
-	matrix[Collider::Type::BIG_BALLOON][Collider::Type::WALL] = false;
+	matrix[Collider::Type::BIG_BALLOON][Collider::Type::WALL] = true;
 	matrix[Collider::Type::BIG_BALLOON][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::BIG_BALLOON][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::BIG_BALLOON][Collider::Type::VERY_BIG_BALLOON] = false;
@@ -59,7 +63,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::BIG_BALLOON][Collider::Type::VERY_SMALL_BALLOON] = false;
 	matrix[Collider::Type::BIG_BALLOON][Collider::Type::ENEMY] = false;   
 
-	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::WALL] = false;
+	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::WALL] = true;
 	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::VERY_BIG_BALLOON] = false;
@@ -68,7 +72,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::VERY_SMALL_BALLOON] = false;
 	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::ENEMY] = false;
 
-	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::WALL] = false;
+	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::WALL] = true;
 	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::VERY_BIG_BALLOON] = false;
