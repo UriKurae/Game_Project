@@ -83,7 +83,7 @@ ModuleHarpoon::ModuleHarpoon()
 	harpoonShot.PushBack({ 1143, 115, 9, 185 });
 	harpoonShot.PushBack({ 1160, 113, 9, 187 });
 	harpoonShot.PushBack({ 1177, 111, 9, 189 });
-
+	harpoonShot.loop = false;
 	harpoonShot.speed = 0.1f;
 
 }
@@ -101,11 +101,7 @@ bool ModuleHarpoon::Start()
 	
 	x = App->player->position.x;
 	y = App->player->position.y - 3;
-
-
-	//collider = App->collisions->AddCollider({ 0, 0, 0, 0 }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
 	
-
 	return true;
 }
 
@@ -115,6 +111,8 @@ update_status ModuleHarpoon::Update()
 	
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && destroyed == true) {
+		harpoonShot.Reset();
+		currentAnimation = &harpoonShot;
 		h = 34;
 		x = App->player->position.x;
 		y = App->player->position.y - 2;
@@ -129,8 +127,8 @@ update_status ModuleHarpoon::Update()
 		currentAnimation = &harpoonShot;
 		colliderH->SetH(h);
 		colliderH->SetPos(x, y);
+		currentAnimation->Update();
 	}
-		
 
 	return ret;
 }
@@ -139,10 +137,11 @@ update_status ModuleHarpoon::PostUpdate()
 {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	if (App->player->destroyed == false)
+	if (App->player->destroyed == false && destroyed == false)
 	{
 		/*SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		App->render->Blit(texture, x, y, &rect);*/
+		
 		App->render->Blit(texture, x, y, &(harpoonShot.GetCurrentFrame()), 0.5f);
 	}
 
@@ -154,7 +153,6 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	SDL_Rect r = App->scene->upperWall->rect;
 	if (c1->Intersects(r)) {
 		delete colliderH;
-		currentAnimation = nullptr;
 		destroyed = true;
 		increment = false;
 	}

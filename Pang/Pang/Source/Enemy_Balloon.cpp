@@ -10,10 +10,10 @@
 
 
 
-Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE tipe) : Enemy(x,y)
+Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x,y)
 {
 	
-	tipoBalloon = tipe;
+	tipoBalloon = type;
 	veryBigBalloonAnim.PushBack({ 207,112, 48, 40 });
 	bigBalloonAnim.PushBack({ 257,119, 32, 26 });
 	smallBalloonAnim.PushBack({292,125,16,14});
@@ -52,7 +52,6 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE tipe) : Enemy(x
 		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
 		currentAnim = &verySmallBalloonAnim;
 	}
-		
 }
 
 void Enemy_Balloon::Update()
@@ -70,27 +69,6 @@ void Enemy_Balloon::balloonBounce()
 	speedY -= gravity;
 
 	//TODO PHYSICS, IMPLEMENT RIGHT, LEFT AND TOP HIT WITH THE BALLOON, SHOULD NOT GAIN SPEED.
-	/*if (position.y < (SCREEN_HEIGHT - 40))
-	{
-
-		position.x += speedX;
-		position.y -= (speedY + gravity);
-		speedY -= gravity;
-
-	}*/
-	/*else if (position.y >= (SCREEN_HEIGHT - 40))
-	{
-		speedY = 4.5f;
-		position.y -= speedY;
-	}*/
-	/*if (position.x >= SCREEN_WIDTH - 50)
-	{
-		speedX = -speedX;
-	}*/
-	if (position.x <= 8)
-	{
-		speedX = 1.0f;
-	}
 }
 
 void Enemy_Balloon::OnCollision(Collider* c2) {
@@ -98,7 +76,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 	SDL_Rect r = this->collider->rect;
 	if (c2 == App->scene->lowerWall) {
 		if (c2->Intersects(r)) {
-			speedY = 5.5f;
+			speedY = 4.5f;
 			App->enemies->touchWall = true;
 		}
 	}
@@ -135,6 +113,5 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x, position.y);
 			}
 		}
-
 	}
 }
