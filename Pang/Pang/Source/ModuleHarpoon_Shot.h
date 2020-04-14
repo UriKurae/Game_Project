@@ -17,7 +17,9 @@ public:
 
 	float speed = 1.5f;
 
-	bool destroyed = false;
+	bool destroyed = true;
+
+	bool increment = false;
 
 	//texture for all the harpoons sprites
 	SDL_Texture* texture = nullptr;
