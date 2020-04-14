@@ -65,7 +65,6 @@ void Enemy_Balloon::Update()
 void Enemy_Balloon::balloonBounce()
 {
 	//PHYSICS MOTIONS
-	
 	position.x += speedX;
 	position.y -= (speedY + gravity);
 	speedY -= gravity;
@@ -84,26 +83,41 @@ void Enemy_Balloon::balloonBounce()
 		speedY = 4.5f;
 		position.y -= speedY;
 	}*/
-	if (position.x >= SCREEN_WIDTH - 50)
+	/*if (position.x >= SCREEN_WIDTH - 50)
 	{
 		speedX = -speedX;
-	}
-	else if (position.x <= 8)
+	}*/
+	if (position.x <= 8)
 	{
 		speedX = 1.0f;
 	}
 }
 
 void Enemy_Balloon::OnCollision(Collider* c2) {
+	App->enemies->touchWall = false;
 	SDL_Rect r = this->collider->rect;
 	if (c2 == App->scene->lowerWall) {
 		if (c2->Intersects(r)) {
-			/*speedY = 4.5f;
-			position.y -= speedY;*/
-			position.x = 0;
-			position.y = 0;
+			speedY = 5.5f;
+			App->enemies->touchWall = true;
 		}
 	}
+	
+	if (c2 == App->scene->rightWall || c2 == App->scene->leftWall) {
+		if (c2->Intersects(r)) {
+			speedX = -speedX;
+			App->enemies->touchWall = true;
+		}
+	}
+	
+	if (c2 == App->scene->upperWall) {
+		if (c2->Intersects(r)) {
+			speedY = -(speedY + 1.5f);
+			App->enemies->touchWall = true;
+		}
+	}
+
+
 
 	if (c2 == App->harpoon->colliderH) {
 		if (c2->Intersects(r)) {

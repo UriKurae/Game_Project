@@ -15,6 +15,11 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER_SHOT] = true;
+	matrix[Collider::Type::WALL][Collider::Type::VERY_BIG_BALLOON] = true;
+	matrix[Collider::Type::WALL][Collider::Type::BIG_BALLOON] = true;
+	matrix[Collider::Type::WALL][Collider::Type::SMALL_BALLOON] = true;
+	matrix[Collider::Type::WALL][Collider::Type::VERY_SMALL_BALLOON] = true;
+
 	//matrix[Collider::Type::WALL][Collider::Type::ENEMY_SHOT] = true;
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;

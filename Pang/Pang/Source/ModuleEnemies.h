@@ -67,7 +67,7 @@ public:
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
 
-	
+	bool touchWall = false;
 
 private:
 	// Spawns a new enemy using the data from the queue
