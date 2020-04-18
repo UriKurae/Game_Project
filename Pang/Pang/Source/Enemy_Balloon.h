@@ -5,14 +5,14 @@
 #include "Path.h"
 #include "ModuleTextures.h"
 
-struct SDL_Texture;
+
 
 class Enemy_Balloon : public Enemy
 {
 public:
 	// Constructor (x y coordinates in the world)
 	// Creates animation and movement data and the collider
-	Enemy_Balloon(int x, int y, enum class ENEMY_TYPE tipe);
+	Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type);
 
 	//virtual void OnCollision(Collider* collider);
 

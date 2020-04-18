@@ -25,7 +25,7 @@ bool SceneIntro::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/UI/Intro.jpg");
+	bgTexture = App->textures->Load("Assets/UI/Intro.png");
 	App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);
 
 	App->render->camera.x = 0;
@@ -36,9 +36,9 @@ bool SceneIntro::Start()
 
 update_status SceneIntro::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 90);
+		App->fade->FadeToBlack(this, (Module*)App->scene, 90);
 	}
 
 	return update_status::UPDATE_CONTINUE;

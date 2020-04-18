@@ -20,11 +20,15 @@ public:
 	// Loads the necessary textures for the map background
 	bool Start() override;
 
+	bool CleanUp();
+
 	update_status Update() override;
 
 	// Called at the end of the application loop.
 	// Performs the render call of all the parts of the scene's background
 	update_status PostUpdate() override;
+
+
 
 public:
 	

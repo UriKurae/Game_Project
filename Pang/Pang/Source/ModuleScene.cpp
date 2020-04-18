@@ -7,6 +7,8 @@
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
 #include "Enemy_Balloon.h"
+#include "ModuleFadeToBlack.h"
+#include "ModulePlayer.h"
 
 
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
@@ -40,6 +42,9 @@ bool ModuleScene::Start()
 	//ADD COLLIDERS
 	//collider = App->collisions->AddCollider({0, 0, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
 
+	App->player->Enable();
+	App->enemies->Enable();
+
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
 	
@@ -65,4 +70,14 @@ update_status ModuleScene::PostUpdate()
 	App->render->Blit(fgTexture, 0, 0, NULL);
 
 	return update_status::UPDATE_CONTINUE;
+}
+
+bool ModuleScene::CleanUp()
+{
+
+	App->player->Disable();
+	App->enemies->Disable();
+
+	return true;
+
 }

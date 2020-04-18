@@ -9,6 +9,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleScene.h"
 #include "ModuleHarpoon_Shot.h"
+#include "ModuleFadeToBlack.h"
 
 #include "SDL/include/SDL_scancode.h"
 
@@ -43,7 +44,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	//shot animation
 	shotAnim.PushBack({ 32, 113, 27, 29 });
 	
-
+	destroyed = false;
 	
 }
 
@@ -180,12 +181,12 @@ update_status ModulePlayer::Update()
 
 	currentAnimation->Update();
 
-	if (destroyed)
-	{
-		destroyedCountdown--;
-		if (destroyedCountdown <= 0)
-			return update_status::UPDATE_STOP;
-	}
+	//if (destroyed)
+	//{
+	//	destroyedCountdown--;
+	//	if (destroyedCountdown <= 0)
+	//		return update_status::UPDATE_STOP;
+	//}
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -213,10 +214,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			position.x = SCREEN_WIDTH - 33;
 			
 		}
-		/* IMPORTANT TO KILL THE PLAYER
+		//IMPORTANT TO KILL THE PLAYER
 		currentAnimation = &deadAnimLeft;
 		destroyed = true;
-		*/
+		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 		
 		
 
