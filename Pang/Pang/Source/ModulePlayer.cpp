@@ -44,7 +44,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	//shot animation
 	shotAnim.PushBack({ 32, 113, 27, 29 });
 	
-	destroyed = false;
+	
 	
 }
 
@@ -71,7 +71,8 @@ bool ModulePlayer::Start()
 
 	
 	collider = App->collisions->AddCollider({ position.x, position.y, 26, 32 }, Collider::Type::PLAYER, this);
-	
+	destroyed = false;
+
 	return ret;
 }
 

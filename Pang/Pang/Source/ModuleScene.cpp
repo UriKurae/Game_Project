@@ -9,6 +9,7 @@
 #include "Enemy_Balloon.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
+#include "ModuleHarpoon_Shot.h"
 
 
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
@@ -77,7 +78,8 @@ bool ModuleScene::CleanUp()
 
 	App->player->Disable();
 	App->enemies->Disable();
-
+	//App->harpoon->Disable();
+	//App->collisions->CleanUp();
 	return true;
 
 }
