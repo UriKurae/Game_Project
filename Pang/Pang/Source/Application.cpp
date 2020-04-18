@@ -11,27 +11,31 @@
 #include "ModuleEnemies.h"
 #include "ModuleCollisions.h"
 #include "ModuleRender.h"
+#include "IntroScene.h"
 #include "ModuleHarpoon_Shot.h"
+#include "ModuleFadeToBlack.h"
 
 Application::Application()
 {
 	// The order in which the modules are added is very important.
 	// It will define the order in which Pre/Update/Post will be called
 	// Render should always be last, as our last action should be updating the screen
-	modules[0] = window = new ModuleWindow();
-	modules[1] = input = new ModuleInput();
+	modules[0] = window = new ModuleWindow(true);
+	modules[1] = input = new ModuleInput(true);
 	modules[2] = textures = new ModuleTextures();
 	modules[3] = audio = new ModuleAudio();
 
-	modules[4] = scene = new ModuleScene();
-	modules[5] = player = new ModulePlayer();
-	modules[6] = harpoon = new ModuleHarpoon();
-	modules[7] = particles = new ModuleParticles();
-	modules[8] = enemies = new ModuleEnemies();
+	modules[4] = sceneIntro = new SceneIntro(true);
+	modules[5] = scene = new ModuleScene();
+	modules[6] = player = new ModulePlayer();
+	modules[7] = harpoon = new ModuleHarpoon();
+	modules[8] = particles = new ModuleParticles();
+	modules[9] = enemies = new ModuleEnemies();
 
-	modules[9] = collisions = new ModuleCollisions();
+	modules[10] = collisions = new ModuleCollisions();
+	modules[11] = fade = new ModuleFadeToBlack(true);
 
-	modules[10] = render = new ModuleRender();
+	modules[12] = render = new ModuleRender();
 
 }
 

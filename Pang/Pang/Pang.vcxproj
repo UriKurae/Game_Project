@@ -26,7 +26,9 @@
     <ClInclude Include="Source\Enemy_BrownShip.h" />
     <ClInclude Include="Source\Enemy_Mech.h" />
     <ClInclude Include="Source\Enemy_RedBird.h" />
+    <ClInclude Include="Source\ModuleFadeToBlack.h" />
     <ClInclude Include="Source\Globals.h" />
+    <ClInclude Include="Source\IntroScene.h" />
     <ClInclude Include="Source\ModuleHarpoon_Shot.h" />
     <ClInclude Include="Source\MemLeaks.h" />
     <ClInclude Include="Source\Module.h" />
@@ -52,7 +54,9 @@
     <ClCompile Include="Source\Enemy_BrownShip.cpp" />
     <ClCompile Include="Source\Enemy_Mech.cpp" />
     <ClCompile Include="Source\Enemy_RedBird.cpp" />
+    <ClCompile Include="Source\ModuleFadeToBlack.cpp" />
     <ClCompile Include="Source\Globals.cpp" />
+    <ClCompile Include="Source\IntroScene.cpp" />
     <ClCompile Include="Source\ModuleHarpoon_Shot.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Module.cpp" />

@@ -11,7 +11,7 @@
 #include <SDL\include\SDL_scancode.h>
 
 
-ModuleHarpoon::ModuleHarpoon()
+ModuleHarpoon::ModuleHarpoon(): Module(true)
 {
 	harpoonShot.PushBack({ 4, 266, 9, 34 });
 	harpoonShot.PushBack({ 21, 264, 9, 36 });

@@ -15,7 +15,7 @@
 #define SPAWN_MARGIN 50
 
 
-ModuleEnemies::ModuleEnemies()
+ModuleEnemies::ModuleEnemies() :Module(true)
 {
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 		enemies[i] = nullptr;

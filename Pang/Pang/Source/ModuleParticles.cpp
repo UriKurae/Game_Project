@@ -8,7 +8,7 @@
 
 #include "SDL/include/SDL_timer.h"
 
-ModuleParticles::ModuleParticles()
+ModuleParticles::ModuleParticles() :Module(true)
 {
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		particles[i] = nullptr;
