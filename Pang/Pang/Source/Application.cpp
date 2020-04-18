@@ -22,20 +22,20 @@ Application::Application()
 	// Render should always be last, as our last action should be updating the screen
 	modules[0] = window = new ModuleWindow(true);
 	modules[1] = input = new ModuleInput(true);
-	modules[2] = textures = new ModuleTextures();
-	modules[3] = audio = new ModuleAudio();
+	modules[2] = textures = new ModuleTextures(true);
+	modules[3] = audio = new ModuleAudio(true);
 
 	modules[4] = sceneIntro = new SceneIntro(true);
-	modules[5] = scene = new ModuleScene();
-	modules[6] = player = new ModulePlayer();
-	modules[7] = harpoon = new ModuleHarpoon();
-	modules[8] = particles = new ModuleParticles();
-	modules[9] = enemies = new ModuleEnemies();
+	modules[5] = scene = new ModuleScene(false);
+	modules[6] = player = new ModulePlayer(false);
+	modules[7] = harpoon = new ModuleHarpoon(false);
+	modules[8] = particles = new ModuleParticles(true);
+	modules[9] = enemies = new ModuleEnemies(false);
 
-	modules[10] = collisions = new ModuleCollisions();
+	modules[10] = collisions = new ModuleCollisions(true);
 	modules[11] = fade = new ModuleFadeToBlack(true);
 
-	modules[12] = render = new ModuleRender();
+	modules[12] = render = new ModuleRender(true);
 
 }
 

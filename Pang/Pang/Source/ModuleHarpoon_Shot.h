@@ -31,7 +31,7 @@ public:
 	Collider* colliderH = nullptr;
 
 public:
-	ModuleHarpoon();
+	ModuleHarpoon(bool startEnabled);
 	~ModuleHarpoon();
 
 	//load all textures

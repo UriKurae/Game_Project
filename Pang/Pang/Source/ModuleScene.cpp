@@ -9,7 +9,7 @@
 #include "Enemy_Balloon.h"
 
 
-ModuleScene::ModuleScene() :Module(true)
+ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
 
 }

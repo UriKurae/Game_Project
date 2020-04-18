@@ -13,7 +13,7 @@
 #include "SDL/include/SDL_scancode.h"
 
 
-ModulePlayer::ModulePlayer() :Module(true)
+ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
 	// idle animation - just one sprite
 	idleAnim.PushBack({ 0, 110, 26, 32 });
