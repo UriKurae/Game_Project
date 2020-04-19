@@ -8,6 +8,9 @@
 #include "ModuleInput.h"
 #include "ModuleCollisions.h"
 #include "ModuleScene.h"
+
+#include "ModuleEnemies.h"
+
 #include <SDL\include\SDL_scancode.h>
 
 
@@ -102,6 +105,7 @@ bool ModuleHarpoon::Start()
 	x = App->player->position.x;
 	y = App->player->position.y - 3;
 	
+
 	return true;
 }
 
@@ -152,38 +156,51 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 {
 	SDL_Rect r = App->scene->upperWall->rect;
 	
-	if (c1->Intersects(r)) {
+	/*if (c1->Intersects(r)) {
 		delete colliderH;
 		destroyed = true;
 		increment = false;
+		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n");
+	}*/
+
+
+	if (c2->type == Collider::Type::WALL) {
+		delete colliderH;
+		destroyed = true;
+		increment = false;
+		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
+		
 	}
 
-	if (c2->type == Collider::Type::VERY_BIG_BALLOON)
+	
+
+	/*if (c2->type == Collider::Type::VERY_BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
+	{
+		delete colliderH;
+		destroyed = true;
+		increment = false;
+		LOG("\n\n\nHARPOON HIT VERY BIG BALLOON\n\n");
+	}
+
+	if (c2->type == Collider::Type::BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
+	{
+		delete colliderH;
+		destroyed = true;
+		increment = false;
+		LOG("\n\n\nHARPOON HIT BIG BALLOON\n\n");
+	}
+
+	if (c2->type == Collider::Type::SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		delete colliderH;
 		destroyed = true;
 		increment = false;
 	}
 
-	if (c2->type == Collider::Type::BIG_BALLOON)
+	if (c2->type == Collider::Type::VERY_SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		delete colliderH;
 		destroyed = true;
 		increment = false;
-	}
-
-	if (c2->type == Collider::Type::SMALL_BALLOON)
-	{
-		delete colliderH;
-		destroyed = true;
-		increment = false;
-	}
-
-	if (c2->type == Collider::Type::VERY_SMALL_BALLOON)
-	{
-		delete colliderH;
-		destroyed = true;
-		increment = false;
-	}
-
+	}*/
 }

@@ -4,8 +4,10 @@
 #include "Module.h"
 #include "p2Point.h"
 
+
 struct SDL_Texture;
 struct Collider;
+
 
 class ModuleHarpoon : public Module
 {
@@ -29,6 +31,7 @@ public:
 	Animation* currentAnimation = nullptr;
 
 	Collider* colliderH = nullptr;
+
 
 public:
 	ModuleHarpoon(bool startEnabled);

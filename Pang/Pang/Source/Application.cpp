@@ -14,6 +14,7 @@
 #include "IntroScene.h"
 #include "ModuleHarpoon_Shot.h"
 #include "ModuleFadeToBlack.h"
+#include "Enemy_Balloon.h"
 
 Application::Application()
 {
@@ -36,7 +37,7 @@ Application::Application()
 	modules[11] = fade = new ModuleFadeToBlack(true);
 
 	modules[12] = render = new ModuleRender(true);
-
+	
 }
 
 Application::~Application()
