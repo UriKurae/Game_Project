@@ -149,15 +149,19 @@ update_status ModulePlayer::PostUpdate()
 	{
 		App->render->Blit(texture, position.x, position.y, &rect);
 	}
-
-	if (destroyed == true || App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) //Blit the dead animation
+	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
-		destroyed = true; //in case f2 is pressed
-
+		destroyed = true;
+	}
+	if (destroyed == true) //Blit the dead animation
+	{
+		destroyed = false; //in case f2 is pressed
+		
 		currentAnimation = &deadAnimLeft;
 		rect = currentAnimation->GetCurrentFrame();
 		
 		App->render->Blit(texture, position.x, position.y, &rect);
+		delete collider;
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 	}
 

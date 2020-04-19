@@ -87,7 +87,7 @@ bool ModuleScene::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();
 	App->harpoon->Disable();
-	App->collisions->Disable();
+	//App->collisions->Disable();
 	return true;
 
 }

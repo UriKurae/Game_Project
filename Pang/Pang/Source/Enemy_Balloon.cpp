@@ -26,6 +26,7 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 
 	currentAnim = &veryBigBalloonAnim;
 	
+	
 	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
 	printf("hola VERY BIG BALLOON");
@@ -144,8 +145,9 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 			{
 				App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, position.x, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON2, position.x, position.y);
-				c2->type == Collider::Type::NONE;
+			//	c2->type == Collider::Type::NONE;
 				App->scene->deadballoons--;
+				
 			}
 			else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON || tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
 			{
