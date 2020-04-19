@@ -134,16 +134,23 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 				App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, position.x, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON2, position.x, position.y);
 				c2->type == Collider::Type::NONE;
+				App->scene->deadballoons--;
 			}
 			else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON || tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
 			{
 				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, position.x, position.y);
+				App->scene->deadballoons--;
 			}
 			else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
 			{
 				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON2, position.x, position.y);
+				App->scene->deadballoons--;
+			}
+			else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON || tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
+			{
+				App->scene->deadballoons--;
 			}
 		}
 	}

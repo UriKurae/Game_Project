@@ -50,8 +50,9 @@ bool ModuleScene::Start()
 
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
-	
+	count++;
 
+	deadballoons = count * 15;
 
 	//TODO BALLOON crear dos balloons petits com el balon normal i cada un amb un velocitat inicial diferent.
 
@@ -62,7 +63,12 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
-	
+	if (deadballoons == 0)
+	{
+		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+	}
+
+
 	return update_status::UPDATE_CONTINUE;
 }
 // Update: draw background

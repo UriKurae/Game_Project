@@ -47,6 +47,9 @@ public:
 	Collider* leftWall = nullptr;
 	Collider* upperWall = nullptr;
 	Collider* lowerWall = nullptr;
+
+	int deadballoons = 0;
+	int count = 0;
 };
 
 #endif
