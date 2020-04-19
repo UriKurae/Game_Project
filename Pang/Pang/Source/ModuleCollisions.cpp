@@ -188,11 +188,11 @@ void ModuleCollisions::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
 			case Collider::Type::SMALL_BALLOON: //green
-				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
-				break;
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
+			break;
 			case Collider::Type::VERY_SMALL_BALLOON: //blue
-				App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
-				break;
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
+			break;
 		}
 	}
 }

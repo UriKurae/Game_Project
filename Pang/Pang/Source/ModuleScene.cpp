@@ -46,6 +46,7 @@ bool ModuleScene::Start()
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
+	App->harpoon->Enable();
 
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
@@ -79,7 +80,7 @@ bool ModuleScene::CleanUp()
 
 	App->player->Disable();
 	App->enemies->Disable();
-	//App->harpoon->Disable();
+	App->harpoon->Disable();
 	App->collisions->Disable();
 	return true;
 

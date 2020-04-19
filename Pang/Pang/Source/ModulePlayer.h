@@ -61,7 +61,7 @@ public:
 	bool destroyed = false;
 
 	// A countdown to when the player gets destroyed. After a while, the game exits
-	uint destroyedCountdown = 120;
+	uint destroyedCountdown = 180;
 
 	// Sound effects indices
 	uint HarpoonFx = 0;

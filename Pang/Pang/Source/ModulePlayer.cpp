@@ -83,7 +83,7 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !destroyed)
 	{
 		position.x -= speed;
 
@@ -94,7 +94,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !destroyed)
 	{
 		position.x += speed;
 
@@ -106,67 +106,13 @@ update_status ModulePlayer::Update()
 
 	}
 
-	//DO IF AND WHEN STAIRS ARE IMPLEMENTED
-	/*if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	//if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) destroyed = true;
+
+
+	/*if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		position.y += speed;
-		if (currentAnimation != &downAnim)
-		{
-			downAnim.Reset();
-			currentAnimation = &downAnim;
-		}
+		
 	}*/
-
-	/*if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
-	{
-		position.y -= speed;
-		if (currentAnimation != &upAnim)
-		{
-			upAnim.Reset();
-			currentAnimation = &upAnim;
-		}
-	}*/
-
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
-	{
-		/*ModuleHarpoon harpoon;
-		
-		currentAnimation = harpoon.harpoonShot;*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*currentAnimation = &shotAnim;
-		App->audio->PlayFx(HarpoonFx);
-
-
-		int movY = 15;
-		int lifeTimeT = 40;
-		
-		for (int i = 0; i < 23; i++)
-		{
-			if (i == 0)
-			{
-				App->particles->harpoonShot[0].lifetime = lifeTimeT; //Was 10 //Clase a part per fer el gancho sencer.
-				App->particles->AddParticle(App->particles->harpoonShot[0], position.x + 10, position.y - movY, Collider::Type::PLAYER_SHOT);
-			}
-			else 
-			{
-
-			App->particles->harpoonShot[i].lifetime = lifeTimeT; //Was 10
-			App->particles->AddParticle(App->particles->harpoonShot[i-1], position.x + 10, position.y - movY, Collider::Type::PLAYER_SHOT);	
-			}
-			
-			movY += 20;
-			lifeTimeT -= 2;
-		}*/
-	}
 
 	//Detect when A and D are pressed at the same time and set the current animation to idle
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT &&
@@ -186,23 +132,36 @@ update_status ModulePlayer::Update()
 
 	currentAnimation->Update();
 
-	//if (destroyed)
-	//{
-	//	destroyedCountdown--;
-	//	if (destroyedCountdown <= 0)
-	//		return update_status::UPDATE_STOP;
-	//}
+	if (destroyed)
+	{
+		destroyedCountdown--;
+		if (destroyedCountdown <= 0)
+			return update_status::UPDATE_STOP;
+		
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModulePlayer::PostUpdate()
 {
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	if (!destroyed)
 	{
-		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		App->render->Blit(texture, position.x, position.y, &rect);
 	}
+
+	if (destroyed == true || App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) //Blit the dead animation
+	{
+		destroyed = true; //in case f2 is pressed
+
+		currentAnimation = &deadAnimLeft;
+		rect = currentAnimation->GetCurrentFrame();
+		
+		App->render->Blit(texture, position.x, position.y, &rect);
+		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+	}
+
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -217,23 +176,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		if (c2 == App->scene->rightWall) {
 			position.x = SCREEN_WIDTH - 33;
-			
 		}
-		//IMPORTANT TO KILL THE PLAYER
-		destroyed = true;
-		currentAnimation = &deadAnimLeft;
-		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
-		
 
-		/*App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
-		App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, Collider::Type::NONE, 14);
-		App->particles->AddParticle(App->particles->explosion, position.x - 7, position.y + 12, Collider::Type::NONE, 40);
-		App->particles->AddParticle(App->particles->explosion, position.x + 5, position.y - 5, Collider::Type::NONE, 28);
-		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);*/
-
-
-		//App->audio->PlayFx(explosionFx);
-
-		//destroyed = true;
+		if (c2->type == Collider::Type::VERY_BIG_BALLOON)
+		{
+			destroyed = true;
+		}
 	}
 }

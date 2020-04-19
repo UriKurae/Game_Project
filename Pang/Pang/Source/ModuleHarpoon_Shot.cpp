@@ -151,9 +151,39 @@ update_status ModuleHarpoon::PostUpdate()
 void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 {
 	SDL_Rect r = App->scene->upperWall->rect;
+	
 	if (c1->Intersects(r)) {
 		delete colliderH;
 		destroyed = true;
 		increment = false;
 	}
+
+	if (c2->type == Collider::Type::VERY_BIG_BALLOON)
+	{
+		delete colliderH;
+		destroyed = true;
+		increment = false;
+	}
+
+	if (c2->type == Collider::Type::BIG_BALLOON)
+	{
+		delete colliderH;
+		destroyed = true;
+		increment = false;
+	}
+
+	if (c2->type == Collider::Type::SMALL_BALLOON)
+	{
+		delete colliderH;
+		destroyed = true;
+		increment = false;
+	}
+
+	if (c2->type == Collider::Type::VERY_SMALL_BALLOON)
+	{
+		delete colliderH;
+		destroyed = true;
+		increment = false;
+	}
+
 }
