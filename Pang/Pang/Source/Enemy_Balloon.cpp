@@ -74,6 +74,7 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
 		currentAnim = &verySmallBalloonAnim;
 	}
+
 }
 
 void Enemy_Balloon::Update()
@@ -111,6 +112,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 		if (c2->Intersects(r)) {
 			speedY = 4.5f;
 			App->enemies->touchWall = true;
+			LOG("\n\n\nBALLOON HIT FLOOR\n\n\n");
 		}
 	}
 	
@@ -118,6 +120,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 		if (c2->Intersects(r)) {
 			speedX = -speedX;
 			App->enemies->touchWall = true;
+			LOG("\n\n\nBALLOON HIT RIGHT WALL\n\n\n");
 		}
 	}
 
@@ -126,6 +129,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 		if (c2->Intersects(r)) {
 			speedX = -speedX;
 			App->enemies->touchWall = true;
+			LOG("\n\n\nBALLOON HIT LEFT WALL\n\n\n");
 		}
 	}
 	
@@ -133,6 +137,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 		if (c2->Intersects(r)) {
 			speedY = -(speedY + 1.5f);
 			App->enemies->touchWall = true;
+			LOG("\n\n\nBALLOON HIT UPPER WALL\n\n\n");
 		}
 	}
 

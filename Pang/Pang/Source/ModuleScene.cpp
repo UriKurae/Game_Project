@@ -45,7 +45,7 @@ bool ModuleScene::Start()
 
 	App->player->Enable();
 	App->enemies->Enable();
-	App->collisions->Enable();
+	//App->collisions->Enable();
 	App->harpoon->Enable();
 
 	//ADD ENEMIES
@@ -88,6 +88,7 @@ bool ModuleScene::CleanUp()
 	App->enemies->Disable();
 	App->harpoon->Disable();
 	//App->collisions->Disable();
+	
 	return true;
 
 }

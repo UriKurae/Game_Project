@@ -14,8 +14,12 @@
 #include "Enemy.h"
 #include "ModuleEnemies.h"
 
+#include "ModuleFonts.h"
+
 #include "SDL/include/SDL_scancode.h"
 
+
+#include <stdio.h>
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
@@ -70,12 +74,15 @@ bool ModulePlayer::Start()
 	
 	//SET SPAWN POSITION FOR PLAYER
 	position.x = (SCREEN_WIDTH / 2) - 20;
-	position.y = SCREEN_HEIGHT - 40;
+	position.y = SCREEN_HEIGHT - 77;
 
 	
 	collider = App->collisions->AddCollider({ position.x, position.y, 26, 32 }, Collider::Type::PLAYER, this);
 	destroyed = false;
 
+
+	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!X-: " };
+	uiFont = App->fonts->Load("Assets/UI/font2_pang.png", lookupTable, 3);
 	return ret;
 }
 
@@ -104,9 +111,6 @@ update_status ModulePlayer::Update()
 		}
 
 	}
-
-	//if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN) destroyed = true;
-
 
 	/*if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
@@ -145,19 +149,23 @@ update_status ModulePlayer::Update()
 update_status ModulePlayer::PostUpdate()
 {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+	
 	if (!destroyed)
 	{
 		App->render->Blit(texture, position.x, position.y, &rect);
 	}
+	
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
 		destroyed = true;
 	}
+
 	if (destroyed == true) //Blit the dead animation
 	{
 		destroyed = false; //in case f2 is pressed
 		
 		currentAnimation = &deadAnimLeft;
+
 		rect = currentAnimation->GetCurrentFrame();
 		
 		App->render->Blit(texture, position.x, position.y, &rect);
@@ -165,6 +173,10 @@ update_status ModulePlayer::PostUpdate()
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 	}
 
+
+	sprintf_s(scoreText, 10, "%7d", score);
+
+	App->fonts->BlitText(0, 0, uiFont, scoreText);
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -184,6 +196,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		if (c2->type == Collider::Type::VERY_BIG_BALLOON)
 		{
 			destroyed = true;
+			score += 100;
 		}
 	}
 }

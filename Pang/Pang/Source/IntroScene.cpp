@@ -6,6 +6,10 @@
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
+
+#include "ModuleCollisions.h"
+
+
 #include <SDL\include\SDL_scancode.h>
 
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)

@@ -29,6 +29,7 @@
     <ClInclude Include="Source\ModuleFadeToBlack.h" />
     <ClInclude Include="Source\Globals.h" />
     <ClInclude Include="Source\IntroScene.h" />
+    <ClInclude Include="Source\ModuleFonts.h" />
     <ClInclude Include="Source\ModuleHarpoon_Shot.h" />
     <ClInclude Include="Source\MemLeaks.h" />
     <ClInclude Include="Source\Module.h" />
@@ -57,6 +58,7 @@
     <ClCompile Include="Source\ModuleFadeToBlack.cpp" />
     <ClCompile Include="Source\Globals.cpp" />
     <ClCompile Include="Source\IntroScene.cpp" />
+    <ClCompile Include="Source\ModuleFonts.cpp" />
     <ClCompile Include="Source\ModuleHarpoon_Shot.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Module.cpp" />
