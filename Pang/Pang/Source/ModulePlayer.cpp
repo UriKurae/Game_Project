@@ -11,6 +11,10 @@
 #include "ModuleHarpoon_Shot.h"
 #include "ModuleFadeToBlack.h"
 
+
+#include "Enemy.h"
+#include "ModuleEnemies.h"
+
 #include "SDL/include/SDL_scancode.h"
 
 
@@ -205,7 +209,7 @@ update_status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1 == collider)
+	if (c1 == this->collider)//player collider
 	{
 		if (c2 == App->scene->leftWall) {
 			position.x = 6;
@@ -216,10 +220,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			
 		}
 		//IMPORTANT TO KILL THE PLAYER
-		currentAnimation = &deadAnimLeft;
 		destroyed = true;
+		currentAnimation = &deadAnimLeft;
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
-		
 		
 
 		/*App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
