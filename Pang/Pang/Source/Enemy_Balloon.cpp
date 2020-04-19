@@ -101,8 +101,11 @@ void Enemy_Balloon::balloonBounce()
 }
 
 void Enemy_Balloon::OnCollision(Collider* c2) {
+	
 	App->enemies->touchWall = false;
+	
 	SDL_Rect r = this->collider->rect;
+	
 	if (c2 == App->scene->lowerWall) {
 		if (c2->Intersects(r)) {
 			speedY = 4.5f;
@@ -110,7 +113,15 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 		}
 	}
 	
-	if (c2 == App->scene->rightWall || c2 == App->scene->leftWall) {
+	if (c2 == App->scene->rightWall) {
+		if (c2->Intersects(r)) {
+			speedX = -speedX;
+			App->enemies->touchWall = true;
+		}
+	}
+
+	if (c2 == App->scene->leftWall)
+	{
 		if (c2->Intersects(r)) {
 			speedX = -speedX;
 			App->enemies->touchWall = true;
