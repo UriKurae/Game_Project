@@ -203,5 +203,23 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			destroyed = true;
 			score += 100;
 		}
+
+		if (c2->type == Collider::Type::BIG_BALLOON)
+		{
+			destroyed = true;
+			score += 100;
+		}
+
+		if (c2->type == Collider::Type::SMALL_BALLOON)
+		{
+			destroyed = true;
+			score += 100;
+		}
+
+		if (c2->type == Collider::Type::VERY_SMALL_BALLOON)
+		{
+			destroyed = true;
+			score += 100;
+		}
 	}
 }
