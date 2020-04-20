@@ -29,12 +29,18 @@ public:
 	bool CleanUp();
 
 public:
+
+	int countDownToFade = 500;
 	
 	// The background sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
 
 	//The foreground sprite sheet loaded into an SDL_Texture
 	SDL_Texture* fgTexture = nullptr;
+
+	//Foregrounds when dying
+	SDL_Texture* deathTexture1 = nullptr;
+	SDL_Texture* deathTexture2 = nullptr;
 	
 	// The sprite rectangle for the ground
 	SDL_Texture* starsTexture = nullptr;

@@ -140,13 +140,13 @@ update_status ModulePlayer::Update()
 
 	currentAnimation->Update();
 
-	if (destroyed)
+	/*if (destroyed)
 	{
 		destroyedCountdown--;
 		if (destroyedCountdown <= 0)
 			return update_status::UPDATE_STOP;
 		
-	}
+	}*/
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -174,8 +174,8 @@ update_status ModulePlayer::PostUpdate()
 		rect = currentAnimation->GetCurrentFrame();
 		
 		App->render->Blit(texture, position.x, position.y, &rect);
-		//delete collider;
-		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+
+		//App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 	}
 
 
@@ -201,6 +201,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		if (c2->type == Collider::Type::VERY_BIG_BALLOON)
 		{
 			destroyed = true;
+			
 			score += 100;
 		}
 

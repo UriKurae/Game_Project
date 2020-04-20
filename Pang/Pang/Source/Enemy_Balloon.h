@@ -41,7 +41,7 @@ private:
 	Animation verySmallBalloonAnim;
 	Animation balloonDeath;
 	enum class ENEMY_TYPE tipoBalloon;
-
+	
 };
 
 #endif // __ENEMY_BROWNSHIP_H__
