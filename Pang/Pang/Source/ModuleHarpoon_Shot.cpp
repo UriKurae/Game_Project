@@ -198,6 +198,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == Collider::Type::SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
+		colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
 	}

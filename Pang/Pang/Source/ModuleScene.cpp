@@ -36,9 +36,9 @@ bool ModuleScene::Start()
 
 	//Walls collider
 	lowerWall = App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);
-	leftWall = App->collisions->AddCollider({ 0, 0, 8, 308 }, Collider::Type::WALL);
+	leftWall = App->collisions->AddCollider({ 0, 0, 8, 208 }, Collider::Type::WALL);
 	upperWall = App->collisions->AddCollider({ 0, 0, 384, 8 }, Collider::Type::WALL);
-	rightWall = App->collisions->AddCollider({ 376, 0, 8, 308 }, Collider::Type::WALL);
+	rightWall = App->collisions->AddCollider({ 376, 0, 8, 208 }, Collider::Type::WALL);
 
 	//ADD COLLIDERS
 	//collider = App->collisions->AddCollider({0, 0, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
