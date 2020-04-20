@@ -75,7 +75,7 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
 		currentAnim = &verySmallBalloonAnim;
 	}
-
+	
 }
 
 void Enemy_Balloon::Update()
@@ -89,15 +89,19 @@ void Enemy_Balloon::balloonBounce()
 {
 	//PHYSICS MOTIONS
 
-	if (tipoBalloon == ENEMY_TYPE::BIGBALLOON2 || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2 || tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2) {
-		position.x -= speedX;
-		position.y -= (speedY + gravity);
-		speedY -= gravity;
-	}
-	else {
-		position.x += speedX;
-		position.y -= (speedY + gravity);
-		speedY -= gravity;
+	if (!App->player->destroyed)
+	{
+		if (tipoBalloon == ENEMY_TYPE::BIGBALLOON2 || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2 || tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2) {
+
+			position.x -= speedX;
+			position.y -= (speedY + gravity);
+			speedY -= gravity;
+		}
+		else {
+			position.x += speedX;
+			position.y -= (speedY + gravity);
+			speedY -= gravity;
+		}
 	}
 	
 	//TODO PHYSICS, IMPLEMENT RIGHT, LEFT AND TOP HIT WITH THE BALLOON, SHOULD NOT GAIN SPEED.
@@ -149,9 +153,9 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 
 			if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 			{
+				
 				App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, position.x, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON2, position.x, position.y);
-			//	c2->type == Collider::Type::NONE;
 				App->scene->balloonsOnScene--;
 				
 			}

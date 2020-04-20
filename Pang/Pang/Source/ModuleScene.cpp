@@ -29,8 +29,11 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
+	countDownToFade = 500;
 	fgTexture = App->textures->Load("Assets/Foregrounds/Foreground Mt.Fuji(Day).png"); //fg on 1st Level is invisible
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Fuji(Day).png");
+	deathTexture1 = App->textures->Load("Assets/Foregrounds/Foreground_Death_1.png");
+	deathTexture2 = App->textures->Load("Assets/Foregrounds/Foreground_Death_2.png");
 
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 1.0f);
 
@@ -48,10 +51,6 @@ bool ModuleScene::Start()
 
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
-	
-
-	//TODO BALLOON crear dos balloons petits com el balon normal i cada un amb un velocitat inicial diferent.
-
 	
 
 	return ret;
@@ -72,8 +71,38 @@ update_status ModuleScene::Update()
 update_status ModuleScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
+	
+	
 	App->render->Blit(bgTexture, 0, 0, NULL);
 	App->render->Blit(fgTexture, 0, 0, NULL);
+
+	//This could be more clean 
+	//Animation to stop the scene with the death 
+
+	/*if (App->player->destroyed)
+	{
+		countDownToFade--;
+	}
+	if (countDownToFade < 500)
+	{
+		countDownToFade--;
+	}
+	if (countDownToFade > 440 && countDownToFade < 460)
+	{
+		App->render->Blit(deathTexture1, 0, 0, NULL);
+		
+	}
+	else if (countDownToFade > 435 && countDownToFade < 440)
+	{
+		App->render->Blit(deathTexture2, 0, 0, NULL);
+	
+	}
+	else if (countDownToFade <= 0)
+	{
+		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+	}*/
+	
+	
 
 	return update_status::UPDATE_CONTINUE;
 }
