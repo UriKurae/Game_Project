@@ -81,8 +81,8 @@ bool ModulePlayer::Start()
 	destroyed = false;
 
 
-	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!X-: " };
-	uiFont = App->fonts->Load("Assets/UI/font2_pang.png", lookupTable, 3);
+	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!X-:" };
+	uiFont = App->fonts->Load("Assets/UI/font2_pang.png", lookupTable, 1);
 	return ret;
 }
 

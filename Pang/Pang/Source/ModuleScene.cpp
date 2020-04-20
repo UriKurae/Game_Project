@@ -40,8 +40,6 @@ bool ModuleScene::Start()
 	upperWall = App->collisions->AddCollider({ 0, 0, 384, 8 }, Collider::Type::WALL);
 	rightWall = App->collisions->AddCollider({ 376, 0, 8, 208 }, Collider::Type::WALL);
 
-	//ADD COLLIDERS
-	//collider = App->collisions->AddCollider({0, 0, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
 
 	App->player->Enable();
 	App->enemies->Enable();
