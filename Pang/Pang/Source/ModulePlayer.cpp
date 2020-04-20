@@ -1,4 +1,4 @@
-#include "ModulePlayer.h"
+﻿#include "ModulePlayer.h"
 
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -52,7 +52,6 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	shotAnim.PushBack({ 32, 113, 27, 29 });
 	
 	
-	
 }
 
 ModulePlayer::~ModulePlayer()
@@ -81,8 +80,8 @@ bool ModulePlayer::Start()
 	destroyed = false;
 
 
-	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!X-:" };
-	uiFont = App->fonts->Load("Assets/UI/font2_pang.png", lookupTable, 1);
+	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕" };
+	uiFont = App->fonts->Load("Assets/UI/Pang_font.png", lookupTable, 1);
 	return ret;
 }
 
@@ -112,10 +111,15 @@ update_status ModulePlayer::Update()
 
 	}
 
-	/*if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
+		if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
+		{
+			shotAnim.Reset();
+			currentAnimation = &shotAnim;
 		
-	}*/
+		}
+	}
 
 	//Detect when A and D are pressed at the same time and set the current animation to idle
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT &&
@@ -127,9 +131,10 @@ update_status ModulePlayer::Update()
 	}
 	// If no up/down movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE)
+		&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_IDLE)
+	{
 		currentAnimation = &idleAnim;
-
+	}
 		
 	collider->SetPos(position.x, position.y);
 
@@ -176,7 +181,7 @@ update_status ModulePlayer::PostUpdate()
 
 	sprintf_s(scoreText, 10, "%7d", score);
 
-	App->fonts->BlitText(0, 0, uiFont, scoreText);
+	App->fonts->BlitText(200, 100, uiFont, scoreText);
 
 	return update_status::UPDATE_CONTINUE;
 }

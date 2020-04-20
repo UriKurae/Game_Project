@@ -13,9 +13,9 @@ class ModuleHarpoon : public Module
 {
 public:
 	//position where is released
-	int x = 0;
-	int y = 0;
-	int h = 34;
+	float x = 0;
+	float y = 0;
+	float h = 34;
 
 	float speed = 1.5f;
 

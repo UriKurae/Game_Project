@@ -87,7 +87,7 @@ ModuleHarpoon::ModuleHarpoon(bool startEnabled) : Module(startEnabled)
 	harpoonShot.PushBack({ 1160, 113, 9, 187 });
 	harpoonShot.PushBack({ 1177, 111, 9, 189 });
 	harpoonShot.loop = false;
-	harpoonShot.speed = 0.1f;
+	harpoonShot.speed = 1.0f;
 
 
 
@@ -106,7 +106,7 @@ bool ModuleHarpoon::Start()
 	texture = App->textures->Load("Assets/Items&Weapons/Harpoon.png");
 	
 	x = App->player->position.x;
-	y = App->player->position.y - 3;
+	y = App->player->position.y - speed;
 	
 
 	return true;
@@ -119,20 +119,18 @@ update_status ModuleHarpoon::Update()
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && destroyed == true) {
 		
-		harpoonShot.Reset();
 		currentAnimation = &harpoonShot;
 		h = 34;
 		x = App->player->position.x;
 		y = App->player->position.y - 2;
 		destroyed = false;
-		colliderH = App->collisions->AddCollider({ x, y, 9, h }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
+		colliderH = App->collisions->AddCollider({ (int)x, (int)y, 9, (int)h }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
 		increment = true;
-
 	}
 	
 	if (increment == true) {
-		y -= 1;
-		h += 1;
+		y -= speed;
+		h += speed;
 		currentAnimation = &harpoonShot;
 		colliderH->SetH(h);
 		colliderH->SetPos(x, y);
@@ -147,44 +145,30 @@ update_status ModuleHarpoon::PostUpdate()
 	update_status ret = update_status::UPDATE_CONTINUE;
 
 	if (App->player->destroyed == false && destroyed == false)
-	{
-		/*SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		App->render->Blit(texture, x, y, &rect);*/
-		
-		App->render->Blit(texture, x, y, &(harpoonShot.GetCurrentFrame()), 0.5f);
+	{		
+		App->render->Blit(texture, x, y, &(harpoonShot.GetCurrentFrame()), 1.0f);
 	}
 
 	return ret;
 }
 
 void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
-{
-	SDL_Rect r = App->scene->upperWall->rect;
-	
-	/*if (c1->Intersects(r)) {
-		delete colliderH;
-		destroyed = true;
-		increment = false;
-		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n");
-	}*/
-
-
+{	
 	if (c2->type == Collider::Type::WALL) {
 		//delete colliderH;
 		colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
+		currentAnimation->Reset();
 		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
-		
 	}
-
-	
 
 	if (c2->type == Collider::Type::VERY_BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
+		currentAnimation->Reset();
 		LOG("\n\n\nHARPOON HIT VERY BIG BALLOON\n\n");
 	}
 
@@ -193,6 +177,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 		colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
+		currentAnimation->Reset();
 		LOG("\n\n\nHARPOON HIT BIG BALLOON\n\n");
 	}
 
@@ -201,6 +186,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 		colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
+		currentAnimation->Reset();
 	}
 
 	if (c2->type == Collider::Type::VERY_SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
@@ -208,5 +194,6 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 		colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
+		currentAnimation->Reset();
 	}
 }
