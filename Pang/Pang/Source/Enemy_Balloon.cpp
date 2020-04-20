@@ -19,9 +19,10 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 	smallBalloonAnim.PushBack({292,125,16,14});
 	verySmallBalloonAnim.PushBack({312,129,8,7});
 
-	balloonDeath.PushBack({4,141,48,40});
-	balloonDeath.PushBack({60,148,28,24});
-	balloonDeath.PushBack({144,136,48,46});
+	balloonDeath.PushBack({ 4,142,48,39 });
+	balloonDeath.PushBack({ 60,148,28,25 });
+	balloonDeath.PushBack({ 96,143,41,37 });
+	balloonDeath.PushBack({ 145,137,48,46 });
 	balloonDeath.speed = 0.1f;
 
 	currentAnim = &veryBigBalloonAnim;
