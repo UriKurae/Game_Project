@@ -154,7 +154,7 @@ bool ModuleAudio::PlayFx(uint index, int repeat)
 	
 	if(soundFx[index] != nullptr)
 	{
-		Mix_VolumeChunk(soundFx[index], 20);
+		Mix_VolumeChunk(soundFx[index], 50);
 		Mix_PlayChannel(-1, soundFx[index], repeat);
 		ret = true;
 	}

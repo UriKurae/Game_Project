@@ -68,7 +68,7 @@ bool ModulePlayer::Start()
 	texture = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
 	currentAnimation = &idleAnim;
 
-	HarpoonFx = App->audio->LoadFx("Assets/Sound/FX/NormalShoot.wav");
+	//HarpoonFx = App->audio->LoadFx("Assets/Sound/FX/NormalShoot.wav");
 
 	
 	//SET SPAWN POSITION FOR PLAYER
@@ -175,7 +175,7 @@ update_status ModulePlayer::PostUpdate()
 		
 		App->render->Blit(texture, position.x, position.y, &rect);
 
-		//App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 	}
 
 

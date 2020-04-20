@@ -22,7 +22,7 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/Items&Weapons/Harpoon4.png");
+	texture = App->textures->Load("Assets/Balloons/Balloons.png");
 
 	/*//Harpoon shot particle
 	harpoonShot[0].anim.PushBack({ 4, 53, 9, 34 });

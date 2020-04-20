@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "Path.h"
 #include "ModuleTextures.h"
+#include "Particle.h"
 
 
 
@@ -40,6 +41,12 @@ private:
 	Animation smallBalloonAnim;
 	Animation verySmallBalloonAnim;
 	Animation balloonDeath;
+	Particle particleDeathVeryBig;
+	Particle particleDeathBig;
+	Particle particleDeathSmall;
+	Particle particleDeathVerySmall;
+
+	uint ballonExplosion = 0;
 	enum class ENEMY_TYPE tipoBalloon;
 	
 };

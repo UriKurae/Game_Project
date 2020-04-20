@@ -1,6 +1,8 @@
 #include "Enemy_Balloon.h"
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "Particle.h"
+#include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleScene.h"
 #include "ModuleEnemies.h"
@@ -12,12 +14,42 @@
 
 Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x,y)
 {
-	
+	ballonExplosion = App->audio->LoadFx("Assets/Sound/FX/DestroyBalls.wav");
 	tipoBalloon = type;
 	veryBigBalloonAnim.PushBack({ 207,112, 48, 40 });
 	bigBalloonAnim.PushBack({ 257,119, 32, 26 });
 	smallBalloonAnim.PushBack({292,125,16,14});
 	verySmallBalloonAnim.PushBack({312,129,8,7});
+
+	particleDeathVeryBig.anim.PushBack({ 4,142,48,39 });
+	particleDeathVeryBig.anim.PushBack({ 60,148,28,25 });
+	particleDeathVeryBig.anim.PushBack({ 96,143,41,37 });
+	particleDeathVeryBig.anim.PushBack({ 145,137,48,46 });
+	particleDeathVeryBig.anim.speed = 0.1f;
+	particleDeathVeryBig.anim.loop = false;
+	
+	particleDeathBig.anim.PushBack({ 4,85,32,26 });
+	particleDeathBig.anim.PushBack({ 44,88,20,15 });
+	particleDeathBig.anim.PushBack({ 72,85,27,26 });
+	particleDeathBig.anim.PushBack({ 107,83,32,30 });
+	particleDeathBig.anim.speed = 0.1f;
+	particleDeathBig.anim.loop = false;
+
+	particleDeathSmall.anim.PushBack({ 4,44,16,14 });
+	particleDeathSmall.anim.PushBack({ 28,47,9,8 });
+	particleDeathSmall.anim.PushBack({ 45,43,15,15 });
+	particleDeathSmall.anim.PushBack({ 68,43,16,16 });
+	particleDeathSmall.anim.speed = 0.1f;
+	particleDeathSmall.anim.loop = false;
+
+	particleDeathVerySmall.anim.PushBack({ 4,12,5,5 });
+	particleDeathVerySmall.anim.PushBack({ 17,12,7,6 });
+	particleDeathVerySmall.anim.PushBack({ 32,11,10,8 });
+	particleDeathVerySmall.anim.speed = 0.1f;
+	particleDeathVerySmall.anim.loop = false;
+	
+
+
 
 	balloonDeath.PushBack({ 4,142,48,39 });
 	balloonDeath.PushBack({ 60,148,28,25 });
@@ -26,6 +58,7 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 	balloonDeath.speed = 0.1f;
 
 	currentAnim = &veryBigBalloonAnim;
+	
 	
 	
 	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
@@ -42,6 +75,7 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 		collider = App->collisions->AddCollider({ position.x, position.y, 32, 26 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
 		
 		currentAnim = &bigBalloonAnim;
+
 
 	}
 	else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
@@ -153,7 +187,8 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 
 			if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 			{
-				
+				App->particles->AddParticle(particleDeathVeryBig, position.x, position.y, Collider::Type::VERY_BIG_BALLOON, 0);
+				App->audio->PlayFx(ballonExplosion);
 				App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, position.x, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON2, position.x, position.y);
 				App->scene->balloonsOnScene--;
@@ -161,6 +196,8 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 			}
 			else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON || tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
 			{
+				App->particles->AddParticle(particleDeathBig, position.x, position.y, Collider::Type::BIG_BALLOON, 0);
+				App->audio->PlayFx(ballonExplosion);
 				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, position.x, position.y);
 				App->scene->balloonsOnScene--;
@@ -168,6 +205,8 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 			}
 			else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
 			{
+				App->particles->AddParticle(particleDeathSmall, position.x, position.y, Collider::Type::SMALL_BALLOON, 0);
+				App->audio->PlayFx(ballonExplosion);
 				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON2, position.x, position.y);
 				App->scene->balloonsOnScene--;
@@ -175,6 +214,8 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 			}
 			else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON || tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
 			{
+				App->particles->AddParticle(particleDeathVerySmall, position.x, position.y, Collider::Type::VERY_SMALL_BALLOON, 0);
+				App->audio->PlayFx(ballonExplosion);
 				App->scene->balloonsOnScene--;
 			}
 		}
