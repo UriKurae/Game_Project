@@ -61,7 +61,7 @@ update_status ModuleScene::Update()
 {
 	if (balloonsOnScene == 0)
 	{
-		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->winScene, 60);
 	}
 	
 	LOG("enemyOnStage == %d", balloonsOnScene)

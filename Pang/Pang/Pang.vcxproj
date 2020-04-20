@@ -43,6 +43,7 @@
     <ClInclude Include="Source\p2Point.h" />
     <ClInclude Include="Source\Particle.h" />
     <ClInclude Include="Source\Path.h" />
+    <ClInclude Include="Source\WinScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
@@ -68,6 +69,7 @@
     <ClCompile Include="Source\ModuleWindow.cpp" />
     <ClCompile Include="Source\Particle.cpp" />
     <ClCompile Include="Source\Path.cpp" />
+    <ClCompile Include="Source\WinScene.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

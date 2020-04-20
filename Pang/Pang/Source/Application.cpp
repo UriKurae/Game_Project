@@ -16,6 +16,7 @@
 #include "ModuleFadeToBlack.h"
 #include "Enemy_Balloon.h"
 #include "ModuleFonts.h"
+#include "WinScene.h"
 
 Application::Application()
 {
@@ -37,8 +38,9 @@ Application::Application()
 	modules[10] = collisions = new ModuleCollisions(true);
 	modules[11] = fade = new ModuleFadeToBlack(true);
 	modules[12] = fonts = new ModuleFonts(true);
+	modules[13] = winScene = new WinScene(false);
 
-	modules[13] = render = new ModuleRender(true);
+	modules[14] = render = new ModuleRender(true);
 	
 }
 
