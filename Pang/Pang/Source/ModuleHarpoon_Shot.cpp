@@ -87,7 +87,7 @@ ModuleHarpoon::ModuleHarpoon(bool startEnabled) : Module(startEnabled)
 	harpoonShot.PushBack({ 1160, 113, 9, 187 });
 	harpoonShot.PushBack({ 1177, 111, 9, 189 });
 	harpoonShot.loop = false;
-	harpoonShot.speed = 1.0f;
+	harpoonShot.speed = 0.6f;
 
 
 
