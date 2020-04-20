@@ -77,8 +77,9 @@ update_status ModuleScene::PostUpdate()
 	App->render->Blit(fgTexture, 0, 0, NULL);
 
 	//This could be more clean 
-	//Animation to stop the scene with the death
-	if (App->player->destroyed)
+	//Animation to stop the scene with the death 
+
+	/*if (App->player->destroyed)
 	{
 		countDownToFade--;
 	}
@@ -99,7 +100,7 @@ update_status ModuleScene::PostUpdate()
 	else if (countDownToFade <= 0)
 	{
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
-	}
+	}*/
 	
 	
 
