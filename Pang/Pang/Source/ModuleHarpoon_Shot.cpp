@@ -89,6 +89,8 @@ ModuleHarpoon::ModuleHarpoon(bool startEnabled) : Module(startEnabled)
 	harpoonShot.loop = false;
 	harpoonShot.speed = 0.1f;
 
+
+
 }
 
 ModuleHarpoon::~ModuleHarpoon()
@@ -116,6 +118,7 @@ update_status ModuleHarpoon::Update()
 	
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && destroyed == true) {
+		
 		harpoonShot.Reset();
 		currentAnimation = &harpoonShot;
 		h = 34;
@@ -124,6 +127,7 @@ update_status ModuleHarpoon::Update()
 		destroyed = false;
 		colliderH = App->collisions->AddCollider({ x, y, 9, h }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
 		increment = true;
+
 	}
 	
 	if (increment == true) {
@@ -167,6 +171,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == Collider::Type::WALL) {
 		//delete colliderH;
+		colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
 		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
@@ -175,9 +180,9 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 
 	
 
-	/*if (c2->type == Collider::Type::VERY_BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
+	if (c2->type == Collider::Type::VERY_BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
-		delete colliderH;
+		colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
 		LOG("\n\n\nHARPOON HIT VERY BIG BALLOON\n\n");
@@ -185,7 +190,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == Collider::Type::BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
-		delete colliderH;
+		colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
 		LOG("\n\n\nHARPOON HIT BIG BALLOON\n\n");
@@ -193,15 +198,14 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == Collider::Type::SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
-		delete colliderH;
 		destroyed = true;
 		increment = false;
 	}
 
 	if (c2->type == Collider::Type::VERY_SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
-		delete colliderH;
+		colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
-	}*/
+	}
 }
