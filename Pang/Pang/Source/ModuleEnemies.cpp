@@ -7,10 +7,10 @@
 #include "ModuleAudio.h"
 
 #include "Enemy.h"
-#include "Enemy_RedBird.h"
-#include "Enemy_BrownShip.h"
-#include "Enemy_Mech.h"
+
 #include "Enemy_Balloon.h"
+
+#include "ModuleScene.h"
 
 #define SPAWN_MARGIN 50
 
@@ -86,6 +86,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPE type, int x, int y)
 	{
 		if(spawnQueue[i].type == ENEMY_TYPE::NO_TYPE)
 		{
+			App->scene->balloonsOnScene++;
 			spawnQueue[i].type = type;
 			spawnQueue[i].x = x;
 			spawnQueue[i].y = y;
@@ -144,15 +145,7 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 		{
 			switch (info.type)
 			{
-				case ENEMY_TYPE::REDBIRD:
-					enemies[i] = new Enemy_RedBird(info.x, info.y);
-					break;
-				case ENEMY_TYPE::BROWNSHIP:
-					enemies[i] = new Enemy_BrownShip(info.x, info.y);
-					break;
-				case ENEMY_TYPE::MECH:
-					enemies[i] = new Enemy_Mech(info.x, info.y);
-					break;
+				
 				case ENEMY_TYPE::VERYBIGBALLOON:
 					enemies[i] = new Enemy_Balloon(info.x, info.y, ENEMY_TYPE::VERYBIGBALLOON);
 					break;

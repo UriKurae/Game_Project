@@ -24,7 +24,7 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	texture = App->textures->Load("Assets/Items&Weapons/Harpoon4.png");
 
-	//Harpoon shot particle
+	/*//Harpoon shot particle
 	harpoonShot[0].anim.PushBack({ 4, 53, 9, 34 });
 	harpoonShot[1].anim.PushBack({ 21, 51, 9, 36 });
 	harpoonShot[2].anim.PushBack({ 38, 49, 9, 38 });
@@ -48,7 +48,7 @@ bool ModuleParticles::Start()
 	harpoonShot[20].anim.PushBack({ 344, 8, 9, 79 });
 	harpoonShot[21].anim.PushBack({ 361, 6, 9, 81 });
 	harpoonShot[22].anim.PushBack({ 378, 4, 9, 83 });
-	harpoonShot->anim.speed = 0.1f;
+	harpoonShot->anim.speed = 0.1f;*/
 
 
 

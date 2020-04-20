@@ -45,14 +45,12 @@ bool ModuleScene::Start()
 
 	App->player->Enable();
 	App->enemies->Enable();
-	//App->collisions->Enable();
+	App->collisions->Enable();
 	App->harpoon->Enable();
 
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
-	count++;
-
-	deadballoons = count * 15;
+	
 
 	//TODO BALLOON crear dos balloons petits com el balon normal i cada un amb un velocitat inicial diferent.
 
@@ -63,11 +61,12 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
-	if (deadballoons == 0)
+	if (balloonsOnScene == 0)
 	{
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 	}
-
+	
+	LOG("enemyOnStage == %d", balloonsOnScene)
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -87,8 +86,7 @@ bool ModuleScene::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();
 	App->harpoon->Disable();
-	//App->collisions->Disable();
-	
+	App->collisions->Disable();
 	return true;
 
 }

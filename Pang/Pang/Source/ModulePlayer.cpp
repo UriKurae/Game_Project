@@ -57,7 +57,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 
 ModulePlayer::~ModulePlayer()
 {
-	
+
 }
 
 bool ModulePlayer::Start()
@@ -169,7 +169,7 @@ update_status ModulePlayer::PostUpdate()
 		rect = currentAnimation->GetCurrentFrame();
 		
 		App->render->Blit(texture, position.x, position.y, &rect);
-		delete collider;
+		//delete collider;
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 	}
 

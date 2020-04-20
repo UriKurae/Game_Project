@@ -93,7 +93,8 @@ ModuleHarpoon::ModuleHarpoon(bool startEnabled) : Module(startEnabled)
 
 ModuleHarpoon::~ModuleHarpoon()
 {
-
+	if (colliderH != nullptr)
+		colliderH->pendingToDelete = true;
 }
 
 bool ModuleHarpoon::Start()
@@ -165,7 +166,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 
 
 	if (c2->type == Collider::Type::WALL) {
-		delete colliderH;
+		//delete colliderH;
 		destroyed = true;
 		increment = false;
 		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
