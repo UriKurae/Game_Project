@@ -69,7 +69,7 @@ public:
 
 	// Font score index
 	uint score = 000;
-	int uiFont = -1;
+	int uiIndex = -1;
 	char scoreText[10] = { "\0" };
 
 };

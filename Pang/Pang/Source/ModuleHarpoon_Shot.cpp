@@ -8,8 +8,8 @@
 #include "ModuleInput.h"
 #include "ModuleCollisions.h"
 #include "ModuleScene.h"
-
 #include "ModuleEnemies.h"
+#include "ModuleParticles.h"
 
 #include <SDL\include\SDL_scancode.h>
 
@@ -90,6 +90,14 @@ ModuleHarpoon::ModuleHarpoon(bool startEnabled) : Module(startEnabled)
 	harpoonShot.speed = 0.6f;
 
 
+	harpoonParticle.anim.PushBack({ 8, 15, 6, 6 });
+	harpoonParticle.anim.PushBack({ 22, 10, 6, 11 });
+	harpoonParticle.anim.PushBack({ 36, 11, 16, 10 });
+	harpoonParticle.anim.PushBack({ 60, 7, 16, 14 });
+	harpoonParticle.anim.loop = false;
+	harpoonParticle.anim.speed = 0.1f;
+
+
 
 }
 
@@ -104,7 +112,7 @@ bool ModuleHarpoon::Start()
 	LOG("LOADING HARPOON TEXTURE");
 
 	texture = App->textures->Load("Assets/Items&Weapons/Harpoon.png");
-	
+		
 	x = App->player->position.x;
 	y = App->player->position.y - speed;
 	
@@ -125,6 +133,7 @@ update_status ModuleHarpoon::Update()
 		y = App->player->position.y - 2;
 		destroyed = false;
 		colliderH = App->collisions->AddCollider({ (int)x, (int)y, 9, (int)h }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
+		App->particles->AddParticle(harpoonParticleShot, x, y - 5, Collider::Type::NONE, 0);
 		increment = true;
 	}
 	
@@ -136,7 +145,13 @@ update_status ModuleHarpoon::Update()
 		colliderH->SetPos(x, y);
 		currentAnimation->Update();
 	}
-
+	if (App->player->destroyed == true)
+	{
+		colliderH->pendingToDelete = true;
+		increment = false;
+		destroyed = true;
+		currentAnimation->Reset();
+	}
 	return ret;
 }
 
@@ -196,4 +211,5 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 		increment = false;
 		currentAnimation->Reset();
 	}
+
 }

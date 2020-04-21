@@ -45,8 +45,7 @@ public:
 	// The sprite rectangle for the ground
 	SDL_Texture* starsTexture = nullptr;
 
-	SDL_Texture* balloon = nullptr;
-	//Enemy_Balloon* enemy1 = nullptr; Esto da errores 
+	SDL_Texture* balloon = nullptr; 
 
 	Collider* collider = nullptr;
 	Collider* rightWall = nullptr;

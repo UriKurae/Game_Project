@@ -81,7 +81,7 @@ bool ModulePlayer::Start()
 
 
 	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕" };
-	uiFont = App->fonts->Load("Assets/UI/Pang_font.png", lookupTable, 1);
+	uiIndex = App->fonts->Load("Assets/UI/Pang_font.png", lookupTable, 1);
 	return ret;
 }
 
@@ -167,7 +167,7 @@ update_status ModulePlayer::PostUpdate()
 
 	if (destroyed == true) //Blit the dead animation
 	{
-		destroyed = false; //in case f2 is pressed
+		//destroyed = false; //in case f2 is pressed
 		
 		currentAnimation = &deadAnimLeft;
 
@@ -176,19 +176,20 @@ update_status ModulePlayer::PostUpdate()
 		App->render->Blit(texture, position.x, position.y, &rect);
 
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+
 	}
-
-
+	
 	sprintf_s(scoreText, 10, "%7d", score);
 
-	App->fonts->BlitText(200, 100, uiFont, scoreText);
+	App->fonts->BlitText(0, 0, uiIndex, scoreText);
+	App->fonts->BlitText(0, 0, uiIndex, "hola");
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1 == this->collider)//player collider
+	if (c1->type == Collider::Type::PLAYER) //player collider
 	{
 		if (c2 == App->scene->leftWall) {
 			position.x = 6;
@@ -201,26 +202,52 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		if (c2->type == Collider::Type::VERY_BIG_BALLOON)
 		{
 			destroyed = true;
-			
-			score += 100;
+			c1->pendingToDelete = true;
+			c2->pendingToDelete = true;
+			//App->harpoon->colliderH->pendingToDelete = true;
 		}
 
 		if (c2->type == Collider::Type::BIG_BALLOON)
 		{
 			destroyed = true;
-			score += 100;
+			c1->pendingToDelete = true;
+			c2->pendingToDelete = true;
+			//App->harpoon->colliderH->pendingToDelete = true;
 		}
 
 		if (c2->type == Collider::Type::SMALL_BALLOON)
 		{
 			destroyed = true;
-			score += 100;
+			c1->pendingToDelete = true;
+			c2->pendingToDelete = true;
+			//App->harpoon->colliderH->pendingToDelete = true;
 		}
 
 		if (c2->type == Collider::Type::VERY_SMALL_BALLOON)
 		{
 			destroyed = true;
-			score += 100;
+			c1->pendingToDelete = true;
+			c2->pendingToDelete = true;
+			//App->harpoon->colliderH->pendingToDelete = true;
 		}
+	}
+
+	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::VERY_BIG_BALLOON)
+	{
+		score += 100;
+	}
+
+	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::BIG_BALLOON)
+	{
+		score += 100;
+	}
+
+	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::SMALL_BALLOON)
+	{
+		score += 100;
+	}
+	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::VERY_SMALL_BALLOON)
+	{
+		score += 100;
 	}
 }

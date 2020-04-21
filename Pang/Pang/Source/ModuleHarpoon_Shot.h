@@ -3,11 +3,11 @@
 #include "Animation.h"
 #include "Module.h"
 #include "p2Point.h"
+#include "Particle.h"
 
 
 struct SDL_Texture;
 struct Collider;
-
 
 class ModuleHarpoon : public Module
 {
@@ -26,11 +26,13 @@ public:
 	//texture for all the harpoons sprites
 	SDL_Texture* texture = nullptr;
 
-	Animation harpoonShot;
+	Animation harpoonParticleShot;
 
 	Animation* currentAnimation = nullptr;
 
 	Collider* colliderH = nullptr;
+
+	Particle harpoonParticle;
 
 
 public:

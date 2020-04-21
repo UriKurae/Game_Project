@@ -21,6 +21,7 @@ struct Font
 	uint totalLength;
 	uint rows, columns;
 	uint char_w, char_h;
+
 };
 
 class ModuleFonts : public Module
