@@ -26,13 +26,13 @@ public:
 	//texture for all the harpoons sprites
 	SDL_Texture* texture = nullptr;
 
-	Animation harpoonParticleShot;
+	Animation harpoonShot;
 
 	Animation* currentAnimation = nullptr;
 
 	Collider* colliderH = nullptr;
 
-	Particle harpoonParticle;
+	Particle harpoonShotParticle;
 
 
 public:
