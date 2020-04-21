@@ -49,7 +49,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	deadAnimRight.PushBack({ 120, 110, 41, 30 });
 
 	//shot animation
-	shotAnim.PushBack({ 32, 113, 27, 29 });
+	shotAnim.PushBack({ 32, 113, 27, 33 });
 	
 	
 }
