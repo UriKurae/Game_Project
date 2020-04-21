@@ -10,6 +10,11 @@
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 #include "ModuleHarpoon_Shot.h"
+#include "ModuleInput.h"
+
+
+#include "SDL/include/SDL_scancode.h"
+
 
 
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
@@ -52,7 +57,7 @@ bool ModuleScene::Start()
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
 	
-	balloonsOnScene = 0;
+	balloonsOnScene = 1;
 	App->player->score = 0;
 
 	return ret;
@@ -60,12 +65,20 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
+	
+	/*if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
+	{
+		balloonsOnScene = 0;
+	}*/
+
+
 	if (balloonsOnScene == 0)
 	{
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->winScene, 60);
 	}
-	
-	LOG("enemyOnStage == %d", balloonsOnScene)
+
+	LOG("enemyOnStage == %d", balloonsOnScene);
+
 
 	return update_status::UPDATE_CONTINUE;
 }

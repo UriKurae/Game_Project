@@ -17,7 +17,7 @@ public:
 	float y = 0;
 	float h = 34;
 
-	float speed = 1.5f;
+	float speed = 2.0f;
 
 	bool destroyed = true;
 
