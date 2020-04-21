@@ -77,7 +77,7 @@ update_status ModuleScene::Update()
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->winScene, 60);
 	}
 
-	LOG("enemyOnStage == %d", balloonsOnScene);
+//	LOG("enemyOnStage == %d", balloonsOnScene);
 
 
 	return update_status::UPDATE_CONTINUE;

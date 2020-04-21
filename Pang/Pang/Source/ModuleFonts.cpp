@@ -66,6 +66,8 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 	
 	LOG("Successfully loaded BMP font from %s", texture_path);
 
+
+
 	return id;
 }
 
@@ -86,6 +88,8 @@ void ModuleFonts::BlitText(int x, int y, int font_index, const char* text) const
 		LOG("Unable to render text with bmp font id %d", font_index);
 		return;
 	}
+
+	LOG("----------------------%d----------------------", font_index);
 
 	const Font* font = &fonts[font_index];
 	SDL_Rect spriteRect;

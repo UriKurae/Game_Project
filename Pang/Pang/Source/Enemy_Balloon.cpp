@@ -136,7 +136,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 		if (c2->Intersects(r)) {
 			speedY = 4.5f;
 			App->enemies->touchWall = true;
-			LOG("\n\n\nBALLOON HIT FLOOR\n\n\n");
+			LOG("BALLOON HIT FLOOR");
 		}
 	}
 	
@@ -144,7 +144,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 		if (c2->Intersects(r)) {
 			speedX = -speedX;
 			App->enemies->touchWall = true;
-			LOG("\n\n\nBALLOON HIT RIGHT WALL\n\n\n");
+			LOG("BALLOON HIT RIGHT WALL");
 		}
 	}
 
@@ -153,7 +153,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 		if (c2->Intersects(r)) {
 			speedX = -speedX;
 			App->enemies->touchWall = true;
-			LOG("\n\n\nBALLOON HIT LEFT WALL\n\n\n");
+			LOG("BALLOON HIT LEFT WALL");
 		}
 	}
 	
@@ -161,7 +161,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 		if (c2->Intersects(r)) {
 			speedY = -(speedY + 1.5f);
 			App->enemies->touchWall = true;
-			LOG("\nBALLOON HIT UPPER WALL\n");
+			LOG("BALLOON HIT UPPER WALL");
 		}
 	}
 
