@@ -151,6 +151,7 @@ update_status ModuleHarpoon::Update()
 		increment = false;
 		destroyed = true;
 		currentAnimation->Reset();
+
 	}
 	return ret;
 }
