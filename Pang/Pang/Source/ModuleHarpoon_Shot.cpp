@@ -129,11 +129,11 @@ update_status ModuleHarpoon::Update()
 		
 		currentAnimation = &harpoonShot;
 		h = 34;
-		x = App->player->position.x;
+		x = App->player->position.x + 10;
 		y = App->player->position.y - 2;
 		destroyed = false;
 		colliderH = App->collisions->AddCollider({ (int)x, (int)y, 9, (int)h }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
-		App->particles->AddParticle(harpoonShotParticle, x, y - 5, Collider::Type::NONE, 0);
+		//App->particles->AddParticle(harpoonShotParticle, x, y - 5, Collider::Type::NONE, 0);
 		increment = true;
 	}
 	
