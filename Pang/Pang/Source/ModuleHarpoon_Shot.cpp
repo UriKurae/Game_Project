@@ -154,7 +154,7 @@ update_status ModuleHarpoon::Update()
 		colliderH->pendingToDelete = true;
 		increment = false;
 		destroyed = true;
-		currentAnimation->Reset();
+		harpoonShot.Reset();
 
 	}
 	return ret;

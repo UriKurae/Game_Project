@@ -80,7 +80,7 @@ bool ModulePlayer::Start()
 	destroyed = false;
 
 
-	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕" };
+	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	uiIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable, 1);
 	return ret;
 }
@@ -179,10 +179,10 @@ update_status ModulePlayer::PostUpdate()
 
 	}
 	
-	sprintf_s(scoreText, 10, "%7d", score);
+	sprintf_s(scoreText, 10, "%d", score);
 
-	App->fonts->BlitText(0, 0, uiIndex, scoreText);
-	App->fonts->BlitText(0, 0, uiIndex, "hola");
+	App->fonts->BlitText(81, 215, uiIndex, scoreText);
+	App->fonts->BlitText(25, 207, uiIndex, "PLAYER-1");
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -204,7 +204,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			destroyed = true;
 			c1->pendingToDelete = true;
 			c2->pendingToDelete = true;
-			//App->harpoon->colliderH->pendingToDelete = true;
 		}
 
 		if (c2->type == Collider::Type::BIG_BALLOON)
@@ -212,7 +211,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			destroyed = true;
 			c1->pendingToDelete = true;
 			c2->pendingToDelete = true;
-			//App->harpoon->colliderH->pendingToDelete = true;
 		}
 
 		if (c2->type == Collider::Type::SMALL_BALLOON)
@@ -220,7 +218,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			destroyed = true;
 			c1->pendingToDelete = true;
 			c2->pendingToDelete = true;
-			//App->harpoon->colliderH->pendingToDelete = true;
 		}
 
 		if (c2->type == Collider::Type::VERY_SMALL_BALLOON)
@@ -228,26 +225,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			destroyed = true;
 			c1->pendingToDelete = true;
 			c2->pendingToDelete = true;
-			//App->harpoon->colliderH->pendingToDelete = true;
 		}
-	}
-
-	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::VERY_BIG_BALLOON)
-	{
-		score += 100;
-	}
-
-	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::BIG_BALLOON)
-	{
-		score += 100;
-	}
-
-	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::SMALL_BALLOON)
-	{
-		score += 100;
-	}
-	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::VERY_SMALL_BALLOON)
-	{
-		score += 100;
 	}
 }

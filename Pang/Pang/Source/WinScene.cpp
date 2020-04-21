@@ -8,6 +8,8 @@
 #include "ModuleInput.h"
 
 #include "ModuleCollisions.h"
+#include "ModulePlayer.h"
+#include "ModuleFonts.h"
 
 
 #include <SDL\include\SDL_scancode.h>
@@ -53,6 +55,7 @@ update_status WinScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
+	App->fonts->BlitText(168, 145, App->player->uiIndex, "1STAGE");
 
 	return update_status::UPDATE_CONTINUE;
 }
