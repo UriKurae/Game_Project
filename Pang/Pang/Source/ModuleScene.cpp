@@ -62,12 +62,13 @@ bool ModuleScene::Start()
 	
 	App->player->score = 0;
 
+	App->scene->balloonsOnScene = 1;
 	return ret;
 }
 
 update_status ModuleScene::Update()
 {
-	
+	LOG("Balloons On Stage %d", App->scene->balloonsOnScene);
 	if (App->input->keys[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
 	{
 		balloonsOnScene = 0;
