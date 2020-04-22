@@ -59,12 +59,10 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 		collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
 		currentAnim = &veryBigBalloonAnim;
 	}
-
-	else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON)//CLEAN ALL PRINTFS AND GET RID OF THE STDIO.H
+	else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON)
 	{
 		collider = App->collisions->AddCollider({ position.x, position.y, 32, 26 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
 		currentAnim = &bigBalloonAnim;
-
 	}
 	else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
 	{
@@ -86,7 +84,6 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
 		currentAnim = &verySmallBalloonAnim;
 	}
-
 	else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
 	{
 		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
@@ -142,7 +139,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 	SDL_Rect r = this->collider->rect;
 	
 	if (c2 == App->scene->lowerWall) {
-		if (c2->Intersects(r)) {
+		if (c2->Intersects(r) == true) {
 			speedY = 4.5f;
 			App->enemies->touchWall = true;
 			LOG("BALLOON HIT FLOOR");
@@ -150,7 +147,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 	}
 	
 	if (c2 == App->scene->rightWall) {
-		if (c2->Intersects(r)) {
+		if (c2->Intersects(r) == true) {
 			speedX = -speedX;
 			App->enemies->touchWall = true;
 			LOG("BALLOON HIT RIGHT WALL");
@@ -159,7 +156,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 
 	if (c2 == App->scene->leftWall)
 	{
-		if (c2->Intersects(r)) {
+		if (c2->Intersects(r) == true) {
 			speedX = -speedX;
 			App->enemies->touchWall = true;
 			LOG("BALLOON HIT LEFT WALL");
@@ -167,7 +164,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 	}
 	
 	if (c2 == App->scene->upperWall) {
-		if (c2->Intersects(r)) {
+		if (c2->Intersects(r) == true) {
 			speedY = -(speedY + 1.5f);
 			App->enemies->touchWall = true;
 			LOG("BALLOON HIT UPPER WALL");
@@ -177,7 +174,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 	
 
 	if (c2 == App->harpoon->colliderH) {
-		if (c2->Intersects(r)) {
+		if (c2->Intersects(r) == true) {
 
 			if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 			{

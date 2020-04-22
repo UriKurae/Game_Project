@@ -16,6 +16,7 @@
 
 #include "ModuleFonts.h"
 
+#include"IntroScene.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL/include/SDL_scancode.h"
@@ -179,6 +180,10 @@ update_status ModulePlayer::PostUpdate()
 	{
 		destroyed = true;
 		lifes--;
+
+		App->collisions->Disable();
+		App->sceneIntro->countdown = 1;
+		
 	}
 
 	if (destroyed == true) //Blit the dead animation
@@ -228,6 +233,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			c1->pendingToDelete = true;
 			c2->pendingToDelete = true;
 			lifes--;
+
 		}
 
 		if (c2->type == Collider::Type::BIG_BALLOON)
@@ -236,6 +242,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			c1->pendingToDelete = true;
 			c2->pendingToDelete = true;
 			lifes--;
+
 		}
 
 		if (c2->type == Collider::Type::SMALL_BALLOON)
@@ -244,6 +251,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			c1->pendingToDelete = true;
 			c2->pendingToDelete = true;
 			lifes--;
+
 		}
 
 		if (c2->type == Collider::Type::VERY_SMALL_BALLOON)
@@ -252,6 +260,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			c1->pendingToDelete = true;
 			c2->pendingToDelete = true;
 			lifes--;
+
 		}
 	}
 }
