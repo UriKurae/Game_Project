@@ -78,16 +78,20 @@ update_status SceneIntro::PostUpdate()
 	else if (countdown > 420 && countdown < 840)
 	{
 		App->render->Blit(intro_2, 0, 0, NULL);
+		SDL_DestroyTexture(intro_1);
 	}
 	else if (countdown > 0 && countdown < 420)
 	{
 		App->render->Blit(intro_3, 0, 0, NULL);
+		SDL_DestroyTexture(intro_2);
 	}
 	else if (countdown == 0)
 	{
-	App->render->Blit(bgTexture, 0, 0, NULL);
-	App->fonts->BlitText(72, 181, App->player->uiIndex, "©MITCHELL");
-	App->fonts->BlitText(244, 181, App->player->uiIndex, "1989");
+		SDL_DestroyTexture(intro_3);
+
+		App->render->Blit(bgTexture, 0, 0, NULL);
+		App->fonts->BlitText(72, 181, App->player->uiIndex, "©MITCHELL");
+		App->fonts->BlitText(244, 181, App->player->uiIndex, "1989");
 	
 	}
 	if (countdown == 1){  App->audio->PlayMusic("Assets/Sound/Sounds_Gameplay/Title.ogg", 1.0f);  } 
@@ -98,9 +102,9 @@ update_status SceneIntro::PostUpdate()
 bool SceneIntro::CleanUp()
 {
 	SDL_DestroyTexture(bgTexture);
-	SDL_DestroyTexture(intro_1);
+	/*SDL_DestroyTexture(intro_1);
 	SDL_DestroyTexture(intro_2);
-	SDL_DestroyTexture(intro_3);
+	SDL_DestroyTexture(intro_3);*/
 
 	
 	return true;

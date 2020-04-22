@@ -142,7 +142,6 @@ update_status ModuleScene::PostUpdate()
 		{
 			App->fade->FadeToBlack((Module*)App->scene, (Module*)App->scene, 60);
 			App->player->collider->pendingToDelete = true;
-			//App->player->lifes--;
 		}
 		else
 		{
