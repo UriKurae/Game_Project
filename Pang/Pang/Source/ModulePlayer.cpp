@@ -144,8 +144,7 @@ update_status ModulePlayer::Update()
 	
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
-
-	collider->SetPos(position.x+5, position.y);
+		collider->SetPos(position.x, position.y);
 	}
 	else
 	{
@@ -181,7 +180,6 @@ update_status ModulePlayer::PostUpdate()
 
 	if (destroyed == true) //Blit the dead animation
 	{
-		//destroyed = false; //in case f2 is pressed
 		
 		currentAnimation = &deadAnimLeft;
 
@@ -189,19 +187,19 @@ update_status ModulePlayer::PostUpdate()
 		
 		App->render->Blit(texture, position.x, position.y, &rect);
 
-		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+		//App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 
 	}
 	
 	sprintf_s(scoreText, 10, "%d", score);
 	sprintf_s(timeText, 5, "%d", time);
 
-	App->fonts->BlitText(81, 215, uiIndex, scoreText);
-	App->fonts->BlitText(25, 207, uiIndex, "PLAYER-1");
-	App->fonts->BlitText(158, 207, uiIndex, "MT.FUJI");
+	App->fonts->BlitText(81, 216, uiIndex, scoreText);
+	App->fonts->BlitText(25, 208, uiIndex, "PLAYER-1");
+	App->fonts->BlitText(158, 208, uiIndex, "MT.FUJI");
 	App->fonts->BlitText(161, 228, uiIndex, "1-1 STAGE");
 	App->fonts->BlitText(151, 236, uiIndex, "HI: 100000");
-	App->fonts->BlitText(272, 207, uiIndex, "PLAYER-2");
+	App->fonts->BlitText(272, 208, uiIndex, "PLAYER-2");
 	App->fonts->BlitText(264, 9, uiIndex, "TIME:");
 	App->fonts->BlitText(351, 9, uiIndex, timeText);
 

@@ -30,7 +30,8 @@ public:
 
 public:
 
-	int countDownToFade = 500;
+	uint countDownToFade = 180;
+	int toFade = 5;
 	
 	// The background sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;

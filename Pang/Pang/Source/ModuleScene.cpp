@@ -35,7 +35,7 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	countDownToFade = 500;
+	countDownToFade = 300;
 	fgTexture = App->textures->Load("Assets/Foregrounds/Foreground Mt.Fuji(Day).png"); //fg on 1st Level is invisible
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Fuji(Day).png");
 	deathTexture1 = App->textures->Load("Assets/Foregrounds/Foreground_Death_1.png");
@@ -97,20 +97,15 @@ update_status ModuleScene::PostUpdate()
 	//This could be more clean 
 	//Animation to stop the scene with the death 
 
-	/*if (App->player->destroyed)
+	if (App->player->destroyed)
 	{
 		countDownToFade--;
 	}
-	if (countDownToFade < 500)
-	{
-		countDownToFade--;
-	}
-	if (countDownToFade > 440 && countDownToFade < 460)
+	if (countDownToFade > 220 && countDownToFade < 230)
 	{
 		App->render->Blit(deathTexture1, 0, 0, NULL);
-		
 	}
-	else if (countDownToFade > 435 && countDownToFade < 440)
+	else if (countDownToFade > 215 && countDownToFade < 220)
 	{
 		App->render->Blit(deathTexture2, 0, 0, NULL);
 	
@@ -118,9 +113,7 @@ update_status ModuleScene::PostUpdate()
 	else if (countDownToFade <= 0)
 	{
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
-	}*/
-	
-	
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
