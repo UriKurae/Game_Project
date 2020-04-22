@@ -141,8 +141,16 @@ update_status ModulePlayer::Update()
 	{
 		currentAnimation = &idleAnim;
 	}
-		
-	collider->SetPos(position.x, position.y);
+	
+	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+	{
+
+	collider->SetPos(position.x+5, position.y);
+	}
+	else
+	{
+		collider->SetPos(position.x, position.y);
+	}
 
 	currentAnimation->Update();
 
