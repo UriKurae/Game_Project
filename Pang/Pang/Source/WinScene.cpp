@@ -56,6 +56,12 @@ update_status WinScene::PostUpdate()
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
 	App->fonts->BlitText(168, 145, App->player->uiIndex, "1STAGE");
+	App->fonts->BlitText(102, 170, App->player->uiIndex, "TIME BONUS");
+	App->fonts->BlitText(214, 170, App->player->uiIndex, "score");
+	App->fonts->BlitText(263, 170, App->player->uiIndex, "PTS.");
+	App->fonts->BlitText(102, 186, App->player->uiIndex, "NEXT EXTEND");
+	App->fonts->BlitText(214, 186, App->player->uiIndex, "score");
+	App->fonts->BlitText(263, 186, App->player->uiIndex, "PTS.");
 
 	return update_status::UPDATE_CONTINUE;
 }

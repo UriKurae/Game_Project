@@ -11,6 +11,7 @@
 #include "ModulePlayer.h"
 #include "ModuleHarpoon_Shot.h"
 #include "ModuleInput.h"
+#include "ModuleFonts.h"
 
 
 #include "SDL/include/SDL_scancode.h"
@@ -19,7 +20,7 @@
 
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
-
+	balloonsOnScene = 1;
 }
 
 ModuleScene::~ModuleScene()
@@ -57,7 +58,7 @@ bool ModuleScene::Start()
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
 	
-	balloonsOnScene = 1;
+	
 	App->player->score = 0;
 
 	return ret;
@@ -66,10 +67,10 @@ bool ModuleScene::Start()
 update_status ModuleScene::Update()
 {
 	
-	/*if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
 	{
 		balloonsOnScene = 0;
-	}*/
+	}
 
 
 	if (balloonsOnScene == 0)
@@ -129,6 +130,8 @@ bool ModuleScene::CleanUp()
 	App->enemies->Disable();
 	App->harpoon->Disable();
 	App->collisions->Disable();
+	App->fonts->UnLoad(App->player->uiIndex);
+	//App->audio->CleanUp();
 	return true;
 
 }

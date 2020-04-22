@@ -67,9 +67,6 @@ bool ModulePlayer::Start()
 
 	texture = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
 	currentAnimation = &idleAnim;
-
-	//HarpoonFx = App->audio->LoadFx("Assets/Sound/FX/NormalShoot.wav");
-
 	
 	//SET SPAWN POSITION FOR PLAYER
 	position.x = (SCREEN_WIDTH / 2) - 20;
@@ -82,11 +79,16 @@ bool ModulePlayer::Start()
 
 	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	uiIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable, 1);
+
 	return ret;
 }
 
 update_status ModulePlayer::Update()
 {
+	count++;
+	if (count % 100 == 0) {
+		time--;
+	}
 
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !destroyed)
 	{
@@ -180,9 +182,17 @@ update_status ModulePlayer::PostUpdate()
 	}
 	
 	sprintf_s(scoreText, 10, "%d", score);
+	sprintf_s(timeText, 5, "%d", time);
 
 	App->fonts->BlitText(81, 215, uiIndex, scoreText);
 	App->fonts->BlitText(25, 207, uiIndex, "PLAYER-1");
+	App->fonts->BlitText(158, 207, uiIndex, "MT.FUJI");
+	App->fonts->BlitText(161, 228, uiIndex, "1-1 STAGE");
+	App->fonts->BlitText(151, 236, uiIndex, "HI: 100000");
+	App->fonts->BlitText(272, 207, uiIndex, "PLAYER-2");
+	App->fonts->BlitText(264, 9, uiIndex, "TIME:");
+	App->fonts->BlitText(351, 9, uiIndex, timeText);
+
 
 	return update_status::UPDATE_CONTINUE;
 }

@@ -34,7 +34,7 @@ public:
 
 	Particle harpoonShotParticle;
 
-
+	uint HarpoonFx = 0;
 public:
 	ModuleHarpoon(bool startEnabled);
 	~ModuleHarpoon();

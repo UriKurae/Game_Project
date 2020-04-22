@@ -10,6 +10,7 @@
 #include "ModuleScene.h"
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
+#include "ModuleAudio.h"
 
 #include <SDL\include\SDL_scancode.h>
 
@@ -112,7 +113,8 @@ bool ModuleHarpoon::Start()
 	LOG("LOADING HARPOON TEXTURE");
 
 	texture = App->textures->Load("Assets/Items&Weapons/Harpoon.png");
-		
+	HarpoonFx = App->audio->LoadFx("Assets/Sound/FX/NormalShoot.wav");
+
 	x = App->player->position.x;
 	y = App->player->position.y - speed;
 	
@@ -126,7 +128,7 @@ update_status ModuleHarpoon::Update()
 	
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN && destroyed == true) {
-		
+		App->audio->PlayFx(HarpoonFx);
 		currentAnimation = &harpoonShot;
 		h = 34;
 		x = App->player->position.x + 10;

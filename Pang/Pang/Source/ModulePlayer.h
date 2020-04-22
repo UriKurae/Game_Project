@@ -64,13 +64,15 @@ public:
 	uint destroyedCountdown = 180;
 
 	// Sound effects indices
-	uint HarpoonFx = 0;
 	uint explosionFx = 0;
 
 	// Font score index
 	uint score = 000;
+	uint time = 100;
+	uint count = 0;
 	int uiIndex = -1;
 	char scoreText[10] = { "\0" };
+	char timeText[3] = { "\0" };
 
 };
 

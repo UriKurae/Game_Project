@@ -87,3 +87,10 @@ bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEna
 
 	return ret;
 }
+
+bool ModuleFadeToBlack::CleanUp() {
+	this->moduleToDisable->Disable();
+	this->moduleToDisable->Enable();
+
+	return true;
+}
