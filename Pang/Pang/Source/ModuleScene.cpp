@@ -12,8 +12,9 @@
 #include "ModuleHarpoon_Shot.h"
 #include "ModuleInput.h"
 #include "ModuleFonts.h"
+#include "ModuleTextures.h"
 
-
+#include "SDL/include/SDL.h"
 #include "SDL/include/SDL_scancode.h"
 
 
@@ -40,6 +41,10 @@ bool ModuleScene::Start()
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Fuji(Day).png");
 	deathTexture1 = App->textures->Load("Assets/Foregrounds/Foreground_Death_1.png");
 	deathTexture2 = App->textures->Load("Assets/Foregrounds/Foreground_Death_2.png");
+	lifesTexture1 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
+	lifesTexture2 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
+	lifesTexture3 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
+
 
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 1.0f);
 
@@ -63,7 +68,6 @@ bool ModuleScene::Start()
 	App->player->score = 0;
 
 	App->scene->balloonsOnScene = 1;
-
 
 	return ret;
 }
@@ -95,6 +99,24 @@ update_status ModuleScene::PostUpdate()
 	
 	App->render->Blit(bgTexture, 0, 0, NULL);
 	App->render->Blit(fgTexture, 0, 0, NULL);
+
+	if (App->player->lifes == 3)
+	{
+		App->render->Blit(lifesTexture1, 25, 227, &lifesTextureRect, 0, false);
+		App->render->Blit(lifesTexture2, 41, 227, &lifesTextureRect, 0, false);
+		App->render->Blit(lifesTexture3, 57, 227, &lifesTextureRect, 0, false);
+	}
+
+	else if (App->player->lifes == 2)
+	{
+		App->render->Blit(lifesTexture1, 25, 227, &lifesTextureRect, 0, false);
+		App->render->Blit(lifesTexture2, 41, 227, &lifesTextureRect, 0, false);
+	}
+
+	else if (App->player->lifes == 1)
+	{
+		App->render->Blit(lifesTexture1, 25, 227, &lifesTextureRect, 0, false);
+	}
 
 	//This could be more clean 
 	//Animation to stop the scene with the death 
@@ -138,6 +160,10 @@ bool ModuleScene::CleanUp()
 	App->enemies->Disable();
 	App->harpoon->Disable();
 	App->collisions->Disable();
+	SDL_DestroyTexture(lifesTexture1);
+	SDL_DestroyTexture(lifesTexture2);
+	SDL_DestroyTexture(lifesTexture3);
+
 	//App->fonts->UnLoad(App->player->uiIndex);
 	//App->audio->CleanUp();
 	return true;
