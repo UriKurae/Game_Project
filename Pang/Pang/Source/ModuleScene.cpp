@@ -110,7 +110,7 @@ update_status ModuleScene::PostUpdate()
 		App->render->Blit(deathTexture2, 0, 0, NULL);
 	
 	}
-	else if (countDownToFade <= 0)
+	else if (countDownToFade == 180)
 	{
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 	}
