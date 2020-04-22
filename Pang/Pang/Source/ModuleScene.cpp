@@ -112,8 +112,19 @@ update_status ModuleScene::PostUpdate()
 	}
 	else if (countDownToFade == 180)
 	{
-		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+		if (lifes > 0)
+		{
+			App->fade->FadeToBlack((Module*)App->scene, (Module*)App->scene, 60);
+			App->player->collider->pendingToDelete = true;
+			lifes--;
+		}
+		else
+		{
+			App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+		}
 	}
+
+	LOG("Lifes: ---------%d---------", lifes);
 
 	return update_status::UPDATE_CONTINUE;
 }
