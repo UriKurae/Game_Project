@@ -39,7 +39,7 @@ bool SceneIntro::Start()
 	intro_3 = App->textures->Load("Assets/UI/Intro_3.png");
 
 
-	App->audio->PlayMusic("Assets/Sound/Sounds_Gameplay/Title.ogg", 1.0f);
+
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -54,7 +54,7 @@ update_status SceneIntro::Update()
 
 	countdown--;
 	}
-	
+
 	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && countdown == 0)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->scene, 30);
@@ -84,7 +84,9 @@ update_status SceneIntro::PostUpdate()
 	App->render->Blit(bgTexture, 0, 0, NULL);
 	App->fonts->BlitText(72, 181, App->player->uiIndex, "©MITCHELL");
 	App->fonts->BlitText(244, 181, App->player->uiIndex, "1989");
+	
 	}
+	if (countdown == 1){  App->audio->PlayMusic("Assets/Sound/Sounds_Gameplay/Title.ogg", 1.0f);  } 
 
 	return update_status::UPDATE_CONTINUE;
 }
