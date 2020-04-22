@@ -163,6 +163,8 @@ bool ModuleScene::CleanUp()
 	App->collisions->Disable();
 	App->sceneIntro->countdown = 1;
 
+	
+	
 	SDL_DestroyTexture(bgTexture);
 	SDL_DestroyTexture(fgTexture);
 	SDL_DestroyTexture(lifesTexture1);
@@ -171,7 +173,8 @@ bool ModuleScene::CleanUp()
 	SDL_DestroyTexture(deathTexture1);
 	SDL_DestroyTexture(deathTexture2);
 	SDL_DestroyTexture(balloon);
-
+	
+	
 
 	
 	return true;

@@ -12,6 +12,8 @@
 
 #include "ModuleScene.h"
 
+#include "SDL/include/SDL.h"
+
 #define SPAWN_MARGIN 50
 
 
@@ -29,8 +31,7 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	texture = App->textures->Load("Assets/Balloons/Balloons.png");
-	//enemyDestroyedFx = App->audio->LoadFx("Assets/Sound/FX/GunShoot.wav");
-	//enemyDestroyedFx = App->audio->LoadFx("Assets/explosion.wav"); Keep this
+
 
 	return true;
 }
@@ -74,6 +75,8 @@ bool ModuleEnemies::CleanUp()
 			enemies[i] = nullptr;
 		}
 	}
+
+	SDL_DestroyTexture(texture);
 
 	return true;
 }

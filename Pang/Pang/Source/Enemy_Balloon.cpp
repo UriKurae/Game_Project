@@ -9,6 +9,7 @@
 #include "ModulePlayer.h"
 #include "ModuleHarpoon_Shot.h"
 
+#include "SDL/include/SDL.h"
 
 
 Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x,y)
@@ -100,6 +101,12 @@ void Enemy_Balloon::Update()
 {
 	balloonBounce();
 	
+	if (App->player->destroyed)
+	{
+
+		collider->pendingToDelete = true;
+	}
+
 	Enemy::Update();
 }
 
@@ -121,6 +128,7 @@ void Enemy_Balloon::balloonBounce()
 			speedY -= gravity;
 		}
 	}
+	
 	
 
 	

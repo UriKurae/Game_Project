@@ -22,7 +22,7 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/Balloons/Balloons.png");
+	texture = App->textures->Load("Assets/Balloons/Balloons Explosion.png");
 
 	return true;
 }

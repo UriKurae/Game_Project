@@ -255,3 +255,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 	}
 }
+
+bool ModulePlayer::CleanUp()
+{
+
+	App->fonts->UnLoad(uiIndex);
+
+	return true;
+}

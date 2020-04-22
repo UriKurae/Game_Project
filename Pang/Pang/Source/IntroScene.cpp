@@ -102,5 +102,6 @@ bool SceneIntro::CleanUp()
 	SDL_DestroyTexture(intro_2);
 	SDL_DestroyTexture(intro_3);
 
+	
 	return true;
 }
