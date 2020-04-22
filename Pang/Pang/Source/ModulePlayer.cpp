@@ -178,6 +178,7 @@ update_status ModulePlayer::PostUpdate()
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
 		destroyed = true;
+		lifes--;
 	}
 
 	if (destroyed == true) //Blit the dead animation
