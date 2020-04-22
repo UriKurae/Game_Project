@@ -260,6 +260,7 @@ bool ModulePlayer::CleanUp()
 {
 
 	App->fonts->UnLoad(uiIndex);
+	SDL_DestroyTexture(texture);
 
 	return true;
 }
