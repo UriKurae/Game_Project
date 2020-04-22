@@ -32,7 +32,7 @@ bool WinScene::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/UI/PangScene1.png");
-	//App->audio->PlayMusic("Assets/Sound/Sounds_Gameplay/Title.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Sound/Sounds_Gameplay/Level_Complete.ogg", 1.0f);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
