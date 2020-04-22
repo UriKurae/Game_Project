@@ -70,9 +70,10 @@ public:
 	uint score = 000;
 	uint time = 100;
 	uint count = 0;
-	int uiIndex = -1;
+	int uiIndex;
 	char scoreText[10] = { "\0" };
 	char timeText[3] = { "\0" };
+	uint timeBonus = 0;
 
 };
 

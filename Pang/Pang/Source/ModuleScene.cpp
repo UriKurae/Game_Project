@@ -20,7 +20,7 @@
 
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
-	balloonsOnScene = 1;
+	
 }
 
 ModuleScene::~ModuleScene()
@@ -58,6 +58,7 @@ bool ModuleScene::Start()
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
 	
+	App->player->uiIndex = 0;
 	
 	App->player->score = 0;
 
@@ -130,7 +131,7 @@ bool ModuleScene::CleanUp()
 	App->enemies->Disable();
 	App->harpoon->Disable();
 	App->collisions->Disable();
-	App->fonts->UnLoad(App->player->uiIndex);
+	//App->fonts->UnLoad(App->player->uiIndex);
 	//App->audio->CleanUp();
 	return true;
 

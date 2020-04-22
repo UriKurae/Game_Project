@@ -6,6 +6,8 @@
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
+#include "ModulePlayer.h"
+#include "ModuleFonts.h"
 
 #include "ModuleCollisions.h"
 
@@ -53,6 +55,8 @@ update_status SceneIntro::PostUpdate()
 {
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
+	App->fonts->BlitText(72, 181, App->player->uiIndex, "©MITCHELL");
+	App->fonts->BlitText(244, 181, App->player->uiIndex, "1989");
 
 	return update_status::UPDATE_CONTINUE;
 }

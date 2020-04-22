@@ -186,7 +186,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, position.x, position.y);
 				App->scene->balloonsOnScene--;
-				App->player->score += 100;
+				App->player->score += 200;
 			}
 			else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
 			{
@@ -195,14 +195,14 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON2, position.x, position.y);
 				App->scene->balloonsOnScene--;
-				App->player->score += 100;
+				App->player->score += 300;
 			}
 			else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON || tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
 			{
 				App->particles->AddParticle(particleDeathVerySmall, position.x, position.y, Collider::Type::NONE, 0);
 				App->audio->PlayFx(ballonExplosion);
 				App->scene->balloonsOnScene--;
-				App->player->score += 100;
+				App->player->score += 400;
 			}
 		}
 	}

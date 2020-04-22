@@ -75,7 +75,7 @@ bool ModulePlayer::Start()
 	
 	collider = App->collisions->AddCollider({ position.x, position.y, 26, 32 }, Collider::Type::PLAYER, this);
 	destroyed = false;
-
+	time = 100;
 
 	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	uiIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable, 1);
@@ -86,8 +86,12 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	count++;
-	if (count % 100 == 0) {
+	if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0) {
 		time--;
+	}
+
+	if (App->scene->balloonsOnScene == 0) {
+		timeBonus = time * 100;
 	}
 
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !destroyed)

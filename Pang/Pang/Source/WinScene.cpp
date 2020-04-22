@@ -10,6 +10,7 @@
 #include "ModuleCollisions.h"
 #include "ModulePlayer.h"
 #include "ModuleFonts.h"
+#include <stdio.h>
 
 
 #include <SDL\include\SDL_scancode.h>
@@ -54,13 +55,15 @@ update_status WinScene::Update()
 update_status WinScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
+	sprintf_s(bonusText, 6, "%d", App->player->timeBonus);
+
 	App->render->Blit(bgTexture, 0, 0, NULL);
 	App->fonts->BlitText(168, 145, App->player->uiIndex, "1STAGE");
 	App->fonts->BlitText(102, 170, App->player->uiIndex, "TIME BONUS");
-	App->fonts->BlitText(214, 170, App->player->uiIndex, "score");
+	App->fonts->BlitText(214, 170, App->player->uiIndex, bonusText);
 	App->fonts->BlitText(263, 170, App->player->uiIndex, "PTS.");
 	App->fonts->BlitText(102, 186, App->player->uiIndex, "NEXT EXTEND");
-	App->fonts->BlitText(214, 186, App->player->uiIndex, "score");
+	App->fonts->BlitText(214, 186, App->player->uiIndex, "20000");
 	App->fonts->BlitText(263, 186, App->player->uiIndex, "PTS.");
 
 	return update_status::UPDATE_CONTINUE;
