@@ -161,13 +161,19 @@ bool ModuleScene::CleanUp()
 	App->enemies->Disable();
 	App->harpoon->Disable();
 	App->collisions->Disable();
+	App->sceneIntro->countdown = 1;
+
+	SDL_DestroyTexture(bgTexture);
+	SDL_DestroyTexture(fgTexture);
 	SDL_DestroyTexture(lifesTexture1);
 	SDL_DestroyTexture(lifesTexture2);
 	SDL_DestroyTexture(lifesTexture3);
-	App->sceneIntro->countdown = 1;
+	SDL_DestroyTexture(deathTexture1);
+	SDL_DestroyTexture(deathTexture2);
+	SDL_DestroyTexture(balloon);
 
-	//App->fonts->UnLoad(App->player->uiIndex);
-	//App->audio->CleanUp();
+
+	
 	return true;
 
 }

@@ -13,6 +13,9 @@
 
 
 #include <SDL\include\SDL_scancode.h>
+#include <SDL\include\SDL.h>
+#include <SDL_mixer\include\SDL_mixer.h>
+
 
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 {
@@ -90,4 +93,14 @@ update_status SceneIntro::PostUpdate()
 	if (countdown == 1){  App->audio->PlayMusic("Assets/Sound/Sounds_Gameplay/Title.ogg", 1.0f);  } 
 
 	return update_status::UPDATE_CONTINUE;
+}
+
+bool SceneIntro::CleanUp()
+{
+	SDL_DestroyTexture(bgTexture);
+	SDL_DestroyTexture(intro_1);
+	SDL_DestroyTexture(intro_2);
+	SDL_DestroyTexture(intro_3);
+
+	return true;
 }

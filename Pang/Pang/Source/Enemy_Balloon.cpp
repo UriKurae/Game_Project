@@ -121,6 +121,7 @@ void Enemy_Balloon::balloonBounce()
 			speedY -= gravity;
 		}
 	}
+	
 
 	
 	//TODO PHYSICS, IMPLEMENT RIGHT, LEFT AND TOP HIT WITH THE BALLOON, SHOULD NOT GAIN SPEED.
