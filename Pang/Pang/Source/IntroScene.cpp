@@ -31,6 +31,7 @@ bool SceneIntro::Start()
 
 	bool ret = true;
 
+	App->player->lifes = 3;
 	
 
 	bgTexture = App->textures->Load("Assets/UI/Intro.png");

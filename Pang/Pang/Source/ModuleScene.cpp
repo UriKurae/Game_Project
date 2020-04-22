@@ -13,6 +13,7 @@
 #include "ModuleInput.h"
 #include "ModuleFonts.h"
 #include "ModuleTextures.h"
+#include "IntroScene.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL/include/SDL_scancode.h"
@@ -163,6 +164,7 @@ bool ModuleScene::CleanUp()
 	SDL_DestroyTexture(lifesTexture1);
 	SDL_DestroyTexture(lifesTexture2);
 	SDL_DestroyTexture(lifesTexture3);
+	App->sceneIntro->countdown = 1;
 
 	//App->fonts->UnLoad(App->player->uiIndex);
 	//App->audio->CleanUp();

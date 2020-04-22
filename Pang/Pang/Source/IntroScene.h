@@ -34,8 +34,8 @@ public:
 	SDL_Texture* intro_2 = nullptr;
 	SDL_Texture* intro_3 = nullptr;
 
-private:
 	int countdown = 1260;
+
 };
 
 #endif
