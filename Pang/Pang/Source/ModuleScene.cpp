@@ -17,6 +17,7 @@
 
 #include "SDL/include/SDL.h"
 #include "SDL/include/SDL_scancode.h"
+#include "SDL_mixer/include/SDL_mixer.h"
 
 
 
@@ -164,7 +165,7 @@ bool ModuleScene::CleanUp()
 	App->sceneIntro->countdown = 1;
 
 	
-	
+	SDL_DestroyTexture(App->harpoon->texture);
 	SDL_DestroyTexture(bgTexture);
 	SDL_DestroyTexture(fgTexture);
 	SDL_DestroyTexture(lifesTexture1);
@@ -173,8 +174,6 @@ bool ModuleScene::CleanUp()
 	SDL_DestroyTexture(deathTexture1);
 	SDL_DestroyTexture(deathTexture2);
 	SDL_DestroyTexture(balloon);
-	
-	
 
 	
 	return true;

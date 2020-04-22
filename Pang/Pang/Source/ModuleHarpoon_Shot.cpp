@@ -149,11 +149,13 @@ update_status ModuleHarpoon::Update()
 	}
 	if (App->player->destroyed == true)
 	{
-		if (colliderH == nullptr)
-		{
-			colliderH = App->collisions->AddCollider({ (int)0, (int)0, 0, (int)0 }, Collider::Type::NONE, (Module*)App->harpoon); //WITHOUT THIS THE LINE BELOW GETS AN ERROR
+		//if (colliderH == nullptr)
+		//{
+		//	colliderH = App->collisions->AddCollider({ (int)0, (int)0, 0, (int)0 }, Collider::Type::NONE, (Module*)App->harpoon); //WITHOUT THIS THE LINE BELOW GETS AN ERROR
+		//}
+		if (colliderH != nullptr) {
+			colliderH->pendingToDelete = true;
 		}
-		colliderH->pendingToDelete = true;
 		increment = false;
 		destroyed = true;
 		harpoonShot.Reset();
