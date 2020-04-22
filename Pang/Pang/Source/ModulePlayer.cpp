@@ -224,6 +224,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			destroyed = true;
 			c1->pendingToDelete = true;
 			c2->pendingToDelete = true;
+			lifes--;
 		}
 
 		if (c2->type == Collider::Type::BIG_BALLOON)
@@ -231,6 +232,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			destroyed = true;
 			c1->pendingToDelete = true;
 			c2->pendingToDelete = true;
+			lifes--;
 		}
 
 		if (c2->type == Collider::Type::SMALL_BALLOON)
@@ -238,6 +240,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			destroyed = true;
 			c1->pendingToDelete = true;
 			c2->pendingToDelete = true;
+			lifes--;
 		}
 
 		if (c2->type == Collider::Type::VERY_SMALL_BALLOON)
@@ -245,6 +248,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			destroyed = true;
 			c1->pendingToDelete = true;
 			c2->pendingToDelete = true;
+			lifes--;
 		}
 	}
 }

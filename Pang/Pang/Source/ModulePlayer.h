@@ -75,6 +75,8 @@ public:
 	char timeText[3] = { "\0" };
 	uint timeBonus = 0;
 
+	int lifes = 3;
+
 };
 
 #endif //!__MODULE_PLAYER_H__

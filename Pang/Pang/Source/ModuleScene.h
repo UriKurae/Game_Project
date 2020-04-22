@@ -55,7 +55,6 @@ public:
 	Collider* lowerWall = nullptr;
 
 	uint balloonsOnScene;
-	uint lifes = 2;
 };
 
 #endif

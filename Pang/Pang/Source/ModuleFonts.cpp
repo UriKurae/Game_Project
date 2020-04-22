@@ -89,7 +89,7 @@ void ModuleFonts::BlitText(int x, int y, int font_index, const char* text) const
 		return;
 	}
 
-	LOG("----------------------%d----------------------", font_index);
+	//LOG("----------------------%d----------------------", font_index);
 
 	const Font* font = &fonts[font_index];
 	SDL_Rect spriteRect;

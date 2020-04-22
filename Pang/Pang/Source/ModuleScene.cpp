@@ -63,6 +63,8 @@ bool ModuleScene::Start()
 	App->player->score = 0;
 
 	App->scene->balloonsOnScene = 1;
+
+
 	return ret;
 }
 
@@ -81,7 +83,7 @@ update_status ModuleScene::Update()
 	}
 
 //	LOG("enemyOnStage == %d", balloonsOnScene);
-
+	LOG("Lifes: ---------%d---------", App->player->lifes);
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -112,11 +114,11 @@ update_status ModuleScene::PostUpdate()
 	}
 	else if (countDownToFade == 180)
 	{
-		if (lifes > 0)
+		if (App->player->lifes > 0)
 		{
 			App->fade->FadeToBlack((Module*)App->scene, (Module*)App->scene, 60);
 			App->player->collider->pendingToDelete = true;
-			lifes--;
+			//App->player->lifes--;
 		}
 		else
 		{
@@ -124,7 +126,7 @@ update_status ModuleScene::PostUpdate()
 		}
 	}
 
-	LOG("Lifes: ---------%d---------", lifes);
+
 
 	return update_status::UPDATE_CONTINUE;
 }
