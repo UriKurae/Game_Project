@@ -87,7 +87,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPE type, int x, int y)
 
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		App->enemies[i].touchWall = false;
+		//App->enemies[i].touchWall = false;
 
 		if(spawnQueue[i].type == ENEMY_TYPE::NO_TYPE)
 		{
