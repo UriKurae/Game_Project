@@ -83,6 +83,7 @@ bool ModulePlayer::Start()
 	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	uiIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable, 1);
 
+
 	return ret;
 }
 

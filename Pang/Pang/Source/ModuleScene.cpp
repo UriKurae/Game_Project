@@ -97,7 +97,7 @@ update_status ModuleScene::Update()
 	}
 
 //	LOG("enemyOnStage == %d", balloonsOnScene);
-	LOG("Lifes: ---------%d---------", App->player->lifes);
+	//LOG("Lifes: ---------%d---------", App->player->lifes);
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -164,7 +164,7 @@ update_status ModuleScene::PostUpdate()
 
 bool ModuleScene::CleanUp()
 {
-
+	LOG("---------------------------------------------- CleanUp ModuleScene ----------------------------------------------")
 	App->player->Disable();
 	App->enemies->Disable();
 	App->harpoon->Disable();

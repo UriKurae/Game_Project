@@ -90,14 +90,12 @@ ModuleHarpoon::ModuleHarpoon(bool startEnabled) : Module(startEnabled)
 	harpoonShot.loop = false;
 	harpoonShot.speed = 0.9f;
 
-
-	harpoonShotParticle.anim.PushBack({ 8, 15, 6, 6 });
-	harpoonShotParticle.anim.PushBack({ 22, 10, 6, 11 });
-	harpoonShotParticle.anim.PushBack({ 36, 11, 16, 10 });
-	harpoonShotParticle.anim.PushBack({ 60, 7, 16, 14 });
+	harpoonShotParticle.anim.PushBack({ 67, 13, 6,6 });
+	harpoonShotParticle.anim.PushBack({ 81, 8, 6, 11 });
+	harpoonShotParticle.anim.PushBack({ 95, 9, 16, 10 });
+	harpoonShotParticle.anim.PushBack({ 119, 5, 18, 14 });
 	harpoonShotParticle.anim.loop = false;
 	harpoonShotParticle.anim.speed = 0.1f;
-
 
 
 }
@@ -135,7 +133,7 @@ update_status ModuleHarpoon::Update()
 		y = App->player->position.y - 2;
 		destroyed = false;
 		colliderH = App->collisions->AddCollider({ (int)x, (int)y, 9, (int)h }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
-		//App->particles->AddParticle(harpoonShotParticle, x, y - 5, Collider::Type::NONE, 0);
+		App->particles->AddParticle(harpoonShotParticle, x, y - 4, Collider::Type::NONE, 0);
 		increment = true;
 	}
 	

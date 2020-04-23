@@ -1,5 +1,8 @@
 #include "Module.h"
 
+#include "Application.h"
+#include "ModuleEnemies.h"
+
 Module::Module(bool startEnabled) : isEnabled(startEnabled)
 {
 	

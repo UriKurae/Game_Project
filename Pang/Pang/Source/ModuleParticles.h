@@ -55,17 +55,6 @@ private:
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };
 
-public:
-	//Template particle for an explosion
-	Particle balloonExplosion;
-
-	//Template for the harpoon shot
-	Particle harpoonShot[25];
-
-	//Template particle for a laser
-	Particle laser;
-
-
 
 };
 
