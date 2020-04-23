@@ -90,7 +90,7 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	count++;
-	if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0) {
+	if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0 && destroyed == false) {
 		time--;
 	}
 
@@ -216,7 +216,7 @@ update_status ModulePlayer::PostUpdate()
 	App->fonts->BlitText(161, 228, uiIndex, "1-1 STAGE");
 	App->fonts->BlitText(151, 236, uiIndex, "HI: 100000");
 	App->fonts->BlitText(272, 208, uiIndex, "PLAYER-2");
-	App->fonts->BlitText(264, 9, uiIndex, "TIME:");
+	App->fonts->BlitText(300, 9, uiIndex, "TIME:");
 	App->fonts->BlitText(351, 9, uiIndex, timeText);
 
 
