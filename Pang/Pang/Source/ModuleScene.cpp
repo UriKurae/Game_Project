@@ -132,7 +132,7 @@ update_status ModuleScene::PostUpdate()
 	//This could be more clean 
 	//Animation to stop the scene with the death 
 
-	if (App->player->destroyed)
+	if (App->player->destroyed || App->player->time == 0)
 	{
 		countDownToFade--;
 	}
