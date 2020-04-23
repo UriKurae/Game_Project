@@ -292,7 +292,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 bool ModulePlayer::CleanUp()
 {
 
-	//App->fonts->UnLoad(uiIndex);
+	App->fonts->UnLoad(uiIndex);
 	SDL_DestroyTexture(texture);
 
 	return true;
