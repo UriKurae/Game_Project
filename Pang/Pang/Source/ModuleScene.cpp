@@ -71,12 +71,16 @@ bool ModuleScene::Start()
 
 	App->scene->balloonsOnScene = 1;
 
+
+	App->enemies->touchWall = false;
+
+
 	return ret;
 }
 
 update_status ModuleScene::Update()
 {
-	LOG("Balloons On Stage %d", App->scene->balloonsOnScene);
+	//LOG("Balloons On Stage %d", App->scene->balloonsOnScene);
 	if (App->input->keys[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
 	{
 		balloonsOnScene = 0;
@@ -166,7 +170,7 @@ bool ModuleScene::CleanUp()
 	App->harpoon->Disable();
 	App->collisions->Disable();
 	App->sceneIntro->countdown = 1;
-
+ 	//App->audio->CleanUp();
 	
 	SDL_DestroyTexture(App->harpoon->texture);
 	SDL_DestroyTexture(bgTexture);
