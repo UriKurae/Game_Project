@@ -61,3 +61,6 @@ Some balloons will drop items, which can help the player boost his weapons or ma
 Each time you destroy a balloon of the same size, you start a streak for that balloon's size, giving you extra
 points.
 
+Be carefull with the time, you have a lot of time to kill all the balloons but it's not unlimited! When the time 
+reaches 0, you will lose. Completing the game with a lot of time left, will give the player extra points.
+
