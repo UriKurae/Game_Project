@@ -80,6 +80,10 @@ update_status ModuleScene::Update()
 	if (App->input->keys[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
 	{
 		balloonsOnScene = 0;
+		App->scene->leftWall->pendingToDelete = true;
+		App->scene->rightWall->pendingToDelete = true;
+		App->scene->upperWall->pendingToDelete = true;
+		App->scene->lowerWall->pendingToDelete = true;
 	}
 
 

@@ -154,7 +154,7 @@ update_status ModuleHarpoon::Update()
 		//	colliderH = App->collisions->AddCollider({ (int)0, (int)0, 0, (int)0 }, Collider::Type::NONE, (Module*)App->harpoon); //WITHOUT THIS THE LINE BELOW GETS AN ERROR
 		//}
 		if (colliderH != nullptr) {
-			colliderH->pendingToDelete = true;
+			this->colliderH->pendingToDelete = true;
 		}
 		increment = false;
 		destroyed = true;
@@ -180,7 +180,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 {	
 	if (c2->type == Collider::Type::WALL) {
 		//delete colliderH;
-		colliderH->pendingToDelete = true;
+		this->colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
@@ -189,7 +189,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == Collider::Type::VERY_BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
-		colliderH->pendingToDelete = true;
+		this->colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
@@ -198,7 +198,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == Collider::Type::BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
-		colliderH->pendingToDelete = true;
+		this->colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
@@ -207,7 +207,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == Collider::Type::SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
-		colliderH->pendingToDelete = true;
+		this->colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
@@ -215,7 +215,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == Collider::Type::VERY_SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
-		colliderH->pendingToDelete = true;
+		this->colliderH->pendingToDelete = true;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();

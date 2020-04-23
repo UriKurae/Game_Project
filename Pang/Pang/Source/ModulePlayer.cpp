@@ -234,6 +234,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			c2->pendingToDelete = true;
 			lifes--;
 
+			App->scene->leftWall->pendingToDelete = true;
+			App->scene->rightWall->pendingToDelete = true;
+			App->scene->upperWall->pendingToDelete = true;
+			App->scene->lowerWall->pendingToDelete = true;
 		}
 
 		if (c2->type == Collider::Type::BIG_BALLOON)
@@ -243,6 +247,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			c2->pendingToDelete = true;
 			lifes--;
 
+			App->scene->leftWall->pendingToDelete = true;
+			App->scene->rightWall->pendingToDelete = true;
+			App->scene->upperWall->pendingToDelete = true;
+			App->scene->lowerWall->pendingToDelete = true;
 		}
 
 		if (c2->type == Collider::Type::SMALL_BALLOON)
@@ -252,6 +260,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			c2->pendingToDelete = true;
 			lifes--;
 
+			App->scene->leftWall->pendingToDelete = true;
+			App->scene->rightWall->pendingToDelete = true;
+			App->scene->upperWall->pendingToDelete = true;
+			App->scene->lowerWall->pendingToDelete = true;
 		}
 
 		if (c2->type == Collider::Type::VERY_SMALL_BALLOON)
@@ -261,6 +273,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			c2->pendingToDelete = true;
 			lifes--;
 
+			App->scene->leftWall->pendingToDelete = true;
+			App->scene->rightWall->pendingToDelete = true;
+			App->scene->upperWall->pendingToDelete = true;
+			App->scene->lowerWall->pendingToDelete = true;
 		}
 	}
 }
