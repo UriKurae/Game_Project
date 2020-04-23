@@ -41,7 +41,7 @@ balloons and you have to always destroy them to progress.
 
 Controls:
 
-To move the player from left to right press A and D.
+To move the player to the left press A and to move the player to the right press D.
 
 To shot the harpoon (Or the equiped weapon) press SPACE BAR.
 
