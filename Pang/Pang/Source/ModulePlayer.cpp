@@ -127,7 +127,6 @@ update_status ModulePlayer::Update()
 		{
 			shotAnim.Reset();
 			currentAnimation = &shotAnim;
-		
 		}
 	}
 
