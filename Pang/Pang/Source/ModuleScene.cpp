@@ -61,6 +61,7 @@ bool ModuleScene::Start()
 	App->enemies->Enable();
 	App->collisions->Enable();
 	App->harpoon->Enable();
+	App->input->Enable();
 
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
@@ -93,6 +94,7 @@ update_status ModuleScene::Update()
 
 	if (balloonsOnScene == 0)
 	{
+		App->harpoon->Disable();
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->winScene, 60);
 	}
 
@@ -170,7 +172,7 @@ bool ModuleScene::CleanUp()
 	App->harpoon->Disable();
 	App->collisions->Disable();
 	App->sceneIntro->countdown = 1;
- 	//App->audio->CleanUp();
+	App->input->Disable();
 	
 	SDL_DestroyTexture(App->harpoon->texture);
 	SDL_DestroyTexture(bgTexture);

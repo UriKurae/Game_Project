@@ -10,6 +10,7 @@
 #include "ModuleFonts.h"
 
 #include "ModuleCollisions.h"
+#include "ModuleEnemies.h"
 
 
 #include <SDL\include\SDL_scancode.h>
@@ -43,11 +44,12 @@ bool SceneIntro::Start()
 	intro_3 = App->textures->Load("Assets/UI/Intro_3.png");
 
 
-
-
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
+	App->input->Enable();
+	//App->enemies->Disable();
+	
 	return ret;
 }
 
@@ -102,6 +104,7 @@ update_status SceneIntro::PostUpdate()
 bool SceneIntro::CleanUp()
 {
 	SDL_DestroyTexture(bgTexture);
+	App->input->Disable();
 	/*SDL_DestroyTexture(intro_1);
 	SDL_DestroyTexture(intro_2);
 	SDL_DestroyTexture(intro_3);*/

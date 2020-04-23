@@ -125,8 +125,16 @@ update_status ModulePlayer::Update()
 	{
 		if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
 		{
-			shotAnim.Reset();
-			currentAnimation = &shotAnim;
+			if (App->scene->balloonsOnScene == 0)
+			{
+				idleAnim.Reset();
+				currentAnimation = &idleAnim;
+			}
+			else
+			{
+				shotAnim.Reset();
+				currentAnimation = &shotAnim;
+			}
 		}
 	}
 
