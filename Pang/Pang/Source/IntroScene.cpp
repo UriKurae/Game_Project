@@ -1,4 +1,4 @@
-#include "IntroScene.h"
+﻿#include "IntroScene.h"
 
 #include "Application.h"
 #include "ModuleFadeToBlack.h"
@@ -43,12 +43,16 @@ bool SceneIntro::Start()
 	intro_2 = App->textures->Load("Assets/UI/Intro_2.png");
 	intro_3 = App->textures->Load("Assets/UI/Intro_3.png");
 
+	char lookupTable1[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
+	introIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable1, 1);
+
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
 	App->input->Enable();
 	//App->enemies->Disable();
+	
 	
 	return ret;
 }
@@ -57,8 +61,7 @@ update_status SceneIntro::Update()
 {
 	if (countdown != 0)
 	{
-
-	countdown--;
+		countdown--;
 	}
 
 	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && countdown == 0)
@@ -92,8 +95,8 @@ update_status SceneIntro::PostUpdate()
 		SDL_DestroyTexture(intro_3);
 
 		App->render->Blit(bgTexture, 0, 0, NULL);
-		App->fonts->BlitText(72, 181, App->player->uiIndex, "�MITCHELL");
-		App->fonts->BlitText(244, 181, App->player->uiIndex, "1989");
+		App->fonts->BlitText(90, 181, introIndex, "©MITCHELL");
+		App->fonts->BlitText(240, 181, introIndex, "1989");
 	
 	}
 	if (countdown == 1){  App->audio->PlayMusic("Assets/Sound/Sounds_Gameplay/Title.ogg", 1.0f);  } 
@@ -104,7 +107,10 @@ update_status SceneIntro::PostUpdate()
 bool SceneIntro::CleanUp()
 {
 	SDL_DestroyTexture(bgTexture);
+	
+	App->fonts->UnLoad(introIndex);
 	App->input->Disable();
+
 	/*SDL_DestroyTexture(intro_1);
 	SDL_DestroyTexture(intro_2);
 	SDL_DestroyTexture(intro_3);*/

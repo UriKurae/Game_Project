@@ -37,6 +37,10 @@ public:
 	SDL_Texture* intro_3 = nullptr;
 
 	int countdown = 1260;
+	
+
+	int introIndex;
+	char scoreText[10] = { "\0" };
 
 };
 

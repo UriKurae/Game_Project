@@ -75,7 +75,6 @@ bool ModuleScene::Start()
 
 	App->enemies->touchWall = false;
 
-
 	return ret;
 }
 
@@ -171,8 +170,8 @@ bool ModuleScene::CleanUp()
 	App->enemies->Disable();
 	App->harpoon->Disable();
 	App->collisions->Disable();
-	App->sceneIntro->countdown = 1;
 	App->input->Disable();
+	App->sceneIntro->countdown = 1;
 	
 	SDL_DestroyTexture(App->harpoon->texture);
 	SDL_DestroyTexture(bgTexture);
@@ -184,6 +183,8 @@ bool ModuleScene::CleanUp()
 	SDL_DestroyTexture(deathTexture2);
 	SDL_DestroyTexture(balloon);
 
+	App->harpoon->HarpoonFx = 0;
+	
 	
 	return true;
 

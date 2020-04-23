@@ -1,4 +1,4 @@
-#include "WinScene.h"
+﻿#include "WinScene.h"
 
 #include "Application.h"
 #include "ModuleFadeToBlack.h"
@@ -12,6 +12,7 @@
 #include "ModuleFonts.h"
 #include <stdio.h>
 
+#include "SDL\include\SDL.h"
 
 #include <SDL\include\SDL_scancode.h>
 
@@ -35,11 +36,17 @@ bool WinScene::Start()
 	bgTexture = App->textures->Load("Assets/UI/PangScene1.png");
 	App->audio->PlayMusic("Assets/Sound/Sounds_Gameplay/Level_Complete.ogg", 1.0f);
 
+
+	char lookupTable2[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
+	winIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable2, 1);
+
+
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
 
 	App->input->Enable();
+	
 
 	return ret;
 }
@@ -61,13 +68,24 @@ update_status WinScene::PostUpdate()
 	sprintf_s(bonusText, 6, "%d", App->player->timeBonus);
 
 	App->render->Blit(bgTexture, 0, 0, NULL);
-	App->fonts->BlitText(168, 145, App->player->uiIndex, "1STAGE");
-	App->fonts->BlitText(102, 170, App->player->uiIndex, "TIME BONUS");
-	App->fonts->BlitText(214, 170, App->player->uiIndex, bonusText);
-	App->fonts->BlitText(263, 170, App->player->uiIndex, "PTS.");
-	App->fonts->BlitText(102, 186, App->player->uiIndex, "NEXT EXTEND");
-	App->fonts->BlitText(214, 186, App->player->uiIndex, "20000");
-	App->fonts->BlitText(263, 186, App->player->uiIndex, "PTS.");
+	App->fonts->BlitText(168, 145, winIndex, "1STAGE");
+	App->fonts->BlitText(102, 170, winIndex, "TIME BONUS");
+	App->fonts->BlitText(214, 170, winIndex, bonusText);
+	App->fonts->BlitText(263, 170, winIndex, "PTS.");
+	App->fonts->BlitText(102, 186, winIndex, "NEXT EXTEND");
+	App->fonts->BlitText(214, 186, winIndex, "20000");
+	App->fonts->BlitText(263, 186, winIndex, "PTS.");
 
 	return update_status::UPDATE_CONTINUE;
+}
+
+bool WinScene::CleanUp()
+{
+	SDL_DestroyTexture(bgTexture);
+	
+	App->fonts->UnLoad(winIndex);
+
+
+
+	return true;
 }
