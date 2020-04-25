@@ -48,7 +48,6 @@ private:
 
 	uint ballonExplosion = 0;
 	enum class ENEMY_TYPE tipoBalloon;
-	
 };
 
 #endif // __ENEMY_BROWNSHIP_H__

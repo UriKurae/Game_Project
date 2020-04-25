@@ -78,7 +78,9 @@ public:
 	uint timeBonus = 0;
 
 	int lifes = 3;
+	int cont = 0;
 
+	enum class ENEMY_TYPE lastBalloon;
 };
 
 #endif //!__MODULE_PLAYER_H__
