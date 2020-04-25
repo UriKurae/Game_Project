@@ -76,21 +76,28 @@ update_status SceneIntro::Update()
 update_status SceneIntro::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	if (countdown > 840)
-	{
-		App->render->Blit(intro_1, 0, 0, NULL);
+	if (App->input->keys[SDL_SCANCODE_F10] == KEY_STATE::KEY_DOWN) {
+		countdown = 1;
 	}
-	else if (countdown > 420 && countdown < 840)
-	{
-		App->render->Blit(intro_2, 0, 0, NULL);
-		SDL_DestroyTexture(intro_1);
+	else {
+		if (countdown > 840)
+		{
+			App->render->Blit(intro_1, 0, 0, NULL);
+		}
+		else if (countdown > 420 && countdown < 840)
+		{
+			App->render->Blit(intro_2, 0, 0, NULL);
+			SDL_DestroyTexture(intro_1);
+		}
+		else if (countdown > 0 && countdown < 420)
+		{
+			App->render->Blit(intro_3, 0, 0, NULL);
+			SDL_DestroyTexture(intro_2);
+		}
 	}
-	else if (countdown > 0 && countdown < 420)
-	{
-		App->render->Blit(intro_3, 0, 0, NULL);
-		SDL_DestroyTexture(intro_2);
-	}
-	else if (countdown == 0)
+	
+	
+	if (countdown == 0)
 	{
 		SDL_DestroyTexture(intro_3);
 

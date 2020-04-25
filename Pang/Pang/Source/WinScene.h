@@ -35,6 +35,8 @@ public:
 
 	char bonusText[5] = { "\0" };
 	int winIndex;
+
+	int winCountdown = 340;
 };
 
 #endif

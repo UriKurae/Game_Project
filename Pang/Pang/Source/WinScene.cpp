@@ -53,7 +53,11 @@ bool WinScene::Start()
 
 update_status WinScene::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN)
+	if (winCountdown != 0) {
+		winCountdown--;
+	}
+
+	if (winCountdown == 0)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 90);
 	}
