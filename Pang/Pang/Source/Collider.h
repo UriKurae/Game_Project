@@ -24,6 +24,7 @@ struct Collider
 
 	//Methods
 	Collider(SDL_Rect rectangle, Type type, Module* listener = nullptr);
+
 	void SetPos(int x, int y);
 	void SetH(int h);
 
@@ -35,7 +36,6 @@ struct Collider
 	Type type;
 	Module* listener = nullptr;
 };
-
 
 
 #endif // !__COLLIDER_H__

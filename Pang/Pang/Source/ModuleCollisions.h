@@ -5,7 +5,6 @@
 
 #include "Module.h"
 #include "Collider.h"
-#include "CircularCollider.h"
 
 class ModuleCollisions : public Module
 {
@@ -35,7 +34,6 @@ public:
 
 	// Adds a new collider to the list
 	Collider* AddCollider(SDL_Rect rect, Collider::Type type, Module* listener = nullptr);
-	CircularCollider* AddCircularCollider(Circle circle, CircularCollider::Type type, Module* listener = nullptr);
 
 	// Draws all existing colliders with some transparency
 	void DebugDraw();
@@ -43,7 +41,6 @@ public:
 private:
 	// All existing colliders in the scene
 	Collider* colliders[MAX_COLLIDERS] = { nullptr };
-	CircularCollider* circularColliders[MAX_COLLIDERS] = { nullptr };
 
 	// The collision matrix. Defines the interaction for two collider types
 	// If set two false, collider 1 will ignore collider 2

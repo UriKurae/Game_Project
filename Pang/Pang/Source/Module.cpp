@@ -43,11 +43,6 @@ void Module::OnCollision(Collider* c1, Collider* c2)
 
 }
 
-void Module::CircularCollision(CircularCollider* c1, Collider* c2)
-{
-
-}
-
 void Module::Enable()
 {
 	if (!isEnabled)
