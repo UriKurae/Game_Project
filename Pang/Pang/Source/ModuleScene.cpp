@@ -172,8 +172,7 @@ bool ModuleScene::CleanUp()
 	App->collisions->Disable();
 	App->input->Disable();
 	App->sceneIntro->countdown = 1;
-
-
+	
 	SDL_DestroyTexture(App->harpoon->texture);
 	SDL_DestroyTexture(bgTexture);
 	SDL_DestroyTexture(fgTexture);
