@@ -6,6 +6,7 @@
 
 struct SDL_Texture;
 struct Collider;
+struct CircularCollider;
 
 class Enemy
 {
@@ -18,7 +19,8 @@ public:
 	virtual ~Enemy();
 
 	// Returns the enemy's collider
-	const Collider* GetCollider() const;
+	virtual const CircularCollider* GetCircularCollider() const;
+	virtual const Collider* GetRectCollider() const;
 
 	// Called from inhering enemies' Udpate
 	// Updates animation and collider position
@@ -45,8 +47,11 @@ protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
 
+	//Collider creation for future enemies
+	Collider* rectCollider = nullptr;
+
 	// The enemy's collider
-	Collider* collider = nullptr;
+	CircularCollider* circularCollider = nullptr;
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;

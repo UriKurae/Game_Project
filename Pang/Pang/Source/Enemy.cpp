@@ -13,22 +13,26 @@ Enemy::Enemy(int x, int y) : position(x, y)
 
 Enemy::~Enemy()
 {
-	if (collider != nullptr)
-		collider->pendingToDelete = true;
+	if (circularCollider != nullptr)
+		circularCollider->pendingToDelete = true;
 }
 
-const Collider* Enemy::GetCollider() const
+const CircularCollider* Enemy::GetCircularCollider() const
 {
-	return collider;
+	return circularCollider;
 }
 
+const Collider* Enemy::GetRectCollider() const
+{
+	return rectCollider;
+}
 void Enemy::Update()
 {
 	if (currentAnim != nullptr)
 		currentAnim->Update();
 
-	if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
+	if (circularCollider != nullptr)
+		circularCollider->SetPos(position.x, position.y);
 }
 
 void Enemy::Draw()
@@ -39,6 +43,5 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {
-
 	App->audio->PlayFx(destroyedFx);
 }

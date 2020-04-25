@@ -7,7 +7,6 @@
 #include "Particle.h"
 
 
-
 class Enemy_Balloon : public Enemy
 {
 public:
@@ -27,13 +26,10 @@ public:
 	float speedX = 1.0f;
 	
 private:
-	// A set of steps that define the position in the screen
-	// And an animation for each step
-	Path path;
-	
+
 	void balloonBounce();
 
-	void OnCollision(Collider* c1) override;
+	//void OnCollision(Collider* c1) override;
 	// This enemy has one sprite and one frame
 	// We are keeping it an animation for consistency with other enemies
 	Animation veryBigBalloonAnim;
