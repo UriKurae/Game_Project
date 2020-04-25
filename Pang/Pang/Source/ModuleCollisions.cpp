@@ -206,15 +206,6 @@ bool ModuleCollisions::CleanUp()
 		}
 	}
 
-	for (uint j = 0; j < MAX_COLLIDERS; ++j)
-	{
-		if (circularColliders[j] != nullptr)
-		{
-			delete colliders[j];
-			colliders[j] = nullptr;
-		}
-	}
-
 	return true;
 }
 
@@ -230,23 +221,6 @@ Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Modu
 			break;
 		}
 	}
-
-	return ret;
-}
-
-
-CircularCollider* ModuleCollisions::AddCircularCollider(Circle circle, CircularCollider::Type type, Module* listener)
-{
-	CircularCollider* ret = nullptr;
-
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
-	{
-		if (colliders[i] == nullptr)
-		{
-			ret = circularColliders[i] = new CircularCollider(circle, type, listener);
-		}
-	}
-
 
 	return ret;
 }

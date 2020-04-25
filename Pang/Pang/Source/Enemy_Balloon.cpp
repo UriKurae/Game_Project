@@ -57,38 +57,37 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 	
 	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
-		circularCollider = App->collisions->AddCircularCollider({ position.x, position.y, 20 }, CircularCollider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
-		//collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
 		currentAnim = &veryBigBalloonAnim;
 	}
 	else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON)
 	{
-		//collider = App->collisions->AddCollider({ position.x, position.y, 32, 26 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 32, 26 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
 		currentAnim = &bigBalloonAnim;
 	}
 	else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
 	{
-		//collider = App->collisions->AddCollider({ position.x, position.y, 32, 26 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 32, 26 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
 		currentAnim = &bigBalloonAnim;
 	}
 	else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON)
 	{
-		//collider = App->collisions->AddCollider({ position.x, position.y, 16, 14 }, Collider::Type::SMALL_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 16, 14 }, Collider::Type::SMALL_BALLOON, (Module*)App->enemies);
 		currentAnim = &smallBalloonAnim;
 	}
 	else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
 	{
-		//collider = App->collisions->AddCollider({ position.x, position.y, 16, 14 }, Collider::Type::SMALL_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 16, 14 }, Collider::Type::SMALL_BALLOON, (Module*)App->enemies);
 		currentAnim = &smallBalloonAnim;
 	}
 	else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON)
 	{
-		//collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
 		currentAnim = &verySmallBalloonAnim;
 	}
 	else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
 	{
-		//collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
 		currentAnim = &verySmallBalloonAnim;
 	}
 
@@ -102,7 +101,8 @@ void Enemy_Balloon::Update()
 	
 	if (App->player->destroyed)
 	{
-		circularCollider->pendingToDelete = true;
+
+		collider->pendingToDelete = true;
 	}
 
 	Enemy::Update();
@@ -133,7 +133,7 @@ void Enemy_Balloon::balloonBounce()
 	//TODO PHYSICS, IMPLEMENT RIGHT, LEFT AND TOP HIT WITH THE BALLOON, SHOULD NOT GAIN SPEED.
 }
 
-/*void Enemy_Balloon::OnCollision(Collider* c2) {
+void Enemy_Balloon::OnCollision(Collider* c2) {
 	
 	//App->enemies->touchWall = false;
 	
@@ -213,4 +213,4 @@ void Enemy_Balloon::balloonBounce()
 			}
 		}
 	}
-}*/
+}

@@ -3,9 +3,7 @@
 
 #include "Globals.h"
 
-
 struct Collider;
-struct CircularCollider;
 
 class Module
 {
@@ -35,7 +33,6 @@ public:
 	//Called when two colliders are intersecting
 	//and the module is registered as the listener
 	virtual void OnCollision(Collider* c1, Collider* c2);
-	virtual void CircularCollision(CircularCollider* c1, Collider* c2);
 
 	//Enable and disable variables
 	void Enable();

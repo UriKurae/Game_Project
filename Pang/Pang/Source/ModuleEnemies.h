@@ -57,10 +57,9 @@ public:
 	// Destroys all active enemies left in the array
 	bool CleanUp() override;
 
-	// Called when an enemy collider hits another collider
+	// Called when an enemi collider hits another collider
 	// The enemy is destroyed and an explosion particle is fired
 	void OnCollision(Collider* c1, Collider* c2) override;
-	void CircularCollision(CircularCollider* c1, Collider* c2) override;
 
 	// Add an enemy into the queue to be spawned later
 	bool AddEnemy(ENEMY_TYPE type, int x, int y);

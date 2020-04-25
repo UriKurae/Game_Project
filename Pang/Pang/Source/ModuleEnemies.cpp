@@ -185,7 +185,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if(enemies[i] != nullptr && enemies[i]->GetRectCollider() == c1)
+		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
 			enemies[i]->OnCollision(c2); //Notify the enemy of a collision
 
@@ -196,22 +196,4 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			}
 		}
 	}
-}
-
-void ModuleEnemies::CircularCollision(CircularCollider* c1, Collider* c2)
-{
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (enemies[i] != nullptr && enemies[i]->GetCircularCollider() == c1)
-		{
-			enemies[i]->OnCollision(c2); //Notify the enemy of a collision
-
-			if (touchWall != true) {
-				delete enemies[i];
-				enemies[i] = nullptr;
-				break;
-			}
-		}
-	}
-
 }
