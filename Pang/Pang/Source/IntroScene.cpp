@@ -36,7 +36,7 @@ SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 	intro.PushBack({ 4992, 0, 384, 245 });
 
 	intro.loop = false;
-	intro.speed = 0.9f;
+	intro.speed = 0.2f;
 	/*intro.PushBack({ 0, 0, 384, 245 });
 	intro.PushBack({ 0, 0, 384, 245 });
 	intro.PushBack({ 0, 0, 384, 245 });
@@ -92,6 +92,10 @@ update_status SceneIntro::Update()
 		countdown--;
 	}
 
+	if (countdown == 0) {
+		currentAnimation = &intro;
+	}
+
 	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && countdown == 0)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->scene, 30);
@@ -128,8 +132,8 @@ update_status SceneIntro::PostUpdate()
 	if (countdown == 0)
 	{
 		SDL_DestroyTexture(intro_3);
-
 		currentAnimation = &intro;
+
 		App->fonts->BlitText(90, 181, introIndex, "©MITCHELL");
 		App->fonts->BlitText(240, 181, introIndex, "1989");
 	
