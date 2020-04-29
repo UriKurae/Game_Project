@@ -89,6 +89,26 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
+	GamePad& pad = App->input->pads[0];
+
+	//Debug key for gamepad rumble testing purposes
+	if (App->input->keys[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)
+	{
+		App->input->ShakeController(0, 12, 0.33f);
+	}
+
+	//Debug key for gamepad rumble testing purposes
+	if (App->input->keys[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN)
+	{
+		App->input->ShakeController(0, 36, 0.66f);
+	}
+
+	//Debug key for gamepad rumble testing purposes
+	if (App->input->keys[SDL_SCANCODE_3] == KEY_STATE::KEY_DOWN)
+	{
+		App->input->ShakeController(0, 60, 1.0f);
+	}
+
 	count++;
 	if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0 && destroyed == false) {
 		time--;
@@ -122,6 +142,45 @@ update_status ModulePlayer::Update()
 	}
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	{
+		if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
+		{
+			if (App->scene->balloonsOnScene == 0)
+			{
+				idleAnim.Reset();
+				currentAnimation = &idleAnim;
+			}
+			else
+			{
+				shotAnim.Reset();
+				currentAnimation = &shotAnim;
+			}
+		}
+	}
+
+	if (pad.l_x > 0 && !destroyed)
+	{
+		position.x += speed;
+
+		if (currentAnimation != &rightAnim)
+		{
+			rightAnim.Reset();
+			currentAnimation = &rightAnim;
+		}
+	}
+
+	if (pad.l_x < 0 && !destroyed)
+	{
+		position.x -= speed;
+
+		if (currentAnimation != &leftAnim)
+		{
+			leftAnim.Reset();
+			currentAnimation = &leftAnim;
+		}
+	}
+
+	if (pad.a == true)
 	{
 		if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
 		{
@@ -218,7 +277,6 @@ update_status ModulePlayer::PostUpdate()
 	App->fonts->BlitText(272, 208, uiIndex, "PLAYER-2");
 	App->fonts->BlitText(300, 9, uiIndex, "TIME:");
 	App->fonts->BlitText(351, 9, uiIndex, timeText);
-
 
 	return update_status::UPDATE_CONTINUE;
 }
