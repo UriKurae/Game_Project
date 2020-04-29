@@ -20,7 +20,35 @@
 
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 {
+	intro.PushBack({0, 0, 384, 245});
+	intro.PushBack({ 384, 0, 384, 245 });
+	intro.PushBack({ 768, 0, 384, 245 });
+	intro.PushBack({ 1152, 0, 384, 245 });
+	intro.PushBack({ 1536, 0, 384, 245 });
+	intro.PushBack({ 1920, 0, 384, 245 });
+	intro.PushBack({ 2304, 0, 384, 245 });
+	intro.PushBack({ 2688, 0, 384, 245 });
+	intro.PushBack({ 3072, 0, 384, 245 });
+	intro.PushBack({ 3456, 0, 384, 245 });
+	intro.PushBack({ 3840, 0, 384, 245 });
+	intro.PushBack({ 4224, 0, 384, 245 });
+	intro.PushBack({ 4608, 0, 384, 245 });
+	intro.PushBack({ 4992, 0, 384, 245 });
 
+	intro.loop = false;
+	intro.speed = 0.9f;
+	/*intro.PushBack({ 0, 0, 384, 245 });
+	intro.PushBack({ 0, 0, 384, 245 });
+	intro.PushBack({ 0, 0, 384, 245 });
+	intro.PushBack({ 0, 0, 384, 245 });
+	intro.PushBack({ 0, 0, 384, 245 });
+	intro.PushBack({ 0, 0, 384, 245 });
+	intro.PushBack({ 0, 0, 384, 245 });
+	intro.PushBack({ 0, 0, 384, 245 });
+	intro.PushBack({ 0, 0, 384, 245 });
+	intro.PushBack({ 0, 0, 384, 245 });
+	intro.PushBack({ 0, 0, 384, 245 });
+	*/
 }
 
 SceneIntro::~SceneIntro()
@@ -39,9 +67,9 @@ bool SceneIntro::Start()
 	
 
 	bgTexture = App->textures->Load("Assets/UI/pangAnimationTitleScreen.png");
-	intro_1 = App->textures->Load("Assets/UI/Intro_1.png");
+	/*intro_1 = App->textures->Load("Assets/UI/Intro_1.png");
 	intro_2 = App->textures->Load("Assets/UI/Intro_2.png");
-	intro_3 = App->textures->Load("Assets/UI/Intro_3.png");
+	intro_3 = App->textures->Load("Assets/UI/Intro_3.png");*/
 
 	char lookupTable1[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	introIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable1, 1);
@@ -101,7 +129,7 @@ update_status SceneIntro::PostUpdate()
 	{
 		SDL_DestroyTexture(intro_3);
 
-		App->render->Blit(bgTexture, 0, 0, NULL);
+		currentAnimation = &intro;
 		App->fonts->BlitText(90, 181, introIndex, "©MITCHELL");
 		App->fonts->BlitText(240, 181, introIndex, "1989");
 	
