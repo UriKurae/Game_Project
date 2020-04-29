@@ -61,7 +61,7 @@ bool ModuleScene::Start()
 	App->enemies->Enable();
 	App->collisions->Enable();
 	App->harpoon->Enable();
-	App->input->Enable();
+	//App->input->Enable();
 
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
@@ -170,7 +170,7 @@ bool ModuleScene::CleanUp()
 	App->enemies->Disable();
 	App->harpoon->Disable();
 	App->collisions->Disable();
-	App->input->Disable();
+	//App->input->Disable();
 	App->sceneIntro->countdown = 1;
 	
 	SDL_DestroyTexture(App->harpoon->texture);

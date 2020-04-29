@@ -148,7 +148,7 @@ bool SceneIntro::CleanUp()
 	SDL_DestroyTexture(bgTexture);
 	
 	App->fonts->UnLoad(introIndex);
-	App->input->Disable();
+	//App->input->Disable();
 
 	/*SDL_DestroyTexture(intro_1);
 	SDL_DestroyTexture(intro_2);

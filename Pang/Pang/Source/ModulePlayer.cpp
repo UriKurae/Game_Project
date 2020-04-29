@@ -118,6 +118,7 @@ update_status ModulePlayer::Update()
 		timeBonus = time * 100;
 	}
 
+	//Detect inputs
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !destroyed)
 	{
 		position.x -= speed;
