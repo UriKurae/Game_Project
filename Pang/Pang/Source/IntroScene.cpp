@@ -38,7 +38,7 @@ bool SceneIntro::Start()
 	App->player->lifes = 3;
 	
 
-	bgTexture = App->textures->Load("Assets/UI/Intro.png");
+	bgTexture = App->textures->Load("Assets/UI/pangAnimationTitleScreen.png");
 	intro_1 = App->textures->Load("Assets/UI/Intro_1.png");
 	intro_2 = App->textures->Load("Assets/UI/Intro_2.png");
 	intro_3 = App->textures->Load("Assets/UI/Intro_3.png");
