@@ -18,7 +18,7 @@
 
 WinScene::WinScene(bool startEnabled) : Module(startEnabled)
 {
-
+	name = "WIN SCENE";
 }
 
 WinScene::~WinScene()

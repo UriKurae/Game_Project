@@ -10,6 +10,8 @@
 
 ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 {
+	name = "COLLISIONS";
+
 	for(uint i = 0; i < MAX_COLLIDERS; ++i) //Assign nullptr to all colliders at the constructor.
 		colliders[i] = nullptr;
 
@@ -223,4 +225,17 @@ Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Modu
 	}
 
 	return ret;
+}
+
+void ModuleCollisions::RemoveCollider(Collider* collider)
+{
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		if (colliders[i] == collider)
+		{
+			delete colliders[i];
+			colliders[i] = nullptr;
+			--colliderCount;
+		}
+	}
 }

@@ -26,6 +26,8 @@
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
+	name = "PLAYER";
+
 	// idle animation - just one sprite
 	idleAnim.PushBack({ 0, 110, 26, 32 });
 
@@ -69,6 +71,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	texture = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
+	++activeTextures; ++totalTextures;
 	currentAnimation = &idleAnim;
 	
 	//SET SPAWN POSITION FOR PLAYER
@@ -77,12 +80,13 @@ bool ModulePlayer::Start()
 
 	
 	collider = App->collisions->AddCollider({ position.x, position.y, 26, 32 }, Collider::Type::PLAYER, this);
+	++activeColliders; ++totalColliders;
 	destroyed = false;
 	time = 100;
 
 	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	uiIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable, 1);
-
+	++activeFonts; ++totalFonts;
 
 	return ret;
 }
@@ -244,7 +248,7 @@ update_status ModulePlayer::PostUpdate()
 		App->render->Blit(texture, position.x, position.y, &rect);
 	}
 	
-	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN)
 	{
 		destroyed = true;
 		lifes--;
@@ -297,6 +301,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		if (c2->type == Collider::Type::VERY_BIG_BALLOON)
 		{
 			destroyed = true;
+			//App->collisions->RemoveCollider(c1);
+			//App->collisions->RemoveCollider(c2);
 			c1->pendingToDelete = true;
 			c2->pendingToDelete = true;
 			lifes--;
@@ -305,6 +311,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			App->scene->rightWall->pendingToDelete = true;
 			App->scene->upperWall->pendingToDelete = true;
 			App->scene->lowerWall->pendingToDelete = true;
+			//App->collisions->RemoveCollider(App->scene->leftWall);
+			//App->collisions->RemoveCollider(App->scene->rightWall);
+			//App->collisions->RemoveCollider(App->scene->upperWall);
+			//App->collisions->RemoveCollider(App->scene->lowerWall);
 		}
 
 		if (c2->type == Collider::Type::BIG_BALLOON)
@@ -350,9 +360,15 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 bool ModulePlayer::CleanUp()
 {
+	activeTextures = activeColliders = activeFonts = activeFx = 0;
 
 	App->fonts->UnLoad(uiIndex);
-	SDL_DestroyTexture(texture);
+	--totalFonts;
+	//SDL_DestroyTexture(texture);
+	App->textures->Unload(texture);
+	--totalTextures;
+	App->collisions->RemoveCollider(collider);
+	--totalColliders;
 
 	return true;
 }

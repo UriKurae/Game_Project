@@ -23,6 +23,7 @@
     <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Enemy_Balloon.h" />
+    <ClInclude Include="Source\ModuleDebugInfo.h" />
     <ClInclude Include="Source\ModuleFadeToBlack.h" />
     <ClInclude Include="Source\Globals.h" />
     <ClInclude Include="Source\IntroScene.h" />
@@ -50,6 +51,7 @@
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\Enemy_Balloon.cpp" />
+    <ClCompile Include="Source\ModuleDebugInfo.cpp" />
     <ClCompile Include="Source\ModuleFadeToBlack.cpp" />
     <ClCompile Include="Source\Globals.cpp" />
     <ClCompile Include="Source\IntroScene.cpp" />

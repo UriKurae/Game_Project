@@ -17,6 +17,8 @@
 
 ModuleHarpoon::ModuleHarpoon(bool startEnabled) : Module(startEnabled)
 {
+	name = "HARPOON";
+
 	harpoonShot.PushBack({ 4, 266, 9, 34 });
 	harpoonShot.PushBack({ 21, 264, 9, 36 });
 	harpoonShot.PushBack({ 38, 262, 9, 38 });
@@ -111,7 +113,9 @@ bool ModuleHarpoon::Start()
 	LOG("LOADING HARPOON TEXTURE");
 
 	texture = App->textures->Load("Assets/Items&Weapons/Harpoon.png");
+	++activeTextures; ++totalTextures;
 	HarpoonFx = App->audio->LoadFx("Assets/Sound/FX/NormalShoot.wav");
+	++activeFx; ++totalFx;
 
 	x = App->player->position.x;
 	y = App->player->position.y - speed;
@@ -134,6 +138,7 @@ update_status ModuleHarpoon::Update()
 		y = App->player->position.y - 2;
 		destroyed = false;
 		colliderH = App->collisions->AddCollider({ (int)x, (int)y, 9, (int)h }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
+		++activeColliders; ++totalColliders;
 		App->particles->AddParticle(harpoonShotParticle, x - 3, y - 6, Collider::Type::NONE, 0);
 		increment = true;
 	}
@@ -176,6 +181,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == Collider::Type::WALL) {
 		//delete colliderH;
 		this->colliderH->pendingToDelete = true;
+		--activeColliders; --totalColliders;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
@@ -185,6 +191,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == Collider::Type::VERY_BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		this->colliderH->pendingToDelete = true;
+		--activeColliders; --totalColliders;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
@@ -194,6 +201,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == Collider::Type::BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		this->colliderH->pendingToDelete = true;
+		--activeColliders; --totalColliders;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
@@ -203,6 +211,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == Collider::Type::SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		this->colliderH->pendingToDelete = true;
+		--activeColliders; --totalColliders;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
@@ -211,6 +220,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == Collider::Type::VERY_SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		this->colliderH->pendingToDelete = true;
+		--activeColliders; --totalColliders;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();

@@ -19,6 +19,8 @@
 
 ModuleEnemies::ModuleEnemies(bool startEnabled) : Module(startEnabled)
 {
+	name = "ENEMIES";
+
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 		enemies[i] = nullptr;
 }

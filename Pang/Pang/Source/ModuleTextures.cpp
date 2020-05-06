@@ -9,6 +9,8 @@
 
 ModuleTextures::ModuleTextures(bool startEnabled) : Module(startEnabled)
 {
+	name = "TEXTURES";
+	
 	for (uint i = 0; i < MAX_TEXTURES; ++i)
 		textures[i] = nullptr;
 }

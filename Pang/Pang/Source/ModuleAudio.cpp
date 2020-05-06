@@ -8,6 +8,8 @@
 
 ModuleAudio::ModuleAudio(bool startEnabled) : Module(startEnabled)
 {
+	name = "AUDIO";
+	
 	for(uint i = 0; i < MAX_FX; ++i)
 		soundFx[i] = nullptr;
 }
@@ -156,6 +158,21 @@ bool ModuleAudio::PlayFx(uint index, int repeat)
 	{
 		Mix_VolumeChunk(soundFx[index], 50);
 		Mix_PlayChannel(-1, soundFx[index], repeat);
+		ret = true;
+	}
+
+	return ret;
+}
+
+bool ModuleAudio::UnloadFx(uint index)
+{
+	bool ret = false;
+
+	if (soundFx[index] != nullptr)
+	{
+		Mix_FreeChunk(soundFx[index]);
+		soundFx[index] = nullptr;
+		--fxCount;
 		ret = true;
 	}
 

@@ -23,7 +23,7 @@
 
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
-	
+	name = "LEVEL 1";
 }
 
 ModuleScene::~ModuleScene()
@@ -40,21 +40,31 @@ bool ModuleScene::Start()
 
 	countDownToFade = 300;
 	fgTexture = App->textures->Load("Assets/Foregrounds/Foreground Mt.Fuji(Day).png"); //fg on 1st Level is invisible
+	++activeTextures; ++totalTextures;
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Fuji(Day).png");
+	++activeTextures; ++totalTextures;
 	deathTexture1 = App->textures->Load("Assets/Foregrounds/Foreground_Death_1.png");
+	++activeTextures; ++totalTextures;
 	deathTexture2 = App->textures->Load("Assets/Foregrounds/Foreground_Death_2.png");
+	++activeTextures; ++totalTextures;
 	lifesTexture1 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
+	++activeTextures; ++totalTextures;
 	lifesTexture2 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
+	++activeTextures; ++totalTextures;
 	lifesTexture3 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
-
+	++activeTextures; ++totalTextures;
 
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 1.0f);
 
 	//Walls collider
 	lowerWall = App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);
+	++activeColliders; ++totalColliders;
 	leftWall = App->collisions->AddCollider({ 0, 0, 8, 208 }, Collider::Type::WALL);
+	++activeColliders; ++totalColliders;
 	upperWall = App->collisions->AddCollider({ 0, 0, 384, 8 }, Collider::Type::WALL);
+	++activeColliders; ++totalColliders;
 	rightWall = App->collisions->AddCollider({ 376, 0, 8, 208 }, Collider::Type::WALL);
+	++activeColliders; ++totalColliders;
 
 
 	App->player->Enable();
@@ -81,13 +91,17 @@ bool ModuleScene::Start()
 update_status ModuleScene::Update()
 {
 	//LOG("Balloons On Stage %d", App->scene->balloonsOnScene);
-	if (App->input->keys[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
 	{
 		balloonsOnScene = 0;
-		App->scene->leftWall->pendingToDelete = true;
-		App->scene->rightWall->pendingToDelete = true;
-		App->scene->upperWall->pendingToDelete = true;
-		App->scene->lowerWall->pendingToDelete = true;
+		App->collisions->RemoveCollider(leftWall);
+		App->collisions->RemoveCollider(rightWall);
+		App->collisions->RemoveCollider(upperWall);
+		App->collisions->RemoveCollider(lowerWall);
+		--activeColliders; --totalColliders;
+		--activeColliders; --totalColliders;
+		--activeColliders; --totalColliders;
+		--activeColliders; --totalColliders;
 	}
 
 
@@ -150,7 +164,8 @@ update_status ModuleScene::PostUpdate()
 		if (App->player->lifes > 0)
 		{
 			App->fade->FadeToBlack((Module*)App->scene, (Module*)App->scene, 60);
-			App->player->collider->pendingToDelete = true;
+			//App->player->collider->pendingToDelete = true;
+			App->collisions->RemoveCollider(App->player->collider);
 		}
 		else
 		{
@@ -166,26 +181,47 @@ update_status ModuleScene::PostUpdate()
 bool ModuleScene::CleanUp()
 {
 	LOG("---------------------------------------------- CleanUp ModuleScene ----------------------------------------------")
+	
+	activeTextures = activeColliders = activeFonts = activeFx = 0;
+		
 	App->player->Disable();
 	App->enemies->Disable();
 	App->harpoon->Disable();
 	App->collisions->Disable();
 	//App->input->Disable();
 	App->sceneIntro->countdown = 1;
-	
-	SDL_DestroyTexture(App->harpoon->texture);
-	SDL_DestroyTexture(bgTexture);
-	SDL_DestroyTexture(fgTexture);
-	SDL_DestroyTexture(lifesTexture1);
-	SDL_DestroyTexture(lifesTexture2);
-	SDL_DestroyTexture(lifesTexture3);
-	SDL_DestroyTexture(deathTexture1);
-	SDL_DestroyTexture(deathTexture2);
-	SDL_DestroyTexture(balloon);
 
-	App->harpoon->HarpoonFx = 0;
+	//App->harpoon->HarpoonFx = 0;
 	
+	App->textures->Unload(App->harpoon->texture);
+	//--totalTextures;
+	App->textures->Unload(bgTexture);
+	--totalTextures;
+	App->textures->Unload(fgTexture);
+	--totalTextures;
+	App->textures->Unload(lifesTexture1);
+	--totalTextures;
+	App->textures->Unload(lifesTexture2);
+	--totalTextures;
+	App->textures->Unload(lifesTexture3);
+	--totalTextures;
+	App->textures->Unload(deathTexture1);
+	--totalTextures;
+	App->textures->Unload(deathTexture2);
+	--totalTextures;
+	App->audio->UnloadFx(App->harpoon->HarpoonFx);
+	--totalFx;
+	App->collisions->RemoveCollider(leftWall);
+	--totalColliders;
+	App->collisions->RemoveCollider(rightWall);
+	--totalColliders;
+	App->collisions->RemoveCollider(upperWall);
+	--totalColliders;
+	App->collisions->RemoveCollider(lowerWall);
+	--totalColliders;
 	
+
+
 	return true;
 
 }

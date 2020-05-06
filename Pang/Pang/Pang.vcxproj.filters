@@ -111,6 +111,9 @@
     <ClInclude Include="Source\WinScene.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ModuleDebugInfo.h">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -184,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="Source\WinScene.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleDebugInfo.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

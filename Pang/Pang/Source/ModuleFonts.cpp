@@ -8,7 +8,7 @@
 
 ModuleFonts::ModuleFonts(bool isEnabled) : Module(isEnabled)
 {
-
+	name = "FONTS";
 }
 
 ModuleFonts::~ModuleFonts()

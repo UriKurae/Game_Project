@@ -14,6 +14,7 @@
 #include "IntroScene.h"
 #include "ModuleHarpoon_Shot.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleDebugInfo.h"
 #include "Enemy_Balloon.h"
 #include "ModuleFonts.h"
 #include "WinScene.h"
@@ -38,9 +39,10 @@ Application::Application()
 	modules[10] = collisions = new ModuleCollisions(true);
 	modules[11] = fade = new ModuleFadeToBlack(true);
 	modules[12] = fonts = new ModuleFonts(true);
-	modules[13] = winScene = new WinScene(false);
+	modules[13] = debugInfo = new ModuleDebugInfo(true);
+	modules[14] = winScene = new WinScene(false);
 
-	modules[14] = render = new ModuleRender(true);
+	modules[15] = render = new ModuleRender(true);
 	
 }
 

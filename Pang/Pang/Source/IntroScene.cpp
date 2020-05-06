@@ -20,6 +20,7 @@
 
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 {
+	name = "S INTRO";
 
 	intro.PushBack({ 0, 0, 384, 245 });
 	intro.PushBack({ 384, 0, 384, 245 });
@@ -105,13 +106,17 @@ bool SceneIntro::Start()
 	App->player->lifes = 3;
 
 	bgTexture = App->textures->Load("Assets/UI/AnimationPangBalls.png");
+	++activeTextures; ++totalTextures;
 	intro_1 = App->textures->Load("Assets/UI/Intro_1.png");
+	++activeTextures; ++totalTextures;
 	intro_2 = App->textures->Load("Assets/UI/Intro_2.png");
+	++activeTextures; ++totalTextures;
 	intro_3 = App->textures->Load("Assets/UI/Intro_3.png");
+	++activeTextures; ++totalTextures;
 
 	char lookupTable1[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	introIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable1, 1);
-
+	++activeFonts; ++totalFonts;
 
 
 	App->render->camera.x = 0;
@@ -155,18 +160,21 @@ update_status SceneIntro::PostUpdate()
 		else if (countdown > 420 && countdown < 840)
 		{
 			App->render->Blit(intro_2, 0, 0, NULL);
-			SDL_DestroyTexture(intro_1);
+			//SDL_DestroyTexture(intro_1);
+			App->textures->Unload(intro_1);
 		}
 		else if (countdown > 0 && countdown < 420)
 		{
 			App->render->Blit(intro_3, 0, 0, NULL);
-			SDL_DestroyTexture(intro_2);
+			//SDL_DestroyTexture(intro_2);
+			App->textures->Unload(intro_2);
 		}
 	}
 
 	if (countdown == 0)
 	{
-		SDL_DestroyTexture(intro_3);
+		//SDL_DestroyTexture(intro_3);
+		App->textures->Unload(intro_3);
 		currentAnimation = &intro;
 		App->render->Blit(bgTexture, 0, 0, &(intro.GetCurrentFrame()), 0.2f);
 		//App->fonts->BlitText(90, 181, introIndex, "©MITCHELL");
@@ -186,9 +194,14 @@ update_status SceneIntro::PostUpdate()
 
 bool SceneIntro::CleanUp()
 {
-	SDL_DestroyTexture(bgTexture);
-
+	//SDL_DestroyTexture(bgTexture);
+	App->textures->Unload(bgTexture);
+	--activeTextures; --totalTextures;
+	--activeTextures; --totalTextures;
+	--activeTextures; --totalTextures;
+	--activeTextures; --totalTextures;
 	App->fonts->UnLoad(introIndex);
+	--activeFonts; --totalFonts;
 
 	/*SDL_DestroyTexture(intro_1);
 	SDL_DestroyTexture(intro_2);
