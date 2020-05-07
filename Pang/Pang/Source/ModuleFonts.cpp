@@ -63,6 +63,8 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 	font.char_w /= fonts[id].totalLength / rows;
 	// char_h --------	Height of each character
 	font.char_h /= rows;
+
+	++fontsCount;
 	
 	LOG("Successfully loaded BMP font from %s", texture_path);
 
@@ -77,6 +79,8 @@ void ModuleFonts::UnLoad(int font_id)
 	{
 		App->textures->Unload(fonts[font_id].texture);
 		fonts[font_id].texture = nullptr;
+		--fontsCount;
+
 		LOG("Successfully Unloaded BMP font_id %d", font_id);
 	}
 }

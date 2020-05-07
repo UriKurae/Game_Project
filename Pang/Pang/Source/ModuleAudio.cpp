@@ -63,8 +63,11 @@ bool ModuleAudio::CleanUp()
 
 	for (uint i = 0; i < MAX_FX; ++i)
 	{
-		if(soundFx[i] != nullptr)
+		if (soundFx[i] != nullptr) {
 			Mix_FreeChunk(soundFx[i]);
+			soundFx[i] = nullptr;
+			--fxCount;
+		}
 	}
 	
 	Mix_CloseAudio();
@@ -142,6 +145,7 @@ uint ModuleAudio::LoadFx(const char* path)
 			if (soundFx[ret] == nullptr)
 			{
 				soundFx[ret] = chunk;
+				++fxCount;
 				break;
 			}
 		}

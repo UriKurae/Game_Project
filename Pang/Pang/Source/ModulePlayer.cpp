@@ -248,7 +248,7 @@ update_status ModulePlayer::PostUpdate()
 		App->render->Blit(texture, position.x, position.y, &rect);
 	}
 	
-	if (App->input->keys[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_F9] == KEY_STATE::KEY_DOWN)
 	{
 		destroyed = true;
 		lifes--;

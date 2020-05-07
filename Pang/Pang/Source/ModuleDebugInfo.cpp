@@ -53,6 +53,12 @@ update_status ModuleDebugInfo::Update()
 		inspectedModule = (Module*)App->scene;
 
 	if (App->input->keys[SDL_SCANCODE_F6] == KEY_DOWN)
+		inspectedModule = (Module*)App->harpoon;
+
+	if (App->input->keys[SDL_SCANCODE_F7] == KEY_DOWN)
+		inspectedModule = (Module*)App->winScene;
+
+	if (App->input->keys[SDL_SCANCODE_F8] == KEY_DOWN)
 		inspectedModule = nullptr;
 
 
