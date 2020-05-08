@@ -121,6 +121,7 @@ bool ModuleHarpoon::Start()
 	x = App->player->position.x;
 	y = App->player->position.y - speed;
 	
+	
 
 	return true;
 }
@@ -132,16 +133,20 @@ update_status ModuleHarpoon::Update()
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && destroyed == true && App->player->destroyed == false)
 		{
+
 		App->audio->PlayFx(HarpoonFx);
 		++activeFx;
 
 		currentAnimation = &harpoonShot;
+		
 		h = 34;
 		x = App->player->position.x + 10;
 		y = App->player->position.y - 2;
 		destroyed = false;
+
 		colliderH = App->collisions->AddCollider({ (int)x, (int)y, 9, (int)h }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
 		++activeColliders; ++totalColliders;
+
 		App->particles->AddParticle(harpoonShotParticle, x - 3, y - 6, Collider::Type::NONE, 0);
 		increment = true;
 
