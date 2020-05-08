@@ -161,20 +161,20 @@ update_status SceneIntro::PostUpdate()
 		{
 			App->render->Blit(intro_2, 0, 0, NULL);
 			//SDL_DestroyTexture(intro_1);
-			App->textures->Unload(intro_1);
+			
 		}
 		else if (countdown > 0 && countdown < 420)
 		{
 			App->render->Blit(intro_3, 0, 0, NULL);
 			//SDL_DestroyTexture(intro_2);
-			App->textures->Unload(intro_2);
+			
 		}
 	}
 
 	if (countdown == 0)
 	{
 		//SDL_DestroyTexture(intro_3);
-		App->textures->Unload(intro_3);
+		
 		currentAnimation = &intro;
 		App->render->Blit(bgTexture, 0, 0, &(intro.GetCurrentFrame()), 0.2f);
 		//App->fonts->BlitText(90, 181, introIndex, "©MITCHELL");
@@ -197,11 +197,19 @@ bool SceneIntro::CleanUp()
 	//SDL_DestroyTexture(bgTexture);
 	App->textures->Unload(bgTexture);
 	--activeTextures; --totalTextures;
+
+	App->textures->Unload(intro_1);
 	--activeTextures; --totalTextures;
+
+	App->textures->Unload(intro_2);
 	--activeTextures; --totalTextures;
+
+	App->textures->Unload(intro_3);
 	--activeTextures; --totalTextures;
+
 	App->fonts->UnLoad(introIndex);
 	--activeFonts; --totalFonts;
+
 
 	/*SDL_DestroyTexture(intro_1);
 	SDL_DestroyTexture(intro_2);

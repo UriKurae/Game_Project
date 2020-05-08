@@ -255,6 +255,8 @@ bool ModuleScene::CleanUp()
 	App->audio->UnloadFx(ballonExplosion);
 
 
+	App->textures->Unload(App->enemies->texture);
+
 
 	return true;
 

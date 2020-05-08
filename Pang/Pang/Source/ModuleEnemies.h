@@ -73,6 +73,9 @@ public:
 
 	bool touchWall = false;
 
+	// The enemies sprite sheet
+	SDL_Texture* texture = nullptr;
+
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
@@ -84,8 +87,6 @@ private:
 	// All spawned enemies in the scene
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
-	// The enemies sprite sheet
-	SDL_Texture* texture = nullptr;
 	
 	Enemy_Balloon balloon;
 

@@ -14,8 +14,7 @@
 
 Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x,y)
 {
-	//ballonExplosion = App->audio->LoadFx("Assets/Sound/FX/DestroyBalls.wav");
-
+	
 
 	tipoBalloon = type;
 	veryBigBalloonAnim.PushBack({ 207,112, 48, 40 });
