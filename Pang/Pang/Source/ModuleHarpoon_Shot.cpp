@@ -113,7 +113,7 @@ bool ModuleHarpoon::Start()
 	LOG("LOADING HARPOON TEXTURE");
 
 	texture = App->textures->Load("Assets/Items&Weapons/Harpoon.png");
-	++activeTextures; ++totalTextures;
+	++totalTextures;
 	HarpoonFx = App->audio->LoadFx("Assets/Sound/FX/NormalShoot.wav");
 	++activeFx; ++totalFx;
 
@@ -141,6 +141,7 @@ update_status ModuleHarpoon::Update()
 		++activeColliders; ++totalColliders;
 		App->particles->AddParticle(harpoonShotParticle, x - 3, y - 6, Collider::Type::NONE, 0);
 		increment = true;
+		++activeTextures;
 	}
 	
 	if (increment == true) {
@@ -185,6 +186,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
+		--activeTextures;
 		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
 	}
 
@@ -195,6 +197,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
+		--activeTextures;
 		LOG("\n\n\nHARPOON HIT VERY BIG BALLOON\n\n");
 	}
 
@@ -205,6 +208,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
+		--activeTextures;
 		LOG("\n\n\nHARPOON HIT BIG BALLOON\n\n");
 	}
 
@@ -215,6 +219,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
+		--activeTextures;
 	}
 
 	if (c2->type == Collider::Type::VERY_SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
@@ -224,6 +229,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
+		--activeTextures;
 	}
 
 }

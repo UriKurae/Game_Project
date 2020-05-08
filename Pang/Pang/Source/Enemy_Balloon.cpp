@@ -229,6 +229,8 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 				collider->pendingToDelete = true;
 				App->particles->AddParticle(particleDeathVerySmall, position.x, position.y, Collider::Type::NONE, 0);
 				App->audio->PlayFx(ballonExplosion);
+				/*App->audio->UnloadFx(ballonExplosion);
+				App->audio->activeFx--;*/
 				App->scene->balloonsOnScene--;
 			}
 		}
