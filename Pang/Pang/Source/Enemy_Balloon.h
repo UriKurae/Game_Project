@@ -35,6 +35,7 @@ private:
 	void balloonBounce();
 
 	void OnCollision(Collider* c1) override;
+
 	// This enemy has one sprite and one frame
 	// We are keeping it an animation for consistency with other enemies
 	Animation veryBigBalloonAnim;
@@ -42,12 +43,13 @@ private:
 	Animation smallBalloonAnim;
 	Animation verySmallBalloonAnim;
 	Animation balloonDeath;
+
 	Particle particleDeathVeryBig;
 	Particle particleDeathBig;
 	Particle particleDeathSmall;
 	Particle particleDeathVerySmall;
 
-	uint ballonExplosion = 0;
+	//uint ballonExplosion = 0;
 	enum class ENEMY_TYPE tipoBalloon;
 };
 

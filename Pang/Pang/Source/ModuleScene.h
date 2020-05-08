@@ -29,6 +29,8 @@ public:
 	bool CleanUp();
 
 public:
+	
+	uint ballonExplosion = 0;
 
 	uint countDownToFade = 180;
 	int toFade = 5;

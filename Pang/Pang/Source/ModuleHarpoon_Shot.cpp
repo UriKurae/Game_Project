@@ -202,7 +202,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == Collider::Type::VERY_BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		this->colliderH->pendingToDelete = true;
-		--activeColliders; --totalColliders;
+		//--activeColliders; --totalColliders;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
@@ -213,7 +213,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == Collider::Type::BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		this->colliderH->pendingToDelete = true;
-		--activeColliders; --totalColliders;
+		//--activeColliders; --totalColliders;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
@@ -224,7 +224,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == Collider::Type::SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		this->colliderH->pendingToDelete = true;
-		--activeColliders; --totalColliders;
+		//--activeColliders; --totalColliders;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
@@ -234,7 +234,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == Collider::Type::VERY_SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		this->colliderH->pendingToDelete = true;
-		--activeColliders; --totalColliders;
+		//--activeColliders; --totalColliders;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();

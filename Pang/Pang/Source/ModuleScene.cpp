@@ -38,6 +38,8 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
+	ballonExplosion = App->audio->LoadFx("Assets/Sound/FX/DestroyBalls.wav");
+
 	countDownToFade = 300;
 	fgTexture = App->textures->Load("Assets/Foregrounds/Foreground Mt.Fuji(Day).png"); //fg on 1st Level is invisible
 	++activeTextures; ++totalTextures;
@@ -199,8 +201,8 @@ bool ModuleScene::CleanUp()
 
 	if (App->harpoon->destroyed)
 	{
-		App->audio->UnloadFx(App->harpoon->HarpoonFx);
-		App->harpoon->totalFx--;
+		/*App->audio->UnloadFx(App->harpoon->HarpoonFx);
+		App->harpoon->totalFx--;*/
 		App->harpoon->activeFx = 0;
 
 		App->textures->Unload(App->harpoon->texture);
@@ -239,7 +241,8 @@ bool ModuleScene::CleanUp()
 	App->textures->Unload(deathTexture2);
 	--totalTextures;
 	App->audio->UnloadFx(App->harpoon->HarpoonFx);
-	--totalFx;
+	App->harpoon->totalFx--;
+	
 	App->collisions->RemoveCollider(leftWall);
 	--totalColliders;
 	App->collisions->RemoveCollider(rightWall);
@@ -249,6 +252,7 @@ bool ModuleScene::CleanUp()
 	App->collisions->RemoveCollider(lowerWall);
 	--totalColliders;
 
+	App->audio->UnloadFx(ballonExplosion);
 
 
 
