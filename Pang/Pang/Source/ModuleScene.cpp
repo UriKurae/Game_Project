@@ -107,8 +107,10 @@ update_status ModuleScene::Update()
 
 	if (balloonsOnScene == 0)
 	{
+		
 		App->harpoon->Disable();
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->winScene, 60);
+
 	}
 
 //	LOG("enemyOnStage == %d", balloonsOnScene);
@@ -164,6 +166,7 @@ update_status ModuleScene::PostUpdate()
 		if (App->player->lifes > 0)
 		{
 			App->fade->FadeToBlack((Module*)App->scene, (Module*)App->scene, 60);
+
 			//App->player->collider->pendingToDelete = true;
 			App->collisions->RemoveCollider(App->player->collider);
 		}
@@ -184,6 +187,24 @@ bool ModuleScene::CleanUp()
 	
 	activeTextures = activeColliders = activeFonts = activeFx = 0;
 		
+
+
+	//REMOVE HARPOONFX WHEN BALLOON KILLS U AND HARPOON IS ALIVE
+
+	if (App->harpoon->destroyed)
+	{
+		App->audio->UnloadFx(App->harpoon->HarpoonFx);
+		App->harpoon->totalFx--;
+		App->harpoon->activeFx = 0;
+
+		App->textures->Unload(App->harpoon->texture);
+		App->harpoon->totalTextures--;
+		App->harpoon->activeTextures = 0;
+
+
+	}
+
+
 	App->player->Disable();
 	App->enemies->Disable();
 	App->harpoon->Disable();
@@ -194,7 +215,7 @@ bool ModuleScene::CleanUp()
 	//App->harpoon->HarpoonFx = 0;
 	
 	App->textures->Unload(App->harpoon->texture);
-	//--totalTextures;
+	--totalTextures;
 	App->textures->Unload(bgTexture);
 	--totalTextures;
 	App->textures->Unload(fgTexture);
@@ -219,7 +240,8 @@ bool ModuleScene::CleanUp()
 	--totalColliders;
 	App->collisions->RemoveCollider(lowerWall);
 	--totalColliders;
-	
+
+
 
 
 	return true;

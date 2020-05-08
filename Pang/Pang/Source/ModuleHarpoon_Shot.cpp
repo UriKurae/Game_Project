@@ -114,8 +114,9 @@ bool ModuleHarpoon::Start()
 
 	texture = App->textures->Load("Assets/Items&Weapons/Harpoon.png");
 	++totalTextures;
+
 	HarpoonFx = App->audio->LoadFx("Assets/Sound/FX/NormalShoot.wav");
-	++activeFx; ++totalFx;
+	++totalFx;
 
 	x = App->player->position.x;
 	y = App->player->position.y - speed;
@@ -132,6 +133,8 @@ update_status ModuleHarpoon::Update()
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && destroyed == true && App->player->destroyed == false)
 		{
 		App->audio->PlayFx(HarpoonFx);
+		++activeFx;
+
 		currentAnimation = &harpoonShot;
 		h = 34;
 		x = App->player->position.x + 10;
@@ -141,6 +144,7 @@ update_status ModuleHarpoon::Update()
 		++activeColliders; ++totalColliders;
 		App->particles->AddParticle(harpoonShotParticle, x - 3, y - 6, Collider::Type::NONE, 0);
 		increment = true;
+
 		++activeTextures;
 	}
 	
@@ -230,6 +234,9 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 		increment = false;
 		currentAnimation->Reset();
 		--activeTextures;
+	
 	}
 
+	--activeFx;
+	
 }
