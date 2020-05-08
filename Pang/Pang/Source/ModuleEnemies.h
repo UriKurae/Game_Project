@@ -2,10 +2,10 @@
 #define __MODULE_ENEMIES_H__
 
 #include "Module.h"
+#include "Enemy.h"
+#include "Enemy_Balloon.h"
 
 #define MAX_ENEMIES 100
-
-// TODO 4: Create a new enemy type: the Mech
 
 enum class ENEMY_TYPE
 {
@@ -31,6 +31,7 @@ struct EnemySpawnpoint
 
 class Enemy;
 struct SDL_Texture;
+struct Enemy_Balloon;
 
 class ModuleEnemies : public Module
 {
@@ -57,7 +58,7 @@ public:
 	// Destroys all active enemies left in the array
 	bool CleanUp() override;
 
-	// Called when an enemi collider hits another collider
+	// Called when an enemy collider hits another collider
 	// The enemy is destroyed and an explosion particle is fired
 	void OnCollision(Collider* c1, Collider* c2) override;
 
@@ -86,6 +87,9 @@ private:
 	// The enemies sprite sheet
 	SDL_Texture* texture = nullptr;
 	
+	Enemy_Balloon balloon;
+
+	Collider* balloonCollider = balloon.collider;
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;

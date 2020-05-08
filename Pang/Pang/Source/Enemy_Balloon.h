@@ -14,6 +14,7 @@ public:
 	// Constructor (x y coordinates in the world)
 	// Creates animation and movement data and the collider
 	Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type);
+	Enemy_Balloon() {};
 
 	//virtual void OnCollision(Collider* collider);
 

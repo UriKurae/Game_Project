@@ -13,6 +13,7 @@ public:
 	// Constructor
 	// Saves the spawn position for later movement calculations
 	Enemy(int x, int y);
+	Enemy() {};
 
 	// Destructor
 	virtual ~Enemy();
@@ -41,12 +42,12 @@ public:
 	// Sound fx when destroyed
 	int destroyedFx = 0;
 
+	// The enemy's collider
+	Collider* collider = nullptr;
+
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
-
-	// The enemy's collider
-	Collider* collider = nullptr;
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
