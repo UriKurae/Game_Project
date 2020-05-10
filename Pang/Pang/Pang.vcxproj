@@ -28,6 +28,7 @@
     <ClInclude Include="Source\Globals.h" />
     <ClInclude Include="Source\IntroScene.h" />
     <ClInclude Include="Source\ModuleFonts.h" />
+    <ClInclude Include="Source\ModuleHarpoon_HookShot.h" />
     <ClInclude Include="Source\ModuleHarpoon_Shot.h" />
     <ClInclude Include="Source\MemLeaks.h" />
     <ClInclude Include="Source\Module.h" />

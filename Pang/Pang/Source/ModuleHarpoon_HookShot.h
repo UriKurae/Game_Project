@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Animation.h"
 #include "Module.h"
 #include "p2Point.h"
@@ -9,7 +8,7 @@
 struct SDL_Texture;
 struct Collider;
 
-class ModuleHarpoon : public Module
+class ModuleHookShot : public Module
 {
 public:
 	//position where is released
@@ -38,8 +37,8 @@ public:
 
 	uint HarpoonFx = 0;
 public:
-	ModuleHarpoon(bool startEnabled);
-	~ModuleHarpoon();
+	ModuleHookShot(bool startEnabled);
+	~ModuleHookShot();
 
 	//load all textures
 	bool Start();

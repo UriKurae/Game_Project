@@ -242,6 +242,28 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	
 	}
 
+	if (c2->type == Collider::Type::BREAKABLE_BLOCK) {
+		//delete colliderH;
+		this->colliderH->pendingToDelete = true;
+		--activeColliders; --totalColliders;
+		destroyed = true;
+		increment = false;
+		currentAnimation->Reset();
+		--activeTextures;
+		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
+	}
+
+	if (c2->type == Collider::Type::UNBREAKABLE_BLOCK) {
+		//delete colliderH;
+		this->colliderH->pendingToDelete = true;
+		--activeColliders; --totalColliders;
+		destroyed = true;
+		increment = false;
+		currentAnimation->Reset();
+		--activeTextures;
+		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
+	}
+
 	--activeFx;
 	
 }
