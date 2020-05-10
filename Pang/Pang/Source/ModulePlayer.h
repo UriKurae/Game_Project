@@ -43,6 +43,7 @@ public:
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
+	SDL_Texture* timeTexture = nullptr;
 	
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
@@ -73,6 +74,7 @@ public:
 	uint time = 100;
 	uint count = 0;
 	int uiIndex;
+	int timeIndex;
 	char scoreText[10] = { "\0" };
 	char timeText[3] = { "\0" };
 	uint timeBonus = 0;

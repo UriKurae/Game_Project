@@ -71,6 +71,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	texture = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
+	timeTexture = App->textures->Load("Assets/UI/Time.png");
 	++activeTextures; ++totalTextures;
 	currentAnimation = &idleAnim;
 	
@@ -86,6 +87,8 @@ bool ModulePlayer::Start()
 
 	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	uiIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable, 1);
+	char timeTable[] = { "0123456789" };
+	timeIndex = App->fonts->Load("Assets/UI/CountdownNumbers.png", timeTable, 1);
 	++activeFonts; ++totalFonts;
 
 	return ret;
@@ -280,8 +283,8 @@ update_status ModulePlayer::PostUpdate()
 	App->fonts->BlitText(161, 228, uiIndex, "1-1 STAGE");
 	App->fonts->BlitText(151, 236, uiIndex, "HI: 100000");
 	App->fonts->BlitText(272, 208, uiIndex, "PLAYER-2");
-	App->fonts->BlitText(300, 9, uiIndex, "TIME:");
-	App->fonts->BlitText(351, 9, uiIndex, timeText);
+	App->render->Blit(timeTexture, 272, 9, NULL);
+	App->fonts->BlitText(337, 9, timeIndex, timeText);
 
 	return update_status::UPDATE_CONTINUE;
 }
