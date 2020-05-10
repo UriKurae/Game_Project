@@ -10,4 +10,4 @@ Carlos:
 	-
 
 David:
-	-
+	-Fixed some spritesheets with the objective to order everything
