@@ -36,6 +36,7 @@
     <ClInclude Include="Source\ModuleEnemies.h" />
     <ClInclude Include="Source\ModuleInput.h" />
     <ClInclude Include="Source\ModuleParticles.h" />
+    <ClInclude Include="Source\ModulePlatforms.h" />
     <ClInclude Include="Source\ModulePlayer.h" />
     <ClInclude Include="Source\ModuleRender.h" />
     <ClInclude Include="Source\ModuleScene.h" />
@@ -64,6 +65,7 @@
     <ClCompile Include="Source\ModuleEnemies.cpp" />
     <ClCompile Include="Source\ModuleInput.cpp" />
     <ClCompile Include="Source\ModuleParticles.cpp" />
+    <ClCompile Include="Source\ModulePlatforms.cpp" />
     <ClCompile Include="Source\ModulePlayer.cpp" />
     <ClCompile Include="Source\ModuleRender.cpp" />
     <ClCompile Include="Source\ModuleScene.cpp" />

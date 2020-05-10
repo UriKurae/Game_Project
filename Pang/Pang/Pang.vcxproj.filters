@@ -114,6 +114,9 @@
     <ClInclude Include="Source\ModuleDebugInfo.h">
       <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ModulePlatforms.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -190,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="Source\ModuleDebugInfo.cpp">
       <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModulePlatforms.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
