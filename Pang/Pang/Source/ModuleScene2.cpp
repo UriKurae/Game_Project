@@ -37,6 +37,12 @@ bool ModuleScene2::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 
+	App->player->Enable();
+	App->enemies->Enable();
+	App->collisions->Enable();
+	App->harpoon->Enable();
+	
+
 	ballonExplosion = App->audio->LoadFx("Assets/Sound/FX/DestroyBalls.wav");
 
 	countDownToFade = 300;
@@ -79,10 +85,6 @@ bool ModuleScene2::Start()
 	rightPlatform = App->collisions->AddCollider({ 192,81,31,6 }, Collider::Type::BREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 
-	App->player->Enable();
-	App->enemies->Enable();
-	App->collisions->Enable();
-	App->harpoon->Enable();
 	//App->input->Enable();
 
 	//ADD ENEMIES
@@ -95,7 +97,7 @@ bool ModuleScene2::Start()
 	App->scene2->balloonsOnScene = 1;
 
 
-	App->enemies->touchWall = false;
+	//6App->enemies->touchWall = false;
 
 	return ret; 
 }
@@ -188,5 +190,79 @@ update_status ModuleScene2::PostUpdate()
 
 bool ModuleScene2::CleanUp()
 {
-	return false;
+
+	LOG("---------------------------------------------- CleanUp ModuleScene ----------------------------------------------")
+
+		activeTextures = activeColliders = activeFonts = activeFx = 0;
+
+
+	App->player->Disable();
+	App->enemies->Disable();
+	App->harpoon->Disable();
+	App->collisions->Disable();
+	//App->input->Disable();
+	App->sceneIntro->countdown = 1;
+
+	//REMOVE HARPOONFX WHEN BALLOON KILLS U AND HARPOON IS ALIVE
+
+	if (App->harpoon->destroyed)
+	{
+		/*App->audio->UnloadFx(App->harpoon->HarpoonFx);
+		App->harpoon->totalFx--;*/
+		App->harpoon->activeFx = 0;
+
+		App->textures->Unload(App->harpoon->texture);
+		App->harpoon->totalTextures--;
+		App->harpoon->activeTextures = 0;
+
+		if (!App->harpoon->destroyed)
+		{
+
+			App->collisions->RemoveCollider(App->harpoon->colliderH);
+			App->harpoon->totalColliders--;
+			App->harpoon->activeColliders = 0;
+		}
+
+	}
+
+
+
+
+	//App->harpoon->HarpoonFx = 0;
+
+	App->textures->Unload(App->harpoon->texture);
+	--totalTextures;
+	App->textures->Unload(bgTexture);
+	--totalTextures;
+	App->textures->Unload(fgTexture);
+	--totalTextures;
+	App->textures->Unload(lifesTexture1);
+	--totalTextures;
+	App->textures->Unload(lifesTexture2);
+	--totalTextures;
+	App->textures->Unload(lifesTexture3);
+	--totalTextures;
+	App->textures->Unload(deathTexture1);
+	--totalTextures;
+	App->textures->Unload(deathTexture2);
+	--totalTextures;
+	App->audio->UnloadFx(App->harpoon->HarpoonFx);
+	App->harpoon->totalFx--;
+
+	App->collisions->RemoveCollider(leftWall);
+	--totalColliders;
+	App->collisions->RemoveCollider(rightWall);
+	--totalColliders;
+	App->collisions->RemoveCollider(upperWall);
+	--totalColliders;
+	App->collisions->RemoveCollider(lowerWall);
+	--totalColliders;
+
+	App->audio->UnloadFx(ballonExplosion);
+
+
+	App->textures->Unload(App->enemies->texture);
+
+
+	return true;
 }

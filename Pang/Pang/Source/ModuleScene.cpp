@@ -96,14 +96,7 @@ update_status ModuleScene::Update()
 	if (App->input->keys[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
 	{
 		balloonsOnScene = 0;
-		App->collisions->RemoveCollider(leftWall);
-		App->collisions->RemoveCollider(rightWall);
-		App->collisions->RemoveCollider(upperWall);
-		App->collisions->RemoveCollider(lowerWall);
-		--activeColliders; --totalColliders;
-		--activeColliders; --totalColliders;
-		--activeColliders; --totalColliders;
-		--activeColliders; --totalColliders;
+	
 	}
 
 
