@@ -48,7 +48,6 @@
     <ClInclude Include="Source\WinScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ModuleHarpoon_HookShot.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />

@@ -197,8 +197,5 @@
     <ClCompile Include="Source\ModulePlatforms.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleHarpoon_HookShot.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
