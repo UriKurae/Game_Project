@@ -1,6 +1,11 @@
 #pragma once
 
 #include "Module.h"
+#include "Animation.h"
+#include "ModuleTextures.h"
+#include "p2Point.h"
+
+struct SDL_Texture;
 
 class ModulePlatforms : public Module 
 {
@@ -24,5 +29,14 @@ public:
 	Animation touched;
 	Animation almostDestroyed;
 
+
+public:
+	bool Start();
+
+	update_status Update() override;
+
+	update_status PostUpdate() override;
+
+	void OnCollision(Collider* c1, Collider* c2) override;
 	
 };

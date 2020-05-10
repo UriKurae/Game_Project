@@ -1,0 +1,192 @@
+#pragma once
+
+#include "ModuleScene2.h"
+
+#include "Application.h"
+#include "ModuleTextures.h"
+#include "ModuleRender.h"
+#include "ModuleAudio.h"
+#include "ModuleCollisions.h"
+#include "ModuleEnemies.h"
+#include "Enemy_Balloon.h"
+#include "ModuleFadeToBlack.h"
+#include "ModulePlayer.h"
+#include "ModuleHarpoon_Shot.h"
+#include "ModuleInput.h"
+#include "ModuleFonts.h"
+#include "ModuleTextures.h"
+#include "IntroScene.h"
+
+#include "SDL/include/SDL.h"
+#include "SDL/include/SDL_scancode.h"
+#include "SDL_mixer/include/SDL_mixer.h"
+
+ModuleScene2::ModuleScene2(bool startEnabled) : Module(startEnabled)
+{
+	name = "LEVEL 2";
+}
+
+ModuleScene2::~ModuleScene2()
+{
+
+	
+}
+
+bool ModuleScene2::Start()
+{
+	LOG("Loading background assets");
+	bool ret = true;
+
+	ballonExplosion = App->audio->LoadFx("Assets/Sound/FX/DestroyBalls.wav");
+
+	countDownToFade = 300;
+
+	fgTexture = App->textures->Load("Assets/Foregrounds/Foreground 2 Mt Fuji.png"); //fg on 2st Level is invisible
+	++activeTextures; ++totalTextures;
+
+	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Fuji(Sunset).png");
+	++activeTextures; ++totalTextures;
+
+	deathTexture1 = App->textures->Load("Assets/Foregrounds/Foreground_Death_1.png");
+	++activeTextures; ++totalTextures;
+
+	deathTexture2 = App->textures->Load("Assets/Foregrounds/Foreground_Death_2.png");
+	++activeTextures; ++totalTextures;
+
+	lifesTexture1 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
+	++activeTextures; ++totalTextures;
+
+	lifesTexture2 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
+	++activeTextures; ++totalTextures;
+
+	lifesTexture3 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
+	++activeTextures; ++totalTextures;
+
+	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 1.0f);
+
+	//Walls collider
+	lowerWall = App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);
+	++activeColliders; ++totalColliders;
+	leftWall = App->collisions->AddCollider({ 0, 0, 8, 208 }, Collider::Type::WALL);
+	++activeColliders; ++totalColliders;
+	upperWall = App->collisions->AddCollider({ 0, 0, 384, 8 }, Collider::Type::WALL);
+	++activeColliders; ++totalColliders;
+	rightWall = App->collisions->AddCollider({ 376, 0, 8, 208 }, Collider::Type::WALL);
+	++activeColliders; ++totalColliders;
+
+	leftPlatform = App->collisions->AddCollider({ 161,81,31,6 }, Collider::Type::BREAKABLE_BLOCK);
+	++activeColliders; ++totalColliders;
+	rightPlatform = App->collisions->AddCollider({ 192,81,31,6 }, Collider::Type::BREAKABLE_BLOCK);
+	++activeColliders; ++totalColliders;
+
+	App->player->Enable();
+	App->enemies->Enable();
+	App->collisions->Enable();
+	App->harpoon->Enable();
+	//App->input->Enable();
+
+	//ADD ENEMIES
+	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
+
+	App->player->uiIndex = 0;
+
+	App->player->score = 0;
+
+	App->scene2->balloonsOnScene = 1;
+
+
+	App->enemies->touchWall = false;
+
+	return ret; 
+}
+
+update_status ModuleScene2::Update()
+{
+	if (App->input->keys[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
+	{
+		balloonsOnScene = 0;
+		App->collisions->RemoveCollider(leftWall);
+		App->collisions->RemoveCollider(rightWall);
+		App->collisions->RemoveCollider(upperWall);
+		App->collisions->RemoveCollider(lowerWall);
+		--activeColliders; --totalColliders;
+		--activeColliders; --totalColliders;
+		--activeColliders; --totalColliders;
+		--activeColliders; --totalColliders;
+	}
+
+
+	if (balloonsOnScene == 0)
+	{
+
+		App->harpoon->Disable();
+		App->fade->FadeToBlack((Module*)App->scene2, (Module*)App->winScene, 60);
+
+	}
+
+	return update_status::UPDATE_CONTINUE; 
+}
+
+update_status ModuleScene2::PostUpdate()
+{
+
+	App->render->Blit(bgTexture, 0, 0, NULL);
+	App->render->Blit(fgTexture, 0, 0, NULL);
+
+	if (App->player->lifes == 3)
+	{
+		App->render->Blit(lifesTexture1, 25, 227, &lifesTextureRect, 0, false);
+		App->render->Blit(lifesTexture2, 41, 227, &lifesTextureRect, 0, false);
+		App->render->Blit(lifesTexture3, 57, 227, &lifesTextureRect, 0, false);
+	}
+
+	else if (App->player->lifes == 2)
+	{
+		App->render->Blit(lifesTexture1, 25, 227, &lifesTextureRect, 0, false);
+		App->render->Blit(lifesTexture2, 41, 227, &lifesTextureRect, 0, false);
+	}
+
+	else if (App->player->lifes == 1)
+	{
+		App->render->Blit(lifesTexture1, 25, 227, &lifesTextureRect, 0, false);
+	}
+
+	//This could be more clean 
+	//Animation to stop the scene with the death 
+
+	if (App->player->destroyed || App->player->time == 0)
+	{
+		countDownToFade--;
+	}
+	if (countDownToFade > 220 && countDownToFade < 230)
+	{
+		App->render->Blit(deathTexture1, 0, 0, NULL);
+	}
+	else if (countDownToFade > 215 && countDownToFade < 220)
+	{
+		App->render->Blit(deathTexture2, 0, 0, NULL);
+
+	}
+	else if (countDownToFade == 180)
+	{
+		if (App->player->lifes > 0)
+		{
+			App->fade->FadeToBlack((Module*)App->scene2, (Module*)App->scene2, 60);
+
+			//App->player->collider->pendingToDelete = true;
+			App->collisions->RemoveCollider(App->player->collider);
+		}
+		else
+		{
+			App->fade->FadeToBlack((Module*)App->scene2, (Module*)App->sceneIntro, 60);
+		}
+	}
+
+
+	return update_status::UPDATE_CONTINUE;
+}
+
+bool ModuleScene2::CleanUp()
+{
+	return false;
+}

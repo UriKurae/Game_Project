@@ -19,6 +19,7 @@
 #include "ModuleFonts.h"
 #include "WinScene.h"
 #include "ModulePlatforms.h"
+#include "ModuleScene2.h"
 
 
 Application::Application()
@@ -33,19 +34,20 @@ Application::Application()
 
 	modules[4] = sceneIntro = new SceneIntro(true);
 	modules[5] = scene = new ModuleScene(false);
-	modules[6] = player = new ModulePlayer(false);
-	modules[7] = platforms = new ModulePlatforms(false);
-	modules[8] = harpoon = new ModuleHarpoon(false);
-	modules[9] = particles = new ModuleParticles(true);
-	modules[10] = enemies = new ModuleEnemies(false);
+	modules[6] = scene2 = new ModuleScene2(false);
+	modules[7] = player = new ModulePlayer(false);
+	modules[8] = platforms = new ModulePlatforms(false);
+	modules[9] = harpoon = new ModuleHarpoon(false);
+	modules[10] = particles = new ModuleParticles(true);
+	modules[11] = enemies = new ModuleEnemies(false);
 
-	modules[11] = collisions = new ModuleCollisions(true);
-	modules[12] = fade = new ModuleFadeToBlack(true);
-	modules[13] = fonts = new ModuleFonts(true);
-	modules[14] = debugInfo = new ModuleDebugInfo(true);
-	modules[15] = winScene = new WinScene(false);
+	modules[12] = collisions = new ModuleCollisions(true);
+	modules[13] = fade = new ModuleFadeToBlack(true);
+	modules[14] = fonts = new ModuleFonts(true);
+	modules[15] = debugInfo = new ModuleDebugInfo(true);
+	modules[16] = winScene = new WinScene(false);
 
-	modules[16] = render = new ModuleRender(true);
+	modules[17] = render = new ModuleRender(true);
 	
 }
 

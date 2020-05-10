@@ -59,8 +59,8 @@ update_status WinScene::Update()
 
 	if (winCountdown == 0)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 90);
-	}
+		App->fade->FadeToBlack(this, (Module*)App->scene2, 90);
+	} 
 
 	return update_status::UPDATE_CONTINUE;
 }
