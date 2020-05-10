@@ -82,6 +82,9 @@ public:
 	int lifes = 3;
 	int cont = 0;
 
+	bool scene1 = false;
+	bool scene2 = false;
+
 	enum class ENEMY_TYPE lastBalloon;
 };
 

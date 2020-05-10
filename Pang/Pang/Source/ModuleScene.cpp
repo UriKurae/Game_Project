@@ -87,6 +87,8 @@ bool ModuleScene::Start()
 
 	App->enemies->touchWall = false;
 
+	App->player->scene1 = true;
+
 	return ret;
 }
 

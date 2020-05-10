@@ -96,6 +96,8 @@ bool ModuleScene2::Start()
 
 	App->scene2->balloonsOnScene = 1;
 
+	App->player->scene1 = false;
+	App->player->scene2 = true;
 
 	//6App->enemies->touchWall = false;
 
