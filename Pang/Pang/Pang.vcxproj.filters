@@ -203,5 +203,8 @@
     <ClCompile Include="Source\ModuleScene2.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ModuleHarpoon_HookShot.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
