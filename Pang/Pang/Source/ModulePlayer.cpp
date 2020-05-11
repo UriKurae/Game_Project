@@ -300,11 +300,11 @@ update_status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c2->type == Collider::Type::PLAYER)
+	/*if (c2->type == Collider::Type::PLAYER)
 	{
 		App->harpoon->Disable();
 		App->hookShot->Enable();
-	}
+	}*/
 
 	if (c1->type == Collider::Type::PLAYER) //player collider
 	{

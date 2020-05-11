@@ -89,7 +89,7 @@ bool ModuleScene::Start()
 	App->player->scene1 = true;
 
 
-	Buff=App->collisions->AddCollider({ 20, 190, 10, 10 }, Collider::Type::PLAYER);
+	//Buff=App->collisions->AddCollider({ 20, 190, 10, 10 }, Collider::Type::PLAYER); FOR TESTS DON'T ERASE PLS
 
 	return ret;
 }

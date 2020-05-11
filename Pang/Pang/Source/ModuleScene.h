@@ -52,7 +52,7 @@ public:
 	Collider* leftWall = nullptr;
 	Collider* upperWall = nullptr;
 	Collider* lowerWall = nullptr;
-	Collider* Buff = nullptr;
+	//Collider* Buff = nullptr;  To make test if the change of shot works DON'T ERASE PLS
 
 	SDL_Texture* lifesTexture1 = nullptr;
 	SDL_Texture* lifesTexture2 = nullptr;
