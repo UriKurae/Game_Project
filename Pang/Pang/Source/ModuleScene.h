@@ -52,6 +52,7 @@ public:
 	Collider* leftWall = nullptr;
 	Collider* upperWall = nullptr;
 	Collider* lowerWall = nullptr;
+	Collider* Buff = nullptr;
 
 	SDL_Texture* lifesTexture1 = nullptr;
 	SDL_Texture* lifesTexture2 = nullptr;

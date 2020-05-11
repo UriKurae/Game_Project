@@ -156,6 +156,7 @@ update_status ModuleHookShot::Update()
 		colliderH->SetPos(x, y);
 		currentAnimation->Update();
 	}
+
 	if (App->player->destroyed == true)
 	{
 		if (colliderH != nullptr) {
@@ -186,6 +187,11 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == Collider::Type::UNBREAKABLE_BLOCK)
 	{
 
+	}
+
+	if (c2->type == Collider::Type::WALL)
+	{
+		increment = false;
 	}
 
 	if (c2->type == Collider::Type::BREAKABLE_BLOCK) {

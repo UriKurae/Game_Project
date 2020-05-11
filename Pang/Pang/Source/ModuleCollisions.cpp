@@ -25,7 +25,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALL][Collider::Type::VERY_SMALL_BALLOON] = true;
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
-	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::VERY_BIG_BALLOON] = true;

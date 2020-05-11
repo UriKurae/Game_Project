@@ -10,6 +10,7 @@
 #include "ModuleScene.h"
 #include "ModuleScene2.h"
 #include "ModuleHarpoon_Shot.h"
+#include "ModuleHarpoon_HookShot.h"
 #include "ModuleFadeToBlack.h"
 
 #include "Enemy.h"
@@ -299,6 +300,12 @@ update_status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
+	if (c2->type == Collider::Type::PLAYER)
+	{
+		App->harpoon->Disable();
+		App->hookShot->Enable();
+	}
+
 	if (c1->type == Collider::Type::PLAYER) //player collider
 	{
 		if (c2 == App->scene->leftWall || c2 == App->scene2->leftWall) {
