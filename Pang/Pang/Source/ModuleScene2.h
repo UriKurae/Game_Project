@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Module.h"
-
 #include "Animation.h"
 
 struct SDL_Texture;
@@ -35,11 +34,20 @@ public:
 		uint countDownToFade = 180;
 		int toFade = 5;
 
+		bool destroyedBlockLeft = false;
+		bool destroyedBlockRight = false;
+
 		// The background sprite sheet loaded into an SDL_Texture
 		SDL_Texture* bgTexture = nullptr;
 
 		//The foreground sprite sheet loaded into an SDL_Texture
 		SDL_Texture* fgTexture = nullptr;
+
+		Animation block;
+
+		Animation blockDestroy;
+
+		Animation* currentAnim = nullptr;
 
 		//Foregrounds when dying
 		SDL_Texture* deathTexture1 = nullptr;

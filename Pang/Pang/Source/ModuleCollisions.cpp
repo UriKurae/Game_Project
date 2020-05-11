@@ -46,6 +46,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::BIG_BALLOON] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::SMALL_BALLOON] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::VERY_SMALL_BALLOON] = true;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::BREAKABLE_BLOCK] = true;
 	
 	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::WALL] = true;
 	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::PLAYER] = true;
@@ -200,11 +201,12 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::VERY_SMALL_BALLOON: //blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
 			break;
-			case Collider::Type::BREAKABLE_BLOCK: //blue
-				App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
-			break;
-			case Collider::Type::UNBREAKABLE_BLOCK: //red
+			case Collider::Type::BREAKABLE_BLOCK: //red
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+			break;
+			case Collider::Type::UNBREAKABLE_BLOCK: //blue
+				App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
+				break;
 		}
 	}
 }

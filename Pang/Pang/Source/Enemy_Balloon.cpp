@@ -5,6 +5,7 @@
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleScene.h"
+#include "ModuleScene2.h"
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
 #include "ModuleHarpoon_Shot.h"
@@ -15,12 +16,19 @@
 Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x,y)
 {
 	
-
 	tipoBalloon = type;
-	veryBigBalloonAnim.PushBack({ 207,112, 48, 40 });
-	bigBalloonAnim.PushBack({ 257,119, 32, 26 });
-	smallBalloonAnim.PushBack({292,125,16,14});
-	verySmallBalloonAnim.PushBack({312,129,8,7});
+	if (App->player->scene1) {
+		veryBigBalloonAnim.PushBack({ 207,112, 48, 40 });
+		bigBalloonAnim.PushBack({ 257,119, 32, 26 });
+		smallBalloonAnim.PushBack({ 292,125,16,14 });
+		verySmallBalloonAnim.PushBack({ 312,129,8,7 });
+	}
+	if (App->player->scene2) {
+		veryBigBalloonAnim.PushBack({ 206, 9, 48, 40 });
+		bigBalloonAnim.PushBack({ 257, 16, 32, 26 });
+		smallBalloonAnim.PushBack({ 291,22,16,14 });
+		verySmallBalloonAnim.PushBack({ 311,26,8,7 });
+	}
 
 	particleDeathVeryBig.anim.PushBack({ 4,142,48,39 });
 	particleDeathVeryBig.anim.PushBack({ 60,148,28,25 });
@@ -28,7 +36,7 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 	particleDeathVeryBig.anim.PushBack({ 145,137,48,46 });
 	particleDeathVeryBig.anim.speed = 0.25f;
 	particleDeathVeryBig.anim.loop = false;
-	
+
 	particleDeathBig.anim.PushBack({ 4,85,32,26 });
 	particleDeathBig.anim.PushBack({ 44,88,20,15 });
 	particleDeathBig.anim.PushBack({ 72,85,27,26 });
@@ -48,7 +56,6 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 	particleDeathVerySmall.anim.PushBack({ 32,11,10,8 });
 	particleDeathVerySmall.anim.speed = 0.25f;
 	particleDeathVerySmall.anim.loop = false;
-	
 
 	currentAnim = &veryBigBalloonAnim;
 	
@@ -130,21 +137,21 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 	
 	//App->enemies->touchWall = false;
 
-	if (c2 == App->scene->lowerWall) {
+	if (c2 == App->scene->lowerWall || c2 == App->scene2->lowerWall) {
 		if (c2->Intersects(collider->rect) == true) {
 			speedY = 4.5f;
 			App->enemies->touchWall = true;
 		}
 	}
 	
-	if (c2 == App->scene->rightWall) {
+	if (c2 == App->scene->rightWall || c2 == App->scene2->rightWall) {
 		if (c2->Intersects(collider->rect) == true) {
 			speedX = -speedX;
 			App->enemies->touchWall = true;
 		}
 	}
 
-	if (c2 == App->scene->leftWall)
+	if (c2 == App->scene->leftWall || c2 == App->scene2->leftWall)
 	{
 		if (c2->Intersects(collider->rect) == true) {
 			speedX = -speedX;
@@ -152,7 +159,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 		}
 	}
 	
-	if (c2 == App->scene->upperWall) {
+	if (c2 == App->scene->upperWall || c2 == App->scene2->upperWall) {
 		if (c2->Intersects(collider->rect) == true) {
 			speedY = -(speedY + 1.5f);
 			App->enemies->touchWall = true;

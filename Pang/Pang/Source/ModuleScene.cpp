@@ -82,8 +82,7 @@ bool ModuleScene::Start()
 	
 	App->player->score = 0;
 
-	App->scene->balloonsOnScene = 1;
-
+	balloonsOnScene = 1;
 
 	App->enemies->touchWall = false;
 

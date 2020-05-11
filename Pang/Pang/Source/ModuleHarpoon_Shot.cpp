@@ -8,6 +8,7 @@
 #include "ModuleInput.h"
 #include "ModuleCollisions.h"
 #include "ModuleScene.h"
+#include "ModuleScene2.h"
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
@@ -243,17 +244,39 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	}
 
 	if (c2->type == Collider::Type::BREAKABLE_BLOCK) {
-		//delete colliderH;
-		this->colliderH->pendingToDelete = true;
-		--activeColliders; --totalColliders;
-		destroyed = true;
-		increment = false;
-		currentAnimation->Reset();
-		--activeTextures;
-		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
+		if (c1->Intersects(App->scene2->leftPlatform->rect)) {
+			//delete colliderH;
+			this->colliderH->pendingToDelete = true;
+			--activeColliders; --totalColliders;
+			destroyed = true;
+			increment = false;
+			currentAnimation->Reset();
+			--activeTextures;
+
+			App->scene2->leftPlatform->pendingToDelete = true;
+			App->scene2->currentAnim = &App->scene2->blockDestroy;
+			App->scene2->destroyedBlockLeft = true;
+
+			LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
+		}
+		if (c1->Intersects(App->scene2->rightPlatform->rect)) {
+			//delete colliderH;
+			this->colliderH->pendingToDelete = true;
+			--activeColliders; --totalColliders;
+			destroyed = true;
+			increment = false;
+			currentAnimation->Reset();
+			--activeTextures;
+
+			App->scene2->rightPlatform->pendingToDelete = true;
+			App->scene2->currentAnim = &App->scene2->blockDestroy;
+			App->scene2->destroyedBlockRight = true;
+
+			LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
+		}
 	}
 
-	if (c2->type == Collider::Type::UNBREAKABLE_BLOCK) {
+	if (c2->type == Collider::Type::UNBREAKABLE_BLOCK && c1->type == Collider::Type::PLAYER_SHOT) {
 		//delete colliderH;
 		this->colliderH->pendingToDelete = true;
 		--activeColliders; --totalColliders;
@@ -261,6 +284,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 		increment = false;
 		currentAnimation->Reset();
 		--activeTextures;
+		
 		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
 	}
 

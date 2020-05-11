@@ -68,8 +68,9 @@ update_status WinScene::Update()
 	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene1 == true)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->scene2, 90);
-	} 
-	else 
+	}
+
+	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene2 == true)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 90);
 	}

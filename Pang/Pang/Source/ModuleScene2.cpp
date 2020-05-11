@@ -37,6 +37,9 @@ bool ModuleScene2::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 
+	destroyedBlockLeft = false;
+	destroyedBlockRight = false;
+
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
@@ -47,8 +50,13 @@ bool ModuleScene2::Start()
 
 	countDownToFade = 300;
 
-	fgTexture = App->textures->Load("Assets/Foregrounds/Foreground 2 Mt Fuji.png"); //fg on 2st Level is invisible
+	fgTexture = App->textures->Load("Assets/Items&Weapons/Blocks Sprites.png"); //fg on 2st Level is invisible
 	++activeTextures; ++totalTextures;
+
+	blockDestroy.PushBack({48, 158, 32, 8});
+	blockDestroy.PushBack({88, 158, 32, 8});
+
+	block.PushBack({8, 158, 32, 8});
 
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Fuji(Sunset).png");
 	++activeTextures; ++totalTextures;
@@ -94,12 +102,12 @@ bool ModuleScene2::Start()
 
 	App->player->score = 0;
 
-	App->scene2->balloonsOnScene = 1;
+	balloonsOnScene = 1;
 
 	App->player->scene1 = false;
 	App->player->scene2 = true;
 
-	//6App->enemies->touchWall = false;
+	App->enemies->touchWall = false;
 
 	return ret; 
 }
@@ -133,9 +141,17 @@ update_status ModuleScene2::Update()
 
 update_status ModuleScene2::PostUpdate()
 {
-
 	App->render->Blit(bgTexture, 0, 0, NULL);
-	App->render->Blit(fgTexture, 0, 0, NULL);
+	if (destroyedBlockLeft == false) 
+	{
+		App->render->Blit(fgTexture, 160, 80, &(block.GetCurrentFrame()), 1.0f);
+	}
+	
+	if (destroyedBlockRight == false)
+	{
+		App->render->Blit(fgTexture, 192, 80, &(block.GetCurrentFrame()), 1.0f);
+	}
+	
 
 	if (App->player->lifes == 3)
 	{

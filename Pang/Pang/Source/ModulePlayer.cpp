@@ -8,6 +8,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
 #include "ModuleScene.h"
+#include "ModuleScene2.h"
 #include "ModuleHarpoon_Shot.h"
 #include "ModuleFadeToBlack.h"
 
@@ -117,11 +118,11 @@ update_status ModulePlayer::Update()
 	}
 
 	count++;
-	if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0 && destroyed == false) {
+	if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0 && destroyed == false || count % 60 == 0 && time > 0 && App->scene2->balloonsOnScene > 0 && destroyed == false) {
 		time--;
 	}
 
-	if (App->scene->balloonsOnScene == 0) {
+	if (App->scene->balloonsOnScene == 0 || App->scene2->balloonsOnScene == 0) {
 		timeBonus = time * 100;
 	}
 
@@ -280,7 +281,14 @@ update_status ModulePlayer::PostUpdate()
 	App->fonts->BlitText(81, 216, uiIndex, scoreText);
 	App->fonts->BlitText(25, 208, uiIndex, "PLAYER-1");
 	App->fonts->BlitText(158, 208, uiIndex, "MT.FUJI");
-	App->fonts->BlitText(161, 228, uiIndex, "1-1 STAGE");
+	if (scene1 == true) 
+	{
+		App->fonts->BlitText(161, 228, uiIndex, "1-1 STAGE");
+	}
+	if (scene2 == true)
+	{
+		App->fonts->BlitText(161, 228, uiIndex, "1-2 STAGE");
+	}
 	App->fonts->BlitText(151, 236, uiIndex, "HI: 100000");
 	App->fonts->BlitText(272, 208, uiIndex, "PLAYER-2");
 	App->render->Blit(timeTexture, 272, 9, NULL);
@@ -293,11 +301,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1->type == Collider::Type::PLAYER) //player collider
 	{
-		if (c2 == App->scene->leftWall) {
+		if (c2 == App->scene->leftWall || c2 == App->scene2->leftWall) {
 			position.x = 6;
 		}
 
-		if (c2 == App->scene->rightWall) {
+		if (c2 == App->scene->rightWall || c2 == App->scene2->rightWall) {
 			position.x = SCREEN_WIDTH - 33;
 		}
 
