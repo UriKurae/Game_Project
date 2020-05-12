@@ -40,14 +40,6 @@ bool ModuleScene2::Start()
 	destroyedBlockLeft = false;
 	destroyedBlockRight = false;
 
-	App->player->Enable();
-	App->enemies->Enable();
-	App->collisions->Enable();
-	App->harpoon->Enable();
-	
-
-	ballonExplosion = App->audio->LoadFx("Assets/Sound/FX/DestroyBalls.wav");
-
 	countDownToFade = 300;
 
 	fgTexture = App->textures->Load("Assets/Items&Weapons/Blocks Sprites.png"); //fg on 2st Level is invisible
@@ -93,6 +85,10 @@ bool ModuleScene2::Start()
 	rightPlatform = App->collisions->AddCollider({ 192,81,31,6 }, Collider::Type::BREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 
+	App->player->Enable();
+	App->enemies->Enable();
+	App->collisions->Enable();
+	App->harpoon->Enable();
 	//App->input->Enable();
 
 	//ADD ENEMIES
@@ -209,7 +205,7 @@ update_status ModuleScene2::PostUpdate()
 bool ModuleScene2::CleanUp()
 {
 
-	LOG("---------------------------------------------- CleanUp ModuleScene ----------------------------------------------")
+	LOG("---------------------------------------------- CleanUp ModuleScene2 ----------------------------------------------")
 
 		activeTextures = activeColliders = activeFonts = activeFx = 0;
 
@@ -267,20 +263,20 @@ bool ModuleScene2::CleanUp()
 	App->audio->UnloadFx(App->harpoon->HarpoonFx);
 	App->harpoon->totalFx--;
 
-	App->collisions->RemoveCollider(leftWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(rightWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(upperWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(lowerWall);
-	--totalColliders;
-
-	App->audio->UnloadFx(ballonExplosion);
+	//App->collisions->RemoveCollider(leftWall);
+	//--totalColliders;
+	//App->collisions->RemoveCollider(rightWall);
+	//--totalColliders;
+	//App->collisions->RemoveCollider(upperWall);
+	//--totalColliders;
+	//App->collisions->RemoveCollider(lowerWall);
+	//--totalColliders;
+	//App->collisions->RemoveCollider(leftPlatform);
+	//--totalColliders;
+	//App->collisions->RemoveCollider(rightPlatform);
 
 
 	App->textures->Unload(App->enemies->texture);
-
 
 	return true;
 }

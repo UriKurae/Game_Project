@@ -38,11 +38,7 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	ballonExplosion = App->audio->LoadFx("Assets/Sound/FX/DestroyBalls.wav");
-
 	countDownToFade = 300;
-	fgTexture = App->textures->Load("Assets/Foregrounds/Foreground Mt.Fuji(Day).png"); //fg on 1st Level is invisible
-	++activeTextures; ++totalTextures;
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Fuji(Day).png");
 	++activeTextures; ++totalTextures;
 	deathTexture1 = App->textures->Load("Assets/Foregrounds/Foreground_Death_1.png");
@@ -87,6 +83,7 @@ bool ModuleScene::Start()
 	App->enemies->touchWall = false;
 
 	App->player->scene1 = true;
+	App->player->scene2 = false;
 
 
 	//Buff=App->collisions->AddCollider({ 20, 190, 10, 10 }, Collider::Type::PLAYER); FOR TESTS DON'T ERASE PLS
@@ -124,7 +121,6 @@ update_status ModuleScene::PostUpdate()
 	
 	
 	App->render->Blit(bgTexture, 0, 0, NULL);
-	App->render->Blit(fgTexture, 0, 0, NULL);
 
 	if (App->player->lifes == 3)
 	{
@@ -216,16 +212,11 @@ bool ModuleScene::CleanUp()
 
 	}
 
-	
-
-
 	//App->harpoon->HarpoonFx = 0;
 	
 	App->textures->Unload(App->harpoon->texture);
 	--totalTextures;
 	App->textures->Unload(bgTexture);
-	--totalTextures;
-	App->textures->Unload(fgTexture);
 	--totalTextures;
 	App->textures->Unload(lifesTexture1);
 	--totalTextures;
@@ -248,9 +239,6 @@ bool ModuleScene::CleanUp()
 	--totalColliders;
 	App->collisions->RemoveCollider(lowerWall);
 	--totalColliders;
-
-	App->audio->UnloadFx(ballonExplosion);
-
 
 	App->textures->Unload(App->enemies->texture);
 

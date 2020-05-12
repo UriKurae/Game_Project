@@ -26,6 +26,8 @@ public:
 	float speedY = 0.0f;
 	float gravity = 0.1f;
 	float speedX = 1.0f;
+
+	uint ballonExplosion = 0;
 	
 private:
 	// A set of steps that define the position in the screen

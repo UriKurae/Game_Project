@@ -5,12 +5,14 @@
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModulePlayer.h"
 
 #include "Enemy.h"
 
 #include "Enemy_Balloon.h"
 
 #include "ModuleScene.h"
+#include "ModuleScene2.h"
 
 #include "SDL/include/SDL.h"
 
@@ -93,7 +95,14 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPE type, int x, int y)
 
 		if(spawnQueue[i].type == ENEMY_TYPE::NO_TYPE)
 		{
-			App->scene->balloonsOnScene++;
+			if (App->player->scene1 == true) 
+			{
+				App->scene->balloonsOnScene++;
+			}
+			if (App->player->scene2 == true) 
+			{
+				App->scene2->balloonsOnScene++;
+			}
 			spawnQueue[i].type = type;
 			spawnQueue[i].x = x;
 			spawnQueue[i].y = y;

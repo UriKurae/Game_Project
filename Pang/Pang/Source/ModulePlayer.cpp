@@ -277,7 +277,7 @@ update_status ModulePlayer::PostUpdate()
 	}
 	
 	sprintf_s(scoreText, 10, "%d", score);
-	sprintf_s(timeText, 5, "%d", time);
+	sprintf_s(timeText, 5, "%3d", time);
 
 	App->fonts->BlitText(81, 216, uiIndex, scoreText);
 	App->fonts->BlitText(25, 208, uiIndex, "PLAYER-1");
@@ -292,8 +292,8 @@ update_status ModulePlayer::PostUpdate()
 	}
 	App->fonts->BlitText(151, 236, uiIndex, "HI: 100000");
 	App->fonts->BlitText(272, 208, uiIndex, "PLAYER-2");
-	App->render->Blit(timeTexture, 272, 9, NULL);
-	App->fonts->BlitText(337, 9, timeIndex, timeText);
+	App->render->Blit(timeTexture, 269, 9, NULL);
+	App->fonts->BlitText(334, 9, timeIndex, timeText);
 
 	return update_status::UPDATE_CONTINUE;
 }

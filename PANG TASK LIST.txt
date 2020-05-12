@@ -4,7 +4,7 @@ Oriol:
 	-
 
 Lucas:
-	-
+	-Win scene 2 done, colliders fixed on scene 2, balloons sprite on scene 2 fixed, blocks funcionality added on scene2.
 
 Carlos:
 	-
