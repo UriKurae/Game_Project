@@ -7,7 +7,7 @@ Lucas:
 	-Win scene 2 done, colliders fixed on scene 2, balloons sprite on scene 2 fixed, blocks funcionality added on scene2.
 
 Carlos:
-	-
+	-Module Hookshot completely (ayuda del David)
 
 David:
 	-Fixed some spritesheets with the objective to order everything

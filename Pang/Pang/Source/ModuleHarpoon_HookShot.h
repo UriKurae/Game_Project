@@ -27,15 +27,19 @@ public:
 	//texture for all the harpoons sprites
 	SDL_Texture* texture = nullptr;
 
-	Animation harpoonShot;
+	Animation hookShot;
+	Animation idleHookShot;
 
 	Animation* currentAnimation = nullptr;
 
 	Collider* colliderH = nullptr;
 
-	Particle harpoonShotParticle;
+	Particle hookShotParticle;
 
 	uint HarpoonFx = 0;
+
+	uint time = 5;
+	uint count = 0;
 public:
 	ModuleHookShot(bool startEnabled);
 	~ModuleHookShot();
