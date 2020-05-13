@@ -10,6 +10,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 #include "ModuleHarpoon_Shot.h"
+#include "ModuleHarpoon_HookShot.h"
 #include "ModuleInput.h"
 #include "ModuleFonts.h"
 #include "ModuleTextures.h"
@@ -68,7 +69,8 @@ bool ModuleScene::Start()
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
-	App->harpoon->Enable();
+	App->hookShot->Enable();
+	App->harpoon->Disable();
 	//App->input->Enable();
 
 	//ADD ENEMIES

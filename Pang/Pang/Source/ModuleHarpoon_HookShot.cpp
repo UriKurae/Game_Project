@@ -139,7 +139,7 @@ update_status ModuleHookShot::Update()
 		y = App->player->position.y - 2;
 		destroyed = false;
 
-		colliderH = App->collisions->AddCollider({ (int)x, (int)y, 9, (int)h }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
+		colliderH = App->collisions->AddCollider({ (int)x, (int)y, 9, (int)h }, Collider::Type::PLAYER_SHOT, (Module*)App->hookShot);
 		++activeColliders; ++totalColliders;
 
 		App->particles->AddParticle(harpoonShotParticle, x - 3, y - 6, Collider::Type::NONE, 0);

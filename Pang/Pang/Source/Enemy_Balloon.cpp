@@ -9,6 +9,7 @@
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
 #include "ModuleHarpoon_Shot.h"
+#include "ModuleHarpoon_HookShot.h"
 
 #include "SDL/include/SDL.h"
 
@@ -224,7 +225,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 
 	SDL_Rect r = collider->rect;
 
-		if (c2 == App->harpoon->colliderH) {
+		if (c2 == App->harpoon->colliderH || c2 == App->hookShot->colliderH) {
 			if (c2->Intersects(r) == true) {
 				App->enemies->touchWall = false;
 				if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
