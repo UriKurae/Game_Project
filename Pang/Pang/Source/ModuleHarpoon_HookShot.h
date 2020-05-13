@@ -37,6 +37,9 @@ public:
 	Particle hookShotParticle;
 
 	uint HarpoonFx = 0;
+
+	uint time = 5;
+	uint count = 0;
 public:
 	ModuleHookShot(bool startEnabled);
 	~ModuleHookShot();

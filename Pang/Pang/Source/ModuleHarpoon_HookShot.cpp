@@ -8,6 +8,7 @@
 #include "ModuleInput.h"
 #include "ModuleCollisions.h"
 #include "ModuleScene.h"
+#include "ModuleScene2.h"
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
@@ -92,7 +93,7 @@ ModuleHookShot::ModuleHookShot(bool startEnabled) : Module(startEnabled)
 	idleHookShot.PushBack({ 770, 0, 9, 191 });
 	idleHookShot.PushBack({ 781, 0, 9, 191 });
 	idleHookShot.loop = false;
-	idleHookShot.speed = 0.01f;
+	idleHookShot.speed = 0.009f;
 
 	hookShotParticle.anim.PushBack({ 62, 13, 16, 6 });
 	hookShotParticle.anim.PushBack({ 76, 8, 16, 11 });
@@ -169,9 +170,21 @@ update_status ModuleHookShot::Update()
 		}
 		increment = false;
 		destroyed = true;
-		hookShot.Reset();
-
+		currentAnimation->Reset();
 	}
+
+	if (time == 0)
+	{
+		this->colliderH->pendingToDelete = true;
+		--activeColliders; --totalColliders;
+		destroyed = true;
+		increment = false;
+		currentAnimation->Reset();
+		time = 5;
+		count = 0;
+		--activeTextures;
+	}
+
 	return ret;
 }
 
@@ -191,14 +204,27 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == Collider::Type::UNBREAKABLE_BLOCK)
 	{
-
+		increment = false;
+		currentAnimation = &idleHookShot;
+		hookShot.Reset();
+		currentAnimation->Update();
+		count++;
+		if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0 && destroyed == false || count % 60 == 0 && time > 0 && App->scene2->balloonsOnScene > 0 && destroyed == false) {
+			time--;
+		}
+		y = 8;
 	}
 
 	if (c2->type == Collider::Type::WALL)
 	{
 		increment = false;
 		currentAnimation = &idleHookShot;
-		currentAnimation->Reset();
+		hookShot.Reset();
+		currentAnimation->Update();
+		count++;
+		if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0 && destroyed == false || count % 60 == 0 && time > 0 && App->scene2->balloonsOnScene > 0 && destroyed == false) {
+			time--;
+		}
 		y = 8;
 	}
 
@@ -209,6 +235,8 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
+		time = 5;
+		count = 0;
 		--activeTextures;
 		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
 	}
@@ -220,6 +248,8 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
+		time = 5;
+		count = 0;
 		--activeTextures;
 		LOG("\n\n\nHARPOON HIT VERY BIG BALLOON\n\n");
 	}
@@ -231,6 +261,8 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
+		time = 5;
+		count = 0;
 		--activeTextures;
 		LOG("\n\n\nHARPOON HIT BIG BALLOON\n\n");
 	}
@@ -242,6 +274,8 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
+		time = 5;
+		count = 0;
 		--activeTextures;
 	}
 
@@ -252,6 +286,8 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
+		time = 5;
+		count = 0;
 		--activeTextures;
 
 	}
