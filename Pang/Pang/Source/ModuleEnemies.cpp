@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
+#include "ModuleCollisions.h"
 
 #include "Enemy.h"
 
@@ -200,7 +201,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		{
 			enemies[i]->OnCollision(c2); //Notify the enemy of a collision
 
-			if (touchWall != true) {
+			if (c2->type != Collider::Type::WALL) {
 				delete enemies[i];
 				enemies[i] = nullptr;
 				break;

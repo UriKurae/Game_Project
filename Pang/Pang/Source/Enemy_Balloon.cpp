@@ -139,7 +139,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 	
 	//App->enemies->touchWall = false;
 
-	if (c2 == App->scene->lowerWall) {
+	/*if (c2 == App->scene->lowerWall) {
 		if (c2->Intersects(collider->rect) == true) {
 			speedY = 4.5f;
 			App->enemies->touchWall = true;
@@ -195,8 +195,33 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 			speedY = -(speedY + 1.5f);
 			App->enemies->touchWall = true;
 		}
-	}
+	}*/
 	
+	if (c2->type == Collider::Type::WALL) {
+			
+		if (collider->rect.y + collider->rect.h > c2->rect.y && collider->rect.y < c2->rect.y) {
+			speedY = 4.5f;
+		}
+
+		//if (collider->rect.x < c2->rect.x + c2->rect.w) {
+		//	speedX = -speedX;
+		//}
+
+		else if (collider->rect.x + collider->rect.w > c2->rect.x) {
+			speedX = -speedX;
+		}
+
+		//if (collider->rect.x < c2->rect.x + c2->rect.w) { //LeftWall
+		//	speedX = -speedX;
+		//}
+
+			//else if (collider->rect.x + collider->rect.w > c2->rect.x) { //RightWall
+			//	speedX = -speedX;
+			//}
+
+		
+	}
+
 	SDL_Rect r = collider->rect;
 
 		if (c2 == App->harpoon->colliderH) {
