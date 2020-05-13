@@ -16,85 +16,90 @@
 
 ModuleHookShot::ModuleHookShot(bool startEnabled) : Module(startEnabled)
 {
-	harpoonShot.PushBack({ 4, 266, 9, 34 });
-	harpoonShot.PushBack({ 21, 264, 9, 36 });
-	harpoonShot.PushBack({ 38, 262, 9, 38 });
-	harpoonShot.PushBack({ 55, 259, 9, 41 });
-	harpoonShot.PushBack({ 72, 257, 9, 43 });
-	harpoonShot.PushBack({ 89, 255, 9, 45 });
-	harpoonShot.PushBack({ 106, 253, 9, 47 });
-	harpoonShot.PushBack({ 123, 250, 9, 50 });
-	harpoonShot.PushBack({ 140, 248, 9, 52 });
-	harpoonShot.PushBack({ 157, 246, 9, 54 });
-	harpoonShot.PushBack({ 174, 244, 9, 56 });
-	harpoonShot.PushBack({ 191, 241, 9, 59 });
-	harpoonShot.PushBack({ 208, 239, 9, 61 });
-	harpoonShot.PushBack({ 225, 237, 9, 63 });
-	harpoonShot.PushBack({ 242, 235, 9, 65 });
-	harpoonShot.PushBack({ 259, 232, 9, 68 });
-	harpoonShot.PushBack({ 276, 230, 9, 70 });
-	harpoonShot.PushBack({ 293, 228, 9, 72 });
-	harpoonShot.PushBack({ 310, 226, 9, 74 });
-	harpoonShot.PushBack({ 327, 223, 9, 77 });
-	harpoonShot.PushBack({ 344, 221, 9, 79 });
-	harpoonShot.PushBack({ 361, 219, 9, 81 });
-	harpoonShot.PushBack({ 378, 217, 9, 83 });
-	harpoonShot.PushBack({ 395, 214, 9, 86 });
-	harpoonShot.PushBack({ 412, 212, 9, 88 });
-	harpoonShot.PushBack({ 429, 210, 9, 90 });
-	harpoonShot.PushBack({ 446, 208, 9, 92 });
-	harpoonShot.PushBack({ 463, 205, 9, 95 });
-	harpoonShot.PushBack({ 480, 203, 9, 97 });
-	harpoonShot.PushBack({ 497, 201, 9, 99 });
-	harpoonShot.PushBack({ 514, 199, 9, 101 });
-	harpoonShot.PushBack({ 531, 196, 9, 104 });
-	harpoonShot.PushBack({ 548, 194, 9, 106 });
-	harpoonShot.PushBack({ 565, 192, 9, 108 });
-	harpoonShot.PushBack({ 582, 190, 9, 110 });
-	harpoonShot.PushBack({ 599, 187, 9, 113 });
-	harpoonShot.PushBack({ 614, 185, 9, 115 });
-	harpoonShot.PushBack({ 633, 183, 9, 117 });
-	harpoonShot.PushBack({ 650, 181, 9, 119 });
-	harpoonShot.PushBack({ 667, 178, 9, 122 });
-	harpoonShot.PushBack({ 684, 176, 9, 124 });
-	harpoonShot.PushBack({ 701, 174, 9, 126 });
-	harpoonShot.PushBack({ 718, 172, 9, 128 });
-	harpoonShot.PushBack({ 735, 169, 9, 131 });
-	harpoonShot.PushBack({ 752, 167, 9, 133 });
-	harpoonShot.PushBack({ 769, 165, 9, 135 });
-	harpoonShot.PushBack({ 786, 163, 9, 137 });
-	harpoonShot.PushBack({ 803, 160, 9, 140 });
-	harpoonShot.PushBack({ 820, 158, 9, 142 });
-	harpoonShot.PushBack({ 837, 156, 9, 144 });
-	harpoonShot.PushBack({ 854, 154, 9, 146 });
-	harpoonShot.PushBack({ 871, 151, 9, 149 });
-	harpoonShot.PushBack({ 888, 149, 9, 151 });
-	harpoonShot.PushBack({ 905, 147, 9, 153 });
-	harpoonShot.PushBack({ 922, 145, 9, 155 });
-	harpoonShot.PushBack({ 939, 142, 9, 158 });
-	harpoonShot.PushBack({ 956, 140, 9, 160 });
-	harpoonShot.PushBack({ 973, 138, 9, 162 });
-	harpoonShot.PushBack({ 990, 136, 9, 164 });
-	harpoonShot.PushBack({ 1007, 133, 9, 167 });
-	harpoonShot.PushBack({ 1024, 131, 9, 169 });
-	harpoonShot.PushBack({ 1041, 129, 9, 171 });
-	harpoonShot.PushBack({ 1058, 127, 9, 173 });
-	harpoonShot.PushBack({ 1075, 124, 9, 176 });
-	harpoonShot.PushBack({ 1092, 122, 9, 178 });
-	harpoonShot.PushBack({ 1109, 120, 9, 180 });
-	harpoonShot.PushBack({ 1126, 118, 9, 182 });
-	harpoonShot.PushBack({ 1143, 115, 9, 185 });
-	harpoonShot.PushBack({ 1160, 113, 9, 187 });
-	harpoonShot.PushBack({ 1177, 111, 9, 189 });
-	harpoonShot.loop = false;
-	harpoonShot.speed = 0.9f;
+	hookShot.PushBack({ 0, 155, 9, 36 });
+	hookShot.PushBack({ 11, 153, 9, 38 });
+	hookShot.PushBack({ 22, 150, 9, 41 });
+	hookShot.PushBack({ 33, 148, 9, 43 });
+	hookShot.PushBack({ 44, 146, 9, 45 });
+	hookShot.PushBack({ 55, 144, 9, 47 });
+	hookShot.PushBack({ 66, 141, 9, 50 });
+	hookShot.PushBack({ 77, 139, 9, 52 });
+	hookShot.PushBack({ 88, 137, 9, 54 });
+	hookShot.PushBack({ 99, 135, 9, 56 });
+	hookShot.PushBack({ 110, 132, 9, 59 });
+	hookShot.PushBack({ 121, 130, 9, 61 });
+	hookShot.PushBack({ 132, 128, 9, 63 });
+	hookShot.PushBack({ 143, 126, 9, 65 });
+	hookShot.PushBack({ 154, 123, 9, 68 });
+	hookShot.PushBack({ 165, 121, 9, 70 });
+	hookShot.PushBack({ 176, 119, 9, 72 });
+	hookShot.PushBack({ 187, 117, 9, 74 });
+	hookShot.PushBack({ 198, 114, 9, 77 });
+	hookShot.PushBack({ 209, 112, 9, 79 });
+	hookShot.PushBack({ 220, 110, 9, 81 });
+	hookShot.PushBack({ 231, 108, 9, 81 });
+	hookShot.PushBack({ 242, 105, 9, 86 });
+	hookShot.PushBack({ 252, 101, 9, 88 });
+	hookShot.PushBack({ 264, 101, 9, 90 });
+	hookShot.PushBack({ 275, 99, 9, 92 });
+	hookShot.PushBack({ 286, 96, 9, 95 });
+	hookShot.PushBack({ 297, 94, 9, 97 });
+	hookShot.PushBack({ 308, 92, 9, 99 });
+	hookShot.PushBack({ 319, 90, 9, 101 });
+	hookShot.PushBack({ 330, 87, 9, 104 });
+	hookShot.PushBack({ 341, 85, 9, 106 });
+	hookShot.PushBack({ 352, 83, 9, 108 });
+	hookShot.PushBack({ 363, 81, 9, 110 });
+	hookShot.PushBack({ 374, 78, 9, 113 });
+	hookShot.PushBack({ 385, 76, 9, 115 });
+	hookShot.PushBack({ 396, 75, 9, 116 });
+	hookShot.PushBack({ 407, 73, 9, 118 });
+	hookShot.PushBack({ 418, 70, 9, 121 });
+	hookShot.PushBack({ 429, 68, 9, 123 });
+	hookShot.PushBack({ 440, 66, 9, 125 });
+	hookShot.PushBack({ 451, 64, 9, 127 });
+	hookShot.PushBack({ 462, 61, 9, 130 });
+	hookShot.PushBack({ 473, 59, 9, 132 });
+	hookShot.PushBack({ 484, 57, 9, 134 });
+	hookShot.PushBack({ 495, 55, 9, 136 });
+	hookShot.PushBack({ 506, 52, 9, 139 });
+	hookShot.PushBack({ 517, 50, 9, 141 });
+	hookShot.PushBack({ 528, 48, 9, 143 });
+	hookShot.PushBack({ 539, 46, 9, 145 });
+	hookShot.PushBack({ 550, 43, 9, 148 });
+	hookShot.PushBack({ 561, 41, 9, 150 });
+	hookShot.PushBack({ 572, 39, 9, 152 });
+	hookShot.PushBack({ 583, 37, 9, 154 });
+	hookShot.PushBack({ 594, 34, 9, 157 });
+	hookShot.PushBack({ 605, 32, 9, 159 });
+	hookShot.PushBack({ 616, 30, 9, 161 });
+	hookShot.PushBack({ 627, 28, 9, 163 });
+	hookShot.PushBack({ 638, 25, 9, 166 });
+	hookShot.PushBack({ 649, 23, 9, 168 });
+	hookShot.PushBack({ 660, 21, 9, 170 });
+	hookShot.PushBack({ 671, 19, 9, 172 });
+	hookShot.PushBack({ 682, 16, 9, 175 });
+	hookShot.PushBack({ 693, 15, 9, 176 });
+	hookShot.PushBack({ 704, 12, 9, 179 });
+	hookShot.PushBack({ 715, 10, 9, 181 });
+	hookShot.PushBack({ 726, 7, 9, 184 });
+	hookShot.PushBack({ 737, 5, 9, 186 });
+	hookShot.PushBack({ 748, 3, 9, 188 });
+	hookShot.loop = false;
+	hookShot.speed = 0.9f;
 
-	harpoonShotParticle.anim.PushBack({ 62, 13, 16, 6 });
-	harpoonShotParticle.anim.PushBack({ 76, 8, 16, 11 });
-	harpoonShotParticle.anim.PushBack({ 95, 9, 16, 10 });
-	harpoonShotParticle.anim.PushBack({ 119, 5, 16, 14 });
-	harpoonShotParticle.anim.loop = false;
-	harpoonShotParticle.anim.speed = 0.3f;
+	idleHookShot.PushBack({ 759, 1, 9, 190 });
+	idleHookShot.PushBack({ 770, 0, 9, 191 });
+	idleHookShot.PushBack({ 781, 0, 9, 191 });
+	idleHookShot.loop = false;
+	idleHookShot.speed = 0.01f;
+
+	hookShotParticle.anim.PushBack({ 62, 13, 16, 6 });
+	hookShotParticle.anim.PushBack({ 76, 8, 16, 11 });
+	hookShotParticle.anim.PushBack({ 95, 9, 16, 10 });
+	hookShotParticle.anim.PushBack({ 119, 5, 16, 14 });
+	hookShotParticle.anim.loop = false;
+	hookShotParticle.anim.speed = 0.3f;
 }
 
 ModuleHookShot::~ModuleHookShot()
@@ -132,7 +137,7 @@ update_status ModuleHookShot::Update()
 		App->audio->PlayFx(HarpoonFx);
 		++activeFx;
 
-		currentAnimation = &harpoonShot;
+		currentAnimation = &hookShot;
 
 		h = 34;
 		x = App->player->position.x + 10;
@@ -142,7 +147,7 @@ update_status ModuleHookShot::Update()
 		colliderH = App->collisions->AddCollider({ (int)x, (int)y, 9, (int)h }, Collider::Type::PLAYER_SHOT, (Module*)App->hookShot);
 		++activeColliders; ++totalColliders;
 
-		App->particles->AddParticle(harpoonShotParticle, x - 3, y - 6, Collider::Type::NONE, 0);
+		App->particles->AddParticle(hookShotParticle, x - 3, y - 6, Collider::Type::NONE, 0);
 		increment = true;
 
 		++activeTextures;
@@ -151,7 +156,7 @@ update_status ModuleHookShot::Update()
 	if (increment == true) {
 		y -= speed;
 		h += speed;
-		currentAnimation = &harpoonShot;
+		currentAnimation = &hookShot;
 		colliderH->SetH(h);
 		colliderH->SetPos(x, y);
 		currentAnimation->Update();
@@ -164,7 +169,7 @@ update_status ModuleHookShot::Update()
 		}
 		increment = false;
 		destroyed = true;
-		harpoonShot.Reset();
+		hookShot.Reset();
 
 	}
 	return ret;
@@ -176,7 +181,7 @@ update_status ModuleHookShot::PostUpdate()
 
 	if (App->player->destroyed == false && destroyed == false)
 	{
-		App->render->Blit(texture, x, y, &(harpoonShot.GetCurrentFrame()), 1.0f);
+		App->render->Blit(texture, x, y, &(currentAnimation->GetCurrentFrame()), 1.0f);
 	}
 
 	return ret;
@@ -192,6 +197,9 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == Collider::Type::WALL)
 	{
 		increment = false;
+		currentAnimation = &idleHookShot;
+		currentAnimation->Reset();
+		y = 8;
 	}
 
 	if (c2->type == Collider::Type::BREAKABLE_BLOCK) {
