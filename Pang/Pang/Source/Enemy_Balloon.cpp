@@ -97,9 +97,6 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
 		currentAnim = &verySmallBalloonAnim;
 	}
-
-	
-		
 }
 
 void Enemy_Balloon::Update()
@@ -137,89 +134,49 @@ void Enemy_Balloon::balloonBounce()
 
 void Enemy_Balloon::OnCollision(Collider* c2) {
 	
-	//App->enemies->touchWall = false;
-
-	/*if (c2 == App->scene->lowerWall) {
-		if (c2->Intersects(collider->rect) == true) {
-			speedY = 4.5f;
-			App->enemies->touchWall = true;
-		}
-	}
-
-	if (c2 == App->scene2->lowerWall) {
-		if (c2->Intersects(collider->rect) == true) {
-			speedY = 4.5f;
-			App->enemies->touchWall = true;
-		}
-	}
-	
-	if (c2 == App->scene->rightWall) {
-		if (c2->Intersects(collider->rect) == true) {
-			speedX = -speedX;
-			App->enemies->touchWall = true;
-		}
-	}
-
-	if (c2 == App->scene2->rightWall) {
-		if (c2->Intersects(collider->rect) == true) {
-			speedX = -speedX;
-			App->enemies->touchWall = true;
-		}
-	}
-
-	if (c2 == App->scene->leftWall)
-	{
-		if (c2->Intersects(collider->rect) == true) {
-			speedX = -speedX;
-			App->enemies->touchWall = true;
-		}
-	}
-
-	if (c2 == App->scene2->leftWall)
-	{
-		if (c2->Intersects(collider->rect) == true) {
-			speedX = -speedX;
-			App->enemies->touchWall = true;
-		}
-	}
-	
-	if (c2 == App->scene->upperWall) {
-		if (c2->Intersects(collider->rect) == true) {
-			speedY = -(speedY + 1.5f);
-			App->enemies->touchWall = true;
-		}
-	}
-
-	if (c2 == App->scene2->upperWall) {
-		if (c2->Intersects(collider->rect) == true) {
-			speedY = -(speedY + 1.5f);
-			App->enemies->touchWall = true;
-		}
-	}*/
-	
 	if (c2->type == Collider::Type::WALL) {
-			
-		if (collider->rect.y + collider->rect.h > c2->rect.y && collider->rect.y < c2->rect.y) {
+		
+		if (collider->rect.y < c2->rect.y + c2->rect.h && collider->rect.y + collider->rect.h > c2->rect.y + c2->rect.h) {
+			speedY = -(speedY + 1.5f);
+		}
+
+		else if (collider->rect.y + collider->rect.h > c2->rect.y && collider->rect.y < c2->rect.y) {
 			speedY = 4.5f;
 		}
 
-		//if (collider->rect.x < c2->rect.x + c2->rect.w) {
-		//	speedX = -speedX;
-		//}
+		else if (collider->rect.x + collider->rect.w > c2->rect.x) {
+			speedX = -speedX;
+		}	
+	}
+
+	if (c2->type == Collider::Type::BREAKABLE_BLOCK) {
+		if (collider->rect.y + collider->rect.h > c2->rect.y + c2->rect.h && collider->rect.y < c2->rect.y + c2->rect.h) {
+			speedY = -(speedY + 0.5f);
+		}
+
+		else if (collider->rect.y + collider->rect.h > c2->rect.y && collider->rect.y + collider->rect.h < c2->rect.y + c2->rect.y) {
+			speedY = 2.5f;
+		}
 
 		else if (collider->rect.x + collider->rect.w > c2->rect.x) {
 			speedX = -speedX;
 		}
 
-		//if (collider->rect.x < c2->rect.x + c2->rect.w) { //LeftWall
-		//	speedX = -speedX;
-		//}
+		else if (collider->rect.y > c2->rect.y && collider->rect.y < c2->rect.y + c2->rect.h && collider->rect.x > c2->rect.x && collider->rect.x < c2->rect.x + c2->rect.w) {
+			speedX = -speedX;
+		}
 
-			//else if (collider->rect.x + collider->rect.w > c2->rect.x) { //RightWall
-			//	speedX = -speedX;
-			//}
+		else if (collider->rect.y + collider->rect.h > c2->rect.y && collider->rect.y + collider->rect.h < c2->rect.y + c2->rect.h && collider->rect.x > c2->rect.x && collider->rect.x < c2->rect.x + c2->rect.w) {
+			speedX = -speedX;
+		}
 
-		
+		else if (collider->rect.y + collider->rect.h > c2->rect.y && collider->rect.y + collider->rect.h < c2->rect.y + c2->rect.h && collider->rect.x + collider->rect.w > c2->rect.x && collider->rect.x + collider->rect.w < c2->rect.x + c2->rect.w) {
+			speedX = -speedX;
+		}
+
+		else if (collider->rect.y > c2->rect.y && collider->rect.y < c2->rect.y + c2->rect.h && collider->rect.x + collider->rect.w > c2->rect.x && collider->rect.x + collider->rect.w < c2->rect.x + c2->rect.w) {
+			speedX = -speedX;
+		}
 	}
 
 	SDL_Rect r = collider->rect;

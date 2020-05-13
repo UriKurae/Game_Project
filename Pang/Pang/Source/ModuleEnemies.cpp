@@ -201,7 +201,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		{
 			enemies[i]->OnCollision(c2); //Notify the enemy of a collision
 
-			if (c2->type != Collider::Type::WALL) {
+			if (c2->type != Collider::Type::WALL && c2->type != Collider::Type::BREAKABLE_BLOCK) {
 				delete enemies[i];
 				enemies[i] = nullptr;
 				break;
