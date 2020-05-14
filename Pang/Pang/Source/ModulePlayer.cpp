@@ -306,74 +306,32 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->hookShot->Enable();
 	}*/
 
-	if (c1->type == Collider::Type::PLAYER) //player collider
-	{
-		if (c2 == App->scene->leftWall || c2 == App->scene2->leftWall) {
+	
+	if (c2 ->type == Collider::Type::WALL) {
+		if (c1->rect.x > c2->rect.x && c1->rect.x < c2->rect.x + c2->rect.w) {
 			position.x = 6;
 		}
 
-		if (c2 == App->scene->rightWall || c2 == App->scene2->rightWall) {
+		if (c1->rect.x + c1->rect.w > c2->rect.x && c1->rect.x + c1->rect.w < c2->rect.x + c2->rect.w) {
 			position.x = SCREEN_WIDTH - 33;
 		}
 
-		if (c2->type == Collider::Type::VERY_BIG_BALLOON)
-		{
-			destroyed = true;
-			//App->collisions->RemoveCollider(c1);
-			//App->collisions->RemoveCollider(c2);
-			c1->pendingToDelete = true;
-			c2->pendingToDelete = true;
-			lifes--;
-
-			App->scene->leftWall->pendingToDelete = true;
-			App->scene->rightWall->pendingToDelete = true;
-			App->scene->upperWall->pendingToDelete = true;
-			App->scene->lowerWall->pendingToDelete = true;
-			//App->collisions->RemoveCollider(App->scene->leftWall);
-			//App->collisions->RemoveCollider(App->scene->rightWall);
-			//App->collisions->RemoveCollider(App->scene->upperWall);
-			//App->collisions->RemoveCollider(App->scene->lowerWall);
-		}
-
-		if (c2->type == Collider::Type::BIG_BALLOON)
-		{
-			destroyed = true;
-			c1->pendingToDelete = true;
-			c2->pendingToDelete = true;
-			lifes--;
-
-			App->scene->leftWall->pendingToDelete = true;
-			App->scene->rightWall->pendingToDelete = true;
-			App->scene->upperWall->pendingToDelete = true;
-			App->scene->lowerWall->pendingToDelete = true;
-		}
-
-		if (c2->type == Collider::Type::SMALL_BALLOON)
-		{
-			destroyed = true;
-			c1->pendingToDelete = true;
-			c2->pendingToDelete = true;
-			lifes--;
-
-			App->scene->leftWall->pendingToDelete = true;
-			App->scene->rightWall->pendingToDelete = true;
-			App->scene->upperWall->pendingToDelete = true;
-			App->scene->lowerWall->pendingToDelete = true;
-		}
-
-		if (c2->type == Collider::Type::VERY_SMALL_BALLOON)
-		{
-			destroyed = true;
-			c1->pendingToDelete = true;
-			c2->pendingToDelete = true;
-			lifes--;
-
-			App->scene->leftWall->pendingToDelete = true;
-			App->scene->rightWall->pendingToDelete = true;
-			App->scene->upperWall->pendingToDelete = true;
-			App->scene->lowerWall->pendingToDelete = true;
-		}
 	}
+
+	if (c2->type == Collider::Type::BALLOON)
+	{
+		destroyed = true;
+
+		c1->pendingToDelete = true;
+		c2->pendingToDelete = true;
+		lifes--;
+
+		App->scene->leftWall->pendingToDelete = true;
+		App->scene->rightWall->pendingToDelete = true;
+		App->scene->upperWall->pendingToDelete = true;
+		App->scene->lowerWall->pendingToDelete = true;
+	}
+	
 }
 
 bool ModulePlayer::CleanUp()
@@ -382,7 +340,6 @@ bool ModulePlayer::CleanUp()
 
 	App->fonts->UnLoad(uiIndex);
 	--totalFonts;
-	//SDL_DestroyTexture(texture);
 	App->textures->Unload(texture);
 	--totalTextures;
 	App->collisions->RemoveCollider(collider);

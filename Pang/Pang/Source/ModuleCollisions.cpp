@@ -19,19 +19,14 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER_SHOT] = true;
-	matrix[Collider::Type::WALL][Collider::Type::VERY_BIG_BALLOON] = true;
-	matrix[Collider::Type::WALL][Collider::Type::BIG_BALLOON] = true;
-	matrix[Collider::Type::WALL][Collider::Type::SMALL_BALLOON] = true;
-	matrix[Collider::Type::WALL][Collider::Type::VERY_SMALL_BALLOON] = true;
+	matrix[Collider::Type::WALL][Collider::Type::BALLOON] = true;
+
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_SHOT] = false;
-	matrix[Collider::Type::PLAYER][Collider::Type::VERY_BIG_BALLOON] = true;
-	matrix[Collider::Type::PLAYER][Collider::Type::BIG_BALLOON] = true;
-	matrix[Collider::Type::PLAYER][Collider::Type::SMALL_BALLOON] = true;
-	matrix[Collider::Type::PLAYER][Collider::Type::VERY_SMALL_BALLOON] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::BALLOON] = true;
 
 	/*matrix[Collider::Type::ENEMY][Collider::Type::WALL] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = true;
@@ -42,60 +37,20 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_SHOT] = false;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::VERY_BIG_BALLOON] = true;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::BIG_BALLOON] = true;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::SMALL_BALLOON] = true;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::VERY_SMALL_BALLOON] = true;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::BALLOON] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::BREAKABLE_BLOCK] = true;
 	
-	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::WALL] = true;
-	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::PLAYER_SHOT] = true;
-	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::VERY_BIG_BALLOON] = false;
-	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::BIG_BALLOON] = false;
-	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::SMALL_BALLOON] = false;
-	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::VERY_SMALL_BALLOON] = false;
-	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::ENEMY] = false;
-	matrix[Collider::Type::VERY_BIG_BALLOON][Collider::Type::BREAKABLE_BLOCK] = true;
-
-	matrix[Collider::Type::BIG_BALLOON][Collider::Type::WALL] = true;
-	matrix[Collider::Type::BIG_BALLOON][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::BIG_BALLOON][Collider::Type::PLAYER_SHOT] = true;
-	matrix[Collider::Type::BIG_BALLOON][Collider::Type::VERY_BIG_BALLOON] = false;
-	matrix[Collider::Type::BIG_BALLOON][Collider::Type::BIG_BALLOON] = false;
-	matrix[Collider::Type::BIG_BALLOON][Collider::Type::SMALL_BALLOON] = false;
-	matrix[Collider::Type::BIG_BALLOON][Collider::Type::VERY_SMALL_BALLOON] = false;
-	matrix[Collider::Type::BIG_BALLOON][Collider::Type::ENEMY] = false;
-	matrix[Collider::Type::BIG_BALLOON][Collider::Type::BREAKABLE_BLOCK] = true;
-
-	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::WALL] = true;
-	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::PLAYER_SHOT] = true;
-	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::VERY_BIG_BALLOON] = false;
-	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::BIG_BALLOON] = false;
-	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::SMALL_BALLOON] = false;
-	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::VERY_SMALL_BALLOON] = false;
-	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::ENEMY] = false;
-	matrix[Collider::Type::SMALL_BALLOON][Collider::Type::BREAKABLE_BLOCK] = true;
-
-	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::WALL] = true;
-	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::PLAYER_SHOT] = true;
-	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::VERY_BIG_BALLOON] = false;
-	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::BIG_BALLOON] = false;
-	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::SMALL_BALLOON] = false;
-	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::VERY_SMALL_BALLOON] = false;
-	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::ENEMY] = false;
-	matrix[Collider::Type::VERY_SMALL_BALLOON][Collider::Type::BREAKABLE_BLOCK] = true;
+	matrix[Collider::Type::BALLOON][Collider::Type::WALL] = true;
+	matrix[Collider::Type::BALLOON][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::BALLOON][Collider::Type::PLAYER_SHOT] = true;
+	matrix[Collider::Type::BALLOON][Collider::Type::BALLOON] = false;
+	matrix[Collider::Type::BALLOON][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::BALLOON][Collider::Type::BREAKABLE_BLOCK] = true;
 
 	matrix[Collider::Type::BREAKABLE_BLOCK][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::BREAKABLE_BLOCK][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::BREAKABLE_BLOCK][Collider::Type::PLAYER_SHOT] = true;
-	matrix[Collider::Type::BREAKABLE_BLOCK][Collider::Type::VERY_BIG_BALLOON] = false;
-	matrix[Collider::Type::BREAKABLE_BLOCK][Collider::Type::BIG_BALLOON] = false;
-	matrix[Collider::Type::BREAKABLE_BLOCK][Collider::Type::SMALL_BALLOON] = false;
-	matrix[Collider::Type::BREAKABLE_BLOCK][Collider::Type::VERY_SMALL_BALLOON] = false;
-
+	matrix[Collider::Type::BREAKABLE_BLOCK][Collider::Type::BALLOON] = false;
 
 }
 
@@ -193,24 +148,15 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::PLAYER_SHOT: // yellow
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 			break;
-			case Collider::Type::VERY_BIG_BALLOON: // magenta
+			case Collider::Type::BALLOON: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
-			case Collider::Type::BIG_BALLOON: // red
+			case Collider::Type::BREAKABLE_BLOCK: //red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
-			case Collider::Type::SMALL_BALLOON: //green
-			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
-			break;
-			case Collider::Type::VERY_SMALL_BALLOON: //blue
+			case Collider::Type::UNBREAKABLE_BLOCK: //blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
 			break;
-			case Collider::Type::BREAKABLE_BLOCK: //red
-				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
-			break;
-			case Collider::Type::UNBREAKABLE_BLOCK: //blue
-				App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
-				break;
 		}
 	}
 }

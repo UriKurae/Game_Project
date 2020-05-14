@@ -65,37 +65,37 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 	
 	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
-		collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::VERY_BIG_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::BALLOON, (Module*)App->enemies);
 		currentAnim = &veryBigBalloonAnim;
 	}
 	else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON)
 	{
-		collider = App->collisions->AddCollider({ position.x, position.y, 32, 26 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 32, 26 }, Collider::Type::BALLOON, (Module*)App->enemies);
 		currentAnim = &bigBalloonAnim;
 	}
 	else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
 	{
-		collider = App->collisions->AddCollider({ position.x, position.y, 32, 26 }, Collider::Type::BIG_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 32, 26 }, Collider::Type::BALLOON, (Module*)App->enemies);
 		currentAnim = &bigBalloonAnim;
 	}
 	else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON)
 	{
-		collider = App->collisions->AddCollider({ position.x, position.y, 16, 14 }, Collider::Type::SMALL_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 16, 14 }, Collider::Type::BALLOON, (Module*)App->enemies);
 		currentAnim = &smallBalloonAnim;
 	}
 	else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
 	{
-		collider = App->collisions->AddCollider({ position.x, position.y, 16, 14 }, Collider::Type::SMALL_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 16, 14 }, Collider::Type::BALLOON, (Module*)App->enemies);
 		currentAnim = &smallBalloonAnim;
 	}
 	else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON)
 	{
-		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::BALLOON, (Module*)App->enemies);
 		currentAnim = &verySmallBalloonAnim;
 	}
 	else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
 	{
-		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::VERY_SMALL_BALLOON, (Module*)App->enemies);
+		collider = App->collisions->AddCollider({ position.x, position.y, 8, 7 }, Collider::Type::BALLOON, (Module*)App->enemies);
 		currentAnim = &verySmallBalloonAnim;
 	}
 }
@@ -182,7 +182,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 
 	SDL_Rect r = collider->rect;
 
-		if (c2 == App->harpoon->colliderH || c2 == App->hookShot->colliderH) {
+		if (c2->type == Collider::Type::PLAYER_SHOT) {
 			if (c2->Intersects(r) == true) {
 				App->enemies->touchWall = false;
 				if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)

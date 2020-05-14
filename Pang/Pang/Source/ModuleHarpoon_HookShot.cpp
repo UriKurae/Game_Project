@@ -175,7 +175,9 @@ update_status ModuleHookShot::Update()
 
 	if (time == 0)
 	{
-		this->colliderH->pendingToDelete = true;
+		if (colliderH != nullptr) {
+			this->colliderH->pendingToDelete = true;
+		}
 		--activeColliders; --totalColliders;
 		destroyed = true;
 		increment = false;
@@ -241,7 +243,7 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
 	}
 
-	if (c2->type == Collider::Type::VERY_BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
+	if (c2->type == Collider::Type::BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		this->colliderH->pendingToDelete = true;
 		//--activeColliders; --totalColliders;
@@ -252,44 +254,6 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 		count = 0;
 		--activeTextures;
 		LOG("\n\n\nHARPOON HIT VERY BIG BALLOON\n\n");
-	}
-
-	if (c2->type == Collider::Type::BIG_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
-	{
-		this->colliderH->pendingToDelete = true;
-		//--activeColliders; --totalColliders;
-		destroyed = true;
-		increment = false;
-		currentAnimation->Reset();
-		time = 5;
-		count = 0;
-		--activeTextures;
-		LOG("\n\n\nHARPOON HIT BIG BALLOON\n\n");
-	}
-
-	if (c2->type == Collider::Type::SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
-	{
-		this->colliderH->pendingToDelete = true;
-		//--activeColliders; --totalColliders;
-		destroyed = true;
-		increment = false;
-		currentAnimation->Reset();
-		time = 5;
-		count = 0;
-		--activeTextures;
-	}
-
-	if (c2->type == Collider::Type::VERY_SMALL_BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
-	{
-		this->colliderH->pendingToDelete = true;
-		//--activeColliders; --totalColliders;
-		destroyed = true;
-		increment = false;
-		currentAnimation->Reset();
-		time = 5;
-		count = 0;
-		--activeTextures;
-
 	}
 
 	--activeFx;
