@@ -328,7 +328,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	}
 
-	if (c2->type == Collider::Type::BALLOON && godMode == true)
+	if (c2->type == Collider::Type::BALLOON && godMode == false)
 	{
 		destroyed = true;
 

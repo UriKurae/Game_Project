@@ -164,22 +164,26 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 				int leftWall = c2->rect.x;
 				int bottomWall = c2->rect.y + c2->rect.h;
 				int rightWall = c2->rect.x + c2->rect.w;
-
-				if (bottomBalloon >= topWall)
+				
+				if (bottomBalloon >= topWall && bottomBalloon < bottomWall)
 				{
-					speedY = 2.5f;
+					speedY = 4.5f;
+					LOG("Balloon touching from above");
 				}
-				if (topBalloon <= bottomWall)
+				 if (topBalloon <= bottomWall && topBalloon > topWall)
 				{
 					speedY = -(speedY + 0.5f);
+					LOG("Balloon touching from below");
 				}
-				if (rightBalloon >= leftWall)
+				 if (rightBalloon >= leftWall)
 				{
 					speedX = -(speedX);
+					LOG("Balloon touching from left side");
 				}
-				if (leftBalloon <= rightWall)
+				 if (leftBalloon <= rightWall)
 				{
 					speedX = -(speedX);
+					LOG("Balloon touching from right side");
 				}
 			}
 		}
