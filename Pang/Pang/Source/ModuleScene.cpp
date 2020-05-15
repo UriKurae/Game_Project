@@ -105,10 +105,7 @@ update_status ModuleScene::Update()
 
 	if (balloonsOnScene == 0)
 	{
-		
-		App->harpoon->Disable();
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->winScene, 60);
-
 	}
 
 //	LOG("enemyOnStage == %d", balloonsOnScene);
@@ -120,8 +117,7 @@ update_status ModuleScene::Update()
 update_status ModuleScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	
-	
+
 	App->render->Blit(bgTexture, 0, 0, NULL);
 
 	if (App->player->lifes == 3)
@@ -144,6 +140,9 @@ update_status ModuleScene::PostUpdate()
 
 	//This could be more clean 
 	//Animation to stop the scene with the death 
+	if (App->player->lifes == 0) {
+		App->render->Blit(App->player->gameOverTexture, 150, 99, NULL);
+	}
 
 	if (App->player->destroyed || App->player->time == 0)
 	{
@@ -156,7 +155,6 @@ update_status ModuleScene::PostUpdate()
 	else if (countDownToFade > 215 && countDownToFade < 220)
 	{
 		App->render->Blit(deathTexture2, 0, 0, NULL);
-	
 	}
 	else if (countDownToFade == 180)
 	{
@@ -189,6 +187,7 @@ bool ModuleScene::CleanUp()
 	App->enemies->Disable();
 	App->harpoon->Disable();
 	App->collisions->Disable();
+	App->hookShot->Disable();
 	//App->input->Disable();
 	App->sceneIntro->countdown = 1;
 

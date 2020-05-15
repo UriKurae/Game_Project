@@ -97,8 +97,6 @@ bool ModuleScene2::Start()
 
 	App->player->uiIndex = 0;
 
-	App->player->score = 0;
-
 	balloonsOnScene = 1;
 
 	App->player->scene1 = false;
@@ -149,6 +147,9 @@ update_status ModuleScene2::PostUpdate()
 		App->render->Blit(fgTexture, 192, 80, &(block.GetCurrentFrame()), 1.0f);
 	}
 	
+	if (App->player->lifes == 0) {
+		App->render->Blit(App->player->gameOverTexture, 150, 99, NULL);
+	}
 
 	if (App->player->lifes == 3)
 	{

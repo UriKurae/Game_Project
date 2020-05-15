@@ -102,14 +102,16 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 
 void Enemy_Balloon::Update()
 {
-	balloonBounce();
-	
-	if (App->player->destroyed)
-	{
-		collider->pendingToDelete = true;
-	}
+	if (App->player->ready == 0) {
+		balloonBounce();
 
-	Enemy::Update();
+		if (App->player->destroyed)
+		{
+			collider->pendingToDelete = true;
+		}
+
+		Enemy::Update();
+	}
 }
 
 void Enemy_Balloon::balloonBounce()
@@ -241,7 +243,12 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 				{
 					if (App->player->lastBalloon == ENEMY_TYPE::BIGBALLOON && tipoBalloon == ENEMY_TYPE::BIGBALLOON2 || App->player->lastBalloon == tipoBalloon) {
 						App->player->cont++;
-						App->player->score += 200 * App->player->cont;
+						if (App->player->count <= 3) {
+							App->player->score += 200 * App->player->cont;
+						}
+						else {
+							App->player->score += 200 * 3;
+						}
 					}
 					else {
 						App->player->score += 200;
@@ -259,7 +266,12 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 				{
 					if (App->player->lastBalloon == ENEMY_TYPE::SMALLBALLOON && tipoBalloon == ENEMY_TYPE::SMALLBALLOON2 || App->player->lastBalloon == tipoBalloon) {
 						App->player->cont++;
-						App->player->score += 300 * App->player->cont;
+						if (App->player->count <= 3) {
+							App->player->score += 300 * App->player->cont;
+						}
+						else {
+							App->player->score += 300 * 3;
+						}
 					}
 					else {
 						App->player->score += 300;
@@ -277,7 +289,12 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 			{
 				if (App->player->lastBalloon == ENEMY_TYPE::VERYSMALLBALLOON && tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2 || App->player->lastBalloon == tipoBalloon) {
 					App->player->cont++;
-					App->player->score += 400 * App->player->cont;
+					if (App->player->count <= 3) {
+						App->player->score += 400 * App->player->cont;
+					}
+					else {
+						App->player->score += 400 * 3;
+					}
 				}
 				else {
 					App->player->score += 400;

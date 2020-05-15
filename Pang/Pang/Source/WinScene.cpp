@@ -55,6 +55,7 @@ bool WinScene::Start()
 		winAnim2.loop = true;
 	}
 	
+	App->player->score += App->player->timeBonus;
 
 	App->input->Enable();
 	

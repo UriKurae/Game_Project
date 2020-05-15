@@ -44,6 +44,8 @@ public:
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
 	SDL_Texture* timeTexture = nullptr;
+	SDL_Texture* gameOverTexture = nullptr;
+	SDL_Texture* readyTexture = nullptr;
 	
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
@@ -73,6 +75,7 @@ public:
 	uint score = 000;
 	uint time = 100;
 	uint count = 0;
+	uint ready = 3;
 	int uiIndex;
 	int timeIndex;
 	char scoreText[10] = { "\0" };

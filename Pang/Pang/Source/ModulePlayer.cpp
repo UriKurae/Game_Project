@@ -74,11 +74,17 @@ bool ModulePlayer::Start()
 
 	bool godMode = false;
 
+	ready = 3;
 
 	texture = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
 	timeTexture = App->textures->Load("Assets/UI/Time.png");
 	++activeTextures; ++totalTextures;
 	currentAnimation = &idleAnim;
+
+	gameOverTexture = App->textures->Load("Assets/UI/GameOver.png");
+	++activeTextures; ++totalTextures;
+	readyTexture = App->textures->Load("Assets/UI/Ready.png");
+	++activeTextures; ++totalTextures;
 	
 	//SET SPAWN POSITION FOR PLAYER
 	position.x = (SCREEN_WIDTH / 2) - 20;
@@ -128,127 +134,134 @@ update_status ModulePlayer::Update()
 	}
 
 	count++;
-	if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0 && destroyed == false || count % 60 == 0 && time > 0 && App->scene2->balloonsOnScene > 0 && destroyed == false) {
-		time--;
+
+	if (count % 30 == 0 && ready > 0) {
+		ready--;
 	}
 
-	if (App->scene->balloonsOnScene == 0 || App->scene2->balloonsOnScene == 0) {
-		timeBonus = time * 100;
-	}
-
-	//Detect inputs
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !destroyed)
-	{
-		position.x -= speed;
-
-		if (currentAnimation != &leftAnim)
-		{
-			leftAnim.Reset();
-			currentAnimation = &leftAnim;
-		}
-	}
-
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !destroyed)
-	{
-		position.x += speed;
-
-		if (currentAnimation != &rightAnim)
-		{
-			rightAnim.Reset();
-			currentAnimation = &rightAnim;
+	if (ready == 0) {
+		if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0 && destroyed == false || count % 60 == 0 && time > 0 && App->scene2->balloonsOnScene > 0 && destroyed == false) {
+			time--;
 		}
 
-	}
+		if (App->scene->balloonsOnScene == 0 || App->scene2->balloonsOnScene == 0) {
+			timeBonus = time * 100;
+		}
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
-	{
-		if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
+		//Detect inputs
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !destroyed)
 		{
-			if (App->scene->balloonsOnScene == 0)
+			position.x -= speed;
+
+			if (currentAnimation != &leftAnim)
 			{
-				idleAnim.Reset();
-				currentAnimation = &idleAnim;
-			}
-			else
-			{
-				shotAnim.Reset();
-				currentAnimation = &shotAnim;
+				leftAnim.Reset();
+				currentAnimation = &leftAnim;
 			}
 		}
-	}
 
-	if (pad.l_x > 0 && !destroyed)
-	{
-		position.x += speed;
-
-		if (currentAnimation != &rightAnim)
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !destroyed)
 		{
-			rightAnim.Reset();
-			currentAnimation = &rightAnim;
-		}
-	}
+			position.x += speed;
 
-	if (pad.l_x < 0 && !destroyed)
-	{
-		position.x -= speed;
-
-		if (currentAnimation != &leftAnim)
-		{
-			leftAnim.Reset();
-			currentAnimation = &leftAnim;
-		}
-	}
-
-	if (pad.a == true)
-	{
-		if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
-		{
-			if (App->scene->balloonsOnScene == 0)
+			if (currentAnimation != &rightAnim)
 			{
-				idleAnim.Reset();
-				currentAnimation = &idleAnim;
+				rightAnim.Reset();
+				currentAnimation = &rightAnim;
 			}
-			else
+
+		}
+
+		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+		{
+			if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
 			{
-				shotAnim.Reset();
-				currentAnimation = &shotAnim;
+				if (App->scene->balloonsOnScene == 0)
+				{
+					idleAnim.Reset();
+					currentAnimation = &idleAnim;
+				}
+				else
+				{
+					shotAnim.Reset();
+					currentAnimation = &shotAnim;
+				}
 			}
 		}
-	}
 
-	//Detect when A and D are pressed at the same time and set the current animation to idle
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT &&
-		App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
-	{
-		//idleAnim.Reset();
-		currentAnimation = &idleAnim;
-		position.x = position.x;
-	}
-	// If no up/down movement detected, set the current animation back to idle
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_IDLE)
-	{
-		currentAnimation = &idleAnim;
-	}
-	
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
-	{
-		collider->SetPos(position.x, position.y);
-	}
-	else
-	{
-		collider->SetPos(position.x, position.y);
-	}
+		if (pad.l_x > 0 && !destroyed)
+		{
+			position.x += speed;
 
-	currentAnimation->Update();
+			if (currentAnimation != &rightAnim)
+			{
+				rightAnim.Reset();
+				currentAnimation = &rightAnim;
+			}
+		}
 
-	/*if (destroyed)
-	{
-		destroyedCountdown--;
-		if (destroyedCountdown <= 0)
-			return update_status::UPDATE_STOP;
-		
-	}*/
+		if (pad.l_x < 0 && !destroyed)
+		{
+			position.x -= speed;
+
+			if (currentAnimation != &leftAnim)
+			{
+				leftAnim.Reset();
+				currentAnimation = &leftAnim;
+			}
+		}
+
+		if (pad.a == true)
+		{
+			if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
+			{
+				if (App->scene->balloonsOnScene == 0)
+				{
+					idleAnim.Reset();
+					currentAnimation = &idleAnim;
+				}
+				else
+				{
+					shotAnim.Reset();
+					currentAnimation = &shotAnim;
+				}
+			}
+		}
+
+		//Detect when A and D are pressed at the same time and set the current animation to idle
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT &&
+			App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+		{
+			//idleAnim.Reset();
+			currentAnimation = &idleAnim;
+			position.x = position.x;
+		}
+		// If no up/down movement detected, set the current animation back to idle
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
+			&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_IDLE)
+		{
+			currentAnimation = &idleAnim;
+		}
+
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+		{
+			collider->SetPos(position.x, position.y);
+		}
+		else
+		{
+			collider->SetPos(position.x, position.y);
+		}
+
+		currentAnimation->Update();
+
+		/*if (destroyed)
+		{
+			destroyedCountdown--;
+			if (destroyedCountdown <= 0)
+				return update_status::UPDATE_STOP;
+
+		}*/
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -257,6 +270,10 @@ update_status ModulePlayer::PostUpdate()
 {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	
+	if (ready == 3 || ready == 1) {
+		App->render->Blit(App->player->readyTexture, 150, 99, NULL);
+	}
+
 	if (!destroyed)
 	{
 		App->render->Blit(texture, position.x, position.y, &rect);
