@@ -118,6 +118,12 @@ update_status ModulePlayer::Update()
 		App->input->ShakeController(0, 60, 1.0f);
 	}
 
+	//Press button G for God Mode
+	if (App->input->keys[SDL_SCANCODE_G] == KEY_STATE::KEY_DOWN)
+	{
+		godMode = !godMode;
+	}
+
 	count++;
 	if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0 && destroyed == false || count % 60 == 0 && time > 0 && App->scene2->balloonsOnScene > 0 && destroyed == false) {
 		time--;
@@ -282,6 +288,7 @@ update_status ModulePlayer::PostUpdate()
 	App->fonts->BlitText(81, 216, uiIndex, scoreText);
 	App->fonts->BlitText(25, 208, uiIndex, "PLAYER-1");
 	App->fonts->BlitText(158, 208, uiIndex, "MT.FUJI");
+
 	if (scene1 == true) 
 	{
 		App->fonts->BlitText(161, 228, uiIndex, "1-1 STAGE");
@@ -318,7 +325,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	}
 
-	if (c2->type == Collider::Type::BALLOON)
+	if (c2->type == Collider::Type::BALLOON && godMode == true)
 	{
 		destroyed = true;
 

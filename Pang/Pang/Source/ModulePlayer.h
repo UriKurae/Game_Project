@@ -85,6 +85,9 @@ public:
 	bool scene1 = false;
 	bool scene2 = false;
 
+	//Boolean for God Mode
+	bool godMode = false;
+
 	enum class ENEMY_TYPE lastBalloon;
 };
 

@@ -170,7 +170,9 @@ update_status ModuleHookShot::Update()
 		}
 		increment = false;
 		destroyed = true;
-		currentAnimation->Reset();
+		
+		hookShot.Reset();
+		idleHookShot.Reset();
 	}
 
 	if (time == 0)
