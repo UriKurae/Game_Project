@@ -72,6 +72,9 @@ bool ModulePlayer::Start()
 
 	bool ret = true;
 
+	bool godMode = false;
+
+
 	texture = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
 	timeTexture = App->textures->Load("Assets/UI/Time.png");
 	++activeTextures; ++totalTextures;
@@ -333,10 +336,20 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		c2->pendingToDelete = true;
 		lifes--;
 
-		App->scene->leftWall->pendingToDelete = true;
-		App->scene->rightWall->pendingToDelete = true;
-		App->scene->upperWall->pendingToDelete = true;
-		App->scene->lowerWall->pendingToDelete = true;
+		if (App->player->scene1) {
+			App->scene->leftWall->pendingToDelete = true;
+			App->scene->rightWall->pendingToDelete = true;
+			App->scene->upperWall->pendingToDelete = true;
+			App->scene->lowerWall->pendingToDelete = true;
+		}
+		else if (App->player->scene2) {
+			App->scene2->leftWall->pendingToDelete = true;
+			App->scene2->rightWall->pendingToDelete = true;
+			App->scene2->upperWall->pendingToDelete = true;
+			App->scene2->lowerWall->pendingToDelete = true;
+			App->scene2->leftPlatform->pendingToDelete = true;
+			App->scene2->rightPlatform->pendingToDelete = true;
+		}
 	}
 	
 }
@@ -346,6 +359,8 @@ bool ModulePlayer::CleanUp()
 	activeTextures = activeColliders = activeFonts = activeFx = 0;
 
 	App->fonts->UnLoad(uiIndex);
+	--totalFonts;
+	App->fonts->UnLoad(timeIndex);
 	--totalFonts;
 	App->textures->Unload(texture);
 	--totalTextures;
