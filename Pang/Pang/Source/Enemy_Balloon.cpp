@@ -151,7 +151,39 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 	}
 
 	if (c2->type == Collider::Type::BREAKABLE_BLOCK) {
-		if (collider->rect.y + collider->rect.h > c2->rect.y + c2->rect.h && collider->rect.y < c2->rect.y + c2->rect.h) {
+
+		if (c2->type == Collider::Type::BREAKABLE_BLOCK) {
+			if (collider->rect.y + collider->rect.h > c2->rect.y + c2->rect.h && collider->rect.y < c2->rect.y + c2->rect.h) {
+
+				int topBalloon = collider->rect.y;
+				int leftBalloon = collider->rect.x;
+				int bottomBalloon = collider->rect.y + collider->rect.h;
+				int rightBalloon = collider->rect.x + collider->rect.w;
+
+				int topWall = c2->rect.y;
+				int leftWall = c2->rect.x;
+				int bottomWall = c2->rect.y + c2->rect.h;
+				int rightWall = c2->rect.x + c2->rect.w;
+
+				if (bottomBalloon >= topWall)
+				{
+					speedY = 2.5f;
+				}
+				if (topBalloon <= bottomWall)
+				{
+					speedY = -(speedY + 0.5f);
+				}
+				if (rightBalloon >= leftWall)
+				{
+					speedX = -(speedX);
+				}
+				if (leftBalloon <= rightWall)
+				{
+					speedX = -(speedX);
+				}
+			}
+		}
+		/*if (collider->rect.y + collider->rect.h > c2->rect.y + c2->rect.h && collider->rect.y < c2->rect.y + c2->rect.h) {
 			speedY = -(speedY + 0.5f);
 		}
 
@@ -177,7 +209,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 
 		else if (collider->rect.y > c2->rect.y && collider->rect.y < c2->rect.y + c2->rect.h && collider->rect.x + collider->rect.w > c2->rect.x && collider->rect.x + collider->rect.w < c2->rect.x + c2->rect.w) {
 			speedX = -speedX;
-		}
+		}*/
 	}
 
 	SDL_Rect r = collider->rect;
