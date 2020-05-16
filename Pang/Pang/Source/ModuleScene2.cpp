@@ -93,7 +93,7 @@ bool ModuleScene2::Start()
 	//App->input->Enable();
 
 	//ADD ENEMIES
-	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
+	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 119, 20);
 
 	App->player->uiIndex = 0;
 

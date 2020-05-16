@@ -35,6 +35,11 @@ bool ModuleScene4::Start()
 
 	bool ret = true;
 
+	fgTexture = App->textures->Load("Assets/Items&Weapons/BlockSprites.png"); //fg on 2st Level is invisible
+	++activeTextures; ++totalTextures;
+
+	block.PushBack({ 221, 40, 8, 32 });
+
 	countDownToFade = 300;
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Keirin(Day).png");
 	++activeTextures; ++totalTextures;
@@ -61,6 +66,10 @@ bool ModuleScene4::Start()
 	rightWall = App->collisions->AddCollider({ 376, 0, 8, 208 }, Collider::Type::WALL);
 	++activeColliders; ++totalColliders;
 
+	leftPlatform = App->collisions->AddCollider({ 184,155,8,32 }, Collider::Type::UNBREAKABLE_BLOCK);
+	++activeColliders; ++totalColliders;
+	rightPlatform = App->collisions->AddCollider({ 192,155,8,32 }, Collider::Type::UNBREAKABLE_BLOCK);
+	++activeColliders; ++totalColliders;
 
 	App->player->Enable();
 	App->enemies->Enable();
@@ -113,6 +122,16 @@ update_status ModuleScene4::Update()
 update_status ModuleScene4::PostUpdate()
 {
 	App->render->Blit(bgTexture, 0, 0, NULL);
+
+	if (destroyedBlockLeft == false)
+	{
+		App->render->Blit(fgTexture, 184, 155, &(block.GetCurrentFrame()), 1.0f);
+	}
+
+	if (destroyedBlockRight == false)
+	{
+		App->render->Blit(fgTexture, 192, 155, &(block.GetCurrentFrame()), 1.0f);
+	}
 
 	if (App->player->lifes == 3)
 	{
