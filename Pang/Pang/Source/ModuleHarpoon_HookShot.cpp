@@ -148,7 +148,7 @@ update_status ModuleHookShot::Update()
 		colliderH = App->collisions->AddCollider({ (int)x, (int)y, 9, (int)h }, Collider::Type::PLAYER_SHOT, (Module*)App->hookShot);
 		++activeColliders; ++totalColliders;
 
-		App->particles->AddParticle(hookShotParticle, x - 3, y - 6, Collider::Type::NONE, 0);
+		App->particles->AddParticle(hookShotParticle, x - 3, y - 6, Collider::Type::PLAYER, 0);
 		increment = true;
 
 		++activeTextures;

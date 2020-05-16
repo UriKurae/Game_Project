@@ -9,13 +9,12 @@
 struct SDL_Texture;
 struct Collider;
 
-class ModuleHarpoon : public Module
+class ModuleGunShot : public Module
 {
 public:
 	//position where is released
 	float x = 0;
 	float y = 0;
-	float h = 34;
 
 	float speed = 2.0f;
 
@@ -26,18 +25,20 @@ public:
 	//texture for all the harpoons sprites
 	SDL_Texture* texture = nullptr;
 
-	Animation harpoonShot;
-
 	Animation* currentAnimation = nullptr;
 
-	Collider* colliderH = nullptr;
+	//Collider* colliderH = nullptr;
 
-	Particle harpoonShotParticle;
+	Particle gunShotParticle;
+	Particle gunShot;
 
 	uint HarpoonFx = 0;
+
+	uint time = 5;
+	uint count = 0;
 public:
-	ModuleHarpoon(bool startEnabled);
-	~ModuleHarpoon();
+	ModuleGunShot(bool startEnabled);
+	~ModuleGunShot();
 
 	//load all textures
 	bool Start();

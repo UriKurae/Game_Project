@@ -22,8 +22,6 @@ public:
 
 	bool increment = false;
 
-	int shotType = 1;
-
 	//texture for all the harpoons sprites
 	SDL_Texture* texture = nullptr;
 
