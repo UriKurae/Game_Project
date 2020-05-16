@@ -155,7 +155,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 	if (c2->type == Collider::Type::BREAKABLE_BLOCK) {
 
 		if (c2->type == Collider::Type::BREAKABLE_BLOCK) {
-			if (collider->rect.y + collider->rect.h > c2->rect.y + c2->rect.h && collider->rect.y < c2->rect.y + c2->rect.h) {
+			
 
 				int topBalloon = collider->rect.y;
 				int leftBalloon = collider->rect.x;
@@ -187,7 +187,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 					speedX = -(speedX);
 					LOG("Balloon touching from right side");
 				}
-			}
+			
 		}
 		/*if (collider->rect.y + collider->rect.h > c2->rect.y + c2->rect.h && collider->rect.y < c2->rect.y + c2->rect.h) {
 			speedY = -(speedY + 0.5f);

@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Enemy_Balloon.h" />
@@ -42,6 +43,10 @@
     <ClInclude Include="Source\ModuleRender.h" />
     <ClInclude Include="Source\ModuleScene.h" />
     <ClInclude Include="Source\ModuleScene2.h" />
+    <ClInclude Include="Source\ModuleScene3.h" />
+    <ClInclude Include="Source\ModuleScene4.h" />
+    <ClInclude Include="Source\ModuleScene5.h" />
+    <ClInclude Include="Source\ModuleScene6.h" />
     <ClInclude Include="Source\ModuleTextures.h" />
     <ClInclude Include="Source\ModuleWindow.h" />
     <ClInclude Include="Source\p2Point.h" />
@@ -73,6 +78,10 @@
     <ClCompile Include="Source\ModuleRender.cpp" />
     <ClCompile Include="Source\ModuleScene.cpp" />
     <ClCompile Include="Source\ModuleScene2.cpp" />
+    <ClCompile Include="Source\ModuleScene3.cpp" />
+    <ClCompile Include="Source\ModuleScene4.cpp" />
+    <ClCompile Include="Source\ModuleScene5.cpp" />
+    <ClCompile Include="Source\ModuleScene6.cpp" />
     <ClCompile Include="Source\ModuleTextures.cpp" />
     <ClCompile Include="Source\ModuleWindow.cpp" />
     <ClCompile Include="Source\Particle.cpp" />

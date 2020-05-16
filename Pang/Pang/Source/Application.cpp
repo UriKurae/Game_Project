@@ -7,6 +7,11 @@
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
 #include "ModuleScene.h"
+#include "ModuleScene2.h"
+#include "ModuleScene3.h"
+#include "ModuleScene4.h"
+#include "ModuleScene5.h"
+#include "ModuleScene6.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
 #include "ModuleCollisions.h"
@@ -20,7 +25,6 @@
 #include "ModuleFonts.h"
 #include "WinScene.h"
 #include "ModulePlatforms.h"
-#include "ModuleScene2.h"
 
 
 Application::Application()
@@ -36,20 +40,25 @@ Application::Application()
 	modules[4] = sceneIntro = new SceneIntro(true);
 	modules[5] = scene = new ModuleScene(false);
 	modules[6] = scene2 = new ModuleScene2(false);
-	modules[7] = player = new ModulePlayer(false);
-	modules[8] = platforms = new ModulePlatforms(false);
-	modules[9] = harpoon = new ModuleHarpoon(false);
-	modules[10] = hookShot = new ModuleHookShot(false);
-	modules[11] = particles = new ModuleParticles(true);
-	modules[12] = enemies = new ModuleEnemies(false);
+	modules[7] = scene3 = new ModuleScene3(false);
+	modules[8] = scene4 = new ModuleScene4(false);
+	modules[9] = scene5 = new ModuleScene5(false);
+	modules[10] = scene6 = new ModuleScene6(false);
 
-	modules[13] = collisions = new ModuleCollisions(true);
-	modules[14] = fade = new ModuleFadeToBlack(true);
-	modules[15] = fonts = new ModuleFonts(true);
-	modules[16] = debugInfo = new ModuleDebugInfo(true);
-	modules[17] = winScene = new WinScene(false);
+	modules[11] = player = new ModulePlayer(false);
+	modules[12] = platforms = new ModulePlatforms(false);
+	modules[13] = harpoon = new ModuleHarpoon(false);
+	modules[14] = hookShot = new ModuleHookShot(false);
+	modules[15] = particles = new ModuleParticles(true);
+	modules[16] = enemies = new ModuleEnemies(false);
 
-	modules[18] = render = new ModuleRender(true);
+	modules[17] = collisions = new ModuleCollisions(true);
+	modules[18] = fade = new ModuleFadeToBlack(true);
+	modules[19] = fonts = new ModuleFonts(true);
+	modules[20] = debugInfo = new ModuleDebugInfo(true);
+	modules[21] = winScene = new WinScene(false);
+
+	modules[22] = render = new ModuleRender(true);
 	
 }
 

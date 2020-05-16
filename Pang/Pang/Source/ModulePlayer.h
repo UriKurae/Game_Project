@@ -87,6 +87,10 @@ public:
 
 	bool scene1 = false;
 	bool scene2 = false;
+	bool scene3 = false;
+	bool scene4 = false;
+	bool scene5 = false;
+	bool scene6 = false;
 
 	//Boolean for God Mode
 	bool godMode = false;
