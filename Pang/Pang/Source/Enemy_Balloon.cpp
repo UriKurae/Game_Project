@@ -6,6 +6,10 @@
 #include "ModuleParticles.h"
 #include "ModuleScene.h"
 #include "ModuleScene2.h"
+#include "ModuleScene3.h"
+#include "ModuleScene4.h"
+#include "ModuleScene5.h"
+#include "ModuleScene6.h"
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
 #include "ModuleHarpoon_Shot.h"
@@ -20,13 +24,13 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 	ballonExplosion = App->audio->LoadFx("Assets/Sound/FX/DestroyBalls.wav");
 
 	tipoBalloon = type;
-	if (App->player->scene1) {
+	if (App->player->scene1 || App->player->scene4) {
 		veryBigBalloonAnim.PushBack({ 207,112, 48, 40 });
 		bigBalloonAnim.PushBack({ 257,119, 32, 26 });
 		smallBalloonAnim.PushBack({ 292,125,16,14 });
 		verySmallBalloonAnim.PushBack({ 312,129,8,7 });
 	}
-	if (App->player->scene2) {
+	if (App->player->scene2 || App->player->scene5) {
 		veryBigBalloonAnim.PushBack({ 206, 9, 48, 40 });
 		bigBalloonAnim.PushBack({ 257, 16, 32, 26 });
 		smallBalloonAnim.PushBack({ 291,22,16,14 });
@@ -226,6 +230,10 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 				collider->pendingToDelete = true;
 				App->scene->balloonsOnScene--;
 				App->scene2->balloonsOnScene--;
+				App->scene3->balloonsOnScene--;
+				App->scene4->balloonsOnScene--;
+				App->scene5->balloonsOnScene--;
+				App->scene6->balloonsOnScene--;
 				App->harpoon->totalColliders--;
 
 
