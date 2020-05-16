@@ -43,7 +43,7 @@ bool ModuleScene3::Start()
 	blockDestroy.PushBack({ 48, 158, 32, 8 });
 	blockDestroy.PushBack({ 88, 158, 32, 8 });
 
-	block.PushBack({ 8, 158, 32, 8 });
+	redBlock.PushBack({ 183, 158, 32, 8 });
 
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Fuji(Night).png");
 	++activeTextures; ++totalTextures;
@@ -82,10 +82,10 @@ bool ModuleScene3::Start()
 	rightUnDestroyablePlatform = App->collisions->AddCollider({ 278,81,31,6 }, Collider::Type::BREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 
-	topDestroyablePlatform = App->collisions->AddCollider({ 175,81,31,6 }, Collider::Type::BREAKABLE_BLOCK);
+	topDestroyablePlatform = App->collisions->AddCollider({ 176,81,31,6 }, Collider::Type::BREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 
-	bottomDestroyablePlatform = App->collisions->AddCollider({ 175,130,31,6 }, Collider::Type::BREAKABLE_BLOCK);
+	bottomDestroyablePlatform = App->collisions->AddCollider({ 176,130,31,6 }, Collider::Type::BREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 
 	App->player->Enable();
@@ -96,10 +96,11 @@ bool ModuleScene3::Start()
 
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
+	App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, 207, 113);
 
 	App->player->uiIndex = 0;
 
-	balloonsOnScene = 1;
+	balloonsOnScene = 2;
 
 	App->player->scene1 = false;
 	App->player->scene2 = false;
@@ -116,15 +117,189 @@ bool ModuleScene3::Start()
 
 update_status ModuleScene3::Update()
 {
-	return update_status();
+
+	if (App->input->keys[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
+	{
+		balloonsOnScene = 0;
+		App->collisions->RemoveCollider(leftWall);
+		App->collisions->RemoveCollider(rightWall);
+		App->collisions->RemoveCollider(upperWall);
+		App->collisions->RemoveCollider(lowerWall);
+		--activeColliders; --totalColliders;
+		--activeColliders; --totalColliders;
+		--activeColliders; --totalColliders;
+		--activeColliders; --totalColliders;
+	}
+
+
+	if (balloonsOnScene == 0)
+	{
+
+		App->harpoon->Disable();
+		App->fade->FadeToBlack((Module*)App->scene3, (Module*)App->winScene, 60);
+
+	}
+
+	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModuleScene3::PostUpdate()
 {
-	return update_status();
+
+	//Print the background on the screen.
+	App->render->Blit(bgTexture, 0, 0, NULL);
+
+	//Print the blocks on the screen, the ones without if are like this because they're not supposed to break and stay always.
+	App->render->Blit(fgTexture, 73, 81, &(redBlock.GetCurrentFrame()), 1.0f);
+	
+	App->render->Blit(fgTexture, 279, 81, &(redBlock.GetCurrentFrame()), 1.0f);
+	
+	if (destroyedBlockTop == false)
+	{
+		App->render->Blit(fgTexture, 175, 81, &(redBlock.GetCurrentFrame()), 1.0f);
+	}
+
+	if (destroyedBlockBottom == false)
+	{
+		App->render->Blit(fgTexture, 176, 131, &(redBlock.GetCurrentFrame()), 1.0f);
+	}
+
+
+	//Print lifes of the players on the screen.
+	if (App->player->lifes == 0) {
+		App->render->Blit(App->player->gameOverTexture, 150, 99, NULL);
+	}
+
+	if (App->player->lifes == 3)
+	{
+		App->render->Blit(lifesTexture1, 25, 227, &lifesTextureRect, 0, false);
+		App->render->Blit(lifesTexture2, 41, 227, &lifesTextureRect, 0, false);
+		App->render->Blit(lifesTexture3, 57, 227, &lifesTextureRect, 0, false);
+	}
+
+	else if (App->player->lifes == 2)
+	{
+		App->render->Blit(lifesTexture1, 25, 227, &lifesTextureRect, 0, false);
+		App->render->Blit(lifesTexture2, 41, 227, &lifesTextureRect, 0, false);
+	}
+
+	else if (App->player->lifes == 1)
+	{
+		App->render->Blit(lifesTexture1, 25, 227, &lifesTextureRect, 0, false);
+	}
+
+	//This could be more clean 
+	//Animation to stop the scene with the death 
+
+	if (App->player->destroyed || App->player->time == 0)
+	{
+		countDownToFade--;
+	}
+	if (countDownToFade > 220 && countDownToFade < 230)
+	{
+		App->render->Blit(deathTexture1, 0, 0, NULL);
+	}
+	else if (countDownToFade > 215 && countDownToFade < 220)
+	{
+		App->render->Blit(deathTexture2, 0, 0, NULL);
+
+	}
+	else if (countDownToFade == 180)
+	{
+		if (App->player->lifes > 0)
+		{
+			App->fade->FadeToBlack((Module*)App->scene3, (Module*)App->scene3, 60);
+
+			//App->player->collider->pendingToDelete = true;
+			App->collisions->RemoveCollider(App->player->collider);
+		}
+		else
+		{
+			App->fade->FadeToBlack((Module*)App->scene3, (Module*)App->sceneIntro, 60);
+		}
+	}
+
+
+	return update_status::UPDATE_CONTINUE;
 }
 
 bool ModuleScene3::CleanUp()
 {
-	return false;
+	LOG("---------------------------------------------- CleanUp ModuleScene3 ----------------------------------------------")
+
+		activeTextures = activeColliders = activeFonts = activeFx = 0;
+
+
+	App->player->Disable();
+	App->enemies->Disable();
+	App->harpoon->Disable();
+	App->collisions->Disable();
+	//App->input->Disable();
+	App->sceneIntro->countdown = 1;
+
+	//REMOVE HARPOONFX WHEN BALLOON KILLS U AND HARPOON IS ALIVE
+
+	if (App->harpoon->destroyed)
+	{
+		/*App->audio->UnloadFx(App->harpoon->HarpoonFx);
+		App->harpoon->totalFx--;*/
+		App->harpoon->activeFx = 0;
+
+		App->textures->Unload(App->harpoon->texture);
+		App->harpoon->totalTextures--;
+		App->harpoon->activeTextures = 0;
+
+		if (!App->harpoon->destroyed)
+		{
+
+			App->collisions->RemoveCollider(App->harpoon->colliderH);
+			App->harpoon->totalColliders--;
+			App->harpoon->activeColliders = 0;
+		}
+
+	}
+
+
+
+
+	//App->harpoon->HarpoonFx = 0;
+
+	App->audio->UnloadFx(App->harpoon->HarpoonFx);
+	App->audio->UnloadFx(App->hookShot->HarpoonFx);
+
+	App->textures->Unload(App->harpoon->texture);
+	--totalTextures;
+	App->textures->Unload(bgTexture);
+	--totalTextures;
+	App->textures->Unload(fgTexture);
+	--totalTextures;
+	App->textures->Unload(lifesTexture1);
+	--totalTextures;
+	App->textures->Unload(lifesTexture2);
+	--totalTextures;
+	App->textures->Unload(lifesTexture3);
+	--totalTextures;
+	App->textures->Unload(deathTexture1);
+	--totalTextures;
+	App->textures->Unload(deathTexture2);
+	--totalTextures;
+	App->audio->UnloadFx(App->harpoon->HarpoonFx);
+	App->harpoon->totalFx--;
+
+	//App->collisions->RemoveCollider(leftWall);
+	//--totalColliders;
+	//App->collisions->RemoveCollider(rightWall);
+	//--totalColliders;
+	//App->collisions->RemoveCollider(upperWall);
+	//--totalColliders;
+	//App->collisions->RemoveCollider(lowerWall);
+	//--totalColliders;
+	//App->collisions->RemoveCollider(leftPlatform);
+	//--totalColliders;
+	//App->collisions->RemoveCollider(rightPlatform);
+
+
+	App->textures->Unload(App->enemies->texture);
+
+	return true;
 }

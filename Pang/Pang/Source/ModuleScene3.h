@@ -35,8 +35,7 @@ public:
 
 	bool destroyedBlockTop = false;
 	bool destroyedBlockBottom = false;
-	bool unDestroyedBlockRight = false;
-	bool unDestroyedBlockLeft = false;
+
 
 	// The background sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
@@ -44,7 +43,7 @@ public:
 	//The foreground sprite sheet loaded into an SDL_Texture
 	SDL_Texture* fgTexture = nullptr;
 
-	Animation block;
+	Animation redBlock;
 
 	Animation blockDestroy;
 

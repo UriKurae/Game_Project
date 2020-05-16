@@ -36,7 +36,13 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 		smallBalloonAnim.PushBack({ 291,22,16,14 });
 		verySmallBalloonAnim.PushBack({ 311,26,8,7 });
 	}
-
+	if (App->player->scene3)
+	{
+		veryBigBalloonAnim.PushBack({ 206, 57, 48, 40 });
+		bigBalloonAnim.PushBack({ 257, 63, 32, 26 });
+		smallBalloonAnim.PushBack({ 291,69,16,14 });
+		verySmallBalloonAnim.PushBack({ 311,73,8,7 });
+	}
 	particleDeathVeryBig.anim.PushBack({ 4,142,48,39 });
 	particleDeathVeryBig.anim.PushBack({ 60,148,28,25 });
 	particleDeathVeryBig.anim.PushBack({ 96,143,41,37 });

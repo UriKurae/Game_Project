@@ -14,6 +14,10 @@
 
 #include "ModuleScene.h"
 #include "ModuleScene2.h"
+#include "ModuleScene3.h"
+#include "ModuleScene4.h"
+#include "ModuleScene5.h"
+#include "ModuleScene6.h"
 
 #include "SDL/include/SDL.h"
 
@@ -100,10 +104,27 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPE type, int x, int y)
 			{
 				App->scene->balloonsOnScene++;
 			}
-			if (App->player->scene2 == true) 
+			else if (App->player->scene2 == true) 
 			{
 				App->scene2->balloonsOnScene++;
 			}
+			else if (App->player->scene3 == true)
+			{
+				App->scene3->balloonsOnScene++;
+			}
+			else if (App->player->scene4 == true)
+			{
+				App->scene4->balloonsOnScene++;
+			}
+			else if (App->player->scene5 == true)
+			{
+				App->scene5->balloonsOnScene++;
+			}
+			else if (App->player->scene6 == true)
+			{
+				App->scene6->balloonsOnScene++;
+			}
+
 			spawnQueue[i].type = type;
 			spawnQueue[i].x = x;
 			spawnQueue[i].y = y;
