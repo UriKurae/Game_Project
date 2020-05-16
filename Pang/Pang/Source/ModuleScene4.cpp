@@ -54,6 +54,8 @@ bool ModuleScene4::Start()
 	lifesTexture3 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
 	++activeTextures; ++totalTextures;
 
+	stairs.PushBack({ 241, 284, 22, 16 });
+
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 1.0f);
 
 	//Walls collider
@@ -66,9 +68,9 @@ bool ModuleScene4::Start()
 	rightWall = App->collisions->AddCollider({ 376, 0, 8, 208 }, Collider::Type::WALL);
 	++activeColliders; ++totalColliders;
 
-	leftPlatform = App->collisions->AddCollider({ 184,155,8,32 }, Collider::Type::UNBREAKABLE_BLOCK);
+	leftPlatform = App->collisions->AddCollider({ 184,156,8,32 }, Collider::Type::UNBREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
-	rightPlatform = App->collisions->AddCollider({ 192,155,8,32 }, Collider::Type::UNBREAKABLE_BLOCK);
+	rightPlatform = App->collisions->AddCollider({ 192,156,8,32 }, Collider::Type::UNBREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 
 	App->player->Enable();
@@ -87,9 +89,7 @@ bool ModuleScene4::Start()
 
 	balloonsOnScene = 1;
 
-	App->enemies->touchWall = false;
-
-	App->player->scene1 = true;
+	App->player->scene1 = false;
 	App->player->scene2 = false;
 	App->player->scene3 = false;
 	App->player->scene4 = true;
@@ -122,6 +122,14 @@ update_status ModuleScene4::Update()
 update_status ModuleScene4::PostUpdate()
 {
 	App->render->Blit(bgTexture, 0, 0, NULL);
+
+	App->render->Blit(fgTexture, 161, 184, &(stairs.GetCurrentFrame()), 1.0f);
+	App->render->Blit(fgTexture, 161, 168, &(stairs.GetCurrentFrame()), 1.0f);
+	App->render->Blit(fgTexture, 161, 156, &(stairs.GetCurrentFrame()), 1.0f);
+
+	App->render->Blit(fgTexture, 201, 184, &(stairs.GetCurrentFrame()), 1.0f);
+	App->render->Blit(fgTexture, 201, 168, &(stairs.GetCurrentFrame()), 1.0f);
+	App->render->Blit(fgTexture, 201, 156, &(stairs.GetCurrentFrame()), 1.0f);
 
 	if (destroyedBlockLeft == false)
 	{
@@ -180,7 +188,7 @@ update_status ModuleScene4::PostUpdate()
 		}
 		else
 		{
-			App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+			App->fade->FadeToBlack((Module*)App->scene4, (Module*)App->sceneIntro, 60);
 		}
 	}
 

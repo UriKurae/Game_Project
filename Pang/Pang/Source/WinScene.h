@@ -32,9 +32,14 @@ public:
 public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
+	SDL_Texture* mapTexture = nullptr;
 
 	Animation winAnim;
 	Animation winAnim2;
+	Animation winAnim3;
+	Animation winAnim4;
+	Animation winAnim5;
+	Animation winAnim6;
 
 	Animation* currentAnimation = nullptr;
 

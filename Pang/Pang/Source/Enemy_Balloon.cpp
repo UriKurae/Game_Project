@@ -39,9 +39,9 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 	if (App->player->scene3)
 	{
 		veryBigBalloonAnim.PushBack({ 206, 57, 48, 40 });
-		bigBalloonAnim.PushBack({ 257, 63, 32, 26 });
-		smallBalloonAnim.PushBack({ 291,69,16,14 });
-		verySmallBalloonAnim.PushBack({ 311,73,8,7 });
+		bigBalloonAnim.PushBack({ 257, 64, 32, 26 });
+		smallBalloonAnim.PushBack({ 291,70,16,14 });
+		verySmallBalloonAnim.PushBack({ 311,74,8,7 });
 	}
 	particleDeathVeryBig.anim.PushBack({ 4,142,48,39 });
 	particleDeathVeryBig.anim.PushBack({ 60,148,28,25 });
@@ -147,7 +147,7 @@ void Enemy_Balloon::balloonBounce()
 
 void Enemy_Balloon::OnCollision(Collider* c2) {
 	
-	if (c2->type == Collider::Type::WALL) {
+	if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::UNBREAKABLE_BLOCK) {
 		
 		if (collider->rect.y < c2->rect.y + c2->rect.h && collider->rect.y + collider->rect.h > c2->rect.y + c2->rect.h) {
 			speedY = -(speedY + 1.5f);

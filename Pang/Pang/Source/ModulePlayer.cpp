@@ -87,6 +87,10 @@ bool ModulePlayer::Start()
 	++activeTextures; ++totalTextures;
 	
 	//SET SPAWN POSITION FOR PLAYER
+	if (scene4 == true) {
+		position.x = 8;
+		position.y = 123;
+	}
 	position.x = (SCREEN_WIDTH / 2) - 20;
 	position.y = SCREEN_HEIGHT - 77;
 
@@ -365,6 +369,17 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 
 	}
+
+	//if (c2->type == Collider::Type::UNBREAKABLE_BLOCK) {
+	//	if (c1->rect.x > c2->rect.x && c1->rect.x < c2->rect.x + c2->rect.w) {
+	//		position.x = 30;
+	//	}
+
+	//	if (c1->rect.x + c1->rect.w > c2->rect.x && c1->rect.x + c1->rect.w < c2->rect.x + c2->rect.w) {
+	//		position.x = 30;
+	//	}
+
+	//}
 
 	if (c2->type == Collider::Type::BALLOON && godMode == false)
 	{

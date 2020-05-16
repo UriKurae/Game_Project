@@ -41,8 +41,10 @@ public:
 
 	//The foreground sprite sheet loaded into an SDL_Texture
 	SDL_Texture* fgTexture = nullptr;
+	SDL_Texture* stairsTexture = nullptr;
 
 	Animation block;
+	Animation stairs;
 
 	Animation blockDestroy;
 

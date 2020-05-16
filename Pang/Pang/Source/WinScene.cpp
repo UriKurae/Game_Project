@@ -36,6 +36,7 @@ bool WinScene::Start()
 	bgTexture = App->textures->Load("Assets/UI/WinAnimations.png");
 	App->audio->PlayMusic("Assets/Sound/Sounds_Gameplay/Level_Complete.ogg", 1.0f);
 
+	mapTexture = App->textures->Load("Assets/UI/IntroMap.png");
 
 	char lookupTable2[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	winIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable2, 1);
@@ -49,10 +50,23 @@ bool WinScene::Start()
 		winAnim.speed = 0.1f;
 		winAnim.loop = true;
 	}
-	if (App->player->scene2 == true) {
+	else if (App->player->scene2 == true) {
 		winAnim2.PushBack({ 0, 96, 194, 96 });
 		winAnim2.speed = 0.1f;
 		winAnim2.loop = true;
+	}
+
+	else if (App->player->scene4 == true) {
+		winAnim4.PushBack({ 0, 288, 194, 96 });
+		winAnim4.PushBack({ 194, 288, 194, 96 });
+		winAnim4.speed = 0.1f;
+		winAnim4.loop = true;
+	}
+
+	else if (App->player->scene5 == true) {
+		winAnim5.PushBack({ 0, 384, 194, 96 });
+		winAnim5.speed = 0.1f;
+		winAnim5.loop = true;
 	}
 	
 	App->player->score += App->player->timeBonus;
@@ -73,7 +87,7 @@ update_status WinScene::Update()
 
 	else if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene2 == true)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->scene4, 90);
+		App->fade->FadeToBlack(this, (Module*)App->scene3, 90);
 	}
 
 	else if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene3 == true)
@@ -97,6 +111,7 @@ update_status WinScene::Update()
 	}
 
 	winAnim.Update();
+	winAnim4.Update();
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -110,16 +125,33 @@ update_status WinScene::PostUpdate()
 		App->render->Blit(bgTexture, 95, 32, &(winAnim.GetCurrentFrame()), 0.2f);
 		App->fonts->BlitText(168, 145, winIndex, "1STAGE");
 	}
-	if (App->player->scene2 == true) {
+	else if (App->player->scene2 == true) {
 		App->render->Blit(bgTexture, 95, 32, &(winAnim2.GetCurrentFrame()), 0.2f);
 		App->fonts->BlitText(168, 145, winIndex, "2STAGE");
 	}
-	App->fonts->BlitText(102, 170, winIndex, "TIME BONUS");
-	App->fonts->BlitText(214, 170, winIndex, bonusText);
-	App->fonts->BlitText(263, 170, winIndex, "PTS.");
-	App->fonts->BlitText(102, 186, winIndex, "NEXT EXTEND");
-	App->fonts->BlitText(214, 186, winIndex, "20000");
-	App->fonts->BlitText(263, 186, winIndex, "PTS.");
+	else if (App->player->scene3 == true) {
+		App->render->Blit(mapTexture, 0, 0, NULL);
+	}
+	else if (App->player->scene4 == true) {
+		App->render->Blit(bgTexture, 95, 32, &(winAnim4.GetCurrentFrame()), 0.2f);
+		App->fonts->BlitText(168, 145, winIndex, "4STAGE");
+	}
+	else if (App->player->scene5 == true) {
+		App->render->Blit(bgTexture, 95, 32, &(winAnim5.GetCurrentFrame()), 0.2f);
+		App->fonts->BlitText(168, 145, winIndex, "5STAGE");
+	}
+	else if (App->player->scene6 == true) {
+		App->render->Blit(mapTexture, 0, 0, NULL);
+	}
+
+	if (App->player->scene1 == true || App->player->scene2 == true || App->player->scene4 == true || App->player->scene5 == true) {
+		App->fonts->BlitText(102, 170, winIndex, "TIME BONUS");
+		App->fonts->BlitText(214, 170, winIndex, bonusText);
+		App->fonts->BlitText(263, 170, winIndex, "PTS.");
+		App->fonts->BlitText(102, 186, winIndex, "NEXT EXTEND");
+		App->fonts->BlitText(214, 186, winIndex, "20000");
+		App->fonts->BlitText(263, 186, winIndex, "PTS.");
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }

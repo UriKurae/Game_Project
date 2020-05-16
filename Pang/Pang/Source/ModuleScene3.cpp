@@ -96,7 +96,7 @@ bool ModuleScene3::Start()
 
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 50, 20);
-	App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, 207, 113);
+	App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, 207, 113);
 
 	App->player->uiIndex = 0;
 
@@ -108,8 +108,6 @@ bool ModuleScene3::Start()
 	App->player->scene4 = false;
 	App->player->scene5 = false;
 	App->player->scene6 = false;
-
-	App->enemies->touchWall = false;
 
 	return ret;
 
