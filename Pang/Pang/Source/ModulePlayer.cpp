@@ -307,15 +307,36 @@ update_status ModulePlayer::PostUpdate()
 
 	App->fonts->BlitText(81, 216, uiIndex, scoreText);
 	App->fonts->BlitText(25, 208, uiIndex, "PLAYER-1");
-	App->fonts->BlitText(158, 208, uiIndex, "MT.FUJI");
 
 	if (scene1 == true) 
 	{
 		App->fonts->BlitText(161, 228, uiIndex, "1-1 STAGE");
+		App->fonts->BlitText(158, 208, uiIndex, "MT.FUJI");
 	}
-	if (scene2 == true)
+	else if (scene2 == true)
 	{
 		App->fonts->BlitText(161, 228, uiIndex, "1-2 STAGE");
+		App->fonts->BlitText(158, 208, uiIndex, "MT.FUJI");
+	}
+	else if (scene3 == true)
+	{
+		App->fonts->BlitText(161, 228, uiIndex, "1-3 STAGE");
+		App->fonts->BlitText(158, 208, uiIndex, "MT.FUJI");
+	}
+	else if (scene4 == true)
+	{
+		App->fonts->BlitText(161, 228, uiIndex, "2-4 STAGE");
+		App->fonts->BlitText(158, 208, uiIndex, "MT.KEIRIN");
+	}
+	else if (scene5 == true)
+	{
+		App->fonts->BlitText(161, 228, uiIndex, "2-5 STAGE");
+		App->fonts->BlitText(158, 208, uiIndex, "MT.KEIRIN");
+	}
+	else if (scene6 == true)
+	{
+		App->fonts->BlitText(161, 228, uiIndex, "2-6 STAGE");
+		App->fonts->BlitText(158, 208, uiIndex, "MT.KEIRIN");
 	}
 	App->fonts->BlitText(151, 236, uiIndex, "HI: 100000");
 	App->fonts->BlitText(272, 208, uiIndex, "PLAYER-2");

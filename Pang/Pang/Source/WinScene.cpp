@@ -71,7 +71,27 @@ update_status WinScene::Update()
 		App->fade->FadeToBlack(this, (Module*)App->scene2, 90);
 	}
 
-	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene2 == true)
+	else if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene2 == true)
+	{
+		App->fade->FadeToBlack(this, (Module*)App->scene3, 90);
+	}
+
+	else if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene3 == true)
+	{
+		App->fade->FadeToBlack(this, (Module*)App->scene4, 90);
+	}
+
+	else if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene4 == true)
+	{
+		App->fade->FadeToBlack(this, (Module*)App->scene5, 90);
+	}
+
+	else if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene5 == true)
+	{
+		App->fade->FadeToBlack(this, (Module*)App->scene6, 90);
+	}
+
+	else if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene6 == true)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 90);
 	}
