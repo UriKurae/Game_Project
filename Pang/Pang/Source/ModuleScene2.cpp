@@ -101,6 +101,10 @@ bool ModuleScene2::Start()
 
 	App->player->scene1 = false;
 	App->player->scene2 = true;
+	App->player->scene3 = false;
+	App->player->scene4 = false;
+	App->player->scene5 = false;
+	App->player->scene6 = false;
 
 	App->enemies->touchWall = false;
 

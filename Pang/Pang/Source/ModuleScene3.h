@@ -33,8 +33,10 @@ public:
 	uint countDownToFade = 180;
 	int toFade = 5;
 
-	bool destroyedBlockLeft = false;
-	bool destroyedBlockRight = false;
+	bool destroyedBlockTop = false;
+	bool destroyedBlockBottom = false;
+	bool unDestroyedBlockRight = false;
+	bool unDestroyedBlockLeft = false;
 
 	// The background sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
@@ -61,8 +63,10 @@ public:
 	Collider* lowerWall = nullptr;
 
 	//Colliders for each block platform
-	Collider* leftPlatform = nullptr;
-	Collider* rightPlatform = nullptr;
+	Collider* leftUnDestroyablePlatform = nullptr;
+	Collider* rightUnDestroyablePlatform = nullptr;
+	Collider* topDestroyablePlatform = nullptr;
+	Collider* bottomDestroyablePlatform = nullptr;
 
 	SDL_Texture* lifesTexture1 = nullptr;
 	SDL_Texture* lifesTexture2 = nullptr;
