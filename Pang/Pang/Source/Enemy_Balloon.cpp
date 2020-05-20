@@ -36,7 +36,7 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 		smallBalloonAnim.PushBack({ 291,22,16,14 });
 		verySmallBalloonAnim.PushBack({ 311,26,8,7 });
 	}
-	if (App->player->scene3)
+	if (App->player->scene3 || App->player->scene6)
 	{
 		veryBigBalloonAnim.PushBack({ 206, 57, 48, 40 });
 		bigBalloonAnim.PushBack({ 257, 64, 32, 26 });
@@ -74,6 +74,11 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 	
 	
 	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
+	{
+		collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::BALLOON, (Module*)App->enemies);
+		currentAnim = &veryBigBalloonAnim;
+	}
+	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
 	{
 		collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::BALLOON, (Module*)App->enemies);
 		currentAnim = &veryBigBalloonAnim;
@@ -130,7 +135,7 @@ void Enemy_Balloon::balloonBounce()
 
 	if (!App->player->destroyed)
 	{
-		if (tipoBalloon == ENEMY_TYPE::BIGBALLOON2 || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2 || tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2) {
+		if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2 || tipoBalloon == ENEMY_TYPE::BIGBALLOON2 || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2 || tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2) {
 			position.x -= speedX;
 			position.y -= (speedY + gravity);
 			speedY -= gravity;
@@ -234,16 +239,11 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 			if (c2->Intersects(r) == true) {
 				
 				collider->pendingToDelete = true;
-				App->scene->balloonsOnScene--;
-				App->scene2->balloonsOnScene--;
-				App->scene3->balloonsOnScene--;
-				App->scene4->balloonsOnScene--;
-				App->scene5->balloonsOnScene--;
-				App->scene6->balloonsOnScene--;
+				App->enemies->balloon.balloonsOnScene--;
 				App->harpoon->totalColliders--;
 
 
-				if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
+				if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
 				{
 					App->player->lastBalloon = ENEMY_TYPE::VERYBIGBALLOON;
 					App->particles->AddParticle(particleDeathVeryBig, position.x, position.y, Collider::Type::NONE, 0);

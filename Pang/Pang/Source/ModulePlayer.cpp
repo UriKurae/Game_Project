@@ -113,6 +113,14 @@ update_status ModulePlayer::Update()
 {
 	GamePad& pad = App->input->pads[0];
 
+	//TO GET THE MOUSE POSITION, SDL_GETMouseState, MUST FIX THE FOR SOME FUCKING REASON THE BALLS WONT SPAWN.
+	//if (App->input->keys[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
+	//{
+	//	SDL_GetMouseState(&mouseX, &mouseY);
+
+	//	App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, mouseX, mouseY);
+	//}
+
 	//Debug key for gamepad rumble testing purposes
 	if (App->input->keys[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)
 	{
@@ -144,11 +152,11 @@ update_status ModulePlayer::Update()
 	}
 
 	if (ready == 0) {
-		if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0 && destroyed == false || count % 60 == 0 && time > 0 && App->scene2->balloonsOnScene > 0 && destroyed == false) {
+		if (count % 60 == 0 && time > 0 && App->enemies->balloon.balloonsOnScene > 0 && destroyed == false) {
 			time--;
 		}
 
-		if (App->scene->balloonsOnScene == 0 || App->scene2->balloonsOnScene == 0) {
+		if (App->enemies->balloon.balloonsOnScene == 0) {
 			timeBonus = time * 100;
 		}
 
@@ -180,7 +188,7 @@ update_status ModulePlayer::Update()
 		{
 			if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
 			{
-				if (App->scene->balloonsOnScene == 0)
+				if (App->enemies->balloon.balloonsOnScene == 0)
 				{
 					idleAnim.Reset();
 					currentAnimation = &idleAnim;
@@ -219,7 +227,7 @@ update_status ModulePlayer::Update()
 		{
 			if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
 			{
-				if (App->scene->balloonsOnScene == 0)
+				if (App->enemies->balloon.balloonsOnScene == 0)
 				{
 					idleAnim.Reset();
 					currentAnimation = &idleAnim;

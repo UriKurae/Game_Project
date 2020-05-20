@@ -78,16 +78,16 @@ bool ModuleScene3::Start()
 	++activeColliders; ++totalColliders;
 
 	//Colliders for blocks
-	leftUnDestroyablePlatform = App->collisions->AddCollider({ 72,80,31,6 }, Collider::Type::BREAKABLE_BLOCK);
+	leftUnDestroyablePlatform = App->collisions->AddCollider({ 73,81,32,6 }, Collider::Type::BREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 
-	rightUnDestroyablePlatform = App->collisions->AddCollider({ 278,81,31,6 }, Collider::Type::BREAKABLE_BLOCK);
+	rightUnDestroyablePlatform = App->collisions->AddCollider({ 279,81,32,6 }, Collider::Type::BREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 
-	topDestroyablePlatform = App->collisions->AddCollider({ 176,81,31,6 }, Collider::Type::BREAKABLE_BLOCK);
+	topDestroyablePlatform = App->collisions->AddCollider({ 175,81,32,6 }, Collider::Type::BREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 
-	bottomDestroyablePlatform = App->collisions->AddCollider({ 176,130,31,6 }, Collider::Type::BREAKABLE_BLOCK);
+	bottomDestroyablePlatform = App->collisions->AddCollider({ 176,131,32,6 }, Collider::Type::BREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 
 	App->player->Enable();
@@ -102,7 +102,7 @@ bool ModuleScene3::Start()
 
 	App->player->uiIndex = 0;
 
-	balloonsOnScene = 2;
+	App->enemies->balloon.balloonsOnScene = 2;
 
 	App->player->scene1 = false;
 	App->player->scene2 = false;
@@ -120,7 +120,7 @@ update_status ModuleScene3::Update()
 
 	if (App->input->keys[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
 	{
-		balloonsOnScene = 0;
+		App->enemies->balloon.balloonsOnScene = 0;
 		App->collisions->RemoveCollider(leftWall);
 		App->collisions->RemoveCollider(rightWall);
 		App->collisions->RemoveCollider(upperWall);
@@ -132,9 +132,8 @@ update_status ModuleScene3::Update()
 	}
 
 
-	if (balloonsOnScene == 0)
+	if (App->enemies->balloon.balloonsOnScene == 0)
 	{
-
 		App->harpoon->Disable();
 		App->fade->FadeToBlack((Module*)App->scene3, (Module*)App->winScene, 60);
 
