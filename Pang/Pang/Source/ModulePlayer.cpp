@@ -144,11 +144,11 @@ update_status ModulePlayer::Update()
 	}
 
 	if (ready == 0) {
-		if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0 && destroyed == false || count % 60 == 0 && time > 0 && App->scene2->balloonsOnScene > 0 && destroyed == false) {
+		if (count % 60 == 0 && time > 0 && App->enemies->balloon.balloonsOnScene > 0 && destroyed == false) {
 			time--;
 		}
 
-		if (App->scene->balloonsOnScene == 0 || App->scene2->balloonsOnScene == 0) {
+		if (App->enemies->balloon.balloonsOnScene == 0) {
 			timeBonus = time * 100;
 		}
 
@@ -180,7 +180,7 @@ update_status ModulePlayer::Update()
 		{
 			if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
 			{
-				if (App->scene->balloonsOnScene == 0)
+				if (App->enemies->balloon.balloonsOnScene == 0)
 				{
 					idleAnim.Reset();
 					currentAnimation = &idleAnim;
@@ -219,7 +219,7 @@ update_status ModulePlayer::Update()
 		{
 			if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
 			{
-				if (App->scene->balloonsOnScene == 0)
+				if (App->enemies->balloon.balloonsOnScene == 0)
 				{
 					idleAnim.Reset();
 					currentAnimation = &idleAnim;

@@ -99,7 +99,7 @@ bool ModuleScene2::Start()
 
 	App->player->uiIndex = 0;
 
-	balloonsOnScene = 1;
+	App->enemies->balloon.balloonsOnScene = 1;
 
 	App->player->scene1 = false;
 	App->player->scene2 = true;
@@ -108,8 +108,6 @@ bool ModuleScene2::Start()
 	App->player->scene5 = false;
 	App->player->scene6 = false;
 
-	App->enemies->touchWall = false;
-
 	return ret; 
 }
 
@@ -117,7 +115,7 @@ update_status ModuleScene2::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
 	{
-		balloonsOnScene = 0;
+		App->enemies->balloon.balloonsOnScene = 0;
 		App->collisions->RemoveCollider(leftWall);
 		App->collisions->RemoveCollider(rightWall);
 		App->collisions->RemoveCollider(upperWall);
@@ -129,7 +127,7 @@ update_status ModuleScene2::Update()
 	}
 
 
-	if (balloonsOnScene == 0)
+	if (App->enemies->balloon.balloonsOnScene == 0)
 	{
 
 		App->harpoon->Disable();

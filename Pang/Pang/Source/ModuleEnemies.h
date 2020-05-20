@@ -13,6 +13,7 @@ enum class ENEMY_TYPE
 	REDBIRD,
 	BROWNSHIP,
 	VERYBIGBALLOON,
+	VERYBIGBALLOON2,
 	BIGBALLOON,
 	BIGBALLOON2,
 	SMALLBALLOON,
@@ -71,7 +72,7 @@ public:
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
 
-	bool touchWall = false;
+	Enemy_Balloon balloon;
 
 	// The enemies sprite sheet
 	SDL_Texture* texture = nullptr;
@@ -86,9 +87,6 @@ private:
 
 	// All spawned enemies in the scene
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
-
-	
-	Enemy_Balloon balloon;
 
 	Collider* balloonCollider = balloon.collider;
 

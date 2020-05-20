@@ -88,7 +88,7 @@ bool ModuleScene4::Start()
 
 	App->player->score = 0;
 
-	balloonsOnScene = 1;
+	App->enemies->balloon.balloonsOnScene = 1;
 
 	App->player->scene1 = false;
 	App->player->scene2 = false;
@@ -108,11 +108,10 @@ update_status ModuleScene4::Update()
 	//LOG("Balloons On Stage %d", App->scene->balloonsOnScene);
 	if (App->input->keys[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
 	{
-		balloonsOnScene = 0;
-
+		App->enemies->balloon.balloonsOnScene = 0;
 	}
 
-	if (balloonsOnScene == 0)
+	if (App->enemies->balloon.balloonsOnScene == 0)
 	{
 		App->fade->FadeToBlack((Module*)App->scene4, (Module*)App->winScene, 60);
 	}
@@ -134,12 +133,12 @@ update_status ModuleScene4::PostUpdate()
 
 	if (destroyedBlockLeft == false)
 	{
-		App->render->Blit(fgTexture, 184, 155, &(block.GetCurrentFrame()), 1.0f);
+		App->render->Blit(fgTexture, 184, 156, &(block.GetCurrentFrame()), 1.0f);
 	}
 
 	if (destroyedBlockRight == false)
 	{
-		App->render->Blit(fgTexture, 192, 155, &(block.GetCurrentFrame()), 1.0f);
+		App->render->Blit(fgTexture, 192, 156, &(block.GetCurrentFrame()), 1.0f);
 	}
 
 	if (App->player->lifes == 3)
@@ -259,6 +258,10 @@ bool ModuleScene4::CleanUp()
 	App->collisions->RemoveCollider(upperWall);
 	--totalColliders;
 	App->collisions->RemoveCollider(lowerWall);
+	--totalColliders;
+	App->collisions->RemoveCollider(rightPlatform);
+	--totalColliders;
+	App->collisions->RemoveCollider(leftPlatform);
 	--totalColliders;
 
 	App->textures->Unload(App->enemies->texture);

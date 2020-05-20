@@ -70,9 +70,9 @@ bool ModuleScene::Start()
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
-	App->gunShot->
+	App->gunShot->Disable();
 	App->hookShot->Disable();
-	App->harpoon->Disable();
+	App->harpoon->Enable();
 	//App->input->Enable();
 
 	//ADD ENEMIES
@@ -82,9 +82,7 @@ bool ModuleScene::Start()
 	
 	App->player->score = 0;
 
-	balloonsOnScene = 1;
-
-	App->enemies->touchWall = false;
+	App->enemies->balloon.balloonsOnScene = 1;
 
 	App->player->scene1 = true;
 	App->player->scene2 = false;
@@ -100,12 +98,12 @@ update_status ModuleScene::Update()
 	//LOG("Balloons On Stage %d", App->scene->balloonsOnScene);
 	if (App->input->keys[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
 	{
-		balloonsOnScene = 0;
+		App->enemies->balloon.balloonsOnScene = 0;
 	
 	}
 
 
-	if (balloonsOnScene == 0)
+	if (App->enemies->balloon.balloonsOnScene == 0)
 	{
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->winScene, 60);
 	}

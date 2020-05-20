@@ -102,7 +102,7 @@ bool ModuleScene3::Start()
 
 	App->player->uiIndex = 0;
 
-	balloonsOnScene = 2;
+	App->enemies->balloon.balloonsOnScene = 2;
 
 	App->player->scene1 = false;
 	App->player->scene2 = false;
@@ -120,7 +120,7 @@ update_status ModuleScene3::Update()
 
 	if (App->input->keys[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
 	{
-		balloonsOnScene = 0;
+		App->enemies->balloon.balloonsOnScene = 0;
 		App->collisions->RemoveCollider(leftWall);
 		App->collisions->RemoveCollider(rightWall);
 		App->collisions->RemoveCollider(upperWall);
@@ -132,9 +132,8 @@ update_status ModuleScene3::Update()
 	}
 
 
-	if (balloonsOnScene == 0)
+	if (App->enemies->balloon.balloonsOnScene == 0)
 	{
-
 		App->harpoon->Disable();
 		App->fade->FadeToBlack((Module*)App->scene3, (Module*)App->winScene, 60);
 
