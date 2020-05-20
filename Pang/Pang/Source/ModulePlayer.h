@@ -38,6 +38,10 @@ public:
 	// Position of the player in the map
 	iPoint position;
 
+	//Position of the mouse
+	int mouseX;
+	int mouseY;
+
 	// The speed in which we move the player (pixels per frame)
 	int speed = 2;
 
