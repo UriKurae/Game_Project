@@ -27,12 +27,16 @@ public:
 
 	Animation* currentAnimation = nullptr;
 
+	Animation gunShot;
+	Animation gunShotMove;
+
 	//Collider* colliderH = nullptr;
 
 	Particle gunShotParticle;
-	Particle gunShot;
 
-	uint HarpoonFx = 0;
+	Collider* colliderH = nullptr;
+
+	uint gunShotFx = 0;
 
 	uint time = 5;
 	uint count = 0;

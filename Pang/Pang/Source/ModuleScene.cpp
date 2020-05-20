@@ -70,7 +70,7 @@ bool ModuleScene::Start()
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
-	App->gunShot->Disable();
+	App->gunShot->Enable();
 	App->hookShot->Disable();
 	App->harpoon->Disable();
 	//App->input->Enable();
@@ -190,6 +190,7 @@ bool ModuleScene::CleanUp()
 	App->harpoon->Disable();
 	App->collisions->Disable();
 	App->hookShot->Disable();
+	App->gunShot->Disable();
 	//App->input->Disable();
 	App->sceneIntro->countdown = 1;
 
