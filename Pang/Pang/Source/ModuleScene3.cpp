@@ -16,7 +16,7 @@
 #include "ModuleFonts.h"
 #include "ModuleTextures.h"
 #include "IntroScene.h"
-#include "ModuleHarpoon_HookShot.h"
+#include "Module.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL/include/SDL_scancode.h"

@@ -70,7 +70,7 @@ bool ModuleScene::Start()
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
-	App->gunShot->
+	App->gunShot->Disable();
 	App->hookShot->Disable();
 	App->harpoon->Disable();
 	//App->input->Enable();
