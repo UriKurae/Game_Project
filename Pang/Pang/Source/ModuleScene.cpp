@@ -11,6 +11,7 @@
 #include "ModulePlayer.h"
 #include "ModuleHarpoon_Shot.h"
 #include "ModuleHarpoon_HookShot.h"
+#include "ModuleGunShot.h"
 #include "ModuleInput.h"
 #include "ModuleFonts.h"
 #include "ModuleTextures.h"
@@ -69,7 +70,8 @@ bool ModuleScene::Start()
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
-	App->hookShot->Enable();
+	App->gunShot->
+	App->hookShot->Disable();
 	App->harpoon->Disable();
 	//App->input->Enable();
 

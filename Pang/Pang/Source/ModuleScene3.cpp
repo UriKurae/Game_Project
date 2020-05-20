@@ -10,6 +10,8 @@
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 #include "ModuleHarpoon_Shot.h"
+#include "ModuleHarpoon_HookShot.h"
+#include "ModuleGunShot.h"
 #include "ModuleInput.h"
 #include "ModuleFonts.h"
 #include "ModuleTextures.h"
