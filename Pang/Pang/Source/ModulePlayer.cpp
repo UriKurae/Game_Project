@@ -12,6 +12,7 @@
 #include "ModuleHarpoon_Shot.h"
 #include "ModuleHarpoon_HookShot.h"
 #include "ModuleFadeToBlack.h"
+#include <stdio.h>
 
 #include "Enemy.h"
 #include "ModuleEnemies.h"
@@ -141,12 +142,14 @@ update_status ModulePlayer::Update()
 	GamePad& pad = App->input->pads[0];
 
 	//TO GET THE MOUSE POSITION, SDL_GETMouseState, MUST FIX THE FOR SOME FUCKING REASON THE BALLS WONT SPAWN.
-	//if (App->input->keys[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
-	//{
-	//	SDL_GetMouseState(&mouseX, &mouseY);
+	if (App->input->keys[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
+	{
+		
+		SDL_GetMouseState(&mouseX, &mouseY);
+	
 
-	//	App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, mouseX, mouseY);
-	//}
+		App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, (mouseX/SCREEN_SIZE), (mouseY/SCREEN_SIZE));
+	}
 
 	//Debug key for gamepad rumble testing purposes
 	if (App->input->keys[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)

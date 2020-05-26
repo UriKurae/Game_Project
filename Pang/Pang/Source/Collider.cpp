@@ -7,7 +7,7 @@ Collider::Collider(SDL_Rect rectangle, Type type, Module* listener): rect(rectan
 
 void Collider::SetPos(int x, int y)
 {
-	rect.x = x;
+ 	rect.x = x;
 	rect.y = y;
 }
 
