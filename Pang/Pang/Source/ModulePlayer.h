@@ -57,6 +57,9 @@ public:
 
 	// A set of animations
 	Animation idleAnim;
+	Animation upAnim;
+	Animation downAnim;
+	Animation stairsAnim;
 	Animation leftAnim;
 	Animation rightAnim;
 	Animation shotAnim;

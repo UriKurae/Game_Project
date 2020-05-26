@@ -17,6 +17,7 @@ struct Collider
 		BALLOON,
 		BREAKABLE_BLOCK,
 		UNBREAKABLE_BLOCK,
+		STAIR,
 
 		MAX
 	};

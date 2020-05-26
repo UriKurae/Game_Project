@@ -23,6 +23,7 @@
 
 ModuleScene5::ModuleScene5(bool startEnabled) : Module(startEnabled)
 {
+	name = "LEVEL 5";
 }
 
 ModuleScene5::~ModuleScene5()
@@ -53,8 +54,6 @@ bool ModuleScene5::Start()
 	++activeTextures; ++totalTextures;
 	lifesTexture3 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
 	++activeTextures; ++totalTextures;
-
-	//stairs.PushBack({ 241, 284, 22, 16 });
 
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 1.0f);
 

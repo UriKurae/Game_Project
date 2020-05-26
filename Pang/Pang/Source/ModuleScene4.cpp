@@ -68,6 +68,10 @@ bool ModuleScene4::Start()
 	++activeColliders; ++totalColliders;
 	rightWall = App->collisions->AddCollider({ 376, 0, 8, 208 }, Collider::Type::WALL);
 	++activeColliders; ++totalColliders;
+	stairLeft = App->collisions->AddCollider({ 161, 155, 22, 45 }, Collider::Type::STAIR);
+	++activeColliders; ++totalColliders;
+	stairRight = App->collisions->AddCollider({ 161, 155, 22, 45 }, Collider::Type::STAIR);
+	++activeColliders; ++totalColliders;
 
 	leftPlatform = App->collisions->AddCollider({ 184,156,8,32 }, Collider::Type::UNBREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;

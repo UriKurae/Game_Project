@@ -61,6 +61,8 @@ public:
 	Collider* leftWall = nullptr;
 	Collider* upperWall = nullptr;
 	Collider* lowerWall = nullptr;
+	Collider* stairLeft = nullptr;
+	Collider* stairRight = nullptr;
 
 	//Colliders for each block platform
 	Collider* leftPlatform = nullptr;

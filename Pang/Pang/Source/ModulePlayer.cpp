@@ -49,6 +49,31 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	rightAnim.PushBack({136, 0, 30, 32});
 	rightAnim.speed = 0.3f;
 
+	//move upStairs
+	upAnim.PushBack({0, 34, 25, 32});
+	upAnim.PushBack({37, 34, 24, 32});
+	upAnim.PushBack({69, 34, 26, 32});
+	upAnim.PushBack({103, 34, 26, 32});
+	upAnim.PushBack({4, 75, 24, 31});
+	upAnim.PushBack({35, 75, 27, 31});
+	upAnim.PushBack({69, 76, 27, 30});
+	upAnim.speed = 0.1f;
+
+	//move upStairs
+	downAnim.PushBack({ 69, 76, 27, 30 });
+	downAnim.PushBack({ 35, 75, 27, 31 });
+	downAnim.PushBack({ 4, 75, 24, 31 });
+	downAnim.PushBack({ 103, 34, 26, 32 });
+	downAnim.PushBack({ 69, 34, 26, 32 });
+	downAnim.PushBack({ 37, 34, 24, 32 });
+	downAnim.PushBack({ 0, 34, 25, 32 });
+	downAnim.speed = 0.1f;
+
+	//move updpwnStairs
+	stairsAnim.PushBack({ 104, 81, 28, 26 });
+	stairsAnim.speed = 0.1;
+	stairsAnim.loop = false;
+
 	//left death animation
 	deadAnimLeft.PushBack({ 69, 110 ,41, 30 });
 
@@ -89,10 +114,12 @@ bool ModulePlayer::Start()
 	//SET SPAWN POSITION FOR PLAYER
 	if (scene4 == true) {
 		position.x = 8;
-		position.y = 123;
+		position.y = 124;
 	}
-	position.x = (SCREEN_WIDTH / 2) - 20;
-	position.y = SCREEN_HEIGHT - 77;
+	else {
+		position.x = (SCREEN_WIDTH / 2) - 20;
+		position.y = SCREEN_HEIGHT - 77;
+	}
 
 	
 	collider = App->collisions->AddCollider({ position.x, position.y, 26, 32 }, Collider::Type::PLAYER, this);
@@ -250,7 +277,7 @@ update_status ModulePlayer::Update()
 		}
 		// If no up/down movement detected, set the current animation back to idle
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
-			&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_IDLE)
+			&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE)
 		{
 			currentAnimation = &idleAnim;
 		}
@@ -367,15 +394,60 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	}*/
 
 	
-	if (c2 ->type == Collider::Type::WALL) {
+	if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::UNBREAKABLE_BLOCK) {
 		if (c1->rect.x > c2->rect.x && c1->rect.x < c2->rect.x + c2->rect.w) {
-			position.x = 6;
+			position.x = position.x + 2;
 		}
 
 		if (c1->rect.x + c1->rect.w > c2->rect.x && c1->rect.x + c1->rect.w < c2->rect.x + c2->rect.w) {
-			position.x = SCREEN_WIDTH - 33;
+			position.x = position.x - 2;
+		}
+		
+		if (c1->rect.y + c1->rect.h > c2->rect.y) {
+			position.y = 168;
+		}
+	}
+
+	if (c2->type == Collider::Type::STAIR) {
+		if (c1->rect.y <= c2->rect.y) {
+			if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
+				position.y -= 0.2f;
+				stairsAnim.Reset();
+				currentAnimation = &stairsAnim;
+			}
 		}
 
+		else if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !destroyed)
+		{
+			position.y -= 0.5f;
+
+			if (currentAnimation != &upAnim)
+			{
+				upAnim.Reset();
+				currentAnimation = &upAnim;
+			}
+
+		}
+
+		if (c1->rect.y + c1->rect.h >= c2->rect.y) {
+			if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) {
+				position.y += 0.2f;
+				stairsAnim.Reset();
+				currentAnimation = &stairsAnim;
+			}
+		}
+
+		else if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !destroyed)
+		{
+			position.y += 1;
+
+			if (currentAnimation != &downAnim)
+			{
+				downAnim.Reset();
+				currentAnimation = &downAnim;
+			}
+
+		}
 	}
 
 	//if (c2->type == Collider::Type::UNBREAKABLE_BLOCK) {
