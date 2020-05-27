@@ -14,13 +14,14 @@
 #include "ModulePlayer.h"
 #include "ModuleHarpoon_Shot.h"
 #include "ModuleHarpoon_HookShot.h"
-#include "ModuleBoosters.h"
-#include "ModuleInput.h"
+
+#include "ModuleTileset.h"
+#include "Application.h"
 
 #include "SDL/include/SDL.h"
 
 
-Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x,y)
+Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x, y)
 {
 
 	ballonExplosion = App->audio->LoadFx("Assets/Sound/FX/DestroyBalls.wav");
@@ -73,8 +74,8 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 	particleDeathVerySmall.anim.loop = false;
 
 	currentAnim = &veryBigBalloonAnim;
-	
-	
+
+
 	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
 		collider = App->collisions->AddCollider({ position.x, position.y, 48, 40 }, Collider::Type::BALLOON, (Module*)App->enemies);
@@ -120,16 +121,8 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 void Enemy_Balloon::Update()
 {
 	if (App->player->ready == 0) {
+		MRUA();
 		balloonBounce();
-
-		//MUST CHANGE BECAUSE IT HAS TO WORK WITH COLLISIONS
-		if (App->input->keys[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)
-		{
-			App->boosters->posX = position.x;
-			App->boosters->posY = position.y;
-		}
-		
-
 
 		if (App->player->destroyed)
 		{
@@ -138,13 +131,11 @@ void Enemy_Balloon::Update()
 
 		Enemy::Update();
 	}
-
 }
 
-void Enemy_Balloon::balloonBounce()
-{
-	//PHYSICS MOTIONS
 
+void Enemy_Balloon::MRUA()
+{
 	if (!App->player->destroyed)
 	{
 		if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2 || tipoBalloon == ENEMY_TYPE::BIGBALLOON2 || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2 || tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2) {
@@ -158,158 +149,219 @@ void Enemy_Balloon::balloonBounce()
 			speedY -= gravity;
 		}
 	}
-	
-	//TODO PHYSICS, IMPLEMENT RIGHT, LEFT AND TOP HIT WITH THE BALLOON, SHOULD NOT GAIN SPEED.
 }
 
-void Enemy_Balloon::OnCollision(Collider* c2) {
-	
-	if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::UNBREAKABLE_BLOCK) {
-		
-		if (collider->rect.y < c2->rect.y + c2->rect.h && collider->rect.y + collider->rect.h > c2->rect.y + c2->rect.h) {
-			speedY = -(speedY + 1.5f);
-		}
+void Enemy_Balloon::balloonBounce()
+{
+	//PHYSICS MOTIONS
 
-		else if (collider->rect.y + collider->rect.h > c2->rect.y && collider->rect.y < c2->rect.y) {
+
+	iPoint tile = { position.x / TILE_SIZE, position.y / TILE_SIZE };
+	if (tile.x < 0) { tile.x = 0; }
+	if (tile.y < 0) { tile.y = 0; }
+	//LOG("%d     %d", tile.x, tile.y);
+
+	//FLOOR COLLISION
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		for (int i = 1; i < 6; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y + 5, tile.x + i).id == ModuleTileset::TileType::WALL)
+			{
+				//position.y -= 5;
+				speedY = 4.5f;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::BIGBALLOON || this->tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
+	{
+		for (int i = 1; i < 4; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y + 3.5f, tile.x + i).id == ModuleTileset::TileType::WALL)
+			{
+				speedY = 4.5f;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON || this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
+	{
+		for (int i = 1; i < 2; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y + 2, tile.x + i).id == ModuleTileset::TileType::WALL)
+			{
+				speedY = 4.5f;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
+	{
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::WALL)
+		{
 			speedY = 4.5f;
 		}
-
-		else if (collider->rect.x + collider->rect.w > c2->rect.x) {
-			speedX = -speedX;
-		}	
 	}
 
-	if (c2->type == Collider::Type::BREAKABLE_BLOCK) {
 
-		if (c2->type == Collider::Type::BREAKABLE_BLOCK) {
-			
+	//RIGHT WALL COLLISION
 
-				int topBalloon = collider->rect.y;
-				int leftBalloon = collider->rect.x;
-				int bottomBalloon = collider->rect.y + collider->rect.h;
-				int rightBalloon = collider->rect.x + collider->rect.w;
-
-				int topWall = c2->rect.y;
-				int leftWall = c2->rect.x;
-				int bottomWall = c2->rect.y + c2->rect.h;
-				int rightWall = c2->rect.x + c2->rect.w;
-				
-				if (bottomBalloon >= topWall && bottomBalloon < bottomWall)
-				{
-					speedY = 4.5f;
-					LOG("Balloon touching from above");
-				}
-				 if (topBalloon <= bottomWall && topBalloon > topWall)
-				{
-					speedY = -(speedY + 0.5f);
-					LOG("Balloon touching from below");
-				}
-				 if (rightBalloon >= leftWall)
-				{
-					speedX = -(speedX);
-					LOG("Balloon touching from left side");
-				}
-				 if (leftBalloon <= rightWall)
-				{
-					speedX = -(speedX);
-					LOG("Balloon touching from right side");
-				}
-			
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		for (int i = 0; i < 5; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y + i, tile.x + 6).id == ModuleTileset::TileType::WALL)
+			{
+				speedX = -speedX;
+				break;
+			}
 		}
-		/*if (collider->rect.y + collider->rect.h > c2->rect.y + c2->rect.h && collider->rect.y < c2->rect.y + c2->rect.h) {
-			speedY = -(speedY + 0.5f);
-		}
-
-		else if (collider->rect.y + collider->rect.h > c2->rect.y && collider->rect.y + collider->rect.h < c2->rect.y + c2->rect.y) {
-			speedY = 2.5f;
-		}
-
-		else if (collider->rect.x + collider->rect.w > c2->rect.x) {
-			speedX = -speedX;
-		}
-
-		else if (collider->rect.y > c2->rect.y && collider->rect.y < c2->rect.y + c2->rect.h && collider->rect.x > c2->rect.x && collider->rect.x < c2->rect.x + c2->rect.w) {
-			speedX = -speedX;
-		}
-
-		else if (collider->rect.y + collider->rect.h > c2->rect.y && collider->rect.y + collider->rect.h < c2->rect.y + c2->rect.h && collider->rect.x > c2->rect.x && collider->rect.x < c2->rect.x + c2->rect.w) {
-			speedX = -speedX;
-		}
-
-		else if (collider->rect.y + collider->rect.h > c2->rect.y && collider->rect.y + collider->rect.h < c2->rect.y + c2->rect.h && collider->rect.x + collider->rect.w > c2->rect.x && collider->rect.x + collider->rect.w < c2->rect.x + c2->rect.w) {
-			speedX = -speedX;
-		}
-
-		else if (collider->rect.y > c2->rect.y && collider->rect.y < c2->rect.y + c2->rect.h && collider->rect.x + collider->rect.w > c2->rect.x && collider->rect.x + collider->rect.w < c2->rect.x + c2->rect.w) {
-			speedX = -speedX;
-		}*/
 	}
+	else if (this->tipoBalloon == ENEMY_TYPE::BIGBALLOON || this->tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
+	{
+		for (int i = 0; i < 3; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y + i, tile.x + 4).id == ModuleTileset::TileType::WALL)
+			{
+				speedX = -speedX;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON || this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
+	{
+		for (int i = 0; i < 2; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y + i, tile.x + 2.5f).id == ModuleTileset::TileType::WALL)
+			{
+				speedX = -speedX;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
+	{
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::WALL)
+		{
+			speedX = -speedX;
+		}
+	}
+
+
+
+	//LEFT WALL COLLISION
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		for (int i = 0; i < 5; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y + i, tile.x).id == ModuleTileset::TileType::WALL)
+			{
+				speedX = -speedX;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::BIGBALLOON || this->tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
+	{
+		for (int i = 0; i < 3; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y + i, tile.x).id == ModuleTileset::TileType::WALL)
+			{
+				speedX = -speedX;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON || this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
+	{
+		for (int i = 0; i < 2; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y + i, tile.x).id == ModuleTileset::TileType::WALL)
+			{
+				speedX = -speedX;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
+	{
+		if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::WALL)
+		{
+			speedX = -speedX;
+		}
+	}
+}
+
+
+void Enemy_Balloon::OnCollision(Collider* c2) {
 
 	SDL_Rect r = collider->rect;
 
-		if (c2->type == Collider::Type::PLAYER_SHOT) {
-			if (c2->Intersects(r) == true) {
-				
-				collider->pendingToDelete = true;
-				App->enemies->balloon.balloonsOnScene--;
-				App->harpoon->totalColliders--;
+	if (c2->type == Collider::Type::PLAYER_SHOT) {
+		if (c2->Intersects(r) == true) {
+
+			collider->pendingToDelete = true;
+			App->enemies->balloon.balloonsOnScene--;
+			App->harpoon->totalColliders--;
 
 
-				if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
-				{
-					App->player->lastBalloon = ENEMY_TYPE::VERYBIGBALLOON;
-					App->particles->AddParticle(particleDeathVeryBig, position.x, position.y, Collider::Type::NONE, 0);
-					App->audio->PlayFx(ballonExplosion);
-					App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, position.x, position.y);
-					App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON2, position.x, position.y);
-					App->player->score += 100;
+			if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+			{
+				App->player->lastBalloon = ENEMY_TYPE::VERYBIGBALLOON;
+				App->particles->AddParticle(particleDeathVeryBig, position.x, position.y, Collider::Type::NONE, 0);
+				App->audio->PlayFx(ballonExplosion);
+				App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, position.x, position.y);
+				App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON2, position.x, position.y);
+				App->player->score += 100;
+				App->player->cont++;
+			}
+			else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON || tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
+			{
+				if (App->player->lastBalloon == ENEMY_TYPE::BIGBALLOON && tipoBalloon == ENEMY_TYPE::BIGBALLOON2 || App->player->lastBalloon == tipoBalloon) {
 					App->player->cont++;
-				}
-				else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON || tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
-				{
-					if (App->player->lastBalloon == ENEMY_TYPE::BIGBALLOON && tipoBalloon == ENEMY_TYPE::BIGBALLOON2 || App->player->lastBalloon == tipoBalloon) {
-						App->player->cont++;
-						if (App->player->count <= 3) {
-							App->player->score += 200 * App->player->cont;
-						}
-						else {
-							App->player->score += 200 * 3;
-						}
+					if (App->player->count <= 3) {
+						App->player->score += 200 * App->player->cont;
 					}
 					else {
-						App->player->score += 200;
-						App->player->cont = 1;
+						App->player->score += 200 * 3;
 					}
-					App->player->lastBalloon = ENEMY_TYPE::BIGBALLOON;
-					
-					App->particles->AddParticle(particleDeathBig, position.x, position.y, Collider::Type::NONE, 0);
-					App->audio->PlayFx(ballonExplosion);
-					App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x, position.y);
-					App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, position.x, position.y);
-				
 				}
-				else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
-				{
-					if (App->player->lastBalloon == ENEMY_TYPE::SMALLBALLOON && tipoBalloon == ENEMY_TYPE::SMALLBALLOON2 || App->player->lastBalloon == tipoBalloon) {
-						App->player->cont++;
-						if (App->player->count <= 3) {
-							App->player->score += 300 * App->player->cont;
-						}
-						else {
-							App->player->score += 300 * 3;
-						}
+				else {
+					App->player->score += 200;
+					App->player->cont = 1;
+				}
+				App->player->lastBalloon = ENEMY_TYPE::BIGBALLOON;
+
+				App->particles->AddParticle(particleDeathBig, position.x, position.y, Collider::Type::NONE, 0);
+				App->audio->PlayFx(ballonExplosion);
+				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x, position.y);
+				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, position.x, position.y);
+
+			}
+			else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
+			{
+				if (App->player->lastBalloon == ENEMY_TYPE::SMALLBALLOON && tipoBalloon == ENEMY_TYPE::SMALLBALLOON2 || App->player->lastBalloon == tipoBalloon) {
+					App->player->cont++;
+					if (App->player->count <= 3) {
+						App->player->score += 300 * App->player->cont;
 					}
 					else {
-						App->player->score += 300;
-						App->player->cont = 1;
+						App->player->score += 300 * 3;
 					}
-					App->player->lastBalloon = ENEMY_TYPE::SMALLBALLOON;
-					
-					App->particles->AddParticle(particleDeathSmall, position.x, position.y, Collider::Type::NONE, 0);
-					App->audio->PlayFx(ballonExplosion);
-					App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x, position.y);
-					App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON2, position.x, position.y);
-				
+				}
+				else {
+					App->player->score += 300;
+					App->player->cont = 1;
+				}
+				App->player->lastBalloon = ENEMY_TYPE::SMALLBALLOON;
+
+				App->particles->AddParticle(particleDeathSmall, position.x, position.y, Collider::Type::NONE, 0);
+				App->audio->PlayFx(ballonExplosion);
+				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x, position.y);
+				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON2, position.x, position.y);
+
 			}
 			else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON || tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
 			{
@@ -327,12 +379,13 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 					App->player->cont = 1;
 				}
 				App->player->lastBalloon = ENEMY_TYPE::VERYSMALLBALLOON;
-				
+
 				App->particles->AddParticle(particleDeathVerySmall, position.x, position.y, Collider::Type::NONE, 0);
 				App->audio->PlayFx(ballonExplosion);
-				
+
 			}
 		}
-	
+
 	}
+
 }

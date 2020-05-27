@@ -23,7 +23,7 @@ public:
 	void Update() override;
 
 	//balloon motions
-	float speedY = 0.0f;
+	float speedY = 0.05f;
 	float gravity = 0.1f;
 	float speedX = 1.0f;
 
@@ -37,6 +37,7 @@ private:
 	Path path;
 	
 	void balloonBounce();
+	void MRUA();
 
 	void OnCollision(Collider* c1) override;
 

@@ -16,6 +16,7 @@
 #include "ModuleFonts.h"
 #include "ModuleTextures.h"
 #include "IntroScene.h"
+#include "ModuleTileset.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL/include/SDL_scancode.h"
@@ -84,7 +85,7 @@ bool ModuleScene5::Start()
 	App->collisions->Enable();
 	App->hookShot->Enable();
 	App->harpoon->Disable();
-	//App->input->Enable();
+	App->tileset->Enable();
 
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 16, 13);
@@ -237,7 +238,7 @@ bool ModuleScene5::CleanUp()
 	App->enemies->Disable();
 	App->harpoon->Disable();
 	App->collisions->Disable();
-	//App->input->Disable();
+	App->tileset->Disable();
 	App->sceneIntro->countdown = 1;
 
 	//REMOVE HARPOONFX WHEN BALLOON KILLS U AND HARPOON IS ALIVE

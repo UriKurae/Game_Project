@@ -27,6 +27,7 @@
 #include "ModuleFonts.h"
 #include "WinScene.h"
 #include "ModulePlatforms.h"
+#include "ModuleTileset.h"
 
 
 Application::Application()
@@ -55,14 +56,15 @@ Application::Application()
 	modules[16] = particles = new ModuleParticles(true);
 	modules[17] = enemies = new ModuleEnemies(false);
 	modules[18] = boosters = new ModuleBoosters(false);
+	modules[19] = tileset = new ModuleTileset(false);
 
-	modules[19] = collisions = new ModuleCollisions(true);
-	modules[20] = fade = new ModuleFadeToBlack(true);
-	modules[21] = fonts = new ModuleFonts(true);
-	modules[22] = debugInfo = new ModuleDebugInfo(true);
-	modules[23] = winScene = new WinScene(false);
+	modules[20] = collisions = new ModuleCollisions(true);
+	modules[21] = fade = new ModuleFadeToBlack(true);
+	modules[22] = fonts = new ModuleFonts(true);
+	modules[23] = debugInfo = new ModuleDebugInfo(true);
+	modules[24] = winScene = new WinScene(false);
 
-	modules[24] = render = new ModuleRender(true);
+	modules[25] = render = new ModuleRender(true);
 	
 }
 
