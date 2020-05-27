@@ -31,7 +31,7 @@ public:
 
 	bool Start() override;
 
-	update_status PostUpdate() override;
+	//update_status PostUpdate() override;
 
 	bool CleanUp() override;
 

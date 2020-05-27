@@ -12,6 +12,9 @@
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
+#include "ModuleTileset.h"
+#include "Enemy_Balloon.h"
+
 
 #include <SDL\include\SDL_scancode.h>
 
@@ -189,7 +192,8 @@ update_status ModuleHarpoon::PostUpdate()
 
 void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 {	
-	if (c2->type == Collider::Type::WALL) {
+	if (c2->type == Collider::Type::WALL) 
+	{
 		//delete colliderH;
 		this->colliderH->pendingToDelete = true;
 		--activeColliders; --totalColliders;
@@ -212,8 +216,10 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	}
 
 
-	if (c2->type == Collider::Type::BREAKABLE_BLOCK) {
-		if (c1->Intersects(App->scene2->leftPlatform->rect)) {
+	if (c2->type == Collider::Type::BREAKABLE_BLOCK)
+	{
+		if (c1->Intersects(App->scene2->leftPlatform->rect)) 
+		{
 			//delete colliderH;
 			this->colliderH->pendingToDelete = true;
 			--activeColliders; --totalColliders;
@@ -228,8 +234,8 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 
 			LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
 		}
-		if (c1->Intersects(App->scene2->rightPlatform->rect)) {
-			//delete colliderH;
+		if (c1->Intersects(App->scene2->rightPlatform->rect))
+		{
 			this->colliderH->pendingToDelete = true;
 			--activeColliders; --totalColliders;
 			destroyed = true;
@@ -245,7 +251,8 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 		}
 	}
 
-	if (c2->type == Collider::Type::UNBREAKABLE_BLOCK && c1->type == Collider::Type::PLAYER_SHOT) {
+	if (c2->type == Collider::Type::UNBREAKABLE_BLOCK && c1->type == Collider::Type::PLAYER_SHOT)
+	{
 		//delete colliderH;
 		this->colliderH->pendingToDelete = true;
 		--activeColliders; --totalColliders;

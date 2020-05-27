@@ -157,9 +157,6 @@ void Enemy_Balloon::balloonBounce()
 
 
 	iPoint tile = { position.x / TILE_SIZE, position.y / TILE_SIZE };
-	/*if (tile.x < 0) { tile.x = 0; }
-	if (tile.y < 0) { tile.y = 0; }*/
-	//LOG("%d     %d", tile.x, tile.y);
 
 	//FLOOR COLLISION
 	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
@@ -292,6 +289,101 @@ void Enemy_Balloon::balloonBounce()
 			speedX = -speedX;
 		}
 	}
+
+
+	//BREAKABLE BLOCK COLLISION
+
+	//top face
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		for (int i = 0; i < 5; ++i) //"long" breakable block
+		{
+			if (App->tileset->getTileLevel(tile.y+5, tile.x + i).id == ModuleTileset::TileType::BREAKABLE)
+			{
+				speedY = 1.8f;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::BIGBALLOON || this->tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
+	{
+		for (int i = 0; i < 4; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y+3, tile.x + i).id == ModuleTileset::TileType::BREAKABLE)
+			{
+				speedY = 1.8f;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON || this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
+	{
+		for (int i = 0; i < 2; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y + 3, tile.x + i).id == ModuleTileset::TileType::BREAKABLE)
+			{
+				speedY = 1.8f;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
+	{
+		if (App->tileset->getTileLevel(tile.y + 3, tile.x).id == ModuleTileset::TileType::BREAKABLE)
+		{
+			speedY = 1.8f;
+		}
+	}
+
+
+	//bottom face
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		for (int i = 1; i < 6; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y-1, tile.x + i).id == ModuleTileset::TileType::BREAKABLE)
+			{
+				speedY = -speedY;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::BIGBALLOON || this->tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
+	{
+		for (int i = 1; i < 5; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y, tile.x + i).id == ModuleTileset::TileType::BREAKABLE)
+			{
+				speedY = -speedY;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON || this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
+	{
+		for (int i = 1; i < 3; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y, tile.x + i).id == ModuleTileset::TileType::BREAKABLE)
+			{
+				speedY = -speedY;
+				break;
+			}
+		}
+	}
+	else if (this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON || this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
+	{
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE)
+		{
+			speedY = -speedY;	
+		}
+	}
+
+
+
+
+
+
 }
 
 

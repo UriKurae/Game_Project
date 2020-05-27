@@ -111,24 +111,6 @@ bool ModuleTileset::Start()
 	return false;
 }
 
-update_status ModuleTileset::PostUpdate()
-{
-	for (int i = 0; i < 26; ++i) //filas
-	{
-		for (int j = 0; j < 48; ++j) //columnas
-		{
-			if (level[i][j] > 1)
-			{
-				SDL_Rect tileRec = { i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE,TILE_SIZE };
-				//App->render->Blit(foreground, i * TILE_SIZE, j * TILE_SIZE, &tileRec, 0, false);
-			}
-		}
-	}
-
-
-	return update_status::UPDATE_CONTINUE;
-}
-
 bool ModuleTileset::CleanUp()
 {
 	return true;
