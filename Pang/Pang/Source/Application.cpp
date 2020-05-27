@@ -20,6 +20,7 @@
 #include "ModuleHarpoon_Shot.h"
 #include "ModuleHarpoon_HookShot.h"
 #include "ModuleGunShot.h"
+#include "ModuleBoosters.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleDebugInfo.h"
 #include "Enemy_Balloon.h"
@@ -53,14 +54,15 @@ Application::Application()
 	modules[15] = gunShot = new ModuleGunShot(false);
 	modules[16] = particles = new ModuleParticles(true);
 	modules[17] = enemies = new ModuleEnemies(false);
+	modules[18] = boosters = new ModuleBoosters(false);
 
-	modules[18] = collisions = new ModuleCollisions(true);
-	modules[19] = fade = new ModuleFadeToBlack(true);
-	modules[20] = fonts = new ModuleFonts(true);
-	modules[21] = debugInfo = new ModuleDebugInfo(true);
-	modules[22] = winScene = new WinScene(false);
+	modules[19] = collisions = new ModuleCollisions(true);
+	modules[20] = fade = new ModuleFadeToBlack(true);
+	modules[21] = fonts = new ModuleFonts(true);
+	modules[22] = debugInfo = new ModuleDebugInfo(true);
+	modules[23] = winScene = new WinScene(false);
 
-	modules[23] = render = new ModuleRender(true);
+	modules[24] = render = new ModuleRender(true);
 	
 }
 

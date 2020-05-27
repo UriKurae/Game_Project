@@ -15,6 +15,7 @@
 #include "ModuleInput.h"
 #include "ModuleFonts.h"
 #include "ModuleTextures.h"
+#include "ModuleBoosters.h"
 #include "IntroScene.h"
 
 #include "SDL/include/SDL.h"
@@ -73,6 +74,7 @@ bool ModuleScene::Start()
 	App->gunShot->Disable();
 	App->hookShot->Enable();
 	App->harpoon->Enable();
+	App->boosters->Enable();
 	//App->input->Enable();
 
 	//ADD ENEMIES

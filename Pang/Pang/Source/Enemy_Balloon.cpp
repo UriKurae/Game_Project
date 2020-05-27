@@ -14,6 +14,8 @@
 #include "ModulePlayer.h"
 #include "ModuleHarpoon_Shot.h"
 #include "ModuleHarpoon_HookShot.h"
+#include "ModuleBoosters.h"
+#include "ModuleInput.h"
 
 #include "SDL/include/SDL.h"
 
@@ -120,6 +122,15 @@ void Enemy_Balloon::Update()
 	if (App->player->ready == 0) {
 		balloonBounce();
 
+		//MUST CHANGE BECAUSE IT HAS TO WORK WITH COLLISIONS
+		if (App->input->keys[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)
+		{
+			App->boosters->posX = position.x;
+			App->boosters->posY = position.y;
+		}
+		
+
+
 		if (App->player->destroyed)
 		{
 			collider->pendingToDelete = true;
@@ -127,6 +138,7 @@ void Enemy_Balloon::Update()
 
 		Enemy::Update();
 	}
+
 }
 
 void Enemy_Balloon::balloonBounce()

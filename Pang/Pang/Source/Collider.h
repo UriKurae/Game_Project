@@ -18,6 +18,7 @@ struct Collider
 		BREAKABLE_BLOCK,
 		UNBREAKABLE_BLOCK,
 		STAIR,
+		BOOSTERS,
 
 		MAX
 	};
