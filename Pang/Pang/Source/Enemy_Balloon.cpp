@@ -157,8 +157,8 @@ void Enemy_Balloon::balloonBounce()
 
 
 	iPoint tile = { position.x / TILE_SIZE, position.y / TILE_SIZE };
-	if (tile.x < 0) { tile.x = 0; }
-	if (tile.y < 0) { tile.y = 0; }
+	/*if (tile.x < 0) { tile.x = 0; }
+	if (tile.y < 0) { tile.y = 0; }*/
 	//LOG("%d     %d", tile.x, tile.y);
 
 	//FLOOR COLLISION
@@ -169,7 +169,7 @@ void Enemy_Balloon::balloonBounce()
 			if (App->tileset->getTileLevel(tile.y + 5, tile.x + i).id == ModuleTileset::TileType::WALL)
 			{
 				//position.y -= 5;
-				speedY = 4.5f;
+				speedY = 4.8f;
 				break;
 			}
 		}
@@ -180,7 +180,7 @@ void Enemy_Balloon::balloonBounce()
 		{
 			if (App->tileset->getTileLevel(tile.y + 3.5f, tile.x + i).id == ModuleTileset::TileType::WALL)
 			{
-				speedY = 4.5f;
+				speedY = 4.3f;
 				break;
 			}
 		}
@@ -191,7 +191,7 @@ void Enemy_Balloon::balloonBounce()
 		{
 			if (App->tileset->getTileLevel(tile.y + 2, tile.x + i).id == ModuleTileset::TileType::WALL)
 			{
-				speedY = 4.5f;
+				speedY = 3.5f;
 				break;
 			}
 		}
@@ -200,7 +200,7 @@ void Enemy_Balloon::balloonBounce()
 	{
 		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::WALL)
 		{
-			speedY = 4.5f;
+			speedY = 2.4f;
 		}
 	}
 

@@ -87,6 +87,14 @@ bool ModuleTileset::Start()
 					{i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE,TILE_SIZE}
 				};
 				break;
+
+			case 5:
+				levelToTile[i][j] =
+				{
+					TileType::TOP_STAIRS,
+					{i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE}
+				};
+				break;
 			}
 		}
 	}
