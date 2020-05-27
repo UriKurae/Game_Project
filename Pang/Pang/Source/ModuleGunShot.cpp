@@ -17,47 +17,46 @@
 
 ModuleGunShot::ModuleGunShot(bool startEnabled) : Module(startEnabled)
 {		
-	shotGun.anim.PushBack({ 100, 13, 4, 8 });
-	shotGun.anim.PushBack({ 112, 13, 8, 8 });
-	shotGun.anim.PushBack({ 128, 13, 12, 8 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.PushBack({ 148, 14, 16, 7 });
-	shotGun.anim.PushBack({ 172, 12, 14, 9 });
-	shotGun.anim.loop = false;
+	shotGun.anim.PushBack({ 155, 11, 12, 8 });
+	shotGun.anim.PushBack({ 155, 11, 12, 8 });
+	shotGun.anim.PushBack({ 169, 11, 12, 8 });
+	shotGun.anim.PushBack({ 169, 11, 12, 8 });
+	shotGun.anim.PushBack({ 187, 11, 12, 8 });
+	shotGun.anim.PushBack({ 187, 11, 12, 8 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+	shotGun.anim.PushBack({ 207, 12, 16, 7 });
+	shotGun.anim.PushBack({ 231, 10, 14, 9 });
+
+	shotGun.anim.loop = true;
 	shotGun.anim.speed = 0.1f;
+
 
 	gunShotParticle.anim.PushBack({ 62, 13, 16, 6 });
 	gunShotParticle.anim.PushBack({ 76, 8, 16, 11 });
@@ -66,7 +65,6 @@ ModuleGunShot::ModuleGunShot(bool startEnabled) : Module(startEnabled)
 	gunShotParticle.anim.loop = false;
 	gunShotParticle.anim.speed = 0.3f;
 
-	//gunShotHitWall.anim.PushBack
 }
 
 ModuleGunShot::~ModuleGunShot()
@@ -78,8 +76,8 @@ bool ModuleGunShot::Start()
 {
 	LOG("LOADING HARPOON TEXTURE");
 
-	texture = App->textures->Load("Assets/Items&Weapons/Mini explosion.png");
-	++totalTextures;
+	//texture = App->textures->Load("Assets/Items&Weapons/Mini explosion.png");
+	//++totalTextures;
 
 	gunShotFx = App->audio->LoadFx("Assets/Sound/FX/GunShoot.wav");
 	++totalFx;
@@ -107,7 +105,7 @@ update_status ModuleGunShot::Update()
 		App->particles->AddParticle(gunShotParticle, x - 3, y - 6, Collider::Type::NONE, 0);
 
 		shotGun.speed.y = -2.0f;
-		App->particles->AddParticle(shotGun, x, y, Collider::Type::PLAYER_SHOT, 0);
+		App->particles->AddParticle(shotGun, x - 3, y + 2, Collider::Type::PLAYER_SHOT, 0);
 		
 	}
 		
@@ -118,7 +116,10 @@ update_status ModuleGunShot::PostUpdate()
 {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	shotGun.anim.GetCurrentFrame();
+	//SDL_Rect rect;
+
+	//rect = shotGun.anim.GetCurrentFrame();
+	App->render->Blit(texture, shotGun.position.x, shotGun.position.y, &(shotGun.anim.GetCurrentFrame()));
 
 	return ret;
 }
