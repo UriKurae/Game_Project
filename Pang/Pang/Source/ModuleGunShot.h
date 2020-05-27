@@ -5,6 +5,7 @@
 #include "p2Point.h"
 #include "Particle.h"
 
+#define MAX_GUNSHOT 7
 
 struct SDL_Texture;
 struct Collider;
@@ -18,29 +19,22 @@ public:
 
 	float speed = 2.0f;
 
-	bool destroyed = true;
-
 	bool increment = false;
 
 	//texture for all the harpoons sprites
 	SDL_Texture* texture = nullptr;
 
-	Animation* currentAnimation = nullptr;
-
-	Animation gunShot;
-	Animation gunShotMove;
-
 	//Collider* colliderH = nullptr;
 
 	Particle gunShotParticle;
 
-	Collider* colliderH = nullptr;
+	Particle shotGun;
+	Particle gunShotHitWall;
 
 	uint gunShotFx = 0;
 
-	uint time = 5;
-	uint count = 0;
 public:
+
 	ModuleGunShot(bool startEnabled);
 	~ModuleGunShot();
 
