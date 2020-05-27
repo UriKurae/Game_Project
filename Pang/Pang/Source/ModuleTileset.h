@@ -15,7 +15,7 @@ public:
 		BREAKABLE,
 		UNBREAKABLE,
 		STAIRS,
-		TOP_STAIRS,
+		TOP_STAIRS
 	};
 
 	struct Tile

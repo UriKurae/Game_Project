@@ -32,12 +32,21 @@ bool ModuleTileset::Start()
 	if (App->scene->IsEnabled() == true)
 	{
 		level = level1;
-		foreground = App->scene->fgTexture;
+
 	}
 	else if (App->scene2->IsEnabled() == true)
 	{
 		level = level2;
-		foreground = App->scene2->fgTexture;
+
+	}
+	else if (App->scene3-> IsEnabled() == true)
+	{
+		level = level3;
+
+	}
+	else if (App->scene4->IsEnabled() == true)
+	{
+		level = level4;
 	}
 	else { return false; }
 
@@ -104,14 +113,14 @@ bool ModuleTileset::Start()
 
 update_status ModuleTileset::PostUpdate()
 {
-	for (int i = 0; i < 26; ++i)//filas
+	for (int i = 0; i < 26; ++i) //filas
 	{
-		for (int j = 0; j < 48; ++j)//columnas
+		for (int j = 0; j < 48; ++j) //columnas
 		{
 			if (level[i][j] > 1)
 			{
 				SDL_Rect tileRec = { i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE,TILE_SIZE };
-				App->render->Blit(foreground, i * TILE_SIZE, j * TILE_SIZE, &tileRec, 0, false);
+				//App->render->Blit(foreground, i * TILE_SIZE, j * TILE_SIZE, &tileRec, 0, false);
 			}
 		}
 	}
