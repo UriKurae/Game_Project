@@ -63,28 +63,37 @@ update_status ModuleBoosters::Update()
 			case 0:
 
 				App->collisions->AddCollider({ posX, posY,16,16 }, Collider::Type::BOOSTERS);
-				anim.PushBack({ 8,9,16,16 });
-				currentAnim = &anim;
+				clockAnim.PushBack({ 8,9,16,16 });
+				currentAnim = &clockAnim;
 				
 				break;
 			case 1:
 				App->collisions->AddCollider({ posX, posY,16,16 }, Collider::Type::BOOSTERS);
-				anim.PushBack({ 8,9,16,16 });
-				currentAnim = &anim;
+				sandHourglassAnim.PushBack({ 48,9,16,16 });
+				currentAnim = &sandHourglassAnim;
 				
 				break;
 
 			case 2:
 				App->collisions->AddCollider({ posX, posY,16,16 }, Collider::Type::BOOSTERS);
-				anim.PushBack({ 8,9,16,16 });
-				currentAnim = &anim;
+				dynamiteAnim.PushBack({ 88,12,15,13 });
+				dynamiteAnim.PushBack({ 111,9,16,16 });
+				dynamiteAnim.PushBack({ 135,9,16,16 });
+				currentAnim = &dynamiteAnim;
 			
 				break;
 
 			case 3:
 				App->collisions->AddCollider({ posX, posY,16,14 }, Collider::Type::BOOSTERS);
-				anim.PushBack({ 8,9,16,16 });
-				currentAnim = &anim;
+				shieldAnim.PushBack({ 9,46,10,8 });
+				shieldAnim.PushBack({ 27,42,14,12 });
+				shieldAnim.PushBack({ 49,40,16,14 });
+				shieldAnim.PushBack({ 73,40,16,14 });
+				shieldAnim.PushBack({ 97,40,16,14 });
+				shieldAnim.PushBack({ 121,40,16,14 });
+				shieldAnim.PushBack({ 145,40,16,14 });
+				shieldAnim.PushBack({ 169,42,14,12 });
+				currentAnim = &shieldAnim;
 			
 				break;
 
@@ -105,7 +114,10 @@ update_status ModuleBoosters::PostUpdate()
 	
 	
 	
-	App->render->Blit(texture, posX, posY, &(anim.GetCurrentFrame()), 1.0f);
+	App->render->Blit(texture, posX, posY, &(clockAnim.GetCurrentFrame()), 1.0f);
+	App->render->Blit(texture, posX, posY, &(shieldAnim.GetCurrentFrame()), 1.0f);
+	App->render->Blit(texture, posX, posY, &(dynamiteAnim.GetCurrentFrame()), 1.0f);
+	App->render->Blit(texture, posX, posY, &(sandHourglassAnim.GetCurrentFrame()), 1.0f);
 	
 
 

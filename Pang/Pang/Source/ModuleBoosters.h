@@ -44,8 +44,12 @@ public:
 	int posX, posY;
 
 	//Animations
-	Animation anim;
 	Animation* currentAnim = nullptr;
+
+	Animation clockAnim;
+	Animation sandHourglassAnim;
+	Animation dynamiteAnim;
+	Animation shieldAnim;
 
 
 private:
