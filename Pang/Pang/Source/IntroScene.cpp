@@ -138,7 +138,7 @@ update_status SceneIntro::Update()
 
 	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && countdown == 0)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->scene2, 30);
+		App->fade->FadeToBlack(this, (Module*)App->scene, 30);
 	}
 
 	intro.Update();

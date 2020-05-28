@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 26
+#define NUM_MODULES 27
 
 class Module;
 class ModuleFadeToBlack;
@@ -27,6 +27,7 @@ class ModuleBoosters;
 class ModuleHarpoon;
 class ModuleHookShot;
 class ModuleGunShot;
+class ModuleDoubleShot;
 class ModuleFonts;
 class WinScene;
 class ModuleDebugInfo;
@@ -78,6 +79,7 @@ public:
 	ModuleHarpoon* harpoon = nullptr;
 	ModuleHookShot* hookShot = nullptr;
 	ModuleGunShot* gunShot = nullptr;
+	ModuleDoubleShot* doubleShot = nullptr;
 	ModulePlatforms* platforms = nullptr;
 	ModuleTileset* tileset = nullptr;
 	ModuleBoosters* boosters = nullptr;

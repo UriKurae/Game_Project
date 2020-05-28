@@ -12,6 +12,7 @@
 #include "ModuleHarpoon_Shot.h"
 #include "ModuleHarpoon_HookShot.h"
 #include "ModuleGunShot.h"
+#include "ModuleHarpoon_DoubleShot.h"
 #include "ModuleInput.h"
 #include "ModuleFonts.h"
 #include "ModuleTextures.h"

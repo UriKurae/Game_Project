@@ -150,6 +150,9 @@
     <ClInclude Include="Source\Tileset.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ModuleHarpoon_DoubleShot.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -256,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="Source\ModuleTileset.cpp">
       <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleHarpoon_DoubleShot.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
