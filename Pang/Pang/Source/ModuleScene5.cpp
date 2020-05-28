@@ -17,6 +17,7 @@
 #include "ModuleTextures.h"
 #include "IntroScene.h"
 #include "ModuleTileset.h"
+#include "ModuleBoosters.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL/include/SDL_scancode.h"
@@ -86,6 +87,7 @@ bool ModuleScene5::Start()
 	App->hookShot->Enable();
 	App->harpoon->Disable();
 	App->tileset->Enable();
+	App->boosters->Enable();
 
 	//ADD ENEMIES
 	App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, 16, 13);
@@ -286,6 +288,8 @@ bool ModuleScene5::CleanUp()
 	App->textures->Unload(deathTexture1);
 	--totalTextures;
 	App->textures->Unload(deathTexture2);
+	--totalTextures;
+	App->textures->Unload(App->boosters->texture);
 	--totalTextures;
 	App->audio->UnloadFx(App->harpoon->HarpoonFx);
 	App->harpoon->totalFx--;

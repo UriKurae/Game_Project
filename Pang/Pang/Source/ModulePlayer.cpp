@@ -12,7 +12,7 @@
 #include "ModuleHarpoon_Shot.h"
 #include "ModuleHarpoon_HookShot.h"
 #include "ModuleFadeToBlack.h"
-#include <stdio.h>
+#include "ModuleBoosters.h"
 
 #include "Enemy.h"
 #include "ModuleEnemies.h"
@@ -488,6 +488,24 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 	}
 	
+	if (c2->type == Collider::Type::BOOSTERS) {
+		//if (App->boosters->booster[CLOCK] == true) {
+		//	App->boosters->collider[CLOCK]->pendingToDelete = true;
+		//	App->boosters->booster[CLOCK] == false;
+		//}
+		//
+		//if (App->boosters->booster[] == true) {
+		//	App->boosters->collider[CLOCK]->pendingToDelete = true;
+		//	App->boosters->booster[CLOCK] == false;
+		//}
+
+		for (int i = 0; i < MAX; i++) {
+			if (App->boosters->booster[i] == true) {
+				App->boosters->collider[i]->pendingToDelete = true;
+				App->boosters->booster[i] = false;
+			}
+		}
+	}
 }
 
 bool ModulePlayer::CleanUp()

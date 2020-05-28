@@ -234,6 +234,8 @@ bool ModuleScene::CleanUp()
 	--totalTextures;
 	App->textures->Unload(deathTexture2);
 	--totalTextures;
+	App->textures->Unload(App->boosters->texture);
+	--totalTextures;
 	App->audio->UnloadFx(App->harpoon->HarpoonFx);
 	App->harpoon->totalFx--;
 	
