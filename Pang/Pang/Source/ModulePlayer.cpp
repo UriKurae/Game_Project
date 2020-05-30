@@ -102,6 +102,7 @@ bool ModulePlayer::Start()
 
 	ready = 3;
 
+
 	texture = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
 	timeTexture = App->textures->Load("Assets/UI/Time.png");
 	++activeTextures; ++totalTextures;
@@ -118,8 +119,9 @@ bool ModulePlayer::Start()
 	//	position.y = 124;
 	//}
 
-		position.x = (SCREEN_WIDTH / 2) - 20;
-		position.y = SCREEN_HEIGHT - 77;
+	position.x = (SCREEN_WIDTH / 2) - 20;
+	position.y = SCREEN_HEIGHT - 77;
+	
 	
 
 	
@@ -296,20 +298,22 @@ update_status ModulePlayer::Update()
 
 		currentAnimation->Update();
 
-		/*if (destroyed)
-		{
-			destroyedCountdown--;
-			if (destroyedCountdown <= 0)
-				return update_status::UPDATE_STOP;
-
-		}*/
+		if (inmunityTime > 0) { inmunityTime--; }
+		
 	}
+	
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModulePlayer::PostUpdate()
 {
+	if (inmunityTime > 0)
+	{
+		App->boosters->inmunityAnim = &App->boosters->shieldInmunity;
+		App->render->Blit(App->boosters->texture, position.x-5, position.y-7, &(App->boosters->inmunityAnim->GetCurrentFrame()), 1.0f);
+	}
+
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	
 	if (ready == 3 || ready == 1) {
@@ -384,6 +388,9 @@ update_status ModulePlayer::PostUpdate()
 	App->fonts->BlitText(272, 208, uiIndex, "PLAYER-2");
 	App->render->Blit(timeTexture, 269, 9, NULL);
 	App->fonts->BlitText(334, 9, timeIndex, timeText);
+
+	
+
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -464,7 +471,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	//}
 
-	if (c2->type == Collider::Type::BALLOON && godMode == false)
+	if (c2->type == Collider::Type::BALLOON && godMode == false && inmunityTime == 0)
 	{
 		destroyed = true;
 
@@ -488,7 +495,14 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 	}
 	
+	//if (c2->type == Collider::Type::BALLOON && godMode == false && shield == true)
+	//{
+	//	shield = false;
+	//}
+
+
 	if (c2->type == Collider::Type::BOOSTERS) {
+	
 		//if (App->boosters->booster[CLOCK] == true) {
 		//	App->boosters->collider[CLOCK]->pendingToDelete = true;
 		//	App->boosters->booster[CLOCK] == false;
@@ -499,7 +513,12 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		//	App->boosters->booster[CLOCK] == false;
 		//}
 
-		
+		if (c2 == App->boosters->typeBooster[SHIELD].collider)
+		{
+			
+			inmunityTime = 180;
+
+		}
 
 
 		for (int i = 0; i < MAX; i++) {

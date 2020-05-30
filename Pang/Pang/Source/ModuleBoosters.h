@@ -64,14 +64,6 @@ public:
 	Boost typeBooster[MAX];
 
 
-	//bool hookIsAlive = false;
-	//bool doubleshotIsAlive = false;
-	//bool gunIsAlive = false;
-	//bool clockIsAlive = false;
-	//bool sandIsAlive = false;
-	//bool dynamiteIsAlive = false;
-	//bool shieldIsAlive = false;
-
 	bool balloonD;
 
 	
@@ -82,13 +74,8 @@ public:
 	//Animations
 	Animation* currentAnim = nullptr;
 
-	//Animation clockAnim;
-	//Animation sandHourglassAnim;
-	//Animation dynamiteAnim;
-	//Animation shieldAnim;
-	//Animation gunAnim;
-	//Animation doubleshotAnim;
-	//Animation hookAnim;
+	Animation* inmunityAnim = nullptr;
+	Animation shieldInmunity;
 
 	SDL_Texture* texture = nullptr;
 	

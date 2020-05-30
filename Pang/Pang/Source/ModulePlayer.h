@@ -102,6 +102,14 @@ public:
 	//Boolean for God Mode
 	bool godMode = false;
 
+
+	//Shield booster (Protects one hit)
+	int inmunityTime = 0;
+
+
+
+
+	//Enum class for Enemy Type
 	enum class ENEMY_TYPE lastBalloon;
 };
 

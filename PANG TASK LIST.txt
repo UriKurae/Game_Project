@@ -1,7 +1,8 @@
 TASK LIST:
 
 Oriol:
-	-Boosters included, enemy spawning at the cursor pointer, Scene 5 implemented, adjustments to scene 3, god mode added.
+	-Boosters included, enemy spawning at the cursor pointer, Scene 5 implemented, adjustments to scene 3, god mode added,
+	-Inmunity shield booster added with animation(With Lucas)
 
 Lucas:
 	-Win scene 2 done, colliders fixed on scene 2, balloons sprite on scene 2 fixed, blocks funcionality added on scene2.

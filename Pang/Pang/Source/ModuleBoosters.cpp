@@ -41,6 +41,11 @@ bool ModuleBoosters::Start()
 
 	}
 
+	shieldInmunity.PushBack({ 105,69,32,39 });
+	shieldInmunity.PushBack({ 65,69,33,38 });
+	shieldInmunity.speed = 0.2f;
+	shieldInmunity.loop = true;
+
 	balloonD = false;
 	
 	return true;
@@ -50,17 +55,20 @@ update_status ModuleBoosters::Update()
 {
 	if (balloonD == true)
 	{
-		/*LOG("BALLON POSITION %d , %d", posX, posY);*/
 	
 		srand(SDL_GetTicks());
 
 		generatedNumber = rand() % 4;
+		//generatedNumber = 3;
+		
 
 		LOG("%d",generatedNumber);
 
 		if (generatedNumber == 3)
 		{
 			generatedNumber = rand() % 7;
+			//generatedNumber = 3;
+			
 		
 			switch (generatedNumber)
 			{
@@ -103,10 +111,11 @@ update_status ModuleBoosters::Update()
 					typeBooster[DYNAMITE].posY = y;
 
 					typeBooster[DYNAMITE].collider = App->collisions->AddCollider({ typeBooster[DYNAMITE].posX, typeBooster[DYNAMITE].posY ,16,16 }, Collider::Type::BOOSTERS);
-					typeBooster[DYNAMITE].anim.PushBack({ 88,12,15,13 });
+					typeBooster[DYNAMITE].anim.PushBack({ 88,9,15,16 });
 					typeBooster[DYNAMITE].anim.PushBack({ 111,9,16,16 });
 					typeBooster[DYNAMITE].anim.PushBack({ 135,9,16,16 });
 					currentAnim = &typeBooster[DYNAMITE].anim;
+					typeBooster[DYNAMITE].anim.speed = 0.2f;
 					typeBooster[DYNAMITE].booster = true;
 				}
 			
@@ -120,16 +129,16 @@ update_status ModuleBoosters::Update()
 					typeBooster[SHIELD].posY = y;
 					typeBooster[SHIELD].collider = App->collisions->AddCollider({ typeBooster[SHIELD].posX, typeBooster[SHIELD].posY ,16,16 }, Collider::Type::BOOSTERS);
 
-					typeBooster[SHIELD].anim.PushBack({ 9,46,10,8 });
-					typeBooster[SHIELD].anim.PushBack({ 27,42,14,12 });
+					typeBooster[SHIELD].anim.PushBack({ 6,42,16,14 });
+					typeBooster[SHIELD].anim.PushBack({ 26,41,16,14 });
 					typeBooster[SHIELD].anim.PushBack({ 49,40,16,14 });
 					typeBooster[SHIELD].anim.PushBack({ 73,40,16,14 });
 					typeBooster[SHIELD].anim.PushBack({ 97,40,16,14 });
 					typeBooster[SHIELD].anim.PushBack({ 121,40,16,14 });
 					typeBooster[SHIELD].anim.PushBack({ 145,40,16,14 });
-					typeBooster[SHIELD].anim.PushBack({ 169,42,14,12 });
+					typeBooster[SHIELD].anim.PushBack({ 168,41,16,14 });
 					currentAnim = &typeBooster[SHIELD].anim;
-					typeBooster[SHIELD].anim.speed = 0.1f;
+					typeBooster[SHIELD].anim.speed = 0.2f;
 					typeBooster[SHIELD].booster = true;
 				}
 			
@@ -180,12 +189,6 @@ update_status ModuleBoosters::Update()
 	}
 
 	balloonD = false;
-	
-	//if (gunIsAlive || hookIsAlive || shieldIsAlive || dynamiteIsAlive || doubleshotIsAlive || sandIsAlive || clockIsAlive) {
-	//	currentAnim->Update();
-	//	posY += 2;
-	//	collider->SetPos(posX, posY);
-	//}
 
 	for (int i = 0; i < MAX; i++) {
 		if (typeBooster[i].booster == true) {
@@ -198,6 +201,7 @@ update_status ModuleBoosters::Update()
 		}
 	}
 
+	
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -210,35 +214,7 @@ update_status ModuleBoosters::PostUpdate()
 			App->render->Blit(texture, typeBooster[i].posX, typeBooster[i].posY, &(typeBooster[i].anim.GetCurrentFrame()), 1.0f);
 		}
 	}
-	/*if (typeBooster[CLOCK].booster == true) {
-		App->render->Blit(texture, typeBooster[CLOCK].posX, typeBooster[CLOCK].posY, &(clockAnim.GetCurrentFrame()), 1.0f);
-	}
-
-	if (typeBooster[SANDHOURGLASS].booster == true) {
-		App->render->Blit(texture, typeBooster[SANDHOURGLASS].posX, typeBooster[SANDHOURGLASS].posY, &(sandHourglassAnim.GetCurrentFrame()), 1.0f);
-	}
-
-	if (typeBooster[SHIELD].booster == true) {
-		App->render->Blit(texture, typeBooster[SHIELD].posX, typeBooster[SHIELD].posY, &(shieldAnim.GetCurrentFrame()), 1.0f);
-	}
-
-	if (typeBooster[DYNAMITE].booster == true) {
-		App->render->Blit(texture, typeBooster[DYNAMITE].posX, typeBooster[DYNAMITE].posY, &(dynamiteAnim.GetCurrentFrame()), 1.0f);
-	}
-
-	if (typeBooster[GUN].booster == true) {
-		App->render->Blit(texture, typeBooster[GUN].posX, typeBooster[GUN].posY, &(gunAnim.GetCurrentFrame()), 1.0f);
-	}
-
-	if (typeBooster[DOUBLESHOT].booster == true) {
-		App->render->Blit(texture, typeBooster[DOUBLESHOT].posX, typeBooster[DOUBLESHOT].posY, &(doubleshotAnim.GetCurrentFrame()), 1.0f);
-	}
-
-	if (typeBooster[HOOK].booster == true) {
-		App->render->Blit(texture, typeBooster[HOOK].posX, typeBooster[HOOK].posY, &(hookAnim.GetCurrentFrame()), 1.0f);
-	}*/
-
-
+	shieldInmunity.Update();
 	return update_status::UPDATE_CONTINUE;
 }
 
