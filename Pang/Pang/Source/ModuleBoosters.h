@@ -74,6 +74,10 @@ public:
 	//Animations
 	Animation* currentAnim = nullptr;
 
+	Animation doubleshotUI;
+	Animation hookUI;
+	Animation gunUI;
+
 	Animation* inmunityAnim = nullptr;
 	Animation shieldInmunity;
 

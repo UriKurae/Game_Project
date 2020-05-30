@@ -14,7 +14,9 @@ public:
 	// Constructor (x y coordinates in the world)
 	// Creates animation and movement data and the collider
 	Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type);
-	Enemy_Balloon() {};
+	Enemy_Balloon() {
+		particleDeathVeryBig.anim.Reset();
+	};
 
 	//virtual void OnCollision(Collider* collider);
 
@@ -50,6 +52,7 @@ private:
 	Animation balloonDeath;
 
 	Particle particleDeathVeryBig;
+	Particle particleDeathVeryBigBlue;
 	Particle particleDeathBig;
 	Particle particleDeathSmall;
 	Particle particleDeathVerySmall;

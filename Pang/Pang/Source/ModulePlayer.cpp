@@ -97,11 +97,13 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 
 	bool ret = true;
-
+	bool dynamite = false;
 	bool godMode = false;
 
 	ready = 3;
 
+	stopTime = 0;
+	inmunityTime = 0;
 
 	texture = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
 	timeTexture = App->textures->Load("Assets/UI/Time.png");
@@ -299,6 +301,8 @@ update_status ModulePlayer::Update()
 		currentAnimation->Update();
 
 		if (inmunityTime > 0) { inmunityTime--; }
+
+		if (stopTime > 0) { stopTime--; }
 		
 	}
 	
@@ -515,14 +519,27 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		if (c2 == App->boosters->typeBooster[SHIELD].collider)
 		{
-			
 			inmunityTime = 180;
 
 		}
 
+		if (c2 == App->boosters->typeBooster[CLOCK].collider) 
+		{
+			stopTime = 420;
+		}
 
-		for (int i = 0; i < MAX; i++) {
-			if (App->boosters->typeBooster[i].booster == true && c2 == App->boosters->typeBooster[i].collider) {
+		if (c2 == App->boosters->typeBooster[DYNAMITE].collider) {
+			dynamite = true;
+		}
+
+		if (c2 == App->boosters->typeBooster[DOUBLESHOT].collider) {
+			doubleshot = true;
+		}
+
+		for (int i = 0; i < MAX; i++) 
+		{
+			if (App->boosters->typeBooster[i].booster == true && c2 == App->boosters->typeBooster[i].collider) 
+			{
 				App->boosters->typeBooster[i].collider->pendingToDelete = true;
 				App->boosters->typeBooster[i].booster = false;
 				break;

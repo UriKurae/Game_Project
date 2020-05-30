@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
+#include "ModulePlayer.h"
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
 
@@ -33,12 +34,30 @@ void Enemy::Update()
 
 void Enemy::Draw()
 {
-	if (currentAnim != nullptr)
-		App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
+	if (currentAnim != nullptr) 
+	{
+		if (App->player->stopTime > 0) {
+			if (App->player->stopTime > 40) {
+				App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
+			}
+			
+			else if (App->player->stopTime < 30 && App->player->stopTime > 20) {
+				App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
+			}
+			else if (App->player->stopTime < 10 && App->player->stopTime > 0) {
+				App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
+			}
+
+		}
+		else {
+			App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
+		}
+		
+	}
+		
 }
 
 void Enemy::OnCollision(Collider* collider)
 {
-
 	App->audio->PlayFx(destroyedFx);
 }

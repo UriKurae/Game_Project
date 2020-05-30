@@ -41,6 +41,10 @@ bool ModuleBoosters::Start()
 
 	}
 
+	doubleshotUI.PushBack({ 223, 68, 29, 32 });
+	gunUI.PushBack({183, 76, 32, 24});
+	hookUI.PushBack({261, 69, 32, 31});
+
 	shieldInmunity.PushBack({ 105,69,32,39 });
 	shieldInmunity.PushBack({ 65,69,33,38 });
 	shieldInmunity.speed = 0.2f;
@@ -58,16 +62,16 @@ update_status ModuleBoosters::Update()
 	
 		srand(SDL_GetTicks());
 
-		generatedNumber = rand() % 4;
-		//generatedNumber = 3;
+		//generatedNumber = rand() % 4;
+		generatedNumber = 3;
 		
 
 		LOG("%d",generatedNumber);
 
 		if (generatedNumber == 3)
 		{
-			generatedNumber = rand() % 7;
-			//generatedNumber = 3;
+			//generatedNumber = rand() % 7;
+			generatedNumber = 6;
 			
 		
 			switch (generatedNumber)
@@ -215,6 +219,10 @@ update_status ModuleBoosters::PostUpdate()
 		}
 	}
 	shieldInmunity.Update();
+
+	if (App->player->doubleshot) {
+		App->render->Blit(texture, 97, 225, &doubleshotUI.GetCurrentFrame(), 1.0f);
+	}
 	return update_status::UPDATE_CONTINUE;
 }
 

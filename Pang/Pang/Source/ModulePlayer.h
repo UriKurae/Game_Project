@@ -106,7 +106,16 @@ public:
 	//Shield booster (Protects one hit)
 	int inmunityTime = 0;
 
+	//Clock booster
 
+	int stopTime = 0;
+
+	//Dynamite Booster
+
+	bool dynamite = false;
+	
+	//Doubleshot Booster
+	bool doubleshot = false;
 
 
 	//Enum class for Enemy Type

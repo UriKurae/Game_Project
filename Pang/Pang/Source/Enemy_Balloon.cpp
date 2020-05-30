@@ -34,12 +34,66 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 		bigBalloonAnim.PushBack({ 257,119, 32, 26 });
 		smallBalloonAnim.PushBack({ 292,125,16,14 });
 		verySmallBalloonAnim.PushBack({ 312,129,8,7 });
+		
+		particleDeathVeryBig.anim.PushBack({ 4,142,48,39 });
+		particleDeathVeryBig.anim.PushBack({ 60,148,28,25 });
+		particleDeathVeryBig.anim.PushBack({ 96,143,41,37 });
+		particleDeathVeryBig.anim.PushBack({ 145,137,48,46 });
+		particleDeathVeryBig.anim.speed = 0.25f;
+		particleDeathVeryBig.anim.loop = false;
+
+		particleDeathBig.anim.PushBack({ 4,85,32,26 });
+		particleDeathBig.anim.PushBack({ 44,88,20,15 });
+		particleDeathBig.anim.PushBack({ 72,85,27,26 });
+		particleDeathBig.anim.PushBack({ 107,83,32,30 });
+		particleDeathBig.anim.speed = 0.25f;
+		particleDeathBig.anim.loop = false;
+
+		particleDeathSmall.anim.PushBack({ 4,44,16,14 });
+		particleDeathSmall.anim.PushBack({ 28,47,9,8 });
+		particleDeathSmall.anim.PushBack({ 45,43,15,15 });
+		particleDeathSmall.anim.PushBack({ 68,43,16,16 });
+		particleDeathSmall.anim.speed = 0.25f;
+		particleDeathSmall.anim.loop = false;
+
+		particleDeathVerySmall.anim.PushBack({ 4,12,5,5 });
+		particleDeathVerySmall.anim.PushBack({ 17,12,7,6 });
+		particleDeathVerySmall.anim.PushBack({ 32,11,10,8 });
+		particleDeathVerySmall.anim.speed = 0.25f;
+		particleDeathVerySmall.anim.loop = false;
 	}
 	if (App->player->scene2 || App->player->scene5) {
 		veryBigBalloonAnim.PushBack({ 206, 9, 48, 40 });
 		bigBalloonAnim.PushBack({ 257, 16, 32, 26 });
 		smallBalloonAnim.PushBack({ 291,22,16,14 });
 		verySmallBalloonAnim.PushBack({ 311,26,8,7 });
+
+		particleDeathVeryBig.anim.PushBack({ 4,269,48,39 });
+		particleDeathVeryBig.anim.PushBack({ 60,276,28,25 });
+		particleDeathVeryBig.anim.PushBack({ 96,270,41,37 });
+		particleDeathVeryBig.anim.PushBack({ 145,266,48,46 });
+		particleDeathVeryBig.anim.speed = 0.25f;
+		particleDeathVeryBig.anim.loop = false;
+
+		particleDeathBig.anim.PushBack({ 4,234,32,26 });
+		particleDeathBig.anim.PushBack({ 44,238,20,15 });
+		particleDeathBig.anim.PushBack({ 72,234,27,26 });
+		particleDeathBig.anim.PushBack({ 107,232,32,30 });
+		particleDeathBig.anim.speed = 0.25f;
+		particleDeathBig.anim.loop = false;
+
+		particleDeathSmall.anim.PushBack({ 4,213,16,14 });
+		particleDeathSmall.anim.PushBack({ 28,215,9,8 });
+		particleDeathSmall.anim.PushBack({ 45,212,15,15 });
+		particleDeathSmall.anim.PushBack({ 68,212,16,16 });
+		particleDeathSmall.anim.speed = 0.25f;
+		particleDeathSmall.anim.loop = false;
+
+		particleDeathVerySmall.anim.PushBack({ 4,201,5,5 });
+		particleDeathVerySmall.anim.PushBack({ 17,201,7,6 });
+		particleDeathVerySmall.anim.PushBack({ 32,200,10,8 });
+		particleDeathVerySmall.anim.speed = 0.25f;
+		particleDeathVerySmall.anim.loop = false;
 	}
 	if (App->player->scene3 || App->player->scene6)
 	{
@@ -47,33 +101,34 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 		bigBalloonAnim.PushBack({ 257, 64, 32, 26 });
 		smallBalloonAnim.PushBack({ 291,70,16,14 });
 		verySmallBalloonAnim.PushBack({ 311,74,8,7 });
+
+		particleDeathVeryBig.anim.PushBack({ 230,192,48,39 });
+		particleDeathVeryBig.anim.PushBack({ 290,199,28,25 });
+		particleDeathVeryBig.anim.PushBack({ 333,193,41,37 });
+		particleDeathVeryBig.anim.PushBack({ 380,189,48,46 });
+		particleDeathVeryBig.anim.speed = 0.25f;
+		particleDeathVeryBig.anim.loop = false;
+
+		particleDeathBig.anim.PushBack({ 294,249,32,26 });
+		particleDeathBig.anim.PushBack({ 333,253,20,15 });
+		particleDeathBig.anim.PushBack({ 364,249,27,26 });
+		particleDeathBig.anim.PushBack({ 396,247,32,30 });
+		particleDeathBig.anim.speed = 0.25f;
+		particleDeathBig.anim.loop = false;
+
+		particleDeathSmall.anim.PushBack({ 358,290,16,14 });
+		particleDeathSmall.anim.PushBack({ 379,292,9,8 });
+		particleDeathSmall.anim.PushBack({ 394,289,15,15 });
+		particleDeathSmall.anim.PushBack({ 412,289,16,16 });
+		particleDeathSmall.anim.speed = 0.25f;
+		particleDeathSmall.anim.loop = false;
+
+		particleDeathVerySmall.anim.PushBack({ 392,318,5,5 });
+		particleDeathVerySmall.anim.PushBack({ 405,318,7,6 });
+		particleDeathVerySmall.anim.PushBack({ 418,317,10,8 });
+		particleDeathVerySmall.anim.speed = 0.25f;
+		particleDeathVerySmall.anim.loop = false;
 	}
-	particleDeathVeryBig.anim.PushBack({ 4,142,48,39 });
-	particleDeathVeryBig.anim.PushBack({ 60,148,28,25 });
-	particleDeathVeryBig.anim.PushBack({ 96,143,41,37 });
-	particleDeathVeryBig.anim.PushBack({ 145,137,48,46 });
-	particleDeathVeryBig.anim.speed = 0.25f;
-	particleDeathVeryBig.anim.loop = false;
-
-	particleDeathBig.anim.PushBack({ 4,85,32,26 });
-	particleDeathBig.anim.PushBack({ 44,88,20,15 });
-	particleDeathBig.anim.PushBack({ 72,85,27,26 });
-	particleDeathBig.anim.PushBack({ 107,83,32,30 });
-	particleDeathBig.anim.speed = 0.25f;
-	particleDeathBig.anim.loop = false;
-
-	particleDeathSmall.anim.PushBack({ 4,44,16,14 });
-	particleDeathSmall.anim.PushBack({ 28,47,9,8 });
-	particleDeathSmall.anim.PushBack({ 45,43,15,15 });
-	particleDeathSmall.anim.PushBack({ 68,43,16,16 });
-	particleDeathSmall.anim.speed = 0.25f;
-	particleDeathSmall.anim.loop = false;
-
-	particleDeathVerySmall.anim.PushBack({ 4,12,5,5 });
-	particleDeathVerySmall.anim.PushBack({ 17,12,7,6 });
-	particleDeathVerySmall.anim.PushBack({ 32,11,10,8 });
-	particleDeathVerySmall.anim.speed = 0.25f;
-	particleDeathVerySmall.anim.loop = false;
 
 	currentAnim = &veryBigBalloonAnim;
 
@@ -122,7 +177,7 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 
 void Enemy_Balloon::Update()
 {
-	if (App->player->ready == 0) {
+	if (App->player->ready == 0 && App->player->stopTime == 0) {
 		MRUA();
 		balloonBounce();
 
