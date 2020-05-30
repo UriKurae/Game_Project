@@ -11,3 +11,4 @@ Carlos:
 
 David:
 	-Fixed some spritesheets with the objective to order everything
+	-Added Tileset functionality and collisions ball-wall working 10/10.
