@@ -118,6 +118,7 @@ bool ModuleTileset::CleanUp()
 
 ModuleTileset::Tile ModuleTileset::getTileLevel(int y, int x)
 {
-	return levelToTile[y][x];
+	return levelToTile[y][x]; //SCENE 4 CRASHES BECAUSE TILE LEVEL IS OUTSIDE THE ARRAY, SINCE THE BALL GOES UNDERGROUND
+							 //DEIBID KNOWS HOW TO FIX IT.
 }
 

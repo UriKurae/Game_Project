@@ -8,7 +8,18 @@
 struct SDL_Texture;
 struct Collider;
 
+struct Boost 
+{
+	int despawnTime = 0;
+	int spawnRand = 0;
+	bool booster = false;
+	Collider* collider;
+	Animation anim;
 
+	//Position of the booster.
+	int posX = 0, posY = 0;
+	
+};
 enum boosters
 {
 	CLOCK,
@@ -20,6 +31,9 @@ enum boosters
 	DOUBLESHOT,
 	MAX
 };
+
+
+
 
 class ModuleBoosters:public Module
 {
@@ -40,7 +54,15 @@ public:
 
 public:
 
-	bool booster[MAX];
+	
+	bool booster;
+	
+	float x;
+	float y;
+
+	
+	Boost typeBooster[MAX];
+
 
 	//bool hookIsAlive = false;
 	//bool doubleshotIsAlive = false;
@@ -52,31 +74,24 @@ public:
 
 	bool balloonD;
 
-	float x;
-	float y;
+	
 
 	int generatedNumber;
 
-	//Position of the booster.
-	int posX[MAX], posY[MAX];
 
 	//Animations
 	Animation* currentAnim = nullptr;
 
-	Animation clockAnim;
-	Animation sandHourglassAnim;
-	Animation dynamiteAnim;
-	Animation shieldAnim;
-	Animation gunAnim;
-	Animation doubleshotAnim;
-	Animation hookAnim;
+	//Animation clockAnim;
+	//Animation sandHourglassAnim;
+	//Animation dynamiteAnim;
+	//Animation shieldAnim;
+	//Animation gunAnim;
+	//Animation doubleshotAnim;
+	//Animation hookAnim;
 
 	SDL_Texture* texture = nullptr;
-	Collider* collider[MAX];
+	
 
-private:
-
-	//Time to despawn the booster and random chance to spawn it
-	int despawnTime;
-	int spawnRand;
+	
 };

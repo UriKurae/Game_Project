@@ -77,7 +77,7 @@ bool ModuleScene::Start()
 	App->hookShot->Disable();
 	App->harpoon->Disable();
 	App->doubleShot->Enable();
-	//App->boosters->Enable();
+	App->boosters->Enable();
 	App->tileset->Enable();
 
 	//ADD ENEMIES
@@ -195,6 +195,10 @@ bool ModuleScene::CleanUp()
 	App->tileset->Disable();
 	App->hookShot->Disable();
 	App->gunShot->Disable();
+	App->doubleShot->Disable();
+
+	App->boosters->Disable();
+	
 
 	App->sceneIntro->countdown = 1;
 
@@ -211,17 +215,20 @@ bool ModuleScene::CleanUp()
 		App->harpoon->activeTextures = 0;
 
 		if (!App->harpoon->destroyed)
-	{
+		{
 
-		App->collisions->RemoveCollider(App->harpoon->colliderH);
-		App->harpoon->totalColliders--;
-		App->harpoon->activeColliders = 0;
-	}
+			App->collisions->RemoveCollider(App->harpoon->colliderH);
+			App->harpoon->totalColliders--;
+			App->harpoon->activeColliders = 0;
+		}
 
 	}
 
 	//App->harpoon->HarpoonFx = 0;
 	
+	App->textures->Unload(App->boosters->texture);
+	--totalTextures;
+
 	App->textures->Unload(App->harpoon->texture);
 	--totalTextures;
 	App->textures->Unload(bgTexture);
@@ -249,6 +256,8 @@ bool ModuleScene::CleanUp()
 	--totalColliders;
 	App->collisions->RemoveCollider(lowerWall);
 	--totalColliders;
+
+	App->collisions->RemoveCollider(App->boosters->typeBooster->collider);
 
 	App->textures->Unload(App->enemies->texture);
 

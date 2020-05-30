@@ -226,6 +226,8 @@ bool ModuleScene2::CleanUp()
 	App->harpoon->Disable();
 	App->collisions->Disable();
 	App->tileset->Disable();
+	App->doubleShot->Disable();
+	App->boosters->Disable();
 	App->sceneIntro->countdown = 1;
 
 	//REMOVE HARPOONFX WHEN BALLOON KILLS U AND HARPOON IS ALIVE
@@ -257,6 +259,10 @@ bool ModuleScene2::CleanUp()
 
 	App->audio->UnloadFx(App->harpoon->HarpoonFx);
 	App->audio->UnloadFx(App->hookShot->HarpoonFx);
+
+
+	App->textures->Unload(App->boosters->texture);
+	--totalTextures;
 
 	App->textures->Unload(App->harpoon->texture);
 	--totalTextures;
@@ -290,6 +296,8 @@ bool ModuleScene2::CleanUp()
 	//App->collisions->RemoveCollider(leftPlatform);
 	//--totalColliders;
 	//App->collisions->RemoveCollider(rightPlatform);
+
+	App->collisions->RemoveCollider(App->boosters->typeBooster->collider);
 
 
 	App->textures->Unload(App->enemies->texture);

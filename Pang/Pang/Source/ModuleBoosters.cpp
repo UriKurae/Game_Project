@@ -34,8 +34,15 @@ bool ModuleBoosters::Start()
 	texture = App->textures->Load("Assets/Items&Weapons/Boosters.png");
 	++totalTextures;
 
-	balloonD = false;
+	for (int i = 0; i < MAX; i++)
+	{
+		typeBooster[i].booster = false;
+		typeBooster[i].anim.Reset();
 
+	}
+
+	balloonD = false;
+	
 	return true;
 }
 
@@ -54,84 +61,118 @@ update_status ModuleBoosters::Update()
 		if (generatedNumber == 3)
 		{
 			generatedNumber = rand() % 7;
-
+		
 			switch (generatedNumber)
 			{
 
 			case 0:
-				posX[CLOCK] = x;
-				posY[CLOCK] = y;
-				collider[CLOCK] = App->collisions->AddCollider({ posX[CLOCK], posY[CLOCK],16,16 }, Collider::Type::BOOSTERS);
-				clockAnim.PushBack({ 8,9,16,16 });
-				currentAnim = &clockAnim;
-				booster[CLOCK] = true;
+				if (typeBooster[CLOCK].booster == false)
+				{
+					typeBooster[CLOCK].posX = x;
+					typeBooster[CLOCK].posY = y;
+
+					typeBooster[CLOCK].collider = App->collisions->AddCollider({ typeBooster[CLOCK].posX, typeBooster[CLOCK].posY ,16,16 }, Collider::Type::BOOSTERS);
+
+					typeBooster[CLOCK].anim.PushBack({ 8,9,16,16 });
+					currentAnim = &typeBooster[CLOCK].anim;
+
+					typeBooster[CLOCK].booster = true;
+				}
 				
 				break;
 			case 1:
-				posX[SANDHOURGLASS] = x;
-				posY[SANDHOURGLASS] = y;
-				collider[SANDHOURGLASS] = App->collisions->AddCollider({ posX[SANDHOURGLASS], posY[SANDHOURGLASS],16,16 }, Collider::Type::BOOSTERS);
-				sandHourglassAnim.PushBack({ 48,9,16,16 });
-				currentAnim = &sandHourglassAnim;
-				booster[SANDHOURGLASS] = true;
+				if (typeBooster[SANDHOURGLASS].booster == false)
+				{
+					typeBooster[SANDHOURGLASS].posX = x;
+					typeBooster[SANDHOURGLASS].posY = y;
+
+					typeBooster[SANDHOURGLASS].collider = App->collisions->AddCollider({ typeBooster[SANDHOURGLASS].posX, typeBooster[SANDHOURGLASS].posY ,16,16 }, Collider::Type::BOOSTERS);
+					typeBooster[SANDHOURGLASS].anim.PushBack({ 48,9,16,16 });
+					currentAnim = &typeBooster[SANDHOURGLASS].anim;
+
+					typeBooster[SANDHOURGLASS].booster = true;
+				}
 				
 				break;
 
 			case 2:
-				posX[DYNAMITE] = x;
-				posY[DYNAMITE] = y;
-				collider[DYNAMITE] = App->collisions->AddCollider({ posX[DYNAMITE], posY[DYNAMITE],16,16 }, Collider::Type::BOOSTERS);
-				dynamiteAnim.PushBack({ 88,12,15,13 });
-				dynamiteAnim.PushBack({ 111,9,16,16 });
-				dynamiteAnim.PushBack({ 135,9,16,16 });
-				currentAnim = &dynamiteAnim;
-				booster[DYNAMITE] = true;
+
+				if (typeBooster[DYNAMITE].booster == false)
+				{
+					typeBooster[DYNAMITE].posX = x;
+					typeBooster[DYNAMITE].posY = y;
+
+					typeBooster[DYNAMITE].collider = App->collisions->AddCollider({ typeBooster[DYNAMITE].posX, typeBooster[DYNAMITE].posY ,16,16 }, Collider::Type::BOOSTERS);
+					typeBooster[DYNAMITE].anim.PushBack({ 88,12,15,13 });
+					typeBooster[DYNAMITE].anim.PushBack({ 111,9,16,16 });
+					typeBooster[DYNAMITE].anim.PushBack({ 135,9,16,16 });
+					currentAnim = &typeBooster[DYNAMITE].anim;
+					typeBooster[DYNAMITE].booster = true;
+				}
 			
 				break;
 
 			case 3:
-				posX[SHIELD] = x;
-				posY[SHIELD] = y;
-				collider[SHIELD] = App->collisions->AddCollider({ posX[SHIELD], posY[SHIELD],16,14 }, Collider::Type::BOOSTERS);
-				shieldAnim.PushBack({ 9,46,10,8 });
-				shieldAnim.PushBack({ 27,42,14,12 });
-				shieldAnim.PushBack({ 49,40,16,14 });
-				shieldAnim.PushBack({ 73,40,16,14 });
-				shieldAnim.PushBack({ 97,40,16,14 });
-				shieldAnim.PushBack({ 121,40,16,14 });
-				shieldAnim.PushBack({ 145,40,16,14 });
-				shieldAnim.PushBack({ 169,42,14,12 });
-				currentAnim = &shieldAnim;
-				shieldAnim.speed = 0.1f;
-				booster[SHIELD] = true;
+
+				if (typeBooster[SHIELD].booster == false)
+				{
+					typeBooster[SHIELD].posX = x;
+					typeBooster[SHIELD].posY = y;
+					typeBooster[SHIELD].collider = App->collisions->AddCollider({ typeBooster[SHIELD].posX, typeBooster[SHIELD].posY ,16,16 }, Collider::Type::BOOSTERS);
+
+					typeBooster[SHIELD].anim.PushBack({ 9,46,10,8 });
+					typeBooster[SHIELD].anim.PushBack({ 27,42,14,12 });
+					typeBooster[SHIELD].anim.PushBack({ 49,40,16,14 });
+					typeBooster[SHIELD].anim.PushBack({ 73,40,16,14 });
+					typeBooster[SHIELD].anim.PushBack({ 97,40,16,14 });
+					typeBooster[SHIELD].anim.PushBack({ 121,40,16,14 });
+					typeBooster[SHIELD].anim.PushBack({ 145,40,16,14 });
+					typeBooster[SHIELD].anim.PushBack({ 169,42,14,12 });
+					currentAnim = &typeBooster[SHIELD].anim;
+					typeBooster[SHIELD].anim.speed = 0.1f;
+					typeBooster[SHIELD].booster = true;
+				}
 			
 				break;
 			case 4:
-				posX[GUN] = x;
-				posY[GUN] = y;
-				collider[GUN] = App->collisions->AddCollider({ posX[GUN], posY[GUN],16,13 }, Collider::Type::BOOSTERS);
-				gunAnim.PushBack({ 269, 42, 16, 13 });
-				currentAnim = &gunAnim;
-				booster[GUN] = true;
+
+				if (typeBooster[GUN].booster == false)
+				{
+					typeBooster[GUN].posX = x;
+					typeBooster[GUN].posY = y;
+					typeBooster[GUN].collider = App->collisions->AddCollider({ typeBooster[GUN].posX, typeBooster[GUN].posY ,16,16 }, Collider::Type::BOOSTERS);
+					typeBooster[GUN].anim.PushBack({ 269, 42, 16, 13 });
+					currentAnim = &typeBooster[GUN].anim;
+					typeBooster[GUN].booster = true;
+
+				}
 
 				break;
 
 			case 5: 
-				posX[HOOK] = x;
-				posY[HOOK] = y;
-				collider[HOOK] = App->collisions->AddCollider({ posX[HOOK], posY[HOOK],15,16 }, Collider::Type::BOOSTERS);
-				hookAnim.PushBack({ 191, 39, 15, 14 });
-				currentAnim = &hookAnim;
-				booster[HOOK] = true;
+				
+				if (typeBooster[HOOK].booster == false)
+				{
+					typeBooster[HOOK].posX = x;
+					typeBooster[HOOK].posY = y;
+					typeBooster[HOOK].collider = App->collisions->AddCollider({ typeBooster[HOOK].posX, typeBooster[HOOK].posY ,16,16 }, Collider::Type::BOOSTERS);
+					typeBooster[HOOK].anim.PushBack({ 191, 39, 15, 14 });
+					currentAnim = &typeBooster[HOOK].anim;
+					typeBooster[HOOK].booster = true;
+				}
 				
 				break;
 			case 6:
-				posX[DOUBLESHOT] = x;
-				posY[DOUBLESHOT] = y;
-				collider[DOUBLESHOT] = App->collisions->AddCollider({ posX[DOUBLESHOT], posY[DOUBLESHOT],15,16 }, Collider::Type::BOOSTERS);
-				doubleshotAnim.PushBack({ 230, 39, 15, 16 });
-				currentAnim = &doubleshotAnim;
-				booster[DOUBLESHOT] = true;
+				
+				if (typeBooster[DOUBLESHOT].booster == false)
+				{
+					typeBooster[DOUBLESHOT].posX = x;
+					typeBooster[DOUBLESHOT].posY = y;
+					typeBooster[DOUBLESHOT].collider = App->collisions->AddCollider({ typeBooster[DOUBLESHOT].posX, typeBooster[DOUBLESHOT].posY ,16,16 }, Collider::Type::BOOSTERS);
+					typeBooster[DOUBLESHOT].anim.PushBack({ 230, 39, 15, 16 });
+					currentAnim = &typeBooster[DOUBLESHOT].anim;
+					typeBooster[DOUBLESHOT].booster = true;
+				}
 
 				break;
 			}
@@ -147,12 +188,12 @@ update_status ModuleBoosters::Update()
 	//}
 
 	for (int i = 0; i < MAX; i++) {
-		if (booster[i] == true) {
+		if (typeBooster[i].booster == true) {
 			currentAnim->Update();
-			posY[i] += 2;
-			collider[i]->SetPos(posX[i], posY[i]);
-			if (posY[i] >= 184) {
-				posY[i] = 184;
+			typeBooster[i].posY += 2;
+			typeBooster[i].collider->SetPos(typeBooster[i].posX, typeBooster[i].posY);
+			if (typeBooster[i].posY >= 184) {
+				typeBooster[i].posY = 184;
 			}
 		}
 	}
@@ -162,33 +203,40 @@ update_status ModuleBoosters::Update()
 
 update_status ModuleBoosters::PostUpdate()
 {
-	if (booster[CLOCK] == true) {
-		App->render->Blit(texture, posX[CLOCK], posY[CLOCK], &(clockAnim.GetCurrentFrame()), 1.0f);
+	for (int i = 0; i < MAX; i++)
+	{
+		if (typeBooster[i].booster == true)
+		{
+			App->render->Blit(texture, typeBooster[i].posX, typeBooster[i].posY, &(typeBooster[i].anim.GetCurrentFrame()), 1.0f);
+		}
+	}
+	/*if (typeBooster[CLOCK].booster == true) {
+		App->render->Blit(texture, typeBooster[CLOCK].posX, typeBooster[CLOCK].posY, &(clockAnim.GetCurrentFrame()), 1.0f);
 	}
 
-	if (booster[SANDHOURGLASS] == true) {
-		App->render->Blit(texture, posX[SANDHOURGLASS], posY[SANDHOURGLASS], &(sandHourglassAnim.GetCurrentFrame()), 1.0f);
+	if (typeBooster[SANDHOURGLASS].booster == true) {
+		App->render->Blit(texture, typeBooster[SANDHOURGLASS].posX, typeBooster[SANDHOURGLASS].posY, &(sandHourglassAnim.GetCurrentFrame()), 1.0f);
 	}
 
-	if (booster[SHIELD] == true) {
-		App->render->Blit(texture, posX[SHIELD], posY[SHIELD], &(shieldAnim.GetCurrentFrame()), 1.0f);
+	if (typeBooster[SHIELD].booster == true) {
+		App->render->Blit(texture, typeBooster[SHIELD].posX, typeBooster[SHIELD].posY, &(shieldAnim.GetCurrentFrame()), 1.0f);
 	}
 
-	if (booster[DYNAMITE] == true) {
-		App->render->Blit(texture, posX[DYNAMITE], posY[DYNAMITE], &(dynamiteAnim.GetCurrentFrame()), 1.0f);
+	if (typeBooster[DYNAMITE].booster == true) {
+		App->render->Blit(texture, typeBooster[DYNAMITE].posX, typeBooster[DYNAMITE].posY, &(dynamiteAnim.GetCurrentFrame()), 1.0f);
 	}
 
-	if (booster[GUN] == true) {
-		App->render->Blit(texture, posX[GUN], posY[GUN], &(gunAnim.GetCurrentFrame()), 1.0f);
+	if (typeBooster[GUN].booster == true) {
+		App->render->Blit(texture, typeBooster[GUN].posX, typeBooster[GUN].posY, &(gunAnim.GetCurrentFrame()), 1.0f);
 	}
 
-	if (booster[DOUBLESHOT] == true) {
-		App->render->Blit(texture, posX[DOUBLESHOT], posY[DOUBLESHOT], &(doubleshotAnim.GetCurrentFrame()), 1.0f);
+	if (typeBooster[DOUBLESHOT].booster == true) {
+		App->render->Blit(texture, typeBooster[DOUBLESHOT].posX, typeBooster[DOUBLESHOT].posY, &(doubleshotAnim.GetCurrentFrame()), 1.0f);
 	}
 
-	if (booster[HOOK] == true) {
-		App->render->Blit(texture, posX[HOOK], posY[HOOK], &(hookAnim.GetCurrentFrame()), 1.0f);
-	}
+	if (typeBooster[HOOK].booster == true) {
+		App->render->Blit(texture, typeBooster[HOOK].posX, typeBooster[HOOK].posY, &(hookAnim.GetCurrentFrame()), 1.0f);
+	}*/
 
 
 	return update_status::UPDATE_CONTINUE;

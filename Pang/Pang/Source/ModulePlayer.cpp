@@ -113,14 +113,14 @@ bool ModulePlayer::Start()
 	++activeTextures; ++totalTextures;
 	
 	//SET SPAWN POSITION FOR PLAYER
-	if (scene4 == true) {
-		position.x = 8;
-		position.y = 124;
-	}
-	else {
+	//if (scene4 == true) {
+	//	position.x = 8;
+	//	position.y = 124;
+	//}
+
 		position.x = (SCREEN_WIDTH / 2) - 20;
 		position.y = SCREEN_HEIGHT - 77;
-	}
+	
 
 	
 	collider = App->collisions->AddCollider({ position.x, position.y, 26, 32 }, Collider::Type::PLAYER, this);
@@ -499,10 +499,14 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		//	App->boosters->booster[CLOCK] == false;
 		//}
 
+		
+
+
 		for (int i = 0; i < MAX; i++) {
-			if (App->boosters->booster[i] == true) {
-				App->boosters->collider[i]->pendingToDelete = true;
-				App->boosters->booster[i] = false;
+			if (App->boosters->typeBooster[i].booster == true && c2 == App->boosters->typeBooster[i].collider) {
+				App->boosters->typeBooster[i].collider->pendingToDelete = true;
+				App->boosters->typeBooster[i].booster = false;
+				break;
 			}
 		}
 	}
