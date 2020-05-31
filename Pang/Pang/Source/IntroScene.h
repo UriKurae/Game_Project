@@ -33,13 +33,25 @@ public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
 	Animation intro;
+	Animation map;
+	Animation selectAnim;
 	Animation* currentAnimation = nullptr;
 	SDL_Texture* intro_1 = nullptr;
 	SDL_Texture* intro_2 = nullptr;
 	SDL_Texture* intro_3 = nullptr;
+	SDL_Texture* mapTexture = nullptr;
+	SDL_Texture* mapAnimTexture = nullptr;
+	SDL_Texture* selectTexture = nullptr;
 
 	int countdown = 1260;
 	
+	bool mapBool = false;
+	bool sceneOne = false;
+	bool sceneTwo = false;
+	bool sceneThree = false;
+	bool sceneFour = false;
+	bool sceneFive = false;
+	bool sceneSix = false;
 
 	int introIndex;
 	char scoreText[10] = { "\0" };

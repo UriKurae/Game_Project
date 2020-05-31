@@ -89,6 +89,42 @@ SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 
 	intro.loop = false;
 	intro.speed = 0.5f;
+
+	map.PushBack({ 0, 0, 384, 37 });
+	map.PushBack({ 384, 0, 384, 37 });
+	map.PushBack({ 768, 0, 384, 37 });
+	map.PushBack({ 1152, 0, 384, 37 });
+	map.PushBack({ 1536, 0, 384, 37 });
+	map.PushBack({ 0, 37, 384, 37 });
+	map.PushBack({ 384, 37, 384, 37 });
+	map.PushBack({ 768, 37, 384, 37 });
+	map.PushBack({ 1152, 37, 384, 37 });
+	map.PushBack({ 1536, 37, 384, 37 });
+	map.PushBack({ 0, 74, 384, 37 });
+	map.PushBack({ 384, 74, 384, 37 });
+	map.PushBack({ 768, 74, 384, 37 });
+	map.PushBack({ 1152, 74, 384, 37 });
+	map.PushBack({ 1536, 74, 384, 37 });
+	map.PushBack({ 0, 111, 384, 37 });
+	map.PushBack({ 384, 111, 384, 37 });
+	map.PushBack({ 768, 111, 384, 37 });
+	map.PushBack({ 1152, 111, 384, 37 });
+	map.PushBack({ 1536, 111, 384, 37 });
+	map.PushBack({ 0, 148, 384, 37 });
+	map.PushBack({ 384, 148, 384, 37 });
+	map.PushBack({ 768, 148, 384, 37 });
+	map.PushBack({ 1152, 148, 384, 37 });
+	map.PushBack({ 1536, 148, 384, 37 });
+	map.PushBack({ 0, 185, 384, 37 });
+	map.PushBack({ 384, 185, 384, 37 });
+	map.PushBack({ 768, 185, 384, 37 });
+	map.PushBack({ 1152, 185, 384, 37 });
+	map.PushBack({ 1536, 185, 384, 37 });
+	map.speed = 0.1f;
+	map.loop = false;
+
+	selectAnim.PushBack({0, 0, 15, 15});
+	selectAnim.PushBack({17, 0, 15, 15});
 }
 
 SceneIntro::~SceneIntro()
@@ -103,8 +139,14 @@ bool SceneIntro::Start()
 
 	bool ret = true;
 
+	mapBool = false;
+	sceneOne = true;
+
 	App->player->lifes = 3;
 
+	selectTexture = App->textures->Load("Assets/UI/MapSelection.png");
+	mapAnimTexture = App->textures->Load("Assets/UI/IntroDown.png");
+	mapTexture = App->textures->Load("Assets/UI/IntroMap.png");
 	bgTexture = App->textures->Load("Assets/UI/AnimationPangBalls.png");
 	++activeTextures; ++totalTextures;
 	intro_1 = App->textures->Load("Assets/UI/Intro_1.png");
@@ -138,10 +180,84 @@ update_status SceneIntro::Update()
 
 	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && countdown == 0)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->scene, 30);
+		
+		mapBool = true;
 	}
 
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
+		if (sceneOne == true) {
+			App->fade->FadeToBlack(this, (Module*)App->scene, 30);
+		}
+
+		else if (sceneTwo == true) {
+			App->fade->FadeToBlack(this, (Module*)App->scene2, 30);
+		}
+		else if (sceneThree == true) {
+			App->fade->FadeToBlack(this, (Module*)App->scene3, 30);
+		}
+		else if (sceneFour == true) {
+			App->fade->FadeToBlack(this, (Module*)App->scene4, 30);
+		}
+		else if (sceneFive == true) {
+			App->fade->FadeToBlack(this, (Module*)App->scene5, 30);
+		}
+		else if (sceneSix == true) {
+			App->fade->FadeToBlack(this, (Module*)App->scene6, 30);
+		}
+	}
+
+	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN && mapBool == true) {
+		if (sceneOne == true) {
+			sceneOne = false;
+			sceneTwo = true;
+		}
+
+		else if (sceneTwo == true) {
+			sceneTwo = false;
+			sceneThree = true;
+		}
+		else if (sceneThree == true) {
+			sceneThree = false;
+			sceneFour = true;
+		}
+		else if (sceneFour == true) {
+			sceneFour = false;
+			sceneFive = true;
+		}
+		else if (sceneFive == true) {
+			sceneFive = false;
+			sceneSix = true;
+		}
+	}
+
+	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN && mapBool == true) {
+		if (sceneTwo == true) {
+			sceneTwo = false;
+			sceneOne = true;
+		}
+		else if (sceneThree == true) {
+			sceneThree = false;
+			sceneTwo = true;
+		}
+		else if (sceneFour == true) {
+			sceneFour = false;
+			sceneThree = true;
+		}
+		else if (sceneFive == true) {
+			sceneFive = false;
+			sceneFour = true;
+		}
+		else if (sceneSix == true) {
+			sceneSix = false;
+			sceneFive = true;
+		}
+	}
+
+
 	intro.Update();
+	if (mapBool == true) {
+		map.Update();
+	}
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -151,6 +267,7 @@ update_status SceneIntro::PostUpdate()
 	// Draw everything --------------------------------------
 	if (App->input->keys[SDL_SCANCODE_F10] == KEY_STATE::KEY_DOWN) {
 		countdown = 300;
+		mapBool = false;
 	}
 	else {
 		if (countdown > 840)
@@ -171,7 +288,7 @@ update_status SceneIntro::PostUpdate()
 		}
 	}
 
-	if (countdown == 0)
+	if (countdown == 0 && mapBool == false)
 	{
 		//SDL_DestroyTexture(intro_3);
 		
@@ -181,12 +298,36 @@ update_status SceneIntro::PostUpdate()
 		//App->fonts->BlitText(240, 181, introIndex, "1989");
 
 	}
-	if (countdown == 1) {
+	if (countdown == 1 && mapBool == false) {
 		intro.Reset();
 		currentAnimation = &intro;
 	}
 	if (countdown == 140) {
 		App->audio->PlayMusic("Assets/Sound/Sounds_Gameplay/Title.ogg", 1.0f);
+	}
+
+	if (mapBool == true) {
+		currentAnimation = &map;
+		App->render->Blit(mapTexture, 0, 0, NULL);
+		App->render->Blit(mapAnimTexture, 0, 208, &(map.GetCurrentFrame()), 0.2f);
+		if (sceneOne == true) {
+			App->render->Blit(selectTexture, 341, 68, &(selectAnim.GetCurrentFrame()), 0.2f);
+		}
+		else if (sceneTwo == true) {
+			App->render->Blit(selectTexture, 301, 68, &(selectAnim.GetCurrentFrame()), 0.2f);
+		}
+		else if (sceneThree == true) {
+			App->render->Blit(selectTexture, 285, 100, &(selectAnim.GetCurrentFrame()), 0.2f);
+		}
+		else if (sceneFour == true) {
+			App->render->Blit(selectTexture, 301, 100, &(selectAnim.GetCurrentFrame()), 0.2f);
+		}
+		else if (sceneFive == true) {
+			App->render->Blit(selectTexture, 329, 161, &(selectAnim.GetCurrentFrame()), 0.2f);
+		}
+		else if (sceneSix == true) {
+			App->render->Blit(selectTexture, 265, 96, &(selectAnim.GetCurrentFrame()), 0.2f);
+		}
 	}
 
 	return update_status::UPDATE_CONTINUE;
