@@ -105,6 +105,7 @@ public:
 
 	//Shield booster (Protects one hit)
 	int inmunityTime = 0;
+	bool inmunity = false;
 
 	//Clock booster
 
