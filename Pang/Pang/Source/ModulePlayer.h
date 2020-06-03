@@ -88,11 +88,18 @@ public:
 	int timeIndex;
 	char scoreText[10] = { "\0" };
 	char timeText[3] = { "\0" };
+	char lifeText[3] = { "\0" };
 	uint timeBonus = 0;
 
+
+
+	//Lifes and management
 	int lifes = 3;
 	int cont = 0;
+	SDL_Texture* lifesTexture1 = nullptr;
+	SDL_Rect lifesTextureRect = { 142, 42, 16, 16 };
 
+	//Booleans for scenes
 	bool scene1 = false;
 	bool scene2 = false;
 	bool scene3 = false;

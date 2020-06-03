@@ -121,6 +121,10 @@ bool ModulePlayer::Start()
 	++activeTextures; ++totalTextures;
 	readyTexture = App->textures->Load("Assets/UI/Ready.png");
 	++activeTextures; ++totalTextures;
+
+	//Load textures for the player's life
+	lifesTexture1 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
+	++activeTextures; ++totalTextures;
 	
 	//SET SPAWN POSITION FOR PLAYER
 	if (scene4 == true) {
@@ -417,6 +421,25 @@ update_status ModulePlayer::PostUpdate()
 	App->render->Blit(timeTexture, 269, 9, NULL);
 	App->fonts->BlitText(334, 9, timeIndex, timeText);
 
+	//Print the lifes of the player, the for is for the icons, the next lines are for the number
+
+
+	for (int i = 0; i < lifes; i++)
+	{
+		if (i == 0)
+		{
+			App->render->Blit(lifesTexture1, 25, 227, &lifesTextureRect, 0, false);
+		}
+		else if (i < 4)
+		{
+			App->render->Blit(lifesTexture1, 25 + (16 * i), 227, &lifesTextureRect, 0, false);
+		}
+	}
+
+	sprintf_s(lifeText, 3, "%d", lifes);
+	if (lifes > 4) { App->fonts->BlitText(89, 235, uiIndex, lifeText); }
+
+
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -541,6 +564,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		//	App->boosters->booster[CLOCK] == false;
 		//}
 
+		//Normal boosters
 		if (c2 == App->boosters->typeBooster[SHIELD].collider)
 		{
 			inmunityTime = 181;
@@ -551,19 +575,24 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			stopTime = 420;
 		}
 
-		if (c2 == App->boosters->typeBooster[DYNAMITE].collider) {
-			dynamite = true;
-			
+		if (c2 == App->boosters->typeBooster[DYNAMITE].collider)
+		{
+			dynamite = true;		
 		}
 
-		if (c2 == App->boosters->typeBooster[DOUBLESHOT].collider) {
-		
-
+		if (c2 == App->boosters->typeBooster[DOUBLESHOT].collider) 
+		{
 			doubleshot = true;
 			currWeapon = 3;
-		
 		}
 
+		if (c2 == App->boosters->typeBooster[EXTRALIFE].collider)
+		{
+			App->player->lifes++;
+		}
+
+
+		//Gun Boosters
 		if (c2 == App->boosters->typeBooster[GUN].collider)
 		{
 			currWeapon = 2;
@@ -600,6 +629,13 @@ bool ModulePlayer::CleanUp()
 	--totalTextures;
 	App->collisions->RemoveCollider(collider);
 	--totalColliders;
+	App->textures->Unload(lifesTexture1);
+	--totalTextures;
+
+	App->harpoon->Disable();
+	App->hookShot->Disable();
+	App->gunShot->Disable();
+	App->doubleShot->Disable();
 
 	return true;
 }

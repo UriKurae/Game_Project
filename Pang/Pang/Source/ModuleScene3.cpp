@@ -59,14 +59,7 @@ bool ModuleScene3::Start()
 	deathTexture2 = App->textures->Load("Assets/Foregrounds/Foreground_Death_2.png");
 	++activeTextures; ++totalTextures;
 
-	lifesTexture1 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
-	++activeTextures; ++totalTextures;
-
-	lifesTexture2 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
-	++activeTextures; ++totalTextures;
-
-	lifesTexture3 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
-	++activeTextures; ++totalTextures;
+	
 
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 1.0f);
 
@@ -96,7 +89,6 @@ bool ModuleScene3::Start()
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
-	App->harpoon->Enable();
 	App->tileset->Enable();
 	App->boosters->Enable();
 
@@ -173,23 +165,6 @@ update_status ModuleScene3::PostUpdate()
 		App->render->Blit(App->player->gameOverTexture, 150, 99, NULL);
 	}
 
-	if (App->player->lifes == 3)
-	{
-		App->render->Blit(lifesTexture1, 25, 227, &lifesTextureRect, 0, false);
-		App->render->Blit(lifesTexture2, 41, 227, &lifesTextureRect, 0, false);
-		App->render->Blit(lifesTexture3, 57, 227, &lifesTextureRect, 0, false);
-	}
-
-	else if (App->player->lifes == 2)
-	{
-		App->render->Blit(lifesTexture1, 25, 227, &lifesTextureRect, 0, false);
-		App->render->Blit(lifesTexture2, 41, 227, &lifesTextureRect, 0, false);
-	}
-
-	else if (App->player->lifes == 1)
-	{
-		App->render->Blit(lifesTexture1, 25, 227, &lifesTextureRect, 0, false);
-	}
 
 	//This could be more clean 
 	//Animation to stop the scene with the death 
@@ -235,10 +210,8 @@ bool ModuleScene3::CleanUp()
 
 	App->player->Disable();
 	App->enemies->Disable();
-	App->harpoon->Disable();
 	App->collisions->Disable();
 	App->tileset->Disable();
-	App->doubleShot->Disable();
 	App->boosters->Disable();
 	App->sceneIntro->countdown = 1;
 
@@ -280,12 +253,6 @@ bool ModuleScene3::CleanUp()
 	App->textures->Unload(bgTexture);
 	--totalTextures;
 	App->textures->Unload(fgTexture);
-	--totalTextures;
-	App->textures->Unload(lifesTexture1);
-	--totalTextures;
-	App->textures->Unload(lifesTexture2);
-	--totalTextures;
-	App->textures->Unload(lifesTexture3);
 	--totalTextures;
 	App->textures->Unload(deathTexture1);
 	--totalTextures;

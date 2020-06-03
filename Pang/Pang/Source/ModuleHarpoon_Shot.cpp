@@ -9,6 +9,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleScene.h"
 #include "ModuleScene2.h"
+#include "ModuleScene6.h"
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
@@ -218,7 +219,7 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 
 	if (c2->type == Collider::Type::BREAKABLE_BLOCK)
 	{
-		if (c1->Intersects(App->scene2->leftPlatform->rect)) 
+		if (c1->Intersects(App->scene2->leftPlatform->rect) || c1->Intersects(App->scene6->leftPlatform->rect))
 		{
 			//delete colliderH;
 			this->colliderH->pendingToDelete = true;

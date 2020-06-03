@@ -63,12 +63,6 @@ public:
 		Collider* leftPlatform = nullptr;
 		Collider* rightPlatform = nullptr;
 
-		SDL_Texture* lifesTexture1 = nullptr;
-		SDL_Texture* lifesTexture2 = nullptr;
-		SDL_Texture* lifesTexture3 = nullptr;
-
-		SDL_Rect lifesTextureRect = { 142, 42, 16, 16 };
-
 		uint balloonsOnScene;
 	};
 
