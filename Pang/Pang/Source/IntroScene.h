@@ -43,15 +43,14 @@ public:
 	SDL_Texture* mapAnimTexture = nullptr;
 	SDL_Texture* selectTexture = nullptr;
 
+	uint introFx = 0;
+
 	int countdown = 1260;
 	
 	bool mapBool = false;
-	bool sceneOne = false;
-	bool sceneTwo = false;
-	bool sceneThree = false;
-	bool sceneFour = false;
-	bool sceneFive = false;
-	bool sceneSix = false;
+	bool stage1 = false;
+	bool stage2 = false;
+
 
 	int introIndex;
 	char scoreText[10] = { "\0" };

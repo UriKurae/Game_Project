@@ -81,6 +81,7 @@ public:
 	// Font score index
 	uint score = 000;
 	uint time = 100;
+
 	uint count = 0;
 	uint ready = 3;
 	int uiIndex;
@@ -102,6 +103,7 @@ public:
 	//Boolean for God Mode
 	bool godMode = false;
 
+	int timeMusic = 6000;
 
 	//Shield booster (Protects one hit)
 	int inmunityTime = 0;

@@ -32,7 +32,7 @@ public:
 public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
-	SDL_Texture* mapTexture = nullptr;
+	SDL_Texture* winScene3 = nullptr;
 
 	Animation winAnim;
 	Animation winAnim2;
@@ -45,6 +45,8 @@ public:
 
 	char bonusText[5] = { "\0" };
 	int winIndex;
+
+	uint winFx = 0;
 
 	int winCountdown = 340;
 };

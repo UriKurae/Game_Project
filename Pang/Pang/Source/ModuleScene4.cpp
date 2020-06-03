@@ -60,7 +60,7 @@ bool ModuleScene4::Start()
 
 	stairs.PushBack({ 241, 284, 22, 16 });
 
-	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtKeirin.ogg", 1.0f);
 
 	//Walls collider
 	lowerWall = App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);
@@ -123,6 +123,10 @@ update_status ModuleScene4::Update()
 	{
 		App->fade->FadeToBlack((Module*)App->scene4, (Module*)App->winScene, 60);
 	}
+
+	//if (App->player->time <= 50) {
+	//	App->audio->PlayMusic("Assets/Sound/Soundtracks/GettingLate.ogg", 1.0f);
+	//}
 
 	return update_status::UPDATE_CONTINUE;
 }

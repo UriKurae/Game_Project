@@ -75,8 +75,8 @@ bool ModuleScene::Start()
 	App->collisions->Enable();
 	App->gunShot->Disable();
 	App->hookShot->Disable();
-	App->harpoon->Disable();
-	App->doubleShot->Enable();
+	App->harpoon->Enable();
+	App->doubleShot->Disable();
 	App->boosters->Enable();
 	App->tileset->Enable();
 
@@ -91,6 +91,10 @@ bool ModuleScene::Start()
 
 	App->player->scene1 = true;
 	App->player->scene2 = false;
+	App->player->scene3 = false;
+	App->player->scene4 = false;
+	App->player->scene5 = false;
+	App->player->scene6 = false;
 
 
 	//Buff=App->collisions->AddCollider({ 20, 190, 10, 10 }, Collider::Type::PLAYER); FOR TESTS DON'T ERASE PLS
@@ -115,6 +119,10 @@ update_status ModuleScene::Update()
 
 //	LOG("enemyOnStage == %d", balloonsOnScene);
 	//LOG("Lifes: ---------%d---------", App->player->lifes);
+
+	//if (App->player->timeMusic == 3000) {
+	//	App->audio->PlayMusic("Assets/Sound/Soundtracks/GettingLate.ogg", 1.0f);
+	//}
 
 	return update_status::UPDATE_CONTINUE;
 }

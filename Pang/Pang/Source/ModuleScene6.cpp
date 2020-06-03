@@ -60,7 +60,7 @@ bool ModuleScene6::Start()
 	lifesTexture3 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
 	++activeTextures; ++totalTextures;
 
-	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtKeirin.ogg", 1.0f);
 
 	//Walls collider
 	lowerWall = App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);

@@ -140,7 +140,7 @@ bool SceneIntro::Start()
 	bool ret = true;
 
 	mapBool = false;
-	sceneOne = true;
+	stage1 = true;
 
 	App->player->lifes = 3;
 
@@ -155,6 +155,8 @@ bool SceneIntro::Start()
 	++activeTextures; ++totalTextures;
 	intro_3 = App->textures->Load("Assets/UI/Intro_3.png");
 	++activeTextures; ++totalTextures;
+
+	introFx = App->audio->LoadFx("Assets/Sound/Sounds_Gameplay/Title.wav");
 
 	char lookupTable1[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	introIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable1, 1);
@@ -180,76 +182,30 @@ update_status SceneIntro::Update()
 
 	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && countdown == 0)
 	{
-		
 		mapBool = true;
 	}
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
-		if (sceneOne == true) {
-			App->fade->FadeToBlack(this, (Module*)App->scene, 30);
-		}
-
-		else if (sceneTwo == true) {
-			App->fade->FadeToBlack(this, (Module*)App->scene2, 30);
-		}
-		else if (sceneThree == true) {
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && mapBool == true) {
+		if (stage1 == true) {
 			App->fade->FadeToBlack(this, (Module*)App->scene3, 30);
 		}
-		else if (sceneFour == true) {
+		else if (stage2 == true) {
 			App->fade->FadeToBlack(this, (Module*)App->scene4, 30);
-		}
-		else if (sceneFive == true) {
-			App->fade->FadeToBlack(this, (Module*)App->scene5, 30);
-		}
-		else if (sceneSix == true) {
-			App->fade->FadeToBlack(this, (Module*)App->scene6, 30);
 		}
 	}
 
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN && mapBool == true) {
-		if (sceneOne == true) {
-			sceneOne = false;
-			sceneTwo = true;
-		}
-
-		else if (sceneTwo == true) {
-			sceneTwo = false;
-			sceneThree = true;
-		}
-		else if (sceneThree == true) {
-			sceneThree = false;
-			sceneFour = true;
-		}
-		else if (sceneFour == true) {
-			sceneFour = false;
-			sceneFive = true;
-		}
-		else if (sceneFive == true) {
-			sceneFive = false;
-			sceneSix = true;
+		if (stage1 == true) {
+			stage1 = false;
+			stage2 = true;
 		}
 	}
 
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN && mapBool == true) {
-		if (sceneTwo == true) {
-			sceneTwo = false;
-			sceneOne = true;
-		}
-		else if (sceneThree == true) {
-			sceneThree = false;
-			sceneTwo = true;
-		}
-		else if (sceneFour == true) {
-			sceneFour = false;
-			sceneThree = true;
-		}
-		else if (sceneFive == true) {
-			sceneFive = false;
-			sceneFour = true;
-		}
-		else if (sceneSix == true) {
-			sceneSix = false;
-			sceneFive = true;
+
+		if (stage2 == true) {
+			stage2 = false;
+			stage1 = true;
 		}
 	}
 
@@ -303,30 +259,18 @@ update_status SceneIntro::PostUpdate()
 		currentAnimation = &intro;
 	}
 	if (countdown == 140) {
-		App->audio->PlayMusic("Assets/Sound/Sounds_Gameplay/Title.ogg", 1.0f);
+		App->audio->PlayFx(introFx);
 	}
 
 	if (mapBool == true) {
 		currentAnimation = &map;
 		App->render->Blit(mapTexture, 0, 0, NULL);
 		App->render->Blit(mapAnimTexture, 0, 208, &(map.GetCurrentFrame()), 0.2f);
-		if (sceneOne == true) {
+		if (stage1 == true) {
 			App->render->Blit(selectTexture, 341, 68, &(selectAnim.GetCurrentFrame()), 0.2f);
 		}
-		else if (sceneTwo == true) {
+		else if (stage2 == true) {
 			App->render->Blit(selectTexture, 301, 68, &(selectAnim.GetCurrentFrame()), 0.2f);
-		}
-		else if (sceneThree == true) {
-			App->render->Blit(selectTexture, 285, 100, &(selectAnim.GetCurrentFrame()), 0.2f);
-		}
-		else if (sceneFour == true) {
-			App->render->Blit(selectTexture, 301, 100, &(selectAnim.GetCurrentFrame()), 0.2f);
-		}
-		else if (sceneFive == true) {
-			App->render->Blit(selectTexture, 329, 161, &(selectAnim.GetCurrentFrame()), 0.2f);
-		}
-		else if (sceneSix == true) {
-			App->render->Blit(selectTexture, 265, 96, &(selectAnim.GetCurrentFrame()), 0.2f);
 		}
 	}
 
@@ -350,6 +294,9 @@ bool SceneIntro::CleanUp()
 
 	App->fonts->UnLoad(introIndex);
 	--activeFonts; --totalFonts;
+
+	App->audio->UnloadFx(introFx);
+	--activeFx; --totalFx;
 
 
 	/*SDL_DestroyTexture(intro_1);

@@ -134,10 +134,8 @@ update_status ModuleScene2::Update()
 
 	if (App->enemies->balloon.balloonsOnScene == 0)
 	{
-
 		App->harpoon->Disable();
 		App->fade->FadeToBlack((Module*)App->scene2, (Module*)App->winScene, 60);
-
 	}
 
 	return update_status::UPDATE_CONTINUE; 

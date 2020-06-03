@@ -34,9 +34,9 @@ bool WinScene::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/UI/WinAnimations.png");
-	App->audio->PlayMusic("Assets/Sound/Sounds_Gameplay/Level_Complete.ogg", 1.0f);
+	winFx = App->audio->LoadFx("Assets/Sound/Sounds_Gameplay/LevelComplete.ogg");
 
-	mapTexture = App->textures->Load("Assets/UI/IntroMap.png");
+	winScene3 = App->textures->Load("Assets/UI/AnimPlaneScene3.png");
 
 	char lookupTable2[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	winIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable2, 1);
@@ -54,6 +54,15 @@ bool WinScene::Start()
 		winAnim2.PushBack({ 0, 96, 194, 96 });
 		winAnim2.speed = 0.1f;
 		winAnim2.loop = true;
+	}
+	else if (App->player->scene3 == true) {
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 6; j++) {
+				winAnim3.PushBack({ j * 384, i * 245, 384, 245 });
+			}
+		}
+		winAnim3.speed = 0.1f;
+		winAnim3.loop = false;
 	}
 
 	else if (App->player->scene4 == true) {
@@ -111,6 +120,7 @@ update_status WinScene::Update()
 	}
 
 	winAnim.Update();
+	winAnim3.Update();
 	winAnim4.Update();
 
 	return update_status::UPDATE_CONTINUE;
@@ -124,24 +134,28 @@ update_status WinScene::PostUpdate()
 	if (App->player->scene1 == true) {
 		App->render->Blit(bgTexture, 95, 32, &(winAnim.GetCurrentFrame()), 0.2f);
 		App->fonts->BlitText(168, 145, winIndex, "1STAGE");
+		App->audio->PlayFx(winFx);
 	}
 	else if (App->player->scene2 == true) {
 		App->render->Blit(bgTexture, 95, 32, &(winAnim2.GetCurrentFrame()), 0.2f);
 		App->fonts->BlitText(168, 145, winIndex, "2STAGE");
+		App->audio->PlayFx(winFx);
 	}
 	else if (App->player->scene3 == true) {
-		App->render->Blit(mapTexture, 0, 0, NULL);
+		App->render->Blit(winScene3, 0, 0, &(winAnim3.GetCurrentFrame()), 0.2f);
 	}
 	else if (App->player->scene4 == true) {
 		App->render->Blit(bgTexture, 95, 32, &(winAnim4.GetCurrentFrame()), 0.2f);
 		App->fonts->BlitText(168, 145, winIndex, "4STAGE");
+		App->audio->PlayFx(winFx);
 	}
 	else if (App->player->scene5 == true) {
 		App->render->Blit(bgTexture, 95, 32, &(winAnim5.GetCurrentFrame()), 0.2f);
 		App->fonts->BlitText(168, 145, winIndex, "5STAGE");
+		App->audio->PlayFx(winFx);
 	}
 	else if (App->player->scene6 == true) {
-		App->render->Blit(mapTexture, 0, 0, NULL);
+		App->render->Blit(winScene3, 0, 0, &(winAnim3.GetCurrentFrame()), 0.2f);
 	}
 
 	if (App->player->scene1 == true || App->player->scene2 == true || App->player->scene4 == true || App->player->scene5 == true) {
@@ -161,8 +175,16 @@ bool WinScene::CleanUp()
 	SDL_DestroyTexture(bgTexture);
 	
 	App->fonts->UnLoad(winIndex);
+	
+	App->audio->UnloadFx(winFx);
 
 	winAnim.Reset();
+	winAnim2.Reset();
+	winAnim3.Reset();
+	winAnim4.Reset();
+	winAnim5.Reset();
+	winAnim6.Reset();
+
 
 	return true;
 }

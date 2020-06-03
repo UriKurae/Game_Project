@@ -131,6 +131,7 @@ bool ModulePlayer::Start()
 	++activeColliders; ++totalColliders;
 	destroyed = false;
 	time = 100;
+	//timeMusic = 3300;
 
 	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	uiIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable, 1);
@@ -193,6 +194,11 @@ update_status ModulePlayer::Update()
 		if (App->enemies->balloon.balloonsOnScene == 0) {
 			timeBonus = time * 100;
 		}
+
+		if (timeMusic > 0) {
+			timeMusic--;
+		}
+
 
 		//Detect inputs
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !destroyed)
@@ -393,9 +399,6 @@ update_status ModulePlayer::PostUpdate()
 	App->render->Blit(timeTexture, 269, 9, NULL);
 	App->fonts->BlitText(334, 9, timeIndex, timeText);
 
-	
-
-
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -520,7 +523,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		if (c2 == App->boosters->typeBooster[SHIELD].collider)
 		{
 			inmunityTime = 180;
-
 		}
 
 		if (c2 == App->boosters->typeBooster[CLOCK].collider) 

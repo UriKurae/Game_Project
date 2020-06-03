@@ -70,8 +70,8 @@ update_status ModuleBoosters::Update()
 
 		if (generatedNumber == 3)
 		{
-			//generatedNumber = rand() % 7;
-			generatedNumber = 6;
+			generatedNumber = rand() % 7;
+			//generatedNumber = 6;
 			
 		
 			switch (generatedNumber)
