@@ -29,6 +29,7 @@ enum boosters
 	GUN,
 	HOOK,
 	DOUBLESHOT,
+	EXTRALIFE,
 	MAX
 };
 

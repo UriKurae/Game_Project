@@ -70,8 +70,8 @@ update_status ModuleBoosters::Update()
 
 		if (generatedNumber == 3)
 		{
-			generatedNumber = rand() % 7;
-			//generatedNumber = 6;
+			//generatedNumber = rand() % 8;
+			generatedNumber = 7;
 			
 		
 			switch (generatedNumber)
@@ -185,6 +185,19 @@ update_status ModuleBoosters::Update()
 					typeBooster[DOUBLESHOT].anim.PushBack({ 230, 39, 15, 16 });
 					currentAnim = &typeBooster[DOUBLESHOT].anim;
 					typeBooster[DOUBLESHOT].booster = true;
+				}
+
+				break;
+			case 7:
+
+				if (typeBooster[EXTRALIFE].booster == false)
+				{
+					typeBooster[EXTRALIFE].posX = x;
+					typeBooster[EXTRALIFE].posY = y;
+					typeBooster[EXTRALIFE].collider = App->collisions->AddCollider({ typeBooster[EXTRALIFE].posX, typeBooster[EXTRALIFE].posY ,16,16 }, Collider::Type::BOOSTERS);
+					typeBooster[EXTRALIFE].anim.PushBack({ 175, 8, 16, 16 });
+					currentAnim = &typeBooster[EXTRALIFE].anim;
+					typeBooster[EXTRALIFE].booster = true;
 				}
 
 				break;
