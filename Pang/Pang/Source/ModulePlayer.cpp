@@ -13,6 +13,8 @@
 #include "ModuleHarpoon_HookShot.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleBoosters.h"
+#include "ModuleHarpoon_DoubleShot.h"
+#include "ModuleGunShot.h"
 
 #include "Enemy.h"
 #include "ModuleEnemies.h"
@@ -85,6 +87,8 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	shotAnim.PushBack({ 32, 113, 27, 33 });
 	
 	
+
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -99,6 +103,9 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	bool dynamite = false;
 	bool godMode = false;
+
+	currWeapon = 0;
+
 
 	ready = 3;
 
@@ -116,13 +123,16 @@ bool ModulePlayer::Start()
 	++activeTextures; ++totalTextures;
 	
 	//SET SPAWN POSITION FOR PLAYER
-	//if (scene4 == true) {
-	//	position.x = 8;
-	//	position.y = 124;
-	//}
-
+	if (scene4 == true) {
+		position.x = 80;
+		position.y = SCREEN_HEIGHT - 77;
+	}
+	else 
+	{
 	position.x = (SCREEN_WIDTH / 2) - 20;
 	position.y = SCREEN_HEIGHT - 77;
+	}
+
 	
 	
 
@@ -138,6 +148,14 @@ bool ModulePlayer::Start()
 	char timeTable[] = { "0123456789" };
 	timeIndex = App->fonts->Load("Assets/UI/CountdownNumbers.png", timeTable, 1);
 	++activeFonts; ++totalFonts;
+
+
+	//Enable all weapons
+
+	App->harpoon->Enable();
+	App->hookShot->Enable();
+	App->gunShot->Enable();
+	App->doubleShot->Enable();
 
 	return ret;
 }
@@ -195,9 +213,9 @@ update_status ModulePlayer::Update()
 			timeBonus = time * 100;
 		}
 
-		if (timeMusic > 0) {
+		/*if (timeMusic > 0) {
 			timeMusic--;
-		}
+		}*/
 
 
 		//Detect inputs
@@ -535,12 +553,29 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		if (c2 == App->boosters->typeBooster[DYNAMITE].collider) {
 			dynamite = true;
+			
 		}
 
 		if (c2 == App->boosters->typeBooster[DOUBLESHOT].collider) {
+		
+
 			doubleshot = true;
+			currWeapon = 3;
+		
 		}
 
+		if (c2 == App->boosters->typeBooster[GUN].collider)
+		{
+			currWeapon = 2;
+			doubleshot = false;
+		
+		}
+
+		if (c2 == App->boosters->typeBooster[HOOK].collider)
+		{
+			currWeapon = 1;
+			doubleshot = false;
+		}
 		for (int i = 0; i < MAX; i++) 
 		{
 			if (App->boosters->typeBooster[i].booster == true && c2 == App->boosters->typeBooster[i].collider) 

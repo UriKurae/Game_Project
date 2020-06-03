@@ -135,7 +135,7 @@ update_status ModuleHarpoon::Update()
 	update_status ret = update_status::UPDATE_CONTINUE;
 	
 	
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && destroyed == true && App->player->destroyed == false)
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && destroyed == true && App->player->destroyed == false && App->player->currWeapon == 0)
 		{
 
 		App->audio->PlayFx(HarpoonFx);

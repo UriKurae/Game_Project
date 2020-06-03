@@ -30,6 +30,7 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 
 	tipoBalloon = type;
 	if (App->player->scene1 || App->player->scene4) {
+	
 		veryBigBalloonAnim.PushBack({ 207,112, 48, 40 });
 		bigBalloonAnim.PushBack({ 257,119, 32, 26 });
 		smallBalloonAnim.PushBack({ 292,125,16,14 });
@@ -869,7 +870,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 				App->particles->AddParticle(particleDeathBig, position.x, position.y, Collider::Type::NONE, 0);
 				App->audio->PlayFx(ballonExplosion);
 				App->boosters->balloonD = true;
-				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x, position.y);
+				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x+16, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, position.x, position.y);
 
 			}
@@ -892,7 +893,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 				App->particles->AddParticle(particleDeathSmall, position.x, position.y, Collider::Type::NONE, 0);
 				App->audio->PlayFx(ballonExplosion);
 				App->boosters->balloonD = true;
-				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x, position.y);
+				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x+8, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON2, position.x, position.y);
 
 			}

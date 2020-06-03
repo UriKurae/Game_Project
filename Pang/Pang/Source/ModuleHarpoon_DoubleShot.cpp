@@ -202,7 +202,7 @@ update_status ModuleDoubleShot::Update()
 	update_status ret = update_status::UPDATE_CONTINUE;
 
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->player->destroyed == false && shotsOnScreen < 3)
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->player->destroyed == false && shotsOnScreen < 3 && App->player->currWeapon == 3)
 	{
 
 		App->audio->PlayFx(HarpoonFx);

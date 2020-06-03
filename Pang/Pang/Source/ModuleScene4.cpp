@@ -81,11 +81,17 @@ bool ModuleScene4::Start()
 	rightPlatform = App->collisions->AddCollider({ 192,156,8,32 }, Collider::Type::UNBREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 
+	App->player->scene1 = false;
+	App->player->scene2 = false;
+	App->player->scene3 = false;
+	App->player->scene4 = true;
+	App->player->scene5 = false;
+	App->player->scene6 = false;
+
+
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
-	App->hookShot->Enable();
-	App->harpoon->Disable();
 	App->tileset->Enable();
 	App->boosters->Enable();
 
@@ -97,14 +103,6 @@ bool ModuleScene4::Start()
 	App->player->score = 0;
 
 	App->enemies->balloon.balloonsOnScene = 1;
-
-	App->player->scene1 = false;
-	App->player->scene2 = false;
-	App->player->scene3 = false;
-	App->player->scene4 = true;
-	App->player->scene5 = false;
-	App->player->scene6 = false;
-
 
 	//Buff=App->collisions->AddCollider({ 20, 190, 10, 10 }, Collider::Type::PLAYER); FOR TESTS DON'T ERASE PLS
 
