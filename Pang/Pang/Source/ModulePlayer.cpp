@@ -306,7 +306,7 @@ update_status ModulePlayer::Update()
 
 		currentAnimation->Update();
 
-		if (inmunityTime > 0) { inmunityTime--; }
+		if (inmunityTime < 181 && inmunityTime > 0) { inmunityTime--; }
 
 		if (stopTime > 0) { stopTime--; }
 		
@@ -318,7 +318,7 @@ update_status ModulePlayer::Update()
 
 update_status ModulePlayer::PostUpdate()
 {
-	if (inmunityTime > 0)
+	if (inmunityTime == 181 )
 	{
 		App->boosters->inmunityAnim = &App->boosters->shieldInmunity;
 		App->render->Blit(App->boosters->texture, position.x-5, position.y-7, &(App->boosters->inmunityAnim->GetCurrentFrame()), 1.0f);
@@ -507,7 +507,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	//	shield = false;
 	//}
 
-
+	if (c2->type == Collider::Type::BALLOON && godMode == false && inmunityTime == 181)
+	{
+		inmunityTime--;
+	}
 	if (c2->type == Collider::Type::BOOSTERS) {
 	
 		//if (App->boosters->booster[CLOCK] == true) {
@@ -522,7 +525,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		if (c2 == App->boosters->typeBooster[SHIELD].collider)
 		{
-			inmunityTime = 180;
+			inmunityTime = 181;
 		}
 
 		if (c2 == App->boosters->typeBooster[CLOCK].collider) 
