@@ -16,6 +16,7 @@
 #include "ModuleHarpoon_DoubleShot.h"
 #include "ModuleGunShot.h"
 
+
 #include "Enemy.h"
 #include "ModuleEnemies.h"
 
@@ -171,9 +172,7 @@ update_status ModulePlayer::Update()
 	//TO GET THE MOUSE POSITION, SDL_GETMouseState, MUST FIX THE FOR SOME FUCKING REASON THE BALLS WONT SPAWN.
 	if (App->input->keys[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
 	{
-		
 		SDL_GetMouseState(&mouseX, &mouseY);
-	
 
 		App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, (mouseX/SCREEN_SIZE), (mouseY/SCREEN_SIZE));
 	}
@@ -616,6 +615,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 	}
 }
+
+
 
 bool ModulePlayer::CleanUp()
 {

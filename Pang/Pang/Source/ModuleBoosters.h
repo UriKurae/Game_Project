@@ -53,6 +53,8 @@ public:
 
 	void OnCollision(Collider* c1, Collider* c2) override;
 
+	void spawnBooster();
+
 public:
 
 	
@@ -61,6 +63,10 @@ public:
 	float x;
 	float y;
 
+
+	//Store location of the mouse pointer
+	int mouseX;
+	int mouseY;
 	
 	Boost typeBooster[MAX];
 

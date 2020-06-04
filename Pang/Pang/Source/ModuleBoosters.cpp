@@ -218,6 +218,7 @@ update_status ModuleBoosters::Update()
 		}
 	}
 
+	spawnBooster();
 	
 	return update_status::UPDATE_CONTINUE;
 }
@@ -238,6 +239,123 @@ update_status ModuleBoosters::PostUpdate()
 	}
 	return update_status::UPDATE_CONTINUE;
 }
+
+
+void ModuleBoosters::spawnBooster()
+{
+	SDL_GetMouseState(&mouseX, &mouseY);
+	
+	if (App->input->keys[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN && App->input->keys[SDL_SCANCODE_LALT] == KEY_STATE::KEY_REPEAT && typeBooster[CLOCK].booster == false)
+	{
+		typeBooster[CLOCK].posX = mouseX / SCREEN_SIZE;
+		typeBooster[CLOCK].posY = mouseY / SCREEN_SIZE;
+
+		typeBooster[CLOCK].collider = App->collisions->AddCollider({ typeBooster[CLOCK].posX, typeBooster[CLOCK].posY ,16,16 }, Collider::Type::BOOSTERS);
+
+		typeBooster[CLOCK].anim.PushBack({ 8,9,16,16 });
+		currentAnim = &typeBooster[CLOCK].anim;
+
+		typeBooster[CLOCK].booster = true;
+
+	}
+	else if (App->input->keys[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN && App->input->keys[SDL_SCANCODE_LALT] == KEY_STATE::KEY_REPEAT && typeBooster[SANDHOURGLASS].booster == false)
+	{
+		typeBooster[SANDHOURGLASS].posX = mouseX / SCREEN_SIZE;
+		typeBooster[SANDHOURGLASS].posY = mouseY / SCREEN_SIZE;
+
+		typeBooster[SANDHOURGLASS].collider = App->collisions->AddCollider({ typeBooster[SANDHOURGLASS].posX,typeBooster[SANDHOURGLASS].posY ,16,16 }, Collider::Type::BOOSTERS);
+
+		typeBooster[SANDHOURGLASS].anim.PushBack({ 48,9,16,16 });
+		currentAnim = &typeBooster[SANDHOURGLASS].anim;
+
+		typeBooster[SANDHOURGLASS].booster = true;
+	}
+	else if (App->input->keys[SDL_SCANCODE_3] == KEY_STATE::KEY_DOWN && App->input->keys[SDL_SCANCODE_LALT] == KEY_STATE::KEY_REPEAT && typeBooster[DYNAMITE].booster == false)
+	{
+		typeBooster[DYNAMITE].posX = mouseX / SCREEN_SIZE;
+		typeBooster[DYNAMITE].posY = mouseY / SCREEN_SIZE;
+
+		typeBooster[DYNAMITE].collider = App->collisions->AddCollider({typeBooster[DYNAMITE].posX,typeBooster[DYNAMITE].posY ,16,16 }, Collider::Type::BOOSTERS);
+
+		typeBooster[DYNAMITE].anim.PushBack({ 88,9,15,16 });
+		typeBooster[DYNAMITE].anim.PushBack({ 111,9,16,16 });
+		typeBooster[DYNAMITE].anim.PushBack({ 135,9,16,16 });
+
+		currentAnim = &typeBooster[DYNAMITE].anim;
+
+		typeBooster[DYNAMITE].booster = true;
+	}
+	else if (App->input->keys[SDL_SCANCODE_4] == KEY_STATE::KEY_DOWN && App->input->keys[SDL_SCANCODE_LALT] == KEY_STATE::KEY_REPEAT && typeBooster[SHIELD].booster == false)
+	{
+		typeBooster[SHIELD].posX = mouseX / SCREEN_SIZE;
+		typeBooster[SHIELD].posY = mouseY / SCREEN_SIZE;
+
+		typeBooster[SHIELD].collider = App->collisions->AddCollider({ typeBooster[SHIELD].posX,typeBooster[SHIELD].posY ,16,16 }, Collider::Type::BOOSTERS);
+
+		typeBooster[SHIELD].anim.PushBack({ 6,42,16,14 });
+		typeBooster[SHIELD].anim.PushBack({ 26,41,16,14 });
+		typeBooster[SHIELD].anim.PushBack({ 49,40,16,14 });
+		typeBooster[SHIELD].anim.PushBack({ 73,40,16,14 });
+		typeBooster[SHIELD].anim.PushBack({ 97,40,16,14 });
+		typeBooster[SHIELD].anim.PushBack({ 121,40,16,14 });
+		typeBooster[SHIELD].anim.PushBack({ 145,40,16,14 });
+		typeBooster[SHIELD].anim.PushBack({ 168,41,16,14 });
+
+		currentAnim = &typeBooster[SHIELD].anim;
+
+		typeBooster[SHIELD].booster = true;
+	}
+	else if (App->input->keys[SDL_SCANCODE_5] == KEY_STATE::KEY_DOWN && App->input->keys[SDL_SCANCODE_LALT] == KEY_STATE::KEY_REPEAT && typeBooster[GUN].booster == false)
+	{
+		typeBooster[GUN].posX = mouseX / SCREEN_SIZE;
+		typeBooster[GUN].posY = mouseY / SCREEN_SIZE;
+
+		typeBooster[GUN].collider = App->collisions->AddCollider({ typeBooster[GUN].posX, typeBooster[GUN].posY ,16,16 }, Collider::Type::BOOSTERS);
+
+		typeBooster[GUN].anim.PushBack({ 269, 42, 16, 13 });
+		currentAnim = &typeBooster[GUN].anim;
+
+		typeBooster[GUN].booster = true;
+	}
+	else if (App->input->keys[SDL_SCANCODE_6] == KEY_STATE::KEY_DOWN && App->input->keys[SDL_SCANCODE_LALT] == KEY_STATE::KEY_REPEAT && typeBooster[HOOK].booster == false)
+	{
+		typeBooster[HOOK].posX = mouseX / SCREEN_SIZE;
+		typeBooster[HOOK].posY = mouseY / SCREEN_SIZE;
+
+		typeBooster[HOOK].collider = App->collisions->AddCollider({ typeBooster[HOOK].posX, typeBooster[HOOK].posY ,16,16 }, Collider::Type::BOOSTERS);
+
+		typeBooster[HOOK].anim.PushBack({ 191, 39, 15, 14 });
+		currentAnim = &typeBooster[HOOK].anim;
+
+		typeBooster[HOOK].booster = true;
+	}
+	else if (App->input->keys[SDL_SCANCODE_7] == KEY_STATE::KEY_DOWN && App->input->keys[SDL_SCANCODE_LALT] == KEY_STATE::KEY_REPEAT && typeBooster[DOUBLESHOT].booster == false)
+	{
+		typeBooster[DOUBLESHOT].posX = mouseX / SCREEN_SIZE;
+		typeBooster[DOUBLESHOT].posY = mouseY / SCREEN_SIZE;
+
+		typeBooster[DOUBLESHOT].collider = App->collisions->AddCollider({ typeBooster[DOUBLESHOT].posX, typeBooster[DOUBLESHOT].posY ,16,16 }, Collider::Type::BOOSTERS);
+
+		typeBooster[DOUBLESHOT].anim.PushBack({ 230, 39, 15, 16 });
+		currentAnim = &typeBooster[DOUBLESHOT].anim;
+
+		typeBooster[DOUBLESHOT].booster = true;
+	}
+	else if (App->input->keys[SDL_SCANCODE_8] == KEY_STATE::KEY_DOWN && App->input->keys[SDL_SCANCODE_LALT] == KEY_STATE::KEY_REPEAT && typeBooster[EXTRALIFE].booster == false)
+	{
+		typeBooster[EXTRALIFE].posX = mouseX / SCREEN_SIZE;
+		typeBooster[EXTRALIFE].posY = mouseY / SCREEN_SIZE;
+
+		typeBooster[EXTRALIFE].collider = App->collisions->AddCollider({typeBooster[EXTRALIFE].posX, typeBooster[EXTRALIFE].posY ,16,16 }, Collider::Type::BOOSTERS);
+
+		typeBooster[EXTRALIFE].anim.PushBack({ 175, 8, 16, 16 });
+		currentAnim = &typeBooster[EXTRALIFE].anim;
+
+		typeBooster[EXTRALIFE].booster = true;
+	}
+
+}
+
 
 void ModuleBoosters::OnCollision(Collider* c1, Collider* c2)
 {
