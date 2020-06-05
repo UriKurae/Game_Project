@@ -52,7 +52,7 @@ bool ModuleScene::Start()
 	++activeTextures; ++totalTextures;
 	
 
-	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 0.0f);
 
 	//Walls collider
 	lowerWall = App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);
@@ -87,6 +87,8 @@ bool ModuleScene::Start()
 	App->player->scene5 = false;
 	App->player->scene6 = false;
 
+	musicBool1 = true;
+	musicBool2 = true;
 
 	//Buff=App->collisions->AddCollider({ 20, 190, 10, 10 }, Collider::Type::PLAYER); FOR TESTS DON'T ERASE PLS
 
@@ -99,9 +101,7 @@ update_status ModuleScene::Update()
 	if (App->input->keys[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
 	{
 		App->enemies->balloon.balloonsOnScene = 0;
-	
 	}
-
 
 	if (App->enemies->balloon.balloonsOnScene == 0)
 	{
@@ -111,9 +111,15 @@ update_status ModuleScene::Update()
 //	LOG("enemyOnStage == %d", balloonsOnScene);
 	//LOG("Lifes: ---------%d---------", App->player->lifes);
 
-	//if (App->player->timeMusic == 3000) {
-	//	App->audio->PlayMusic("Assets/Sound/Soundtracks/GettingLate.ogg", 1.0f);
-	//}
+	if (App->player->time == 50 && musicBool1 == true) {
+		musicBool1 = false;
+		App->audio->PlayMusic("Assets/Sound/Soundtracks/GettingLate.ogg", 0.0f);
+	}
+
+	if (App->player->time == 20 && musicBool2 == true) {
+		musicBool2 = false;
+		App->audio->PlayMusic("Assets/Sound/Soundtracks/OutOfTime!.ogg", 0.0f);
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -173,7 +179,6 @@ bool ModuleScene::CleanUp()
 	App->enemies->Disable();
 	App->collisions->Disable();
 	App->tileset->Disable();
-
 	App->boosters->Disable();
 	
 

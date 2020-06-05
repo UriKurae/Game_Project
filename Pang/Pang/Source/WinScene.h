@@ -31,7 +31,8 @@ public:
 
 public:
 	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* bgTexture = nullptr;
+	SDL_Texture* winTexture1 = nullptr;
+	SDL_Texture* winTexture245 = nullptr;
 	SDL_Texture* winScene3 = nullptr;
 
 	Animation winAnim;

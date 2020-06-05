@@ -53,7 +53,7 @@ bool ModuleScene5::Start()
 	++activeTextures; ++totalTextures;
 
 
-	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtKeirin.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtKeirin.ogg", 0.0f);
 
 	//Walls collider
 	lowerWall = App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);
@@ -101,7 +101,8 @@ bool ModuleScene5::Start()
 	App->player->scene6 = false;
 
 
-	
+	musicBool1 = true;
+	musicBool2 = true;
 
 	return ret;
 }
@@ -128,6 +129,16 @@ update_status ModuleScene5::Update()
 		App->harpoon->Disable();
 		App->fade->FadeToBlack((Module*)App->scene5, (Module*)App->winScene, 60);
 
+	}
+
+	if (App->player->time == 50 && musicBool1 == true) {
+		musicBool1 = false;
+		App->audio->PlayMusic("Assets/Sound/Soundtracks/GettingLate.ogg", 0.0f);
+	}
+
+	if (App->player->time == 20 && musicBool2 == true) {
+		musicBool2 = false;
+		App->audio->PlayMusic("Assets/Sound/Soundtracks/OutOfTime!.ogg", 0.0f);
 	}
 
 	return update_status::UPDATE_CONTINUE;

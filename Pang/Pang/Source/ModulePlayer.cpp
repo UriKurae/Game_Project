@@ -146,7 +146,6 @@ bool ModulePlayer::Start()
 	++activeColliders; ++totalColliders;
 	destroyed = false;
 	time = 100;
-	//timeMusic = 3300;
 
 	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	uiIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable, 1);
@@ -216,9 +215,6 @@ update_status ModulePlayer::Update()
 			timeBonus = time * 100;
 		}
 
-		/*if (timeMusic > 0) {
-			timeMusic--;
-		}*/
 
 
 		//Detect inputs
@@ -330,6 +326,21 @@ update_status ModulePlayer::Update()
 		if (inmunityTime < 181 && inmunityTime > 0) { inmunityTime--; }
 
 		if (stopTime > 0) { stopTime--; }
+
+		if (App->input->keys[SDL_SCANCODE_LALT] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN) {
+			if (currWeapon == 0) {
+				currWeapon = 1;
+			}
+			else if (currWeapon == 1) {
+				currWeapon = 2;
+			}
+			else if (currWeapon == 2) {
+				currWeapon = 3;
+			}
+			else if (currWeapon == 3) {
+				currWeapon = 0;
+			}
+		}
 		
 	}
 	

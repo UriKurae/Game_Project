@@ -44,8 +44,11 @@ public:
 	SDL_Texture* selectTexture = nullptr;
 
 	uint introFx = 0;
+	uint mapFx = 0;
 
 	int countdown = 1260;
+	int countMap = 0;
+	int countdownMap = 9;
 	
 	bool mapBool = false;
 	bool stage1 = false;
@@ -53,7 +56,9 @@ public:
 
 
 	int introIndex;
+	int countdownIndex;
 	char scoreText[10] = { "\0" };
+	char mapText[2] = { "\0" };
 
 };
 

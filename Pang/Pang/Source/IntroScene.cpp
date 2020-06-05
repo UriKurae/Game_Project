@@ -17,6 +17,8 @@
 #include <SDL\include\SDL.h>
 #include <SDL_mixer\include\SDL_mixer.h>
 
+#include <stdio.h>
+
 
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 {
@@ -157,10 +159,14 @@ bool SceneIntro::Start()
 	++activeTextures; ++totalTextures;
 
 	introFx = App->audio->LoadFx("Assets/Sound/Sounds_Gameplay/Title.wav");
+	mapFx = App->audio->LoadFx("Assets/Sound/FX/CountDownFx.wav");
 
 	char lookupTable1[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	introIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable1, 1);
 	++activeFonts; ++totalFonts;
+
+	char mapTable[] = { "9876543210" };
+	countdownIndex = App->fonts->Load("Assets/UI/Fonts/MapTimer.png", mapTable, 1);
 
 
 	App->render->camera.x = 0;
@@ -180,14 +186,21 @@ update_status SceneIntro::Update()
 		countdown--;
 	}
 
+	if (mapBool) { countMap++; }
+
+	if (countMap % 60 == 0 && countdownMap > 0 && mapBool == true) {
+		App->audio->PlayFx(mapFx);
+		countdownMap--;
+	}
+
 	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && countdown == 0)
 	{
 		mapBool = true;
 	}
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && mapBool == true) {
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && mapBool == true || mapBool == true && countdownMap == 0) {
 		if (stage1 == true) {
-			App->fade->FadeToBlack(this, (Module*)App->scene3, 30);
+			App->fade->FadeToBlack(this, (Module*)App->scene, 30);
 		}
 		else if (stage2 == true) {
 			App->fade->FadeToBlack(this, (Module*)App->scene4, 30);
@@ -225,7 +238,8 @@ update_status SceneIntro::PostUpdate()
 		countdown = 300;
 		mapBool = false;
 	}
-	else {
+	else 
+	{
 		if (countdown > 840)
 		{
 			App->render->Blit(intro_1, 0, 0, NULL);
@@ -233,20 +247,15 @@ update_status SceneIntro::PostUpdate()
 		else if (countdown > 420 && countdown < 840)
 		{
 			App->render->Blit(intro_2, 0, 0, NULL);
-			//SDL_DestroyTexture(intro_1);
-			
 		}
 		else if (countdown > 0 && countdown < 420)
 		{
 			App->render->Blit(intro_3, 0, 0, NULL);
-			//SDL_DestroyTexture(intro_2);
-			
 		}
 	}
 
 	if (countdown == 0 && mapBool == false)
 	{
-		//SDL_DestroyTexture(intro_3);
 		
 		currentAnimation = &intro;
 		App->render->Blit(bgTexture, 0, 0, &(intro.GetCurrentFrame()), 0.2f);
@@ -262,10 +271,13 @@ update_status SceneIntro::PostUpdate()
 		App->audio->PlayFx(introFx);
 	}
 
+	sprintf_s(mapText, 2, "%d", countdownMap);
+
 	if (mapBool == true) {
 		currentAnimation = &map;
 		App->render->Blit(mapTexture, 0, 0, NULL);
 		App->render->Blit(mapAnimTexture, 0, 208, &(map.GetCurrentFrame()), 0.2f);
+		App->fonts->BlitText(259, 32, countdownIndex, mapText);
 		if (stage1 == true) {
 			App->render->Blit(selectTexture, 341, 68, &(selectAnim.GetCurrentFrame()), 0.2f);
 		}

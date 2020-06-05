@@ -69,5 +69,7 @@ public:
 
 	uint balloonsOnScene;
 
-
+	//Change the music
+	bool musicBool1 = false;
+	bool musicBool2 = false;
 };

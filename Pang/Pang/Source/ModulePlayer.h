@@ -112,8 +112,6 @@ public:
 	//Boolean for God Mode
 	bool godMode = false;
 
-	int timeMusic = 6000;
-
 	//Shield booster (Protects one hit)
 	int inmunityTime = 0;
 	bool inmunity = false;

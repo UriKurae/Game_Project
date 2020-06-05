@@ -88,7 +88,7 @@ bool ModuleAudio::PlayMusic(const char* path, float fade_time)
 		if(fade_time > 0.0f)
 		{
 			// Warning: This call blocks the execution until fade out is done
-			Mix_FadeOutMusic((int) (fade_time * 1000.0f));
+			Mix_FadeOutMusic((int) (fade_time * 10.0f));
 		}
 		else
 		{
