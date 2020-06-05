@@ -9,6 +9,8 @@
 #include "ModuleScene2.h"
 #include "ModuleScene3.h"
 #include "ModuleScene4.h"
+#include "ModuleScene5.h"
+#include "ModuleScene6.h"
 
 #include "Tileset.h"
 
@@ -47,6 +49,14 @@ bool ModuleTileset::Start()
 	else if (App->scene4->IsEnabled() == true)
 	{
 		level = level4;
+	}
+	else if (App->scene5->IsEnabled() == true)
+	{
+		level = level5;
+	}
+	else if (App->scene6->IsEnabled() == true)
+	{
+		level = level6;
 	}
 	else { return false; }
 
