@@ -77,6 +77,9 @@ public:
 	// The enemies sprite sheet
 	SDL_Texture* texture = nullptr;
 
+	//Destroy all ballons till verysmall
+	void destroyDynamiteBalloons();
+
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);

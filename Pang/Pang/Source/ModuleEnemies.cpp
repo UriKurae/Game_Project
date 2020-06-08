@@ -218,6 +218,39 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 	}
 }
 
+void ModuleEnemies::destroyDynamiteBalloons()
+{
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		int notSmallBalloons = 0;
+		if (enemies[i] != nullptr && enemies[i]->collider->rect.h == 40)
+		{
+			enemies[i]->collider->pendingToDelete = true;
+			enemies[i] = nullptr;
+			notSmallBalloons++;
+			break;
+		}
+		else if (enemies[i] != nullptr && enemies[i]->collider->rect.h == 26)
+		{
+			enemies[i]->collider->pendingToDelete = true;
+			enemies[i] = nullptr;
+			notSmallBalloons++;
+			break;
+		}
+		else if (enemies[i] != nullptr && enemies[i]->collider->rect.h == 14)
+		{
+			enemies[i]->collider->pendingToDelete = true;
+			enemies[i] = nullptr;
+			notSmallBalloons++;
+			break;
+		}
+
+
+	}
+
+
+}
+
 
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {

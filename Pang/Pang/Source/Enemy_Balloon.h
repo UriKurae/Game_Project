@@ -40,6 +40,7 @@ private:
 	
 	void balloonBounce();
 	void MRUA();
+	void dynamiteDestroy();
 
 	void OnCollision(Collider* c1) override;
 

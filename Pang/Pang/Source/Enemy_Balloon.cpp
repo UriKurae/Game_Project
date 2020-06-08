@@ -182,6 +182,12 @@ void Enemy_Balloon::Update()
 		MRUA();
 		balloonBounce();
 
+		if (App->player->dynamite == true)
+		{
+			App->enemies->destroyDynamiteBalloons();
+			dynamiteDestroy();
+		}
+
 		if (App->player->destroyed)
 		{
 			collider->pendingToDelete = true;
@@ -206,6 +212,50 @@ void Enemy_Balloon::MRUA()
 			position.y -= (speedY + gravity);
 			speedY -= gravity;
 		}
+	}
+}
+
+void Enemy_Balloon::dynamiteDestroy()
+{
+
+	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		App->player->lastBalloon = ENEMY_TYPE::VERYBIGBALLOON;
+		App->particles->AddParticle(particleDeathVeryBig, position.x, position.y, Collider::Type::NONE, 0);
+		App->audio->PlayFx(ballonExplosion);
+		App->boosters->balloonD = true;
+		App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, position.x, position.y);
+		App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON2, position.x, position.y);
+		App->player->score += 100;
+		App->player->cont++;
+		if (collider != nullptr) { collider->pendingToDelete = true; }
+
+	}
+
+	else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON || tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
+	{
+		App->player->lastBalloon = ENEMY_TYPE::BIGBALLOON;
+		App->particles->AddParticle(particleDeathBig, position.x, position.y, Collider::Type::NONE, 0);
+		App->audio->PlayFx(ballonExplosion);
+		App->boosters->balloonD = true;
+		App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x + 16, position.y);
+		App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, position.x, position.y);
+		if (collider != nullptr) { collider->pendingToDelete = true; }
+	}
+
+	else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
+	{
+		App->player->lastBalloon = ENEMY_TYPE::SMALLBALLOON;
+		App->particles->AddParticle(particleDeathSmall, position.x, position.y, Collider::Type::NONE, 0);
+		App->audio->PlayFx(ballonExplosion);
+		App->boosters->balloonD = true;
+		App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x + 8, position.y);
+		App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON2, position.x, position.y);
+		if (collider != nullptr) { collider->pendingToDelete = true; }
+	}
+	else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON || tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
+	{
+		LOG("Not exploding, very small ballon");
 	}
 }
 
