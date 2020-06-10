@@ -31,10 +31,10 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 	tipoBalloon = type;
 	if (App->player->scene1 || App->player->scene4) {
 	
-		veryBigBalloonAnim.PushBack({ 207,112, 48, 40 });
-		bigBalloonAnim.PushBack({ 257,119, 32, 26 });
-		smallBalloonAnim.PushBack({ 292,125,16,14 });
-		verySmallBalloonAnim.PushBack({ 312,129,8,7 });
+		veryBigBalloonAnim.PushBack({ 0, 103, 48, 40 });
+		bigBalloonAnim.PushBack({ 51, 110, 32, 26 });
+		smallBalloonAnim.PushBack({ 85, 116,16,14 });
+		verySmallBalloonAnim.PushBack({ 105, 120,8,7 });
 		
 		particleDeathVeryBig.anim.PushBack({ 4,142,48,39 });
 		particleDeathVeryBig.anim.PushBack({ 60,148,28,25 });
@@ -64,10 +64,10 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 		particleDeathVerySmall.anim.loop = false;
 	}
 	if (App->player->scene2 || App->player->scene5) {
-		veryBigBalloonAnim.PushBack({ 206, 9, 48, 40 });
-		bigBalloonAnim.PushBack({ 257, 16, 32, 26 });
-		smallBalloonAnim.PushBack({ 291,22,16,14 });
-		verySmallBalloonAnim.PushBack({ 311,26,8,7 });
+		veryBigBalloonAnim.PushBack({ 0, 0, 48, 40 });
+		bigBalloonAnim.PushBack({ 51, 7, 32, 26 });
+		smallBalloonAnim.PushBack({ 85, 13,16,14 });
+		verySmallBalloonAnim.PushBack({ 105, 17,8,7 });
 
 		particleDeathVeryBig.anim.PushBack({ 4,269,48,39 });
 		particleDeathVeryBig.anim.PushBack({ 60,276,28,25 });
@@ -98,10 +98,10 @@ Enemy_Balloon::Enemy_Balloon(int x, int y, enum class ENEMY_TYPE type) : Enemy(x
 	}
 	if (App->player->scene3 || App->player->scene6)
 	{
-		veryBigBalloonAnim.PushBack({ 206, 57, 48, 40 });
-		bigBalloonAnim.PushBack({ 257, 64, 32, 26 });
-		smallBalloonAnim.PushBack({ 291,70,16,14 });
-		verySmallBalloonAnim.PushBack({ 311,74,8,7 });
+		veryBigBalloonAnim.PushBack({ 0, 48, 48, 40 });
+		bigBalloonAnim.PushBack({ 51, 55, 32, 26 });
+		smallBalloonAnim.PushBack({ 85, 61,16,14 });
+		verySmallBalloonAnim.PushBack({ 105, 65,8,7 });
 
 		particleDeathVeryBig.anim.PushBack({ 230,192,48,39 });
 		particleDeathVeryBig.anim.PushBack({ 290,199,28,25 });
