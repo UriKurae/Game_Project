@@ -62,16 +62,14 @@ update_status ModuleBoosters::Update()
 	
 		srand(SDL_GetTicks());
 
-		//generatedNumber = rand() % 4;
-		generatedNumber = 3;
+		generatedNumber = rand() % 4;
 		
 
 		LOG("%d",generatedNumber);
 
 		if (generatedNumber == 3)
 		{
-			//generatedNumber = rand() % 8;
-			generatedNumber = 7;
+			generatedNumber = rand() % 8;
 			
 		
 			switch (generatedNumber)

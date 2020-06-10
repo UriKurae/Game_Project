@@ -268,3 +268,25 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	--activeFx;
 	
 }
+
+bool ModuleHarpoon::CleanUp()
+{
+	if (destroyed == true)
+	{
+		App->textures->Unload(texture);
+		totalTextures--;
+		activeTextures = 0;
+		App->audio->UnloadFx(HarpoonFx);
+
+		if (!destroyed)
+		{
+
+			App->collisions->RemoveCollider(colliderH);
+			totalColliders--;
+			activeColliders = 0;
+		}
+
+	}
+
+	return true;
+}

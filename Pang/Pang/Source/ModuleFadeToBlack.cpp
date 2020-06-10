@@ -38,6 +38,7 @@ update_status ModuleFadeToBlack::Update()
 		{
 			
 			moduleToDisable->Disable();
+			
 			moduleToEnable->Enable();
 
 			currentStep = Fade_Step::FROM_BLACK;
@@ -91,8 +92,6 @@ bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEna
 }
 
 bool ModuleFadeToBlack::CleanUp() {
-	/*this->moduleToDisable->Disable();
-	this->moduleToDisable->Enable();*/
-
+	
 	return true;
 }

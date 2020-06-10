@@ -24,70 +24,13 @@ SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 {
 	name = "S INTRO";
 
-	intro.PushBack({ 0, 0, 384, 245 });
-	intro.PushBack({ 384, 0, 384, 245 });
-	intro.PushBack({ 768, 0, 384, 245 });
-	intro.PushBack({ 1152, 0, 384, 245 });
-	intro.PushBack({ 1536, 0, 384, 245 });
-	intro.PushBack({ 1920, 0, 384, 245 });
-	intro.PushBack({ 2304, 0, 384, 245 });
-	intro.PushBack({ 2688, 0, 384, 245 });
-	intro.PushBack({ 3072, 0, 384, 245 });
-	intro.PushBack({ 3456, 0, 384, 245 });
-	intro.PushBack({ 3840, 0, 384, 245 });
-	intro.PushBack({ 4224, 0, 384, 245 });
-	intro.PushBack({ 4608, 0, 384, 245 });
-	intro.PushBack({ 4992, 0, 384, 245 });
-	intro.PushBack({ 5376, 0, 384, 245 });
-	intro.PushBack({ 5760, 0, 384, 245 });
-	intro.PushBack({ 6144, 0, 384, 245 });
-	intro.PushBack({ 6528, 0, 384, 245 });
-	intro.PushBack({ 6912, 0, 384, 245 });
-	intro.PushBack({ 7296, 0, 384, 245 });
-	intro.PushBack({ 7680, 0, 384, 245 });
-	intro.PushBack({ 8064, 0, 384, 245 });
-	intro.PushBack({ 8448, 0, 384, 245 });
-	intro.PushBack({ 8832, 0, 384, 245 });
-	intro.PushBack({ 9216, 0, 384, 245 });
-	intro.PushBack({ 9600, 0, 384, 245 });
-	intro.PushBack({ 9984, 0, 384, 245 });
-	intro.PushBack({ 10368, 0, 384, 245 });
-	intro.PushBack({ 10752, 0, 384, 245 });
-	intro.PushBack({ 11136, 0, 384, 245 });
-	intro.PushBack({ 11520, 0, 384, 245 });
-	intro.PushBack({ 11904, 0, 384, 245 });
-	intro.PushBack({ 0, 245, 384, 245 });
-	intro.PushBack({ 384, 245, 384, 245 });
-	intro.PushBack({ 768, 245, 384, 245 });
-	intro.PushBack({ 1152, 245, 384, 245 });
-	intro.PushBack({ 1536, 245, 384, 245 });
-	intro.PushBack({ 1920, 245, 384, 245 });
-	intro.PushBack({ 2304, 245, 384, 245 });
-	intro.PushBack({ 2688, 245, 384, 245 });
-	intro.PushBack({ 3072, 245, 384, 245 });
-	intro.PushBack({ 3456, 245, 384, 245 });
-	intro.PushBack({ 3840, 245, 384, 245 });
-	intro.PushBack({ 4224, 245, 384, 245 });
-	intro.PushBack({ 4608, 245, 384, 245 });
-	intro.PushBack({ 4992, 245, 384, 245 });
-	intro.PushBack({ 5376, 245, 384, 245 });
-	intro.PushBack({ 5760, 245, 384, 245 });
-	intro.PushBack({ 6144, 245, 384, 245 });
-	intro.PushBack({ 6528, 245, 384, 245 });
-	intro.PushBack({ 6912, 245, 384, 245 });
-	intro.PushBack({ 7296, 245, 384, 245 });
-	intro.PushBack({ 7680, 245, 384, 245 });
-	intro.PushBack({ 8064, 245, 384, 245 });
-	intro.PushBack({ 8448, 245, 384, 245 });
-	intro.PushBack({ 8832, 245, 384, 245 });
-	intro.PushBack({ 9216, 245, 384, 245 });
-	intro.PushBack({ 9600, 245, 384, 245 });
-	intro.PushBack({ 9984, 245, 384, 245 });
-	intro.PushBack({ 10368, 245, 384, 245 });
-	intro.PushBack({ 10752, 245, 384, 245 });
-	intro.PushBack({ 11136, 245, 384, 245 });
-	intro.PushBack({ 11520, 245, 384, 245 });
-	intro.PushBack({ 11904, 245, 384, 245 });
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			intro.PushBack({ 384 * j, 245 * i, 384, 245 });
+		}
+	}
 
 	intro.loop = false;
 	intro.speed = 0.5f;

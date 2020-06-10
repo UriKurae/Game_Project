@@ -42,7 +42,7 @@ bool ModuleScene3::Start()
 
 	countDownToFade = 300;
 
-	fgTexture = App->textures->Load("Assets/Items&Weapons/Blocks Sprites.png"); //fg on 3st Level is invisible
+	fgTexture = App->textures->Load("Assets/Items&Weapons/BlockSprites.png"); //fg on 3st Level is invisible
 	++activeTextures; ++totalTextures;
 
 	blockDestroy.PushBack({ 48, 158, 32, 8 });
@@ -199,13 +199,30 @@ update_status ModuleScene3::PostUpdate()
 	{
 		if (App->player->lifes > 0)
 		{
-			App->fade->FadeToBlack((Module*)App->scene3, (Module*)App->scene3, 60);
+			App->player->Disable();
+			App->enemies->Disable();
+			App->collisions->Disable();
+			App->tileset->Disable();
+			App->boosters->Disable();
+			App->harpoon->Disable();
+			App->doubleShot->Disable();
+			App->gunShot->Disable();
+			App->hookShot->Disable();
 
-			//App->player->collider->pendingToDelete = true;
-			App->collisions->RemoveCollider(App->player->collider);
+			App->fade->FadeToBlack((Module*)App->scene3, (Module*)App->scene3, 60);
 		}
 		else
 		{
+			App->player->Disable();
+			App->enemies->Disable();
+			App->collisions->Disable();
+			App->tileset->Disable();
+			App->boosters->Disable();
+			App->harpoon->Disable();
+			App->doubleShot->Disable();
+			App->gunShot->Disable();
+			App->hookShot->Disable();
+
 			App->fade->FadeToBlack((Module*)App->scene3, (Module*)App->sceneIntro, 60);
 		}
 	}
@@ -226,37 +243,12 @@ bool ModuleScene3::CleanUp()
 	App->collisions->Disable();
 	App->tileset->Disable();
 	App->boosters->Disable();
+	App->harpoon->Disable();
+	App->doubleShot->Disable();
+	App->gunShot->Disable();
+	App->hookShot->Disable();
+
 	App->sceneIntro->countdown = 1;
-
-	//REMOVE HARPOONFX WHEN BALLOON KILLS U AND HARPOON IS ALIVE
-
-	if (App->harpoon->destroyed)
-	{
-		/*App->audio->UnloadFx(App->harpoon->HarpoonFx);
-		App->harpoon->totalFx--;*/
-		App->harpoon->activeFx = 0;
-
-		App->textures->Unload(App->harpoon->texture);
-		App->harpoon->totalTextures--;
-		App->harpoon->activeTextures = 0;
-
-		if (!App->harpoon->destroyed)
-		{
-
-			App->collisions->RemoveCollider(App->harpoon->colliderH);
-			App->harpoon->totalColliders--;
-			App->harpoon->activeColliders = 0;
-		}
-
-	}
-
-
-
-
-	//App->harpoon->HarpoonFx = 0;
-
-	App->audio->UnloadFx(App->harpoon->HarpoonFx);
-	App->audio->UnloadFx(App->hookShot->HarpoonFx);
 
 	App->textures->Unload(App->boosters->texture);
 	--totalTextures;
@@ -275,18 +267,6 @@ bool ModuleScene3::CleanUp()
 	--totalTextures;
 	App->audio->UnloadFx(App->harpoon->HarpoonFx);
 	App->harpoon->totalFx--;
-
-	//App->collisions->RemoveCollider(leftWall);
-	//--totalColliders;
-	//App->collisions->RemoveCollider(rightWall);
-	//--totalColliders;
-	//App->collisions->RemoveCollider(upperWall);
-	//--totalColliders;
-	//App->collisions->RemoveCollider(lowerWall);
-	//--totalColliders;
-	//App->collisions->RemoveCollider(leftPlatform);
-	//--totalColliders;
-	//App->collisions->RemoveCollider(rightPlatform);
 
 	App->collisions->RemoveCollider(App->boosters->typeBooster->collider);
 

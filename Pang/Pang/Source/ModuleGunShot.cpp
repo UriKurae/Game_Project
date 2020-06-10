@@ -76,9 +76,6 @@ bool ModuleGunShot::Start()
 {
 	LOG("LOADING HARPOON TEXTURE");
 
-	//texture = App->textures->Load("Assets/Items&Weapons/Mini explosion.png");
-	//++totalTextures;
-
 	gunShotFx = App->audio->LoadFx("Assets/Sound/FX/GunShoot.wav");
 	++totalFx;
 
@@ -146,5 +143,11 @@ void ModuleGunShot::OnCollision(Collider* c1, Collider* c2)
 		
 	}
 
-	--activeFx;
+}
+
+bool ModuleGunShot::CleanUp()
+{
+	App->audio->UnloadFx(gunShotFx);
+
+	return true;
 }

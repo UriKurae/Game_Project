@@ -134,8 +134,8 @@ bool ModulePlayer::Start()
 	}
 	else 
 	{
-	position.x = (SCREEN_WIDTH / 2) - 20;
-	position.y = SCREEN_HEIGHT - 77;
+		position.x = (SCREEN_WIDTH / 2) - 20;
+		position.y = SCREEN_HEIGHT - 77;
 	}
 
 	
@@ -314,7 +314,7 @@ update_status ModulePlayer::Update()
 
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 		{
-			collider->SetPos(position.x, position.y);
+			collider->SetPos(position.x + 5, position.y);
 		}
 		else
 		{

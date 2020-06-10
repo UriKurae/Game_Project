@@ -386,3 +386,29 @@ void ModuleDoubleShot::OnCollision(Collider* c1, Collider* c2)
 	--activeFx;
 
 }
+
+bool ModuleDoubleShot::CleanUp()
+{
+
+	App->textures->Unload(texture);
+	totalTextures--;
+	activeTextures = 0;
+	App->audio->UnloadFx(HarpoonFx);
+
+	for (uint i = 0; i < SHOTS; i++)
+	{
+		if (harpoon[i].destroyed == true)
+		{
+
+			if (!harpoon[i].destroyed)
+			{
+				App->collisions->RemoveCollider(harpoon[i].colliderH);
+				totalColliders--;
+				activeColliders = 0;
+			}
+
+		}
+	}
+
+	return true;
+}

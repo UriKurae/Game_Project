@@ -122,7 +122,8 @@ bool ModuleHookShot::Start()
 	x = App->player->position.x;
 	y = App->player->position.y - speed;
 
-
+	time = 5;
+	count = 0;
 
 	return true;
 }
@@ -184,6 +185,8 @@ update_status ModuleHookShot::Update()
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
+		hookShot.Reset();
+		idleHookShot.Reset();
 		time = 5;
 		count = 0;
 		--activeTextures;
@@ -213,7 +216,7 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 		hookShot.Reset();
 		currentAnimation->Update();
 		count++;
-		if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0 && destroyed == false || count % 60 == 0 && time > 0 && App->scene2->balloonsOnScene > 0 && destroyed == false) {
+		if (count % 60 == 0 && time > 0 && App->enemies->balloon.balloonsOnScene > 0 && destroyed == false) {
 			time--;
 		}
 		y = 8;
@@ -226,19 +229,22 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 		hookShot.Reset();
 		currentAnimation->Update();
 		count++;
-		if (count % 60 == 0 && time > 0 && App->scene->balloonsOnScene > 0 && destroyed == false || count % 60 == 0 && time > 0 && App->scene2->balloonsOnScene > 0 && destroyed == false) {
+		if (count % 60 == 0 && time > 0 && App->enemies->balloon.balloonsOnScene > 0 && destroyed == false) {
 			time--;
 		}
 		y = 8;
 	}
 
-	if (c2->type == Collider::Type::BREAKABLE_BLOCK) {
-		//delete colliderH;
+	if (c2->type == Collider::Type::BREAKABLE_BLOCK) 
+	{
+		
 		this->colliderH->pendingToDelete = true;
 		--activeColliders; --totalColliders;
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
+		hookShot.Reset();
+		idleHookShot.Reset();
 		time = 5;
 		count = 0;
 		--activeTextures;
@@ -248,10 +254,12 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == Collider::Type::BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		this->colliderH->pendingToDelete = true;
-		//--activeColliders; --totalColliders;
+		
 		destroyed = true;
 		increment = false;
 		currentAnimation->Reset();
+		hookShot.Reset();
+		idleHookShot.Reset();
 		time = 5;
 		count = 0;
 		--activeTextures;
@@ -259,4 +267,26 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 	}
 
 	--activeFx;
+}
+
+bool ModuleHookShot::CleanUp()
+{
+	if (destroyed == true)
+	{
+		App->textures->Unload(texture);
+		totalTextures--;
+		activeTextures = 0;
+		App->audio->UnloadFx(HarpoonFx);
+
+		if (!destroyed)
+		{
+
+			App->collisions->RemoveCollider(colliderH);
+			totalColliders--;
+			activeColliders = 0;
+		}
+
+	}
+
+	return true;
 }
