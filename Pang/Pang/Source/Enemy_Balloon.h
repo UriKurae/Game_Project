@@ -32,6 +32,9 @@ public:
 	uint ballonExplosion = 0;
 
 	uint balloonsOnScene = 0;
+
+	uint destroyBalloonsTime = 3;
+	uint destroyBalloonsCount = 0;
 	
 private:
 	// A set of steps that define the position in the screen

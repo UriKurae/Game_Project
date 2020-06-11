@@ -217,7 +217,6 @@ void Enemy_Balloon::MRUA()
 
 void Enemy_Balloon::dynamiteDestroy()
 {
-
 	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
 	{
 		App->player->lastBalloon = ENEMY_TYPE::VERYBIGBALLOON;
@@ -229,7 +228,8 @@ void Enemy_Balloon::dynamiteDestroy()
 		App->player->score += 100;
 		App->player->cont++;
 		if (collider != nullptr) { collider->pendingToDelete = true; }
-
+	
+		App->enemies->balloon.balloonsOnScene--;
 	}
 
 	else if (tipoBalloon == ENEMY_TYPE::BIGBALLOON || tipoBalloon == ENEMY_TYPE::BIGBALLOON2)
@@ -241,6 +241,8 @@ void Enemy_Balloon::dynamiteDestroy()
 		App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x + 16, position.y);
 		App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, position.x, position.y);
 		if (collider != nullptr) { collider->pendingToDelete = true; }
+
+		App->enemies->balloon.balloonsOnScene--;
 	}
 
 	else if (tipoBalloon == ENEMY_TYPE::SMALLBALLOON || tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
@@ -252,10 +254,26 @@ void Enemy_Balloon::dynamiteDestroy()
 		App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x + 8, position.y);
 		App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON2, position.x, position.y);
 		if (collider != nullptr) { collider->pendingToDelete = true; }
+
+		App->enemies->balloon.balloonsOnScene--;
+
 	}
 	else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON || tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
 	{
 		LOG("Not exploding, very small ballon");
+	}
+
+	destroyBalloonsCount++;
+
+	if (destroyBalloonsCount % 60 == 0 && destroyBalloonsTime > 0 && App->enemies->balloon.balloonsOnScene > 0 && App->player->destroyed == false) {
+		destroyBalloonsTime--;
+	}
+
+	if (destroyBalloonsTime == 0)
+	{
+		App->player->dynamite = false;
+		destroyBalloonsCount = 0;
+		destroyBalloonsTime = 3;
 	}
 }
 
