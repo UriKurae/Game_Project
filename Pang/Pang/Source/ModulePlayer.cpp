@@ -353,7 +353,7 @@ update_status ModulePlayer::PostUpdate()
 	if (inmunityTime == 181 )
 	{
 		App->boosters->inmunityAnim = &App->boosters->shieldInmunity;
-		App->render->Blit(App->boosters->texture, position.x-5, position.y-7, &(App->boosters->inmunityAnim->GetCurrentFrame()), 1.0f);
+		App->render->Blit(App->boosters->texture, position.x - 3, position.y-7, &(App->boosters->inmunityAnim->GetCurrentFrame()), 1.0f);
 	}
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
@@ -563,16 +563,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		inmunityTime--;
 	}
 	if (c2->type == Collider::Type::BOOSTERS) {
-	
-		//if (App->boosters->booster[CLOCK] == true) {
-		//	App->boosters->collider[CLOCK]->pendingToDelete = true;
-		//	App->boosters->booster[CLOCK] == false;
-		//}
-		//
-		//if (App->boosters->booster[] == true) {
-		//	App->boosters->collider[CLOCK]->pendingToDelete = true;
-		//	App->boosters->booster[CLOCK] == false;
-		//}
 
 		//Normal boosters
 		if (c2 == App->boosters->typeBooster[SHIELD].collider)
@@ -590,31 +580,36 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			dynamite = true;		
 		}
 
-		if (c2 == App->boosters->typeBooster[DOUBLESHOT].collider) 
-		{
-			doubleshot = true;
-			currWeapon = 3;
-		}
-
 		if (c2 == App->boosters->typeBooster[EXTRALIFE].collider)
 		{
 			App->player->lifes++;
 		}
 
+		if (c2 == App->boosters->typeBooster[SANDHOURGLASS].collider)
+		{
+			//TODO
+		}
 
 		//Gun Boosters
 		if (c2 == App->boosters->typeBooster[GUN].collider)
 		{
 			currWeapon = 2;
-			doubleshot = false;
+			//doubleshot = false;
 		
 		}
 
 		if (c2 == App->boosters->typeBooster[HOOK].collider)
 		{
 			currWeapon = 1;
-			doubleshot = false;
+			//doubleshot = false;
 		}
+
+		if (c2 == App->boosters->typeBooster[DOUBLESHOT].collider)
+		{
+			//doubleshot = true;
+			currWeapon = 3;
+		}
+
 		for (int i = 0; i < MAX; i++) 
 		{
 			if (App->boosters->typeBooster[i].booster == true && c2 == App->boosters->typeBooster[i].collider) 

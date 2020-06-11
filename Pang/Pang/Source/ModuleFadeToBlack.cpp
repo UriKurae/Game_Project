@@ -3,6 +3,11 @@
 #include "Application.h"
 #include "ModuleRender.h"
 
+#include "ModuleHarpoon_Shot.h"
+#include "ModuleHarpoon_HookShot.h"
+#include "ModuleHarpoon_DoubleShot.h"
+#include "ModuleGunShot.h"
+
 #include "SDL/include/SDL_render.h"
 
 ModuleFadeToBlack::ModuleFadeToBlack(bool startEnabled) : Module(startEnabled)
@@ -38,7 +43,12 @@ update_status ModuleFadeToBlack::Update()
 		{
 			
 			moduleToDisable->Disable();
-			
+
+			App->harpoon->CleanUp();
+			App->hookShot->CleanUp();
+			App->doubleShot->CleanUp();
+			App->gunShot->CleanUp();
+
 			moduleToEnable->Enable();
 
 			currentStep = Fade_Step::FROM_BLACK;

@@ -68,7 +68,7 @@ ModuleGunShot::ModuleGunShot(bool startEnabled) : Module(startEnabled)
 	gunShotHitWall.anim.PushBack({ 251, 14, 14, 5 });
 	gunShotHitWall.anim.PushBack({ 271, 14, 14, 5 });
 	gunShotHitWall.anim.loop = false;
-	gunShotHitWall.anim.speed = 0.3f;
+	gunShotHitWall.anim.speed = 0.1f;
 
 }
 
@@ -130,12 +130,12 @@ void ModuleGunShot::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == Collider::Type::UNBREAKABLE_BLOCK)
 	{
-		
+		App->particles->AddParticle(gunShotHitWall, x - 3, y - 6, Collider::Type::NONE, 0);
 	}
 
 	if (c2->type == Collider::Type::WALL)
 	{
-
+		App->particles->AddParticle(gunShotHitWall, x - 3, y - 6, Collider::Type::NONE, 0);
 	}
 
 	if (c2->type == Collider::Type::BREAKABLE_BLOCK) 
