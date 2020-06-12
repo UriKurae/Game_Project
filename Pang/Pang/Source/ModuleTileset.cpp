@@ -179,8 +179,6 @@ void ModuleTileset::changeTile(iPoint tile)
 				levelToTile[8][12].id = TileType::EMPTY;
 				levelToTile[9][12].id = TileType::EMPTY;
 				App->scene5->destroyedBlockTopLeft = true;
-				App->scene5->blockDestroy.Reset();
-				App->render->Blit(App->scene5->fgTexture, 96, 56, &(App->scene5->blockDestroy.GetCurrentFrame()), 1.0f);
 			}
 
 			else if (tile.y == 12) {
@@ -188,8 +186,7 @@ void ModuleTileset::changeTile(iPoint tile)
 				levelToTile[11][12].id = TileType::EMPTY;
 				levelToTile[12][12].id = TileType::EMPTY;
 				App->scene5->destroyedBlockBottomLeft = true;
-				App->scene5->blockDestroy.Reset();
-				App->render->Blit(App->scene5->fgTexture, 96, 80, &(App->scene5->blockDestroy.GetCurrentFrame()), 1.0f);
+				
 			}
 			
 		}
@@ -200,8 +197,7 @@ void ModuleTileset::changeTile(iPoint tile)
 				levelToTile[8][24].id = TileType::EMPTY;
 				levelToTile[9][24].id = TileType::EMPTY;
 				App->scene5->destroyedBlockMiddle = true;
-				App->scene5->blockDestroy.Reset();
-				App->render->Blit(App->scene5->fgTexture, 96, 56, &(App->scene5->blockDestroy.GetCurrentFrame()), 1.0f);
+		
 			}
 		}
 
@@ -211,8 +207,7 @@ void ModuleTileset::changeTile(iPoint tile)
 				levelToTile[8][36].id = TileType::EMPTY;
 				levelToTile[9][36].id = TileType::EMPTY;
 				App->scene5->destroyedBlockTopRight = true;
-				App->scene5->blockDestroy.Reset();
-				App->render->Blit(App->scene5->fgTexture, 96, 56, &(App->scene5->blockDestroy.GetCurrentFrame()), 1.0f);
+			
 			}
 
 			else if (tile.y == 12) {
@@ -220,31 +215,10 @@ void ModuleTileset::changeTile(iPoint tile)
 				levelToTile[11][36].id = TileType::EMPTY;
 				levelToTile[12][36].id = TileType::EMPTY;
 				App->scene5->destroyedBlockBottomRight = true;
-				App->scene5->blockDestroy.Reset();
-				App->render->Blit(App->scene5->fgTexture, 96, 80, &(App->scene5->blockDestroy.GetCurrentFrame()), 1.0f);
-			}
-		}
-		/*if (tile.y >= 7 && tile.y <= 10) {
-			if (tile.x == 12) {
-				
-				
-			}
-			if (tile.x == 36) {
 				
 			}
 		}
-
-		if (tile.y >= 11 && tile.y <= 10) {
-			if (tile.x == 12) {
-				
-			}
-			if (tile.x == 24) {
-				
-			}
-			if (tile.x == 36) {
-				
-			}
-		}*/
+		
 	}
 
 	if (level == level6) {
@@ -258,6 +232,21 @@ void ModuleTileset::changeTile(iPoint tile)
 
 bool ModuleTileset::CleanUp()
 {
+	if (level == level5)
+	{
+		levelToTile[7][12].id = TileType::BREAKABLE;
+		levelToTile[8][12].id = TileType::BREAKABLE;
+		levelToTile[9][12].id = TileType::BREAKABLE;
+		levelToTile[10][12].id = TileType::BREAKABLE;
+		levelToTile[11][12].id = TileType::BREAKABLE;
+		levelToTile[12][12].id = TileType::BREAKABLE;
+		levelToTile[7][36].id = TileType::BREAKABLE;
+		levelToTile[8][36].id = TileType::BREAKABLE;
+		levelToTile[9][36].id = TileType::BREAKABLE;
+		levelToTile[10][36].id = TileType::BREAKABLE;
+		levelToTile[11][36].id = TileType::BREAKABLE;
+		levelToTile[12][36].id = TileType::BREAKABLE;
+	}
 	return true;
 }
 

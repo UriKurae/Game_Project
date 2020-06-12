@@ -28,6 +28,8 @@ public:
 
 	bool CleanUp();
 
+	void pushBlocksAnims();
+
 public:
 
 	uint countDownToFade = 180;
@@ -47,8 +49,13 @@ public:
 
 	Animation blockVer;
 
-	Animation blockDestroy;
-
+	//Animation pushes
+	Animation blockDestroyTopLeft;
+	Animation blockDestroyBottomLeft;
+	Animation blockDestroyMiddle;
+	Animation blockDestroyTopRight;
+	Animation blockDestroyBottomRight;
+	   
 	Animation* currentAnim = nullptr;
 
 	//Foregrounds when dying

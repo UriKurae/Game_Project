@@ -33,6 +33,8 @@ ModuleScene5::~ModuleScene5()
 {
 }
 
+
+
 bool ModuleScene5::Start()
 {
 	LOG("Loading background assets");
@@ -42,12 +44,13 @@ bool ModuleScene5::Start()
 	fgTexture = App->textures->Load("Assets/Items&Weapons/BlockSprites.png");
 	++activeTextures; ++totalTextures;
 
-	blockVer.PushBack({ 8, 14, 8, 24 });
+	pushBlocksAnims();
 
-	blockDestroy.PushBack({40, 14, 8, 24});
-	blockDestroy.PushBack({56, 14, 8, 24});
-	blockDestroy.PushBack({71, 14, 8, 24});
-	blockDestroy.speed = 0.1f;
+	destroyedBlockTopLeft = false;
+	destroyedBlockBottomLeft = false;
+	destroyedBlockMiddle = false;
+	destroyedBlockTopRight = false;
+	destroyedBlockBottomRight = false;
 
 	countDownToFade = 300;
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Keirin(Sunset).png");
@@ -143,6 +146,13 @@ update_status ModuleScene5::Update()
 		App->audio->PlayMusic("Assets/Sound/Soundtracks/OutOfTime!.ogg", 0.0f);
 	}
 
+	
+	blockDestroyTopLeft.Update();
+	blockDestroyBottomLeft.Update();
+	blockDestroyMiddle.Update();
+	blockDestroyTopRight.Update();
+	blockDestroyBottomRight.Update();
+
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -156,25 +166,51 @@ update_status ModuleScene5::PostUpdate()
 	if (destroyedBlockBottomLeft == false)
 	{
 		App->render->Blit(fgTexture, 96, 80, &(blockVer.GetCurrentFrame()), 1.0f);
+		blockDestroyBottomLeft.Reset();
+	}
+	else
+	{
+		App->render->Blit(fgTexture, 96, 80, &(blockDestroyBottomLeft.GetCurrentFrame()), 1.0f);
 	}
 
 	if (destroyedBlockTopLeft == false)
 	{
 		App->render->Blit(fgTexture, 96, 56, &(blockVer.GetCurrentFrame()), 1.0f);
+		blockDestroyTopLeft.Reset();
+	}
+	else
+	{
+		App->render->Blit(fgTexture, 96, 56, &(blockDestroyTopLeft.GetCurrentFrame()), 1.0f);
 	}
 
 	if (destroyedBlockMiddle == false)
 	{
 		App->render->Blit(fgTexture, 192, 56, &(blockVer.GetCurrentFrame()), 1.0f);
+		blockDestroyMiddle.Reset();
+	}
+	else
+	{
+		App->render->Blit(fgTexture, 192, 56, &(blockDestroyMiddle.GetCurrentFrame()), 1.0f);
 	}
 
 	if (destroyedBlockTopRight == false)
 	{
 		App->render->Blit(fgTexture, 288, 56, &(blockVer.GetCurrentFrame()), 1.0f);
+		blockDestroyTopRight.Reset();
+	}
+	else
+	{
+
+		App->render->Blit(fgTexture, 288, 56, &(blockDestroyTopRight.GetCurrentFrame()), 1.0f);
 	}
 	if (destroyedBlockBottomRight == false)
 	{
 		App->render->Blit(fgTexture, 288, 80, &(blockVer.GetCurrentFrame()), 1.0f);
+		blockDestroyBottomRight.Reset();
+	}
+	else
+	{
+		App->render->Blit(fgTexture, 288, 80, &(blockDestroyBottomRight.GetCurrentFrame()), 1.0f);
 	}
 
 
@@ -214,6 +250,48 @@ update_status ModuleScene5::PostUpdate()
 
 
 	return update_status::UPDATE_CONTINUE;
+}
+
+void ModuleScene5::pushBlocksAnims()
+{
+
+	blockVer.PushBack({ 8, 14, 8, 24 });
+
+	blockDestroyTopLeft.PushBack({ 40, 14, 8, 24 });
+	blockDestroyTopLeft.PushBack({ 56, 14, 8, 24 });
+	blockDestroyTopLeft.PushBack({ 71, 14, 8, 24 });
+	blockDestroyTopLeft.PushBack({ 143, 51, 8, 24 });
+	blockDestroyTopLeft.speed = 0.1f;
+	blockDestroyTopLeft.loop = false;
+
+	blockDestroyBottomLeft.PushBack({ 40, 14, 8, 24 });
+	blockDestroyBottomLeft.PushBack({ 56, 14, 8, 24 });
+	blockDestroyBottomLeft.PushBack({ 71, 14, 8, 24 });
+	blockDestroyBottomLeft.PushBack({ 143, 51, 8, 24 });
+	blockDestroyBottomLeft.speed = 0.1f;
+	blockDestroyBottomLeft.loop = false;
+
+	blockDestroyMiddle.PushBack({ 40, 14, 8, 24 });
+	blockDestroyMiddle.PushBack({ 56, 14, 8, 24 });
+	blockDestroyMiddle.PushBack({ 71, 14, 8, 24 });
+	blockDestroyMiddle.PushBack({ 143, 51, 8, 24 });
+	blockDestroyMiddle.speed = 0.1f;
+	blockDestroyMiddle.loop = false;
+
+	blockDestroyTopRight.PushBack({ 40, 14, 8, 24 });
+	blockDestroyTopRight.PushBack({ 56, 14, 8, 24 });
+	blockDestroyTopRight.PushBack({ 71, 14, 8, 24 });
+	blockDestroyTopRight.PushBack({ 143, 51, 8, 24 });
+	blockDestroyTopRight.speed = 0.1f;
+	blockDestroyTopRight.loop = false;
+
+	blockDestroyBottomRight.PushBack({ 40, 14, 8, 24 });
+	blockDestroyBottomRight.PushBack({ 56, 14, 8, 24 });
+	blockDestroyBottomRight.PushBack({ 71, 14, 8, 24 });
+	blockDestroyBottomRight.PushBack({ 143, 51, 8, 24 });
+	blockDestroyBottomRight.speed = 0.1f;
+	blockDestroyBottomRight.loop = false;
+
 }
 
 bool ModuleScene5::CleanUp()
