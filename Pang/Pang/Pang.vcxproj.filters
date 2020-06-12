@@ -34,6 +34,12 @@
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{d67b0da9-af4f-4af8-a32a-8def6858ad7d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Modules\Gameplay\Weapons">
+      <UniqueIdentifier>{9fe8ae9a-d108-4f5b-9fd8-954023ed9eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Modules\Gameplay\Scenes">
+      <UniqueIdentifier>{993f4d6a-beed-43e4-8e1a-5bc3aabd73bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h">
@@ -78,9 +84,6 @@
     <ClInclude Include="Source\ModulePlayer.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ModuleScene.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Module.h">
       <Filter>Source Files\Modules</Filter>
     </ClInclude>
@@ -96,50 +99,17 @@
     <ClInclude Include="Source\Enemy_Balloon.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ModuleHarpoon_Shot.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\IntroScene.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ModuleFadeToBlack.h">
       <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\ModuleFonts.h">
       <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\WinScene.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ModuleDebugInfo.h">
       <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ModulePlatforms.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ModuleScene2.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ModuleHarpoon_HookShot.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Application.h">
       <Filter>Source Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ModuleScene3.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ModuleScene4.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ModuleScene5.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ModuleScene6.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ModuleGunShot.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
     <ClInclude Include="Source\ModuleBoosters.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
@@ -150,8 +120,41 @@
     <ClInclude Include="Source\Tileset.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ModuleGunShot.h">
+      <Filter>Source Files\Modules\Gameplay\Weapons</Filter>
+    </ClInclude>
     <ClInclude Include="Source\ModuleHarpoon_DoubleShot.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
+      <Filter>Source Files\Modules\Gameplay\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleHarpoon_HookShot.h">
+      <Filter>Source Files\Modules\Gameplay\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleHarpoon_Shot.h">
+      <Filter>Source Files\Modules\Gameplay\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IntroScene.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleScene.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleScene2.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleScene3.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleScene4.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleScene5.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleScene6.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WinScene.h">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -197,9 +200,6 @@
     <ClCompile Include="Source\ModulePlayer.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ModuleScene.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Module.cpp">
       <Filter>Source Files\Modules</Filter>
     </ClCompile>
@@ -212,47 +212,14 @@
     <ClCompile Include="Source\Enemy_Balloon.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ModuleHarpoon_Shot.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\IntroScene.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
     <ClCompile Include="Source\ModuleFadeToBlack.cpp">
       <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\ModuleFonts.cpp">
       <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\WinScene.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
     <ClCompile Include="Source\ModuleDebugInfo.cpp">
       <Filter>Source Files\Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ModulePlatforms.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ModuleScene2.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ModuleHarpoon_HookShot.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ModuleScene3.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ModuleScene4.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ModuleScene5.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ModuleScene6.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ModuleGunShot.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
     <ClCompile Include="Source\ModuleBoosters.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
@@ -260,8 +227,41 @@
     <ClCompile Include="Source\ModuleTileset.cpp">
       <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ModuleGunShot.cpp">
+      <Filter>Source Files\Modules\Gameplay\Weapons</Filter>
+    </ClCompile>
     <ClCompile Include="Source\ModuleHarpoon_DoubleShot.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
+      <Filter>Source Files\Modules\Gameplay\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleHarpoon_HookShot.cpp">
+      <Filter>Source Files\Modules\Gameplay\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleHarpoon_Shot.cpp">
+      <Filter>Source Files\Modules\Gameplay\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IntroScene.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleScene.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleScene2.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleScene3.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleScene4.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleScene5.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleScene6.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WinScene.cpp">
+      <Filter>Source Files\Modules\Gameplay\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

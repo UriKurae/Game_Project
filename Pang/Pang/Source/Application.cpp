@@ -27,7 +27,6 @@
 #include "Enemy_Balloon.h"
 #include "ModuleFonts.h"
 #include "WinScene.h"
-#include "ModulePlatforms.h"
 #include "ModuleTileset.h"
 
 
@@ -50,23 +49,22 @@ Application::Application()
 	modules[10] = scene6 = new ModuleScene6(false);
 
 	modules[11] = player = new ModulePlayer(false);
-	modules[12] = platforms = new ModulePlatforms(false);
-	modules[13] = harpoon = new ModuleHarpoon(false);
-	modules[14] = hookShot = new ModuleHookShot(false);
-	modules[15] = gunShot = new ModuleGunShot(false);
-	modules[16] = doubleShot = new ModuleDoubleShot(false);
-	modules[17] = particles = new ModuleParticles(true);
-	modules[18] = enemies = new ModuleEnemies(false);
-	modules[19] = boosters = new ModuleBoosters(false);
-	modules[20] = tileset = new ModuleTileset(false);
+	modules[12] = harpoon = new ModuleHarpoon(false);
+	modules[13] = hookShot = new ModuleHookShot(false);
+	modules[14] = gunShot = new ModuleGunShot(false);
+	modules[15] = doubleShot = new ModuleDoubleShot(false);
+	modules[16] = particles = new ModuleParticles(true);
+	modules[17] = enemies = new ModuleEnemies(false);
+	modules[18] = boosters = new ModuleBoosters(false);
+	modules[19] = tileset = new ModuleTileset(false);
 
-	modules[21] = collisions = new ModuleCollisions(true);
-	modules[22] = fade = new ModuleFadeToBlack(true);
-	modules[23] = fonts = new ModuleFonts(true);
-	modules[24] = debugInfo = new ModuleDebugInfo(true);
-	modules[25] = winScene = new WinScene(false);
+	modules[20] = collisions = new ModuleCollisions(true);
+	modules[21] = fade = new ModuleFadeToBlack(true);
+	modules[22] = fonts = new ModuleFonts(true);
+	modules[23] = debugInfo = new ModuleDebugInfo(true);
+	modules[24] = winScene = new WinScene(false);
 
-	modules[26] = render = new ModuleRender(true);
+	modules[25] = render = new ModuleRender(true);
 	
 }
 

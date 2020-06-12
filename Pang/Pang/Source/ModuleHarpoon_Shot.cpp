@@ -117,7 +117,7 @@ bool ModuleHarpoon::Start()
 {
 	LOG("LOADING HARPOON TEXTURE");
 
-	texture = App->textures->Load("Assets/Items&Weapons/Harpoon2.png");
+	texture = App->textures->Load("Assets/Items&Weapons/Harpoon.png");
 	++totalTextures;
 
 	HarpoonFx = App->audio->LoadFx("Assets/Sound/FX/NormalShoot.wav");
