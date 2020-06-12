@@ -35,6 +35,8 @@ public:
 
 	bool destroyedBlockTop = false;
 	bool destroyedBlockBottom = false;
+	bool destroyedBlockRight = false;
+	bool destroyedBlockLeft = false;
 
 
 	// The background sprite sheet loaded into an SDL_Texture

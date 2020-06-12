@@ -126,7 +126,6 @@ update_status ModuleScene2::Update()
 
 	if (App->enemies->balloon.balloonsOnScene == 0)
 	{
-		App->harpoon->Disable();
 		App->fade->FadeToBlack((Module*)App->scene2, (Module*)App->winScene, 60);
 	}
 
@@ -181,31 +180,10 @@ update_status ModuleScene2::PostUpdate()
 	{
 		if (App->player->lifes > 0)
 		{
-			App->player->Disable();
-			App->enemies->Disable();
-			App->collisions->Disable();
-			App->tileset->Disable();
-			App->boosters->Disable();
-			App->harpoon->Disable();
-			App->doubleShot->Disable();
-			App->gunShot->Disable();
-			App->hookShot->Disable();
-
 			App->fade->FadeToBlack((Module*)App->scene2, (Module*)App->scene2, 60);
-
 		}
 		else
 		{
-			App->player->Disable();
-			App->enemies->Disable();
-			App->collisions->Disable();
-			App->tileset->Disable();
-			App->boosters->Disable();
-			App->harpoon->Disable();
-			App->doubleShot->Disable();
-			App->gunShot->Disable();
-			App->hookShot->Disable();
-
 			App->fade->FadeToBlack((Module*)App->scene2, (Module*)App->sceneIntro, 60);
 		}
 	}

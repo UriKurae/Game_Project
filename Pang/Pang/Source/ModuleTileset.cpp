@@ -121,6 +121,141 @@ bool ModuleTileset::Start()
 	return false;
 }
 
+void ModuleTileset::changeTile(iPoint tile)
+{
+	if (level == level2)
+	{
+		if (tile.x <= 23) {
+			levelToTile[tile.y][20].id = TileType::EMPTY;
+			levelToTile[tile.y][21].id = TileType::EMPTY;
+			levelToTile[tile.y][22].id = TileType::EMPTY;
+			levelToTile[tile.y][23].id = TileType::EMPTY;
+			App->scene2->destroyedBlockLeft = true;
+		}
+		if (tile.x > 23 && tile.x <= 27) {
+			levelToTile[tile.y][24].id = TileType::EMPTY;
+			levelToTile[tile.y][25].id = TileType::EMPTY;
+			levelToTile[tile.y][26].id = TileType::EMPTY;
+			levelToTile[tile.y][27].id = TileType::EMPTY;
+			App->scene2->destroyedBlockRight = true;
+		}
+	}
+
+	else if (level == level3)
+	{
+		if (tile.x <= 12) {
+			levelToTile[tile.y][9].id = TileType::EMPTY;
+			levelToTile[tile.y][10].id = TileType::EMPTY;
+			levelToTile[tile.y][11].id = TileType::EMPTY;
+			levelToTile[tile.y][12].id = TileType::EMPTY;
+			App->scene3->destroyedBlockLeft = true;
+		}
+		if (tile.x >= 22 && tile.x <= 25) {
+			levelToTile[tile.y][22].id = TileType::EMPTY;
+			levelToTile[tile.y][23].id = TileType::EMPTY;
+			levelToTile[tile.y][24].id = TileType::EMPTY;
+			levelToTile[tile.y][25].id = TileType::EMPTY;
+			if (tile.y == 10) {
+				App->scene3->destroyedBlockTop = true;
+			}
+			else if (tile.y == 16) {
+				App->scene3->destroyedBlockBottom = true;
+			}
+		}
+		if (tile.x >= 35 && tile.x <= 38) {
+			levelToTile[tile.y][35].id = TileType::EMPTY;
+			levelToTile[tile.y][36].id = TileType::EMPTY;
+			levelToTile[tile.y][37].id = TileType::EMPTY;
+			levelToTile[tile.y][38].id = TileType::EMPTY;
+			App->scene3->destroyedBlockRight = true;
+		}
+	}
+
+	else if (level == level5) {
+
+		if (tile.x == 12) {
+			if (tile.y == 9) {
+				levelToTile[7][12].id = TileType::EMPTY;
+				levelToTile[8][12].id = TileType::EMPTY;
+				levelToTile[9][12].id = TileType::EMPTY;
+				App->scene5->destroyedBlockTopLeft = true;
+				App->scene5->blockDestroy.Reset();
+				App->render->Blit(App->scene5->fgTexture, 96, 56, &(App->scene5->blockDestroy.GetCurrentFrame()), 1.0f);
+			}
+
+			else if (tile.y == 12) {
+				levelToTile[10][12].id = TileType::EMPTY;
+				levelToTile[11][12].id = TileType::EMPTY;
+				levelToTile[12][12].id = TileType::EMPTY;
+				App->scene5->destroyedBlockBottomLeft = true;
+				App->scene5->blockDestroy.Reset();
+				App->render->Blit(App->scene5->fgTexture, 96, 80, &(App->scene5->blockDestroy.GetCurrentFrame()), 1.0f);
+			}
+			
+		}
+
+		if (tile.x == 24) {
+			if (tile.y == 9) {
+				levelToTile[7][24].id = TileType::EMPTY;
+				levelToTile[8][24].id = TileType::EMPTY;
+				levelToTile[9][24].id = TileType::EMPTY;
+				App->scene5->destroyedBlockMiddle = true;
+				App->scene5->blockDestroy.Reset();
+				App->render->Blit(App->scene5->fgTexture, 96, 56, &(App->scene5->blockDestroy.GetCurrentFrame()), 1.0f);
+			}
+		}
+
+		if (tile.x == 36) {
+			if (tile.y == 9) {
+				levelToTile[7][36].id = TileType::EMPTY;
+				levelToTile[8][36].id = TileType::EMPTY;
+				levelToTile[9][36].id = TileType::EMPTY;
+				App->scene5->destroyedBlockTopRight = true;
+				App->scene5->blockDestroy.Reset();
+				App->render->Blit(App->scene5->fgTexture, 96, 56, &(App->scene5->blockDestroy.GetCurrentFrame()), 1.0f);
+			}
+
+			else if (tile.y == 12) {
+				levelToTile[10][36].id = TileType::EMPTY;
+				levelToTile[11][36].id = TileType::EMPTY;
+				levelToTile[12][36].id = TileType::EMPTY;
+				App->scene5->destroyedBlockBottomRight = true;
+				App->scene5->blockDestroy.Reset();
+				App->render->Blit(App->scene5->fgTexture, 96, 80, &(App->scene5->blockDestroy.GetCurrentFrame()), 1.0f);
+			}
+		}
+		/*if (tile.y >= 7 && tile.y <= 10) {
+			if (tile.x == 12) {
+				
+				
+			}
+			if (tile.x == 36) {
+				
+			}
+		}
+
+		if (tile.y >= 11 && tile.y <= 10) {
+			if (tile.x == 12) {
+				
+			}
+			if (tile.x == 24) {
+				
+			}
+			if (tile.x == 36) {
+				
+			}
+		}*/
+	}
+
+	if (level == level6) {
+		if (tile.x >= 23 && tile.x <=24) {
+			levelToTile[tile.y][23].id = TileType::EMPTY;
+			levelToTile[tile.y][24].id = TileType::EMPTY;
+			App->scene6->destroyedBlockCentral = true;
+		}
+	}
+}
+
 bool ModuleTileset::CleanUp()
 {
 	return true;

@@ -2,6 +2,7 @@
 
 #include "Module.h"
 #include "SDL/include/SDL_rect.h"
+#include "p2Point.h"
 
 struct SDL_Texture;
 class ModuleTileset : public Module
@@ -31,6 +32,8 @@ public:
 
 	bool Start() override;
 
+	void changeTile(iPoint tile);
+
 	//update_status PostUpdate() override;
 
 	bool CleanUp() override;
@@ -38,9 +41,7 @@ public:
 	//getter
 	Tile getTileLevel(int y, int x);
 
-private:
-	SDL_Texture* foreground = nullptr;
-
-	int(*level)[48] = nullptr;
 	Tile levelToTile[26][48] = {};
+
+	int (*level)[48] = nullptr;
 };

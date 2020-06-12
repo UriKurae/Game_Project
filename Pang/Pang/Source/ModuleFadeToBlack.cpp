@@ -43,12 +43,6 @@ update_status ModuleFadeToBlack::Update()
 		{
 			
 			moduleToDisable->Disable();
-
-			App->harpoon->CleanUp();
-			App->hookShot->CleanUp();
-			App->doubleShot->CleanUp();
-			App->gunShot->CleanUp();
-
 			moduleToEnable->Enable();
 
 			currentStep = Fade_Step::FROM_BLACK;

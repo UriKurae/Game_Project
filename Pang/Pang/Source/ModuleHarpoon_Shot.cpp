@@ -117,7 +117,7 @@ bool ModuleHarpoon::Start()
 {
 	LOG("LOADING HARPOON TEXTURE");
 
-	texture = App->textures->Load("Assets/Items&Weapons/Harpoon.png");
+	texture = App->textures->Load("Assets/Items&Weapons/Harpoon2.png");
 	++totalTextures;
 
 	HarpoonFx = App->audio->LoadFx("Assets/Sound/FX/NormalShoot.wav");
@@ -125,8 +125,6 @@ bool ModuleHarpoon::Start()
 
 	x = App->player->position.x;
 	y = App->player->position.y - speed;
-	
-	
 
 	return true;
 }
@@ -134,7 +132,6 @@ bool ModuleHarpoon::Start()
 update_status ModuleHarpoon::Update()
 {
 	update_status ret = update_status::UPDATE_CONTINUE;
-	
 	
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && destroyed == true && App->player->destroyed == false && App->player->currWeapon == 0)
 		{
@@ -176,7 +173,44 @@ update_status ModuleHarpoon::Update()
 		harpoonShot.Reset();
 
 	}
+
+	breakableCollision();
+
 	return ret;
+}
+
+void ModuleHarpoon::breakableCollision() {
+
+	iPoint tile = { x / TILE_SIZE, y / TILE_SIZE };
+
+	if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE) {
+		this->colliderH->pendingToDelete = true;
+		--activeColliders; --totalColliders;
+		destroyed = true;
+		increment = false;
+		currentAnimation->Reset();
+		--activeTextures;
+		App->tileset->changeTile(tile);
+		LOG("%d %d ", tile.x, tile.y);
+	}
+	else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY) {
+		this->colliderH->pendingToDelete = true;
+		--activeColliders; --totalColliders;
+		destroyed = true;
+		increment = false;
+		currentAnimation->Reset();
+		--activeTextures;
+		App->tileset->levelToTile[tile.y][tile.x].id = ModuleTileset::TileType::EMPTY;
+	}
+	else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY){
+		this->colliderH->pendingToDelete = true;
+		--activeColliders; --totalColliders;
+		destroyed = true;
+		increment = false;
+		currentAnimation->Reset();
+		--activeTextures;
+		App->tileset->levelToTile[tile.y][tile.x].id = ModuleTileset::TileType::EMPTY;
+	}
 }
 
 update_status ModuleHarpoon::PostUpdate()
@@ -217,40 +251,40 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 	}
 
 
-	if (c2->type == Collider::Type::BREAKABLE_BLOCK)
-	{
-		if (c1->Intersects(App->scene2->leftPlatform->rect) || c1->Intersects(App->scene6->leftPlatform->rect))
-		{
-			//delete colliderH;
-			this->colliderH->pendingToDelete = true;
-			--activeColliders; --totalColliders;
-			destroyed = true;
-			increment = false;
-			currentAnimation->Reset();
-			--activeTextures;
+	//if (c2->type == Collider::Type::BREAKABLE_BLOCK)
+	//{
+	//	if (c1->Intersects(App->scene2->leftPlatform->rect) || c1->Intersects(App->scene6->leftPlatform->rect))
+	//	{
+	//		//delete colliderH;
+	//		this->colliderH->pendingToDelete = true;
+	//		--activeColliders; --totalColliders;
+	//		destroyed = true;
+	//		increment = false;
+	//		currentAnimation->Reset();
+	//		--activeTextures;
 
-			App->scene2->leftPlatform->pendingToDelete = true;
-			App->scene2->currentAnim = &App->scene2->blockDestroy;
-			App->scene2->destroyedBlockLeft = true;
+	//		App->scene2->leftPlatform->pendingToDelete = true;
+	//		App->scene2->currentAnim = &App->scene2->blockDestroy;
+	//		App->scene2->destroyedBlockLeft = true;
 
-			LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
-		}
-		if (c1->Intersects(App->scene2->rightPlatform->rect))
-		{
-			this->colliderH->pendingToDelete = true;
-			--activeColliders; --totalColliders;
-			destroyed = true;
-			increment = false;
-			currentAnimation->Reset();
-			--activeTextures;
+	//		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
+	//	}
+	//	if (c1->Intersects(App->scene2->rightPlatform->rect))
+	//	{
+	//		this->colliderH->pendingToDelete = true;
+	//		--activeColliders; --totalColliders;
+	//		destroyed = true;
+	//		increment = false;
+	//		currentAnimation->Reset();
+	//		--activeTextures;
 
-			App->scene2->rightPlatform->pendingToDelete = true;
-			App->scene2->currentAnim = &App->scene2->blockDestroy;
-			App->scene2->destroyedBlockRight = true;
+	//		App->scene2->rightPlatform->pendingToDelete = true;
+	//		App->scene2->currentAnim = &App->scene2->blockDestroy;
+	//		App->scene2->destroyedBlockRight = true;
 
-			LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
-		}
-	}
+	//		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
+	//	}
+	//}
 
 	if (c2->type == Collider::Type::UNBREAKABLE_BLOCK && c1->type == Collider::Type::PLAYER_SHOT)
 	{

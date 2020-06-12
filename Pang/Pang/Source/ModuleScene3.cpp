@@ -48,7 +48,7 @@ bool ModuleScene3::Start()
 	blockDestroy.PushBack({ 48, 158, 32, 8 });
 	blockDestroy.PushBack({ 88, 158, 32, 8 });
 
-	redBlock.PushBack({ 183, 158, 32, 8 });
+	redBlock.PushBack({ 8, 172, 32, 8 });
 
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Fuji(Night).png");
 	++activeTextures; ++totalTextures;
@@ -133,9 +133,7 @@ update_status ModuleScene3::Update()
 
 	if (App->enemies->balloon.balloonsOnScene == 0)
 	{
-		App->harpoon->Disable();
 		App->fade->FadeToBlack((Module*)App->scene3, (Module*)App->winScene, 60);
-
 	}
 
 	if (App->player->time == 50 && musicBool1 == true) {
@@ -158,9 +156,13 @@ update_status ModuleScene3::PostUpdate()
 	App->render->Blit(bgTexture, 0, 0, NULL);
 
 	//Print the blocks on the screen, the ones without if are like this because they're not supposed to break and stay always.
-	App->render->Blit(fgTexture, 73, 81, &(redBlock.GetCurrentFrame()), 1.0f);
+	if (destroyedBlockLeft == false) {
+		App->render->Blit(fgTexture, 73, 81, &(redBlock.GetCurrentFrame()), 1.0f);
+	}
 	
-	App->render->Blit(fgTexture, 279, 81, &(redBlock.GetCurrentFrame()), 1.0f);
+	if (destroyedBlockRight == false) {
+		App->render->Blit(fgTexture, 279, 81, &(redBlock.GetCurrentFrame()), 1.0f);
+	}
 	
 	if (destroyedBlockTop == false)
 	{
@@ -199,30 +201,10 @@ update_status ModuleScene3::PostUpdate()
 	{
 		if (App->player->lifes > 0)
 		{
-			App->player->Disable();
-			App->enemies->Disable();
-			App->collisions->Disable();
-			App->tileset->Disable();
-			App->boosters->Disable();
-			App->harpoon->Disable();
-			App->doubleShot->Disable();
-			App->gunShot->Disable();
-			App->hookShot->Disable();
-
 			App->fade->FadeToBlack((Module*)App->scene3, (Module*)App->scene3, 60);
 		}
 		else
 		{
-			App->player->Disable();
-			App->enemies->Disable();
-			App->collisions->Disable();
-			App->tileset->Disable();
-			App->boosters->Disable();
-			App->harpoon->Disable();
-			App->doubleShot->Disable();
-			App->gunShot->Disable();
-			App->hookShot->Disable();
-
 			App->fade->FadeToBlack((Module*)App->scene3, (Module*)App->sceneIntro, 60);
 		}
 	}

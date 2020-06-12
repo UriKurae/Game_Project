@@ -44,6 +44,11 @@ bool ModuleScene5::Start()
 
 	blockVer.PushBack({ 8, 14, 8, 24 });
 
+	blockDestroy.PushBack({40, 14, 8, 24});
+	blockDestroy.PushBack({56, 14, 8, 24});
+	blockDestroy.PushBack({71, 14, 8, 24});
+	blockDestroy.speed = 0.1f;
+
 	countDownToFade = 300;
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Keirin(Sunset).png");
 	++activeTextures; ++totalTextures;
@@ -123,12 +128,9 @@ update_status ModuleScene5::Update()
 	}
 
 
-	if (balloonsOnScene == 0)
+	if (App->enemies->balloon.balloonsOnScene == 0)
 	{
-
-		App->harpoon->Disable();
 		App->fade->FadeToBlack((Module*)App->scene5, (Module*)App->winScene, 60);
-
 	}
 
 	if (App->player->time == 50 && musicBool1 == true) {
@@ -153,26 +155,26 @@ update_status ModuleScene5::PostUpdate()
 	//Print the blocks on the screen.
 	if (destroyedBlockBottomLeft == false)
 	{
-		App->render->Blit(fgTexture, 96, 70, &(blockVer.GetCurrentFrame()), 1.0f);
+		App->render->Blit(fgTexture, 96, 80, &(blockVer.GetCurrentFrame()), 1.0f);
 	}
 
 	if (destroyedBlockTopLeft == false)
 	{
-		App->render->Blit(fgTexture, 96, 48, &(blockVer.GetCurrentFrame()), 1.0f);
+		App->render->Blit(fgTexture, 96, 56, &(blockVer.GetCurrentFrame()), 1.0f);
 	}
 
 	if (destroyedBlockMiddle == false)
 	{
-		App->render->Blit(fgTexture, 192, 48, &(blockVer.GetCurrentFrame()), 1.0f);
+		App->render->Blit(fgTexture, 192, 56, &(blockVer.GetCurrentFrame()), 1.0f);
 	}
 
 	if (destroyedBlockTopRight == false)
 	{
-		App->render->Blit(fgTexture, 287, 48, &(blockVer.GetCurrentFrame()), 1.0f);
+		App->render->Blit(fgTexture, 288, 56, &(blockVer.GetCurrentFrame()), 1.0f);
 	}
 	if (destroyedBlockBottomRight == false)
 	{
-		App->render->Blit(fgTexture, 287,70, &(blockVer.GetCurrentFrame()), 1.0f);
+		App->render->Blit(fgTexture, 288, 80, &(blockVer.GetCurrentFrame()), 1.0f);
 	}
 
 
@@ -202,30 +204,10 @@ update_status ModuleScene5::PostUpdate()
 	{
 		if (App->player->lifes > 0)
 		{
-			App->player->Disable();
-			App->enemies->Disable();
-			App->collisions->Disable();
-			App->tileset->Disable();
-			App->boosters->Disable();
-			App->harpoon->Disable();
-			App->doubleShot->Disable();
-			App->gunShot->Disable();
-			App->hookShot->Disable();
-
 			App->fade->FadeToBlack((Module*)App->scene5, (Module*)App->scene5, 60);
 		}
 		else
 		{
-			App->player->Disable();
-			App->enemies->Disable();
-			App->collisions->Disable();
-			App->tileset->Disable();
-			App->boosters->Disable();
-			App->harpoon->Disable();
-			App->doubleShot->Disable();
-			App->gunShot->Disable();
-			App->hookShot->Disable();
-
 			App->fade->FadeToBlack((Module*)App->scene5, (Module*)App->sceneIntro, 60);
 		}
 	}

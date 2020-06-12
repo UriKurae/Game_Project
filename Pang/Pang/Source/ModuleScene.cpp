@@ -153,31 +153,10 @@ update_status ModuleScene::PostUpdate()
 	{
 		if (App->player->lifes > 0)
 		{
-			App->player->Disable();
-			App->enemies->Disable();
-			App->collisions->Disable();
-			App->tileset->Disable();
-			App->boosters->Disable();
-			App->harpoon->Disable();
-			App->doubleShot->Disable();
-			App->gunShot->Disable();
-			App->hookShot->Disable();
-
 			App->fade->FadeToBlack((Module*)App->scene, (Module*)App->scene, 60);
-
 		}
 		else
 		{
-			App->player->Disable();
-			App->enemies->Disable();
-			App->collisions->Disable();
-			App->tileset->Disable();
-			App->boosters->Disable();
-			App->harpoon->Disable();
-			App->doubleShot->Disable();
-			App->gunShot->Disable();
-			App->hookShot->Disable();
-
 			App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 		}
 	}
@@ -193,7 +172,6 @@ bool ModuleScene::CleanUp()
 	
 	activeTextures = activeColliders = activeFonts = activeFx = 0;
 		
-
 	App->player->Disable();
 	App->enemies->Disable();
 	App->collisions->Disable();
@@ -203,7 +181,6 @@ bool ModuleScene::CleanUp()
 	App->doubleShot->Disable();
 	App->gunShot->Disable();
 	App->hookShot->Disable();
-	
 
 	App->sceneIntro->countdown = 1;
 	

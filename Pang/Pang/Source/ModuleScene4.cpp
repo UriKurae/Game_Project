@@ -180,30 +180,10 @@ update_status ModuleScene4::PostUpdate()
 	{
 		if (App->player->lifes > 0)
 		{
-			App->player->Disable();
-			App->enemies->Disable();
-			App->collisions->Disable();
-			App->tileset->Disable();
-			App->boosters->Disable();
-			App->harpoon->Disable();
-			App->doubleShot->Disable();
-			App->gunShot->Disable();
-			App->hookShot->Disable();
-
 			App->fade->FadeToBlack((Module*)App->scene4, (Module*)App->scene4, 60);
 		}
 		else
 		{
-			App->player->Disable();
-			App->enemies->Disable();
-			App->collisions->Disable();
-			App->tileset->Disable();
-			App->boosters->Disable();
-			App->harpoon->Disable();
-			App->doubleShot->Disable();
-			App->gunShot->Disable();
-			App->hookShot->Disable();
-			
 			App->fade->FadeToBlack((Module*)App->scene4, (Module*)App->sceneIntro, 60);
 		}
 	}

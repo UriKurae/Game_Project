@@ -13,11 +13,11 @@ class ModuleHarpoon : public Module
 {
 public:
 	//position where is released
-	float x = 0;
-	float y = 0;
-	float h = 34;
+	int x = 0;
+	int y = 0;
+	int h = 34;
 
-	float speed = 2.0f;
+	int speed = 2;
 
 	bool destroyed = true;
 
@@ -43,6 +43,8 @@ public:
 	//load all textures
 	bool Start();
 
+	void breakableCollision();
+
 	update_status Update() override;
 
 	update_status PostUpdate() override;
@@ -50,5 +52,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 
 	bool CleanUp() override;
+
+	int aux = 1;
 
 };
