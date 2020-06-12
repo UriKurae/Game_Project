@@ -15,7 +15,7 @@
 #include "ModuleBoosters.h"
 #include "ModuleHarpoon_DoubleShot.h"
 #include "ModuleGunShot.h"
-
+#include "ModuleTileset.h"
 
 #include "Enemy.h"
 #include "ModuleEnemies.h"
@@ -38,32 +38,33 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	idleAnim.PushBack({ 0, 110, 26, 32 });
 
 	// move left
-	leftAnim.PushBack({379, 0, 30, 31});
-	leftAnim.PushBack({416, 0, 28, 31});
-	leftAnim.PushBack({448, 0, 30, 32});
-	leftAnim.PushBack({482, 0, 30, 31});
-	leftAnim.PushBack({516, 0, 30, 32});
+	leftAnim.PushBack({ 379, 0, 30, 31 });
+	leftAnim.PushBack({ 416, 0, 28, 31 });
+	leftAnim.PushBack({ 448, 0, 30, 32 });
+	leftAnim.PushBack({ 482, 0, 30, 31 });
+	leftAnim.PushBack({ 516, 0, 30, 32 });
 	leftAnim.speed = 0.3f;
 
 	//move right
-	rightAnim.PushBack({0, 0, 30, 32});
-	rightAnim.PushBack({33, 0, 30, 32});
-	rightAnim.PushBack({68, 0, 30, 32});
-	rightAnim.PushBack({102, 0, 28, 32});
-	rightAnim.PushBack({136, 0, 30, 32});
+	rightAnim.PushBack({ 0, 0, 30, 32 });
+	rightAnim.PushBack({ 33, 0, 30, 32 });
+	rightAnim.PushBack({ 68, 0, 30, 32 });
+	rightAnim.PushBack({ 102, 0, 28, 32 });
+	rightAnim.PushBack({ 136, 0, 30, 32 });
 	rightAnim.speed = 0.3f;
 
 	//move upStairs
-	upAnim.PushBack({0, 34, 25, 32});
-	upAnim.PushBack({37, 34, 24, 32});
-	upAnim.PushBack({69, 34, 26, 32});
-	upAnim.PushBack({103, 34, 26, 32});
-	upAnim.PushBack({4, 75, 24, 31});
-	upAnim.PushBack({35, 75, 27, 31});
-	upAnim.PushBack({69, 76, 27, 30});
-	upAnim.speed = 0.1f;
+	upAnim.PushBack({ 0, 34, 25, 32 });
+	upAnim.PushBack({ 37, 34, 24, 32 });
+	upAnim.PushBack({ 69, 34, 26, 32 });
+	upAnim.PushBack({ 103, 34, 26, 32 });
+	upAnim.PushBack({ 4, 75, 24, 31 });
+	upAnim.PushBack({ 35, 75, 27, 31 });
+	upAnim.PushBack({ 69, 76, 27, 30 });
+	upAnim.speed = 0.2f;
+	upAnim.loop = true;
 
-	//move upStairs
+	//move downStairs
 	downAnim.PushBack({ 69, 76, 27, 30 });
 	downAnim.PushBack({ 35, 75, 27, 31 });
 	downAnim.PushBack({ 4, 75, 24, 31 });
@@ -71,7 +72,8 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	downAnim.PushBack({ 69, 34, 26, 32 });
 	downAnim.PushBack({ 37, 34, 24, 32 });
 	downAnim.PushBack({ 0, 34, 25, 32 });
-	downAnim.speed = 0.1f;
+	downAnim.speed = 0.2f;
+	downAnim.loop = true;
 
 	//move updpwnStairs
 	stairsAnim.PushBack({ 104, 81, 28, 26 });
@@ -86,8 +88,8 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 
 	//shot animation
 	shotAnim.PushBack({ 32, 113, 27, 33 });
-	
-	
+
+
 
 
 }
@@ -126,26 +128,23 @@ bool ModulePlayer::Start()
 	//Load textures for the player's life
 	lifesTexture1 = App->textures->Load("Assets/Movement/Sprite_Sheet_Movement.png");
 	++activeTextures; ++totalTextures;
-	
+
 	//SET SPAWN POSITION FOR PLAYER
 	if (scene4 == true) {
 		position.x = 80;
 		position.y = SCREEN_HEIGHT - 77;
 	}
-	else 
+	else
 	{
 		position.x = (SCREEN_WIDTH / 2) - 20;
 		position.y = SCREEN_HEIGHT - 77;
 	}
 
-	
-	
-
-	
 	collider = App->collisions->AddCollider({ position.x, position.y, 26, 32 }, Collider::Type::PLAYER, this);
 	++activeColliders; ++totalColliders;
 	destroyed = false;
 	time = 100;
+	//timeMusic = 3300;
 
 	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	uiIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable, 1);
@@ -161,19 +160,148 @@ bool ModulePlayer::Start()
 	App->gunShot->Enable();
 	App->doubleShot->Enable();
 
+	speed = 2;
+
 	return ret;
+}
+
+
+void ModulePlayer::upStairs()
+{
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !destroyed)
+	{
+
+		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
+		{
+			if (currentAnimation != &upAnim)
+			{
+				upAnim.Reset();
+				currentAnimation = &upAnim;
+
+			}
+			position.y--;
+		}
+
+
+		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS)
+		{
+			if (currentAnimation != &idleAnim)
+			{
+				idleAnim.Reset();
+				currentAnimation = &idleAnim;
+			}
+			position.y = 124;
+		}
+
+		checkIfNeedToFall();
+	}
+	checkIfNeedToFall();
+
+}
+
+
+void ModulePlayer::downStairs()
+{
+
+	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !destroyed)
+	{
+		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS &&
+			position.y < SCREEN_HEIGHT - 77)
+		{
+			if (currentAnimation != &downAnim)
+			{
+				downAnim.Reset();
+				currentAnimation = &downAnim;
+
+			}
+			position.y++;
+		}
+
+		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS ||
+			App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
+		{
+			if (currentAnimation != &downAnim)
+			{
+				downAnim.Reset();
+				currentAnimation = &downAnim;
+			}
+
+			if (position.y < SCREEN_HEIGHT - 77)
+			{
+				position.y++;
+			}
+			else
+			{
+				position.y = SCREEN_HEIGHT - 77;
+			}
+		}
+
+		checkIfNeedToFall();
+	}
+
+	checkIfNeedToFall();
+
+
+}
+
+void ModulePlayer::checkUnbreakable()
+{
+	LOG("%i  %i", tile.x, tile.y);
+
+	if (App->tileset->getTileLevel(tile.y + 2, tile.x + 3).id == ModuleTileset::TileType::UNBREAKABLE ||
+		App->tileset->getTileLevel(tile.y + 2, tile.x).id == ModuleTileset::TileType::UNBREAKABLE)
+	{
+		position.x -= 2;
+	}
+
+}
+
+void ModulePlayer::checkIfNeedToFall()
+{
+	if (position.y < SCREEN_HEIGHT - 77)
+	{
+		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id != ModuleTileset::TileType::STAIRS &&
+			App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id != ModuleTileset::TileType::TOP_STAIRS)
+		{
+			if (currentAnimation != &idleAnim)
+			{
+				idleAnim.Reset();
+				currentAnimation = &idleAnim;
+			}
+			speed = 0;
+			position.y++;
+
+
+			if (App->tileset->getTileLevel(tile.y + 5, tile.x + 1).id == ModuleTileset::TileType::WALL)
+			{
+				if (position.y < SCREEN_HEIGHT - 77)
+				{
+					position.y++;
+					speed = 2;
+				}
+				else
+				{
+					position.y = SCREEN_HEIGHT - 77;
+				}
+			}
+		}
+	}
 }
 
 update_status ModulePlayer::Update()
 {
 	GamePad& pad = App->input->pads[0];
+	tile = { position.x / TILE_SIZE, position.y / TILE_SIZE };
+
 
 	//TO GET THE MOUSE POSITION, SDL_GETMouseState, MUST FIX THE FOR SOME FUCKING REASON THE BALLS WONT SPAWN.
 	if (App->input->keys[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
 	{
+
 		SDL_GetMouseState(&mouseX, &mouseY);
 
-		App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, (mouseX/SCREEN_SIZE), (mouseY/SCREEN_SIZE));
+
+		App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, (mouseX / SCREEN_SIZE), (mouseY / SCREEN_SIZE));
 	}
 
 	//Debug key for gamepad rumble testing purposes
@@ -215,6 +343,9 @@ update_status ModulePlayer::Update()
 			timeBonus = time * 100;
 		}
 
+		/*if (timeMusic > 0) {
+			timeMusic--;
+		}*/
 
 
 		//Detect inputs
@@ -240,6 +371,10 @@ update_status ModulePlayer::Update()
 			}
 
 		}
+
+		upStairs();
+		downStairs();
+		checkUnbreakable();
 
 		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 		{
@@ -314,7 +449,7 @@ update_status ModulePlayer::Update()
 
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 		{
-			collider->SetPos(position.x + 5, position.y);
+			collider->SetPos(position.x, position.y);
 		}
 		else
 		{
@@ -327,37 +462,22 @@ update_status ModulePlayer::Update()
 
 		if (stopTime > 0) { stopTime--; }
 
-		if (App->input->keys[SDL_SCANCODE_LALT] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN) {
-			if (currWeapon == 0) {
-				currWeapon = 1;
-			}
-			else if (currWeapon == 1) {
-				currWeapon = 2;
-			}
-			else if (currWeapon == 2) {
-				currWeapon = 3;
-			}
-			else if (currWeapon == 3) {
-				currWeapon = 0;
-			}
-		}
-		
 	}
-	
+
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModulePlayer::PostUpdate()
 {
-	if (inmunityTime == 181 )
+	if (inmunityTime == 181)
 	{
 		App->boosters->inmunityAnim = &App->boosters->shieldInmunity;
-		App->render->Blit(App->boosters->texture, position.x - 3, position.y-7, &(App->boosters->inmunityAnim->GetCurrentFrame()), 1.0f);
+		App->render->Blit(App->boosters->texture, position.x - 5, position.y - 7, &(App->boosters->inmunityAnim->GetCurrentFrame()), 1.0f);
 	}
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	
+
 	if (ready == 3 || ready == 1) {
 		App->render->Blit(App->player->readyTexture, 150, 99, NULL);
 	}
@@ -366,7 +486,7 @@ update_status ModulePlayer::PostUpdate()
 	{
 		App->render->Blit(texture, position.x, position.y, &rect);
 	}
-	
+
 	if (App->input->keys[SDL_SCANCODE_F9] == KEY_STATE::KEY_DOWN)
 	{
 		destroyed = true;
@@ -374,29 +494,29 @@ update_status ModulePlayer::PostUpdate()
 
 		App->collisions->Disable();
 		App->sceneIntro->countdown = 1;
-		
+
 	}
 
 	if (destroyed == true) //Blit the dead animation
 	{
-		
+
 		currentAnimation = &deadAnimLeft;
 
 		rect = currentAnimation->GetCurrentFrame();
-		
+
 		App->render->Blit(texture, position.x, position.y, &rect);
 
 		//App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 
 	}
-	
+
 	sprintf_s(scoreText, 10, "%d", score);
 	sprintf_s(timeText, 5, "%3d", time);
 
 	App->fonts->BlitText(81, 216, uiIndex, scoreText);
 	App->fonts->BlitText(25, 208, uiIndex, "PLAYER-1");
 
-	if (scene1 == true) 
+	if (scene1 == true)
 	{
 		App->fonts->BlitText(161, 228, uiIndex, "1-1 STAGE");
 		App->fonts->BlitText(158, 208, uiIndex, "MT.FUJI");
@@ -461,8 +581,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->hookShot->Enable();
 	}*/
 
-	
-	if (c2->type == Collider::Type::WALL || c2->type == Collider::Type::UNBREAKABLE_BLOCK) {
+
+	if (c2->type == Collider::Type::WALL /*|| c2->type == Collider::Type::UNBREAKABLE_BLOCK*/) {
 		if (c1->rect.x > c2->rect.x && c1->rect.x < c2->rect.x + c2->rect.w) {
 			position.x = position.x + 2;
 		}
@@ -470,13 +590,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		if (c1->rect.x + c1->rect.w > c2->rect.x && c1->rect.x + c1->rect.w < c2->rect.x + c2->rect.w) {
 			position.x = position.x - 2;
 		}
-		
+
 		if (c1->rect.y + c1->rect.h > c2->rect.y) {
 			position.y = 168;
 		}
 	}
 
-	if (c2->type == Collider::Type::STAIR) {
+	/*if (c2->type == Collider::Type::STAIR) {
 		if (c1->rect.y <= c2->rect.y) {
 			if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
 				position.y -= 0.2f;
@@ -516,7 +636,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			}
 
 		}
-	}
+	}*/
 
 	//if (c2->type == Collider::Type::UNBREAKABLE_BLOCK) {
 	//	if (c1->rect.x > c2->rect.x && c1->rect.x < c2->rect.x + c2->rect.w) {
@@ -552,7 +672,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			App->scene2->rightPlatform->pendingToDelete = true;
 		}
 	}
-	
+
 	//if (c2->type == Collider::Type::BALLOON && godMode == false && shield == true)
 	//{
 	//	shield = false;
@@ -564,20 +684,36 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	}
 	if (c2->type == Collider::Type::BOOSTERS) {
 
+		//if (App->boosters->booster[CLOCK] == true) {
+		//	App->boosters->collider[CLOCK]->pendingToDelete = true;
+		//	App->boosters->booster[CLOCK] == false;
+		//}
+		//
+		//if (App->boosters->booster[] == true) {
+		//	App->boosters->collider[CLOCK]->pendingToDelete = true;
+		//	App->boosters->booster[CLOCK] == false;
+		//}
+
 		//Normal boosters
 		if (c2 == App->boosters->typeBooster[SHIELD].collider)
 		{
 			inmunityTime = 181;
 		}
 
-		if (c2 == App->boosters->typeBooster[CLOCK].collider) 
+		if (c2 == App->boosters->typeBooster[CLOCK].collider)
 		{
 			stopTime = 420;
 		}
 
 		if (c2 == App->boosters->typeBooster[DYNAMITE].collider)
 		{
-			dynamite = true;		
+			dynamite = true;
+		}
+
+		if (c2 == App->boosters->typeBooster[DOUBLESHOT].collider)
+		{
+			doubleshot = true;
+			currWeapon = 3;
 		}
 
 		if (c2 == App->boosters->typeBooster[EXTRALIFE].collider)
@@ -585,34 +721,23 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			App->player->lifes++;
 		}
 
-		if (c2 == App->boosters->typeBooster[SANDHOURGLASS].collider)
-		{
-			//TODO
-		}
 
 		//Gun Boosters
 		if (c2 == App->boosters->typeBooster[GUN].collider)
 		{
 			currWeapon = 2;
-			//doubleshot = false;
-		
+			doubleshot = false;
+
 		}
 
 		if (c2 == App->boosters->typeBooster[HOOK].collider)
 		{
 			currWeapon = 1;
-			//doubleshot = false;
+			doubleshot = false;
 		}
-
-		if (c2 == App->boosters->typeBooster[DOUBLESHOT].collider)
+		for (int i = 0; i < MAX; i++)
 		{
-			//doubleshot = true;
-			currWeapon = 3;
-		}
-
-		for (int i = 0; i < MAX; i++) 
-		{
-			if (App->boosters->typeBooster[i].booster == true && c2 == App->boosters->typeBooster[i].collider) 
+			if (App->boosters->typeBooster[i].booster == true && c2 == App->boosters->typeBooster[i].collider)
 			{
 				App->boosters->typeBooster[i].collider->pendingToDelete = true;
 				App->boosters->typeBooster[i].booster = false;
@@ -621,8 +746,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 	}
 }
-
-
 
 bool ModulePlayer::CleanUp()
 {
