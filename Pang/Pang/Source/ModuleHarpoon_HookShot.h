@@ -12,13 +12,15 @@ class ModuleHookShot : public Module
 {
 public:
 	//position where is released
-	float x = 0;
-	float y = 0;
-	float h = 34;
+	int x = 0;
+	int y = 0;
+	int h = 34;
 
-	float speed = 2.0f;
+	int speed = 2.0f;
 
 	bool destroyed = true;
+
+	bool timeToDestroy = false;
 
 	bool increment = false;
 
@@ -46,6 +48,12 @@ public:
 	bool Start();
 
 	update_status Update() override;
+
+	void breakableCollision();
+
+	void unbreakableCollision();
+
+	void wallCollision();
 
 	update_status PostUpdate() override;
 

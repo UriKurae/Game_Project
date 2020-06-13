@@ -43,9 +43,13 @@ public:
 	//load all textures
 	bool Start();
 
+	update_status Update() override;
+
 	void breakableCollision();
 
-	update_status Update() override;
+	void unbreakableCollision();
+
+	void wallCollision();
 
 	update_status PostUpdate() override;
 

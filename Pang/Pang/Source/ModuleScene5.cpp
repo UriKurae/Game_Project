@@ -27,13 +27,13 @@
 ModuleScene5::ModuleScene5(bool startEnabled) : Module(startEnabled)
 {
 	name = "LEVEL 5";
+
+	pushBlocksAnims();
 }
 
 ModuleScene5::~ModuleScene5()
 {
 }
-
-
 
 bool ModuleScene5::Start()
 {
@@ -43,8 +43,6 @@ bool ModuleScene5::Start()
 
 	fgTexture = App->textures->Load("Assets/Items&Weapons/BlockSprites.png");
 	++activeTextures; ++totalTextures;
-
-	pushBlocksAnims();
 
 	destroyedBlockTopLeft = false;
 	destroyedBlockBottomLeft = false;
@@ -108,7 +106,6 @@ bool ModuleScene5::Start()
 	App->player->scene5 = true;
 	App->player->scene6 = false;
 
-
 	musicBool1 = true;
 	musicBool2 = true;
 
@@ -119,7 +116,7 @@ update_status ModuleScene5::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
 	{
-		balloonsOnScene = 0;
+		App->enemies->balloon.balloonsOnScene = 0;
 		App->collisions->RemoveCollider(leftWall);
 		App->collisions->RemoveCollider(rightWall);
 		App->collisions->RemoveCollider(upperWall);

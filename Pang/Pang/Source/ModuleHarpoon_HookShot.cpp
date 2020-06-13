@@ -12,6 +12,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
+#include "ModuleTileset.h"
 
 #include <SDL\include\SDL_scancode.h>
 
@@ -133,7 +134,8 @@ update_status ModuleHookShot::Update()
 	update_status ret = update_status::UPDATE_CONTINUE;
 
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && destroyed == true && App->player->destroyed == false && App->player->currWeapon == 1)
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && destroyed == true && App->player->destroyed == false && App->player->currWeapon == 1 && 
+		App->enemies->balloon.balloonsOnScene > 0)
 	{
 
 		App->audio->PlayFx(HarpoonFx);
@@ -176,6 +178,14 @@ update_status ModuleHookShot::Update()
 		idleHookShot.Reset();
 	}
 
+	//if (timeToDestroy == true) {
+	//	count++;
+	//}
+	//if (count % 60 == 0 && time > 0 && App->enemies->balloon.balloonsOnScene > 0 && destroyed == false && timeToDestroy == true) {
+	//	time--;
+	//	currentAnimation->Update();
+	//}
+
 	if (time == 0)
 	{
 		if (colliderH != nullptr) {
@@ -190,9 +200,116 @@ update_status ModuleHookShot::Update()
 		time = 5;
 		count = 0;
 		--activeTextures;
+		--activeFx;
+		//timeToDestroy = false;
 	}
 
+	//breakableCollision();
+	//unbreakableCollision();
+	//wallCollision();
+
 	return ret;
+}
+
+void ModuleHookShot::breakableCollision()
+{
+	//iPoint tile = { x / TILE_SIZE, y / TILE_SIZE };
+
+	//if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE) {
+	//	this->colliderH->pendingToDelete = true;
+	//	--activeColliders; --totalColliders;
+	//	destroyed = true;
+	//	increment = false;
+	//	currentAnimation->Reset();
+	//	hookShot.Reset();
+	//	idleHookShot.Reset();
+	//	time = 5;
+	//	count = 0;
+	//	--activeTextures;
+	//	--activeFx;
+	//	App->tileset->changeTile(tile);
+	//	//LOG("%d %d ", tile.x, tile.y);
+	//}
+	//else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY) {
+	//	this->colliderH->pendingToDelete = true;
+	//	--activeColliders; --totalColliders;
+	//	destroyed = true;
+	//	increment = false;
+	//	currentAnimation->Reset();
+	//	hookShot.Reset();
+	//	idleHookShot.Reset();
+	//	time = 5;
+	//	count = 0;
+	//	--activeTextures;
+	//	--activeFx;
+	//	App->tileset->changeTile(tile);
+	//}
+	//else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY) {
+	//	this->colliderH->pendingToDelete = true;
+	//	--activeColliders; --totalColliders;
+	//	destroyed = true;
+	//	increment = false;
+	//	currentAnimation->Reset();
+	//	hookShot.Reset();
+	//	idleHookShot.Reset();
+	//	time = 5;
+	//	count = 0;
+	//	--activeTextures;
+	//	--activeFx;
+	//	App->tileset->changeTile(tile);
+	//}
+}
+
+void ModuleHookShot::unbreakableCollision()
+{
+	//iPoint tile = { x / TILE_SIZE, y / TILE_SIZE };
+
+	//if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE) {
+	//	increment = false;
+	//	currentAnimation = &idleHookShot;
+	//	hookShot.Reset();
+	//	currentAnimation->Update();
+	//	count++;
+	//	if (count % 60 == 0 && time > 0 && App->enemies->balloon.balloonsOnScene > 0 && destroyed == false) {
+	//		time--;
+	//	}
+	//	//y = 8;
+	//}
+	//else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY) {
+	//	increment = false;
+	//	currentAnimation = &idleHookShot;
+	//	hookShot.Reset();
+	//	currentAnimation->Update();
+	//	count++;
+	//	if (count % 60 == 0 && time > 0 && App->enemies->balloon.balloonsOnScene > 0 && destroyed == false) {
+	//		time--;
+	//	}
+	//	//y = 8;
+	//}
+	//else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY) {
+	//	increment = false;
+	//	currentAnimation = &idleHookShot;
+	//	hookShot.Reset();
+	//	currentAnimation->Update();
+	//	count++;
+	//	if (count % 60 == 0 && time > 0 && App->enemies->balloon.balloonsOnScene > 0 && destroyed == false) {
+	//		time--;
+	//	}
+	//	//y = 8;
+	//}
+}
+
+void ModuleHookShot::wallCollision()
+{
+	//iPoint tile = { x / TILE_SIZE, y / TILE_SIZE };
+
+	//if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::WALL && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::WALL) {
+	//	increment = false;
+	//	currentAnimation = &idleHookShot;
+	//	hookShot.Reset();
+	//	timeToDestroy = true;
+	//	y = 8;
+	//}
 }
 
 update_status ModuleHookShot::PostUpdate()
@@ -271,19 +388,20 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 
 bool ModuleHookShot::CleanUp()
 {
+	activeTextures = activeColliders = activeFx = 0;
+
 	if (destroyed == true)
 	{
 		App->textures->Unload(texture);
 		totalTextures--;
-		activeTextures = 0;
 		App->audio->UnloadFx(HarpoonFx);
+		--totalFx;
 
 		if (!destroyed)
 		{
 
 			App->collisions->RemoveCollider(colliderH);
 			totalColliders--;
-			activeColliders = 0;
 		}
 
 	}

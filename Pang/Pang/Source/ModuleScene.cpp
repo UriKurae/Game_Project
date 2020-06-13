@@ -193,8 +193,6 @@ bool ModuleScene::CleanUp()
 	--totalTextures;
 	App->textures->Unload(deathTexture2);
 	--totalTextures;
-	App->textures->Unload(App->boosters->texture);
-	--totalTextures;
 	
 	App->collisions->RemoveCollider(leftWall);
 	--totalColliders;

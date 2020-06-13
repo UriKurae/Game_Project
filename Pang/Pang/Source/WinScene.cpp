@@ -34,13 +34,18 @@ bool WinScene::Start()
 	bool ret = true;
 
 	winTexture1 = App->textures->Load("Assets/UI/WinScene1.png");
+	++activeTextures; ++totalTextures;
 	winTexture245 = App->textures->Load("Assets/UI/WinScene245.png");
+	++activeTextures; ++totalTextures;
 	winFx = App->audio->LoadFx("Assets/Sound/Sounds_Gameplay/LevelComplete.ogg");
+	++activeFx; ++totalFx;
 
-	winScene3 = App->textures->Load("Assets/UI/AnimPlaneScene31.png");
+	winScene3 = App->textures->Load("Assets/UI/AnimPlaneScene3.png");
+	++activeTextures; ++totalTextures;
 
 	char lookupTable2[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	winIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable2, 1);
+	++activeFonts; ++totalFx;
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -180,14 +185,18 @@ bool WinScene::CleanUp()
 {
 	activeFx = activeColliders = activeFonts = activeTextures = 0;
 
-	SDL_DestroyTexture(winTexture1);
+	App->textures->Unload(winTexture1);
 	--totalTextures;
-	SDL_DestroyTexture(winTexture245);
+	App->textures->Unload(winTexture245);
 	--totalTextures;
+	App->textures->Unload(winScene3);
+	--totalTextures;
+
 	
 	App->fonts->UnLoad(winIndex);
-	
+	--totalFonts;
 	App->audio->UnloadFx(winFx);
+	--totalFonts;
 
 	winAnim.Reset();
 	winAnim2.Reset();

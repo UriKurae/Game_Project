@@ -68,8 +68,8 @@ SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 	map.speed = 0.1f;
 	map.loop = false;
 
-	selectAnim.PushBack({0, 0, 15, 15});
-	selectAnim.PushBack({17, 0, 15, 15});
+	selectAnim.PushBack({0, 0, 16, 16});
+	selectAnim.PushBack({17, 0, 16, 16});
 }
 
 SceneIntro::~SceneIntro()
@@ -90,8 +90,11 @@ bool SceneIntro::Start()
 	App->player->lifes = 3;
 
 	selectTexture = App->textures->Load("Assets/UI/MapSelection.png");
+	++activeTextures; ++totalTextures;
 	mapAnimTexture = App->textures->Load("Assets/UI/IntroDown.png");
+	++activeTextures; ++totalTextures;
 	mapTexture = App->textures->Load("Assets/UI/IntroMap.png");
+	++activeTextures; ++totalTextures;
 	bgTexture = App->textures->Load("Assets/UI/AnimationPangBalls.png");
 	++activeTextures; ++totalTextures;
 	intro_1 = App->textures->Load("Assets/UI/Intro_1.png");
@@ -102,7 +105,9 @@ bool SceneIntro::Start()
 	++activeTextures; ++totalTextures;
 
 	introFx = App->audio->LoadFx("Assets/Sound/Sounds_Gameplay/Title.wav");
+	++activeFx; ++totalFx;
 	mapFx = App->audio->LoadFx("Assets/Sound/FX/CountDownFx.wav");
+	++activeFx; ++totalFx;
 
 	char lookupTable1[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	introIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable1, 1);
@@ -110,6 +115,7 @@ bool SceneIntro::Start()
 
 	char mapTable[] = { "9876543210" };
 	countdownIndex = App->fonts->Load("Assets/UI/Fonts/MapTimer.png", mapTable, 1);
+	++activeFonts; ++totalFonts;
 
 
 	App->render->camera.x = 0;
@@ -143,7 +149,7 @@ update_status SceneIntro::Update()
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && mapBool == true || mapBool == true && countdownMap == 0) {
 		if (stage1 == true) {
-			App->fade->FadeToBlack(this, (Module*)App->scene, 30);
+			App->fade->FadeToBlack(this, (Module*)App->scene3, 30);
 		}
 		else if (stage2 == true) {
 			App->fade->FadeToBlack(this, (Module*)App->scene4, 30);
@@ -220,12 +226,12 @@ update_status SceneIntro::PostUpdate()
 		currentAnimation = &map;
 		App->render->Blit(mapTexture, 0, 0, NULL);
 		App->render->Blit(mapAnimTexture, 0, 208, &(map.GetCurrentFrame()), 0.2f);
-		App->fonts->BlitText(259, 32, countdownIndex, mapText);
+		App->fonts->BlitText(260, 31, countdownIndex, mapText);
 		if (stage1 == true) {
-			App->render->Blit(selectTexture, 341, 68, &(selectAnim.GetCurrentFrame()), 0.2f);
+			App->render->Blit(selectTexture, 340, 68, &(selectAnim.GetCurrentFrame()), 0.2f);
 		}
 		else if (stage2 == true) {
-			App->render->Blit(selectTexture, 301, 68, &(selectAnim.GetCurrentFrame()), 0.2f);
+			App->render->Blit(selectTexture, 300, 68, &(selectAnim.GetCurrentFrame()), 0.2f);
 		}
 	}
 
@@ -234,8 +240,18 @@ update_status SceneIntro::PostUpdate()
 
 bool SceneIntro::CleanUp()
 {
-	//SDL_DestroyTexture(bgTexture);
+	activeTextures = activeColliders = activeFonts = activeFx = 0;
+
 	App->textures->Unload(bgTexture);
+	--activeTextures; --totalTextures;
+
+	App->textures->Unload(selectTexture);
+	--activeTextures; --totalTextures;
+
+	App->textures->Unload(mapTexture);
+	--activeTextures; --totalTextures;
+
+	App->textures->Unload(mapAnimTexture);
 	--activeTextures; --totalTextures;
 
 	App->textures->Unload(intro_1);
@@ -250,14 +266,14 @@ bool SceneIntro::CleanUp()
 	App->fonts->UnLoad(introIndex);
 	--activeFonts; --totalFonts;
 
+	App->fonts->UnLoad(countdownIndex);
+	--activeFonts; --totalFonts;
+
 	App->audio->UnloadFx(introFx);
 	--activeFx; --totalFx;
 
-
-	/*SDL_DestroyTexture(intro_1);
-	SDL_DestroyTexture(intro_2);
-	SDL_DestroyTexture(intro_3);*/
-
+	App->audio->UnloadFx(mapFx);
+	--activeFx; --totalFx;
 
 	return true;
 }

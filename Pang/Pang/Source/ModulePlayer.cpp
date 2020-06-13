@@ -89,9 +89,6 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	//shot animation
 	shotAnim.PushBack({ 32, 113, 27, 33 });
 
-
-
-
 }
 
 ModulePlayer::~ModulePlayer()
@@ -347,6 +344,20 @@ update_status ModulePlayer::Update()
 			timeMusic--;
 		}*/
 
+		if (App->input->keys[SDL_SCANCODE_LALT] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN && !destroyed) {
+			if (currWeapon == 0) {
+				currWeapon = 1;
+			}
+			else if (currWeapon == 1) {
+				currWeapon = 2;
+			}
+			else if (currWeapon == 2) {
+				currWeapon = 3;
+			}
+			else if (currWeapon == 3) {
+				currWeapon = 0;
+			}
+		}
 
 		//Detect inputs
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !destroyed)

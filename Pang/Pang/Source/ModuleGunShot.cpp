@@ -95,7 +95,8 @@ update_status ModuleGunShot::Update()
 	update_status ret = update_status::UPDATE_CONTINUE;
 
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->player->destroyed == false && App->player->currWeapon == 2)
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->player->destroyed == false && App->player->currWeapon == 2 && 
+		App->enemies->balloon.balloonsOnScene > 0)
 	{
 
 		App->audio->PlayFx(gunShotFx);
