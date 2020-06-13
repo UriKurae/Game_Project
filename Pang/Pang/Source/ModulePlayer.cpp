@@ -166,8 +166,9 @@ bool ModulePlayer::Start()
 
 void ModulePlayer::upStairs()
 {
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !destroyed &&
-		App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE)
+	GamePad& pad = App->input->pads[0];
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !destroyed ||
+		pad.l_y < 0 && !destroyed)
 	{
 
 		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
@@ -204,8 +205,10 @@ void ModulePlayer::upStairs()
 void ModulePlayer::downStairs()
 {
 	LOG("%i  %i", position.x, position.y);
+	GamePad& pad = App->input->pads[0];
 
-	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !destroyed)
+	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !destroyed ||
+		pad.l_y > 0 && !destroyed)
 	{
 		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS &&
 			position.y < SCREEN_HEIGHT - 77)
@@ -297,7 +300,6 @@ update_status ModulePlayer::Update()
 	GamePad& pad = App->input->pads[0];
 	tile = { position.x / TILE_SIZE, position.y / TILE_SIZE };
 
-
 	//TO GET THE MOUSE POSITION, SDL_GETMouseState, MUST FIX THE FOR SOME FUCKING REASON THE BALLS WONT SPAWN.
 	if (App->input->keys[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
 	{
@@ -367,32 +369,36 @@ update_status ModulePlayer::Update()
 		}
 
 		//Detect inputs
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !destroyed &&
-			App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id != ModuleTileset::TileType::STAIRS)
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || pad.l_x < 0 || pad.left == true)
 		{
-			position.x -= speed;
-			collider->SetPos(position.x, position.y);
-
-			if (currentAnimation != &leftAnim)
+			if (!destroyed && App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id != ModuleTileset::TileType::STAIRS)
 			{
-				leftAnim.Reset();
-				currentAnimation = &leftAnim;
+				position.x -= speed;
+				collider->SetPos(position.x, position.y);
+
+				if (currentAnimation != &leftAnim)
+				{
+					leftAnim.Reset();
+					currentAnimation = &leftAnim;
+				}
 			}
 		}
 
-		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !destroyed &&
-			App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id != ModuleTileset::TileType::STAIRS &&
-			App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id != ModuleTileset::TileType::EMPTY)
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || pad.l_x > 0 || pad.right == true)
 		{
-
-			position.x += speed;
-			collider->SetPos(position.x, position.y);
-
-			if (currentAnimation != &rightAnim)
+			if (!destroyed && App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id != ModuleTileset::TileType::STAIRS &&
+				App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id != ModuleTileset::TileType::EMPTY)
 			{
-				rightAnim.Reset();
-				currentAnimation = &rightAnim;
 
+				position.x += speed;
+				collider->SetPos(position.x, position.y);
+
+				if (currentAnimation != &rightAnim)
+				{
+					rightAnim.Reset();
+					currentAnimation = &rightAnim;
+
+				}
 			}
 		}
 
@@ -417,7 +423,7 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-		if (pad.l_x > 0 && !destroyed)
+		/*if (pad.l_x > 0 && !destroyed)
 		{
 			position.x += speed;
 
@@ -438,7 +444,7 @@ update_status ModulePlayer::Update()
 				currentAnimation = &leftAnim;
 			}
 		}
-
+		
 		if (pad.a == true)
 		{
 			if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
@@ -454,11 +460,11 @@ update_status ModulePlayer::Update()
 					currentAnimation = &shotAnim;
 				}
 			}
-		}
+		}*/
 
 		//Detect when A and D are pressed at the same time and set the current animation to idle
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT &&
-			App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT ||
+			pad.left && pad.right)
 		{
 			idleAnim.Reset();
 			currentAnimation = &idleAnim;
