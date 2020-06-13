@@ -1,5 +1,5 @@
-# PANG 
-### by Middle Ambient Studios
+
+
 
 ![](https://i.imgur.com/yibELGG.png)
 
@@ -86,15 +86,12 @@ SPAWN EXTRA LIFE BOOSTER ON MOUSE POSITION: ALT + 8
 
 # Latest version of PANG 
 
-[Download]()
+### [Download]()
 
 
 ## More Information
 
 #### Our wiki page [HERE](https://github.com/UriKurae/Pang/wiki)
 #### Our github repository [HERE](https://github.com/UriKurae/Pang)
-
-
-
 
 ###### *Pang Tribute by Middle Ambient Studios*
