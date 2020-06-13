@@ -20,7 +20,9 @@ public:
 	float speed = 2.0f;
 
 	bool increment = false;
-	bool canShot = false;
+	
+	//time to not spam the laser gun
+	int canShot = 0;
 
 	//texture for all the harpoons sprites
 	SDL_Texture* texture = nullptr;
