@@ -1,5 +1,3 @@
-theme: jekyll-theme-merlot
-
 Presentation:
 
 We are Middle Ambient Studios, an indie developer studio created for the purpose of making 
