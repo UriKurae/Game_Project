@@ -130,6 +130,7 @@ bool SceneIntro::Start()
 
 update_status SceneIntro::Update()
 {
+	GamePad& pad = App->input->pads[0];
 	if (countdown != 0)
 	{
 		countdown--;
@@ -142,32 +143,42 @@ update_status SceneIntro::Update()
 		countdownMap--;
 	}
 
-	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && countdown == 0)
+	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || pad.start)
 	{
+		if(countdown == 0)
 		mapBool = true;
 	}
-
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && mapBool == true || mapBool == true && countdownMap == 0) {
-		if (stage1 == true) {
-			App->fade->FadeToBlack(this, (Module*)App->scene3, 30);
-		}
-		else if (stage2 == true) {
-			App->fade->FadeToBlack(this, (Module*)App->scene4, 30);
-		}
-	}
-
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN && mapBool == true) {
-		if (stage1 == true) {
-			stage1 = false;
-			stage2 = true;
+	
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || pad.a)
+	{
+		if (mapBool == true || mapBool == true && countdownMap == 0)
+		{
+			if (stage1 == true) {
+				App->fade->FadeToBlack(this, (Module*)App->scene3, 30);
+			}
+			else if (stage2 == true) {
+				App->fade->FadeToBlack(this, (Module*)App->scene4, 30);
+			}
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN && mapBool == true) {
+	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || pad.left) {
+		if (mapBool)
+		{
+			if (stage1 == true) {
+				stage1 = false;
+				stage2 = true;
+			}
+		}
+	}
 
-		if (stage2 == true) {
-			stage2 = false;
-			stage1 = true;
+	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN || pad.right) {
+		if (mapBool)
+		{
+			if (stage2 == true) {
+				stage2 = false;
+				stage1 = true;
+			}
 		}
 	}
 

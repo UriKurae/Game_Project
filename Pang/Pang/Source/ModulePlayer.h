@@ -43,8 +43,7 @@ public:
 	// Position of the player in the map
 	iPoint position;
 	iPoint tile = { position.x / TILE_SIZE, position.y / TILE_SIZE };
-
-
+	
 	//Position of the mouse
 	int mouseX;
 	int mouseY;
