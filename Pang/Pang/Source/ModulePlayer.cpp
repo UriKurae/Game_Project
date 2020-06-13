@@ -89,7 +89,6 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 
 	//shot animation
 	shotAnim.PushBack({ 32, 113, 27, 33 });
-
 }
 
 ModulePlayer::~ModulePlayer()
@@ -106,7 +105,6 @@ bool ModulePlayer::Start()
 	bool godMode = false;
 
 	currWeapon = 0;
-
 
 	ready = 3;
 
@@ -164,37 +162,38 @@ bool ModulePlayer::Start()
 }
 
 
-void ModulePlayer::upStairs()
+/*void ModulePlayer::upStairs()
 {
-	GamePad& pad = App->input->pads[0];
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !destroyed ||
-		pad.l_y < 0 && !destroyed)
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || pad.l_y < 0 || pad.up)
 	{
-
-		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
+		if (!destroyed)
 		{
-			if (currentAnimation != &upAnim)
-			{
-				upAnim.Reset();
-				currentAnimation = &upAnim;
 
+			if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
+			{
+				if (currentAnimation != &upAnim)
+				{
+					upAnim.Reset();
+					currentAnimation = &upAnim;
+
+				}
+
+				position.y--;
 			}
 
-			position.y--;
-		}
 
-
-		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS)
-		{
-			if (currentAnimation != &idleAnim)
+			if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS)
 			{
-				idleAnim.Reset();
-				currentAnimation = &idleAnim;
+				if (currentAnimation != &idleAnim)
+				{
+					idleAnim.Reset();
+					currentAnimation = &idleAnim;
+				}
+				position.y = 124;
 			}
-			position.y = 124;
+			collider->SetPos(position.x, position.y);
+			checkIfNeedToFall();
 		}
-		collider->SetPos(position.x, position.y);
-		checkIfNeedToFall();
 	}
 
 	checkIfNeedToFall();
@@ -205,11 +204,10 @@ void ModulePlayer::upStairs()
 void ModulePlayer::downStairs()
 {
 	LOG("%i  %i", position.x, position.y);
-	GamePad& pad = App->input->pads[0];
 
-	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !destroyed ||
-		pad.l_y > 0 && !destroyed)
+	if ((App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || pad.l_y > 0 || pad.down) && !destroyed)
 	{
+		
 		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS &&
 			position.y < SCREEN_HEIGHT - 77)
 		{
@@ -241,18 +239,17 @@ void ModulePlayer::downStairs()
 				idleAnim.Reset();
 				currentAnimation = &idleAnim;
 			}
-			//position.y = SCREEN_HEIGHT - 77;
-			//speed = 2;
 		}
 		collider->SetPos(position.x, position.y);
 
 		checkIfNeedToFall();
+
 	}
 
 	checkIfNeedToFall();
 
 }
-
+*/
 void ModulePlayer::checkUnbreakable()
 {
 	LOG("%i  %i", tile.x, tile.y);
@@ -369,7 +366,7 @@ update_status ModulePlayer::Update()
 		}
 
 		//Detect inputs
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || pad.l_x < 0 || pad.left == true)
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || pad.l_x < 0 || pad.left)
 		{
 			if (!destroyed && App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id != ModuleTileset::TileType::STAIRS)
 			{
@@ -384,7 +381,7 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || pad.l_x > 0 || pad.right == true)
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || pad.l_x > 0 || pad.right)
 		{
 			if (!destroyed && App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id != ModuleTileset::TileType::STAIRS &&
 				App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id != ModuleTileset::TileType::EMPTY)
@@ -402,11 +399,7 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-		upStairs();
-		downStairs();
-		checkUnbreakable();
-
-		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+		if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || pad.a) && ready == 0)
 		{
 			if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
 			{
@@ -422,45 +415,6 @@ update_status ModulePlayer::Update()
 				}
 			}
 		}
-
-		/*if (pad.l_x > 0 && !destroyed)
-		{
-			position.x += speed;
-
-			if (currentAnimation != &rightAnim)
-			{
-				rightAnim.Reset();
-				currentAnimation = &rightAnim;
-			}
-		}
-
-		if (pad.l_x < 0 && !destroyed)
-		{
-			position.x -= speed;
-
-			if (currentAnimation != &leftAnim)
-			{
-				leftAnim.Reset();
-				currentAnimation = &leftAnim;
-			}
-		}
-		
-		if (pad.a == true)
-		{
-			if (currentAnimation != &shotAnim && App->harpoon->destroyed == true)
-			{
-				if (App->enemies->balloon.balloonsOnScene == 0)
-				{
-					idleAnim.Reset();
-					currentAnimation = &idleAnim;
-				}
-				else
-				{
-					shotAnim.Reset();
-					currentAnimation = &shotAnim;
-				}
-			}
-		}*/
 
 		//Detect when A and D are pressed at the same time and set the current animation to idle
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT ||
@@ -475,27 +429,104 @@ update_status ModulePlayer::Update()
 			App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE &&
 			App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_IDLE &&
 			App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE &&
-			App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE)
+			App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE && !pad.right && !pad.left && !pad.up && !pad.down && pad.l_x == 0 && pad.l_y == 0 && !pad.a)
 		{
-			currentAnimation = &idleAnim;
+			if (App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
+			{
+				currentAnimation = &idleStairs;
+			}
+			else
+			{
+				currentAnimation = &idleAnim;
+				collider->SetPos(position.x, position.y);
+			}
+		}
+
+
+
+
+		//----------------------------------------STAIRS CODE----------------------------------------//
+
+		//UP STAIRS
+
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || pad.l_y < 0 || pad.up)
+		{
+			if (!destroyed)
+			{
+
+				if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
+				{
+					if (currentAnimation != &upAnim)
+					{
+						upAnim.Reset();
+						currentAnimation = &upAnim;
+
+					}
+
+					position.y--;
+				}
+
+
+				if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS)
+				{
+					if (currentAnimation != &idleAnim)
+					{
+						idleAnim.Reset();
+						currentAnimation = &idleAnim;
+					}
+					position.y = 124;
+				}
+				collider->SetPos(position.x, position.y);
+				checkIfNeedToFall();
+			}
+		}
+
+		//DOWN STAIRS
+
+		if ((App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || pad.l_y > 0 || pad.down) && !destroyed)
+		{
+
+			if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS &&
+				position.y < SCREEN_HEIGHT - 77)
+			{
+				if (currentAnimation != &downAnim)
+				{
+					downAnim.Reset();
+					currentAnimation = &downAnim;
+
+				}
+				position.y++;
+			}
+
+			if (App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS ||
+				App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
+			{
+				if (currentAnimation != &downAnim)
+				{
+					downAnim.Reset();
+					currentAnimation = &downAnim;
+				}
+
+				position.y++;
+			}
+
+			if (App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::WALL)
+			{
+				if (currentAnimation != &idleAnim)
+				{
+					idleAnim.Reset();
+					currentAnimation = &idleAnim;
+				}
+			}
 			collider->SetPos(position.x, position.y);
+
+			checkIfNeedToFall();
+
 		}
 
-		//Animation if no up/down movement on stairs
-		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE &&
-			App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE &&
-			App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
-		{
-			currentAnimation = &idleStairs;
-		}
+		checkIfNeedToFall();
+		checkUnbreakable();
 
-		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT &&
-			App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT &&
-			App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
-		{
-			currentAnimation = &idleStairs;
-		}
-		
 
 		currentAnimation->Update();
 

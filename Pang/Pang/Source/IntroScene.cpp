@@ -151,36 +151,30 @@ update_status SceneIntro::Update()
 		mapBool = true;
 	}
 	
-	else if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || pad.a)
+	else if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || pad.a) && mapBool == true || mapBool == true && countdownMap == 0)
 	{
-		if (mapBool == true || mapBool == true && countdownMap == 0)
-		{
-			if (stage1 == true) {
-				App->fade->FadeToBlack(this, (Module*)App->scene, 30);
+		if (stage1 == true) {
+			App->fade->FadeToBlack(this, (Module*)App->scene, 30);
 			}
-			else if (stage2 == true) {
-				App->fade->FadeToBlack(this, (Module*)App->scene4, 30);
-			}
+		else if (stage2 == true) {
+			App->fade->FadeToBlack(this, (Module*)App->scene4, 30);
+			
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || pad.left) {
-		if (mapBool)
-		{
-			if (stage1 == true) {
-				stage1 = false;
-				stage2 = true;
-			}
+	if ((App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || pad.left) && mapBool) {
+		
+		if (stage1 == true) {
+			stage1 = false;
+			stage2 = true;
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN || pad.right) {
-		if (mapBool)
-		{
-			if (stage2 == true) {
-				stage2 = false;
-				stage1 = true;
-			}
+	if ((App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN || pad.right) && mapBool) {
+			
+		if (stage2 == true) {
+			stage2 = false;
+			stage1 = true;
 		}
 	}
 

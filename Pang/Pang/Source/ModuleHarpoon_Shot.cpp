@@ -132,9 +132,10 @@ bool ModuleHarpoon::Start()
 update_status ModuleHarpoon::Update()
 {
 	update_status ret = update_status::UPDATE_CONTINUE;
-	
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && destroyed == true && App->player->destroyed == false && App->player->currWeapon == 0 && 
-		App->enemies->balloon.balloonsOnScene > 0)
+	GamePad& pad = App->input->pads[0];
+
+	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || pad.a) && destroyed == true && App->player->destroyed == false && App->player->currWeapon == 0 && 
+		App->enemies->balloon.balloonsOnScene > 0 && App->player->ready == 0)
 		{
 
 		App->audio->PlayFx(HarpoonFx);

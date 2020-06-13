@@ -20,6 +20,7 @@ public:
 	float speed = 2.0f;
 
 	bool increment = false;
+	bool canShot = false;
 
 	//texture for all the harpoons sprites
 	SDL_Texture* texture = nullptr;

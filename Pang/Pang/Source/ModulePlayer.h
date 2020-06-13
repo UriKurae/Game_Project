@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
+#include "ModuleInput.h"
+#include "Application.h"
+
 
 struct SDL_Texture;
 struct Collider;
@@ -34,8 +37,8 @@ public:
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
-	void upStairs();
-	void downStairs();
+	//void upStairs();
+	//void downStairs();
 	void checkUnbreakable();
 	void checkIfNeedToFall();
 
@@ -43,7 +46,7 @@ public:
 	// Position of the player in the map
 	iPoint position;
 	iPoint tile = { position.x / TILE_SIZE, position.y / TILE_SIZE };
-	
+		
 	//Position of the mouse
 	int mouseX;
 	int mouseY;
