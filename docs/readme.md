@@ -1,8 +1,15 @@
+# PANG 
+### by Middle Ambient Studios
+
 ![](https://i.imgur.com/yibELGG.png)
 
-# PANG
+### OUR OBJECTIVE
 
-### by Middle Ambient Studios
+We are Middle Ambient Studios, an indie developer studio created for the purpose of making 
+our first game ever for the university UPC (CITM).
+
+We decided to recreate PANG, an arcade videogame from 1989, where you have to destroy
+all balloons in the screen.
 
 ### DESCRIPTION OF THE GAME
 
@@ -26,7 +33,7 @@ Keyboard controls:
 
 Gamepad:
 
-- MOVE: Joystic
+- MOVEMENT: Joystic
 - SHOOT: 'A' or 'X' button (Depends of the Gamepad)
 
 Cheat Controls:
@@ -54,7 +61,40 @@ SPAWN EXTRA LIFE BOOSTER ON MOUSE POSITION: ALT + 8
 
 ## MIDDLE AMBIENT STUDIOS
 
+![](https://i.imgur.com/tzYGt0v.png)
 
-### Team Members
+### The Middle Ambient Team
+ ![](https://i.imgur.com/AhjD9b0.jpg)
 
-## D
+**Lucas Pérez**
+* *Gameplay Programmer and Management*
+* [Lucas's Github](https://github.com/LucasPG14)
+
+**David González**
+* *Q&A and Programmer*
+* [David's Github](https://github.com/MagiX7)
+
+**Carlos Megía**
+* *Art and Q&A*
+* [Carlos's Github](https://github.com/Chuchocoronel)
+
+**Oriol Bernal**
+* *Art and Gameplay programer*
+* [Oriol's Github ](https://github.com/UriKurae)
+
+
+
+# Latest version of PANG 
+
+[Download]()
+
+
+## More Information
+
+#### Our wiki page [HERE](https://github.com/UriKurae/Pang/wiki)
+#### Our github repository [HERE](https://github.com/UriKurae/Pang)
+
+
+
+
+###### *Pang Tribute by Middle Ambient Studios*
