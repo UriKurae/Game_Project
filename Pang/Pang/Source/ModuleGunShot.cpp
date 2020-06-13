@@ -64,12 +64,6 @@ ModuleGunShot::ModuleGunShot(bool startEnabled) : Module(startEnabled)
 	gunShotParticle.anim.PushBack({ 119, 5, 16, 14 });
 	gunShotParticle.anim.loop = false;
 	gunShotParticle.anim.speed = 0.3f;
-
-	gunShotHitWall.anim.PushBack({ 251, 14, 14, 5 });
-	gunShotHitWall.anim.PushBack({ 271, 14, 14, 5 });
-	gunShotHitWall.anim.loop = false;
-	gunShotHitWall.anim.speed = 0.1f;
-
 }
 
 ModuleGunShot::~ModuleGunShot()

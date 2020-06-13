@@ -6,6 +6,7 @@
 #include "ModuleRender.h"
 #include "ModuleCollisions.h"
 #include "ModuleTileset.h"
+#include "ModuleAudio.h"
 
 #include "SDL/include/SDL_timer.h"
 
@@ -15,6 +16,11 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 	
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		particles[i] = nullptr;
+
+	gunShotHitWall.anim.PushBack({ 251, 14, 14, 5 });
+	gunShotHitWall.anim.PushBack({ 271, 14, 14, 5 });
+	gunShotHitWall.anim.loop = false;
+	gunShotHitWall.anim.speed = 0.1f;
 }
 
 ModuleParticles::~ModuleParticles()
@@ -26,6 +32,9 @@ bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
 	texture = App->textures->Load("Assets/Balloons/Particles.png");
+
+	gunShotHit = App->audio->LoadFx("Assets/Sound/FX/HitGunShoot.wav");
+
 
 	return true;
 }
@@ -80,6 +89,7 @@ update_status ModuleParticles::Update()
 	breakableCollision();
 	unbreakableCollision();
 	wallCollision();
+
 	
 	return update_status::UPDATE_CONTINUE;
 }
@@ -169,19 +179,27 @@ void ModuleParticles::unbreakableCollision()
 			tile = { particles[i]->position.x / TILE_SIZE,  particles[i]->position.y / TILE_SIZE };
 		}
 
-		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && particles[i] != nullptr) {
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && particles[i] != nullptr && particles[i]->collider->type == Collider::Type::PLAYER_SHOT) {
 
+			//App->audio->PlayFx(gunShotHit);
+			//AddParticle(gunShotHitWall, particles[i]->position.x - 3, particles[i]->position.y, Collider::Type::NONE, 0);
 			delete particles[i];
 			particles[i] = nullptr;
 			break;
 
 		}
-		else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY && particles[i] != nullptr) {
+		else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY && particles[i] != nullptr ) {
+			
+			//App->audio->PlayFx(gunShotHit);
+			//AddParticle(gunShotHitWall, particles[i]->position.x - 3, particles[i]->position.y, Collider::Type::NONE, 0);
 			delete particles[i];
 			particles[i] = nullptr;
 			break;
 		}
 		else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY && particles[i] != nullptr) {
+			
+			//App->audio->PlayFx(gunShotHit);
+			//AddParticle(gunShotHitWall, particles[i]->position.x - 3, particles[i]->position.y, Collider::Type::NONE, 0);
 			delete particles[i];
 			particles[i] = nullptr;
 			break;
@@ -201,6 +219,9 @@ void ModuleParticles::wallCollision()
 		}
 
 		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::WALL && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::WALL && particles[i] != nullptr) {
+			
+			//App->audio->PlayFx(gunShotHit);
+			//AddParticle(gunShotHitWall, particles[i]->position.x - 3, particles[i]->position.y, Collider::Type::NONE, 0);
 			delete particles[i];
 			particles[i] = nullptr;
 			break;

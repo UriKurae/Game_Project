@@ -120,6 +120,8 @@ bool ModuleHookShot::Start()
 	HarpoonFx = App->audio->LoadFx("Assets/Sound/FX/NormalShoot.wav");
 	++totalFx;
 
+	//HitHookFX = App->audio->LoadFx("Assets/Sound/FX/")
+
 	x = App->player->position.x;
 	y = App->player->position.y - speed;
 

@@ -29,7 +29,6 @@ public:
 	Particle gunShotParticle;
 
 	Particle shotGun;
-	Particle gunShotHitWall;
 
 	uint gunShotFx = 0;
 

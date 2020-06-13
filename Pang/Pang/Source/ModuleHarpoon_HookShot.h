@@ -37,6 +37,7 @@ public:
 	Particle hookShotParticle;
 
 	uint HarpoonFx = 0;
+	uint HitHookFX = 0;
 
 	uint time = 5;
 	uint count = 0;

@@ -67,6 +67,10 @@ private:
 
 	// Total amount of particles loaded into the array
 	uint particlesCount = 0;
+
+	Particle gunShotHitWall;
+
+	uint gunShotHit = 0;
 };
 
 #endif // !__MODULEPARTICLES_H__
