@@ -374,7 +374,7 @@ update_status ModulePlayer::Update()
 			if (!destroyed && App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id != ModuleTileset::TileType::STAIRS)
 			{
 				position.x -= speed;
-				collider->SetPos(position.x, position.y);
+				collider->SetPos(position.x + 5, position.y);
 
 				if (currentAnimation != &leftAnim)
 				{
@@ -478,6 +478,7 @@ update_status ModulePlayer::Update()
 			App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE)
 		{
 			currentAnimation = &idleAnim;
+			collider->SetPos(position.x, position.y);
 		}
 
 		//Animation if no up/down movement on stairs
@@ -502,7 +503,7 @@ update_status ModulePlayer::Update()
 
 		if (stopTime > 0) { stopTime--; }
 
-		collider->SetPos(position.x, position.y);
+
 	}
 
 
@@ -635,6 +636,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		if (c1->rect.y + c1->rect.h > c2->rect.y) {
 			position.y = 168;
 		}
+
+		collider->SetPos(position.x, position.y);
 	}
 
 	/*if (c2->type == Collider::Type::STAIR) {

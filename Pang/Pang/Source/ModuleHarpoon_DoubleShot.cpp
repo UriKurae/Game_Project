@@ -225,7 +225,6 @@ update_status ModuleDoubleShot::Update()
 				++activeColliders; ++totalColliders;
 				harpoon[i].increment = true;
 				harpoon[i].destroyed = false;
-
 				break;
 			}
 		}
@@ -270,25 +269,105 @@ update_status ModuleDoubleShot::Update()
 
 void ModuleDoubleShot::breakableCollision()
 {
-	iPoint tile = { harpoon[0].x / TILE_SIZE, harpoon[0].y / TILE_SIZE };
-	iPoint tile2 = { harpoon[1].x / TILE_SIZE, harpoon[1].y / TILE_SIZE };
+	for (uint i = 0; i < SHOTS; i++)
+	{
+		iPoint tile = { harpoon[i].x / TILE_SIZE, harpoon[i].y / TILE_SIZE };
 
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE && harpoon[i].colliderH != nullptr) {
+			harpoon[i].colliderH->pendingToDelete = true;
+			harpoon[i].colliderH = nullptr;
+			harpoon[i].destroyed = true;
+			harpoon[i].increment = false;
+			harpoon[i].DoubleShot.Reset();
+			App->tileset->changeTile(tile);
+			shotsOnScreen--;
+			--activeTextures;
+			break;
+		}
+		else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY && harpoon[i].colliderH != nullptr) {
+			harpoon[i].colliderH->pendingToDelete = true;
+			harpoon[i].colliderH = nullptr;
+			harpoon[i].destroyed = true;
+			harpoon[i].increment = false;
+			harpoon[i].DoubleShot.Reset();
+			App->tileset->changeTile(tile);
+			shotsOnScreen--;
+			--activeTextures;
+			break;
+		}
+		else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY && harpoon[i].colliderH != nullptr) {
+			harpoon[i].colliderH->pendingToDelete = true;
+			harpoon[i].colliderH = nullptr;
+			harpoon[i].destroyed = true;
+			harpoon[i].increment = false;
+			harpoon[i].DoubleShot.Reset();
+			App->tileset->changeTile(tile);
+			shotsOnScreen--;
+			--activeTextures;
+			break;
+		}
+	}
 }
 
 void ModuleDoubleShot::unbreakableCollision()
 {
-	iPoint tile = { harpoon[0].x / TILE_SIZE, harpoon[0].y / TILE_SIZE };
-	iPoint tile2 = { harpoon[1].x / TILE_SIZE, harpoon[1].y / TILE_SIZE };
+	for (uint i = 0; i < SHOTS; i++)
+	{
+		iPoint tile = { harpoon[i].x / TILE_SIZE, harpoon[i].y / TILE_SIZE };
 
-	
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && harpoon[i].colliderH != nullptr) {
+
+			harpoon[i].colliderH->pendingToDelete = true;
+			harpoon[i].colliderH = nullptr;
+			harpoon[i].destroyed = true;
+			harpoon[i].increment = false;
+			harpoon[i].DoubleShot.Reset();
+			shotsOnScreen--;
+			--activeTextures;
+			break;
+			
+		}
+		else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY && harpoon[i].colliderH != nullptr) {
+			harpoon[i].colliderH->pendingToDelete = true;
+			harpoon[i].colliderH = nullptr;
+			harpoon[i].destroyed = true;
+			harpoon[i].increment = false;
+			harpoon[i].DoubleShot.Reset();
+			shotsOnScreen--;
+			--activeTextures;
+			break;
+		}
+		else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY && harpoon[i].colliderH != nullptr) {
+			harpoon[i].colliderH->pendingToDelete = true;
+			harpoon[i].colliderH = nullptr;
+			harpoon[i].destroyed = true;
+			harpoon[i].increment = false;
+			harpoon[i].DoubleShot.Reset();
+			shotsOnScreen--;
+			--activeTextures;
+			break;
+		}
+	}
 }
 
 void ModuleDoubleShot::wallCollision()
-{
-	iPoint tile = { harpoon[0].x / TILE_SIZE, harpoon[0].y / TILE_SIZE };
-	iPoint tile2 = { harpoon[1].x / TILE_SIZE, harpoon[1].y / TILE_SIZE };
-	
-	
+{	
+	for (uint i = 0; i < SHOTS; i++)
+	{
+		
+		iPoint tile = { harpoon[i].x / TILE_SIZE, harpoon[i].y / TILE_SIZE };
+
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::WALL && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::WALL && harpoon[i].colliderH != nullptr) {
+			harpoon[i].colliderH->pendingToDelete = true;
+			harpoon[i].colliderH = nullptr;
+			harpoon[i].destroyed = true;
+			harpoon[i].increment = false;
+			harpoon[i].DoubleShot.Reset();
+			shotsOnScreen--;
+			--activeTextures;
+			break;
+		}
+	}
 }
 
 update_status ModuleDoubleShot::PostUpdate()

@@ -51,6 +51,13 @@ public:
 	inline uint GetParticlesCount() const { return particlesCount; };
 
 
+	void breakableCollision();
+
+	void unbreakableCollision();
+
+	void wallCollision();
+
+
 private:
 	// Particles spritesheet loaded into an SDL Texture
 	SDL_Texture* texture = nullptr;

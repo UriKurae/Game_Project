@@ -243,11 +243,11 @@ update_status ModuleBoosters::PostUpdate()
 	}
 	else if (App->player->currWeapon == 2)
 	{
-		App->render->Blit(texture, 105, 227, &gunUI.GetCurrentFrame(), 1.0f);
+		App->render->Blit(texture, 105, 230, &gunUI.GetCurrentFrame(), 1.0f);
 	}
 	else if (App->player->currWeapon == 1)
 	{
-		App->render->Blit(texture, 105, 230, &hookUI.GetCurrentFrame(), 1.0f);
+		App->render->Blit(texture, 105, 227, &hookUI.GetCurrentFrame(), 1.0f);
 	}
 
 	return update_status::UPDATE_CONTINUE;

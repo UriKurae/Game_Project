@@ -5,6 +5,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleCollisions.h"
+#include "ModuleTileset.h"
 
 #include "SDL/include/SDL_timer.h"
 
@@ -51,7 +52,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		// Always destroy particles that collide
-		if (particles[i] != nullptr && particles[i]->collider == c1)
+		if (particles[i] != nullptr && particles[i]->collider == c1 && c2->type == Collider::Type::BALLOON)
 		{
 			delete particles[i];
 			particles[i] = nullptr;
@@ -76,6 +77,10 @@ update_status ModuleParticles::Update()
 		}
 	}
 
+	breakableCollision();
+	unbreakableCollision();
+	wallCollision();
+	
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -119,4 +124,86 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, C
 	}
 
 	return newParticle;
+}
+
+void ModuleParticles::breakableCollision()
+{
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; i++)
+	{
+		iPoint tile;
+
+		if (particles[i] != nullptr)
+		{ 
+			tile = { particles[i]->position.x / TILE_SIZE,  particles[i]->position.y / TILE_SIZE };
+		}
+
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE && particles[i] != nullptr) {
+			App->tileset->changeTile(tile);
+			delete particles[i];
+			particles[i] = nullptr;
+			break;
+		}
+		else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY && particles[i] != nullptr) {
+			App->tileset->changeTile(tile);
+			delete particles[i];
+			particles[i] = nullptr;
+			break;
+		}
+		else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY && particles[i] != nullptr) {
+			App->tileset->changeTile(tile);
+			delete particles[i];
+			particles[i] = nullptr;
+			break;
+		}
+	}
+}
+
+void ModuleParticles::unbreakableCollision()
+{
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; i++)
+	{
+		iPoint tile;
+
+		if (particles[i] != nullptr)
+		{
+			tile = { particles[i]->position.x / TILE_SIZE,  particles[i]->position.y / TILE_SIZE };
+		}
+
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && particles[i] != nullptr) {
+
+			delete particles[i];
+			particles[i] = nullptr;
+			break;
+
+		}
+		else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY && particles[i] != nullptr) {
+			delete particles[i];
+			particles[i] = nullptr;
+			break;
+		}
+		else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY && particles[i] != nullptr) {
+			delete particles[i];
+			particles[i] = nullptr;
+			break;
+		}
+	}
+}
+
+void ModuleParticles::wallCollision()
+{
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; i++)
+	{
+		iPoint tile;
+
+		if (particles[i] != nullptr)
+		{
+			tile = { particles[i]->position.x / TILE_SIZE,  particles[i]->position.y / TILE_SIZE };
+		}
+
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::WALL && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::WALL && particles[i] != nullptr) {
+			delete particles[i];
+			particles[i] = nullptr;
+			break;
+		}
+	}
 }

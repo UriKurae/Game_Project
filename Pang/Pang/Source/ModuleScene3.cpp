@@ -96,7 +96,7 @@ bool ModuleScene3::Start()
 	++activeColliders; ++totalColliders;
 
 	//Colliders for blocks
-	leftUnDestroyablePlatform = App->collisions->AddCollider({ 73,81,32,6 }, Collider::Type::BREAKABLE_BLOCK);
+	/*leftUnDestroyablePlatform = App->collisions->AddCollider({ 73,81,32,6 }, Collider::Type::BREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 
 	rightUnDestroyablePlatform = App->collisions->AddCollider({ 279,81,32,6 }, Collider::Type::BREAKABLE_BLOCK);
@@ -106,7 +106,7 @@ bool ModuleScene3::Start()
 	++activeColliders; ++totalColliders;
 
 	bottomDestroyablePlatform = App->collisions->AddCollider({ 176,131,32,6 }, Collider::Type::BREAKABLE_BLOCK);
-	++activeColliders; ++totalColliders;
+	++activeColliders; ++totalColliders;*/
 
 	App->player->Enable();
 	App->enemies->Enable();
