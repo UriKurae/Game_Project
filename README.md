@@ -1,3 +1,4 @@
+theme: jekyll-theme-merlot
 
 Presentation:
 
