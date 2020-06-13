@@ -75,10 +75,11 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	downAnim.speed = 0.2f;
 	downAnim.loop = true;
 
-	//move updpwnStairs
-	stairsAnim.PushBack({ 104, 81, 28, 26 });
-	stairsAnim.speed = 0.1;
-	stairsAnim.loop = false;
+	//idle stairs anim
+	idleStairs.PushBack({ 103,34,26,32 });
+
+	//idle top stairs anim
+	idleTopStairs.PushBack({ 104, 81, 28, 26 });
 
 	//left death animation
 	deadAnimLeft.PushBack({ 69, 110 ,41, 30 });
@@ -88,6 +89,9 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 
 	//shot animation
 	shotAnim.PushBack({ 32, 113, 27, 33 });
+
+
+
 
 }
 
@@ -165,7 +169,8 @@ bool ModulePlayer::Start()
 
 void ModulePlayer::upStairs()
 {
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !destroyed)
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !destroyed &&
+		App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE)
 	{
 
 		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
@@ -176,6 +181,7 @@ void ModulePlayer::upStairs()
 				currentAnimation = &upAnim;
 
 			}
+
 			position.y--;
 		}
 
@@ -189,9 +195,10 @@ void ModulePlayer::upStairs()
 			}
 			position.y = 124;
 		}
-
+		collider->SetPos(position.x, position.y);
 		checkIfNeedToFall();
 	}
+
 	checkIfNeedToFall();
 
 }
@@ -199,6 +206,7 @@ void ModulePlayer::upStairs()
 
 void ModulePlayer::downStairs()
 {
+	LOG("%i  %i", position.x, position.y);
 
 	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !destroyed)
 	{
@@ -214,8 +222,8 @@ void ModulePlayer::downStairs()
 			position.y++;
 		}
 
-		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS ||
-			App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
+		if (App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS ||
+			App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
 		{
 			if (currentAnimation != &downAnim)
 			{
@@ -223,34 +231,42 @@ void ModulePlayer::downStairs()
 				currentAnimation = &downAnim;
 			}
 
-			if (position.y < SCREEN_HEIGHT - 77)
-			{
-				position.y++;
-			}
-			else
-			{
-				position.y = SCREEN_HEIGHT - 77;
-			}
+			position.y++;
 		}
+
+		if (App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::WALL)
+		{
+			if (currentAnimation != &idleAnim)
+			{
+				idleAnim.Reset();
+				currentAnimation = &idleAnim;
+			}
+			//position.y = SCREEN_HEIGHT - 77;
+			speed = 2;
+		}
+		collider->SetPos(position.x, position.y);
 
 		checkIfNeedToFall();
 	}
 
 	checkIfNeedToFall();
 
-
 }
 
 void ModulePlayer::checkUnbreakable()
 {
 	LOG("%i  %i", tile.x, tile.y);
-
-	if (App->tileset->getTileLevel(tile.y + 2, tile.x + 3).id == ModuleTileset::TileType::UNBREAKABLE ||
-		App->tileset->getTileLevel(tile.y + 2, tile.x).id == ModuleTileset::TileType::UNBREAKABLE)
+	for (int i = 0; i < 3; ++i)
 	{
-		position.x -= 2;
+		if (App->tileset->getTileLevel(tile.y + i, tile.x + 3).id == ModuleTileset::TileType::UNBREAKABLE)
+		{
+			position.x--;
+		}
+		else if (App->tileset->getTileLevel(tile.y + i, tile.x).id == ModuleTileset::TileType::UNBREAKABLE)
+		{
+			position.x++;
+		}
 	}
-
 }
 
 void ModulePlayer::checkIfNeedToFall()
@@ -258,28 +274,22 @@ void ModulePlayer::checkIfNeedToFall()
 	if (position.y < SCREEN_HEIGHT - 77)
 	{
 		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id != ModuleTileset::TileType::STAIRS &&
-			App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id != ModuleTileset::TileType::TOP_STAIRS)
+			App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id != ModuleTileset::TileType::TOP_STAIRS &&
+			App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id != ModuleTileset::TileType::UNBREAKABLE)
 		{
 			if (currentAnimation != &idleAnim)
 			{
 				idleAnim.Reset();
 				currentAnimation = &idleAnim;
 			}
+
 			speed = 0;
 			position.y++;
+			collider->SetPos(position.x, position.y);
 
-
-			if (App->tileset->getTileLevel(tile.y + 5, tile.x + 1).id == ModuleTileset::TileType::WALL)
+			if (App->tileset->getTileLevel(tile.y + 5, tile.x - 1).id == ModuleTileset::TileType::WALL)
 			{
-				if (position.y < SCREEN_HEIGHT - 77)
-				{
-					position.y++;
-					speed = 2;
-				}
-				else
-				{
-					position.y = SCREEN_HEIGHT - 77;
-				}
+				speed = 2;
 			}
 		}
 	}
@@ -340,29 +350,12 @@ update_status ModulePlayer::Update()
 			timeBonus = time * 100;
 		}
 
-		/*if (timeMusic > 0) {
-			timeMusic--;
-		}*/
-
-		if (App->input->keys[SDL_SCANCODE_LALT] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN && !destroyed) {
-			if (currWeapon == 0) {
-				currWeapon = 1;
-			}
-			else if (currWeapon == 1) {
-				currWeapon = 2;
-			}
-			else if (currWeapon == 2) {
-				currWeapon = 3;
-			}
-			else if (currWeapon == 3) {
-				currWeapon = 0;
-			}
-		}
-
 		//Detect inputs
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !destroyed)
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !destroyed &&
+			App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id != ModuleTileset::TileType::STAIRS)
 		{
 			position.x -= speed;
+			collider->SetPos(position.x, position.y);
 
 			if (currentAnimation != &leftAnim)
 			{
@@ -371,16 +364,20 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !destroyed)
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !destroyed &&
+			App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id != ModuleTileset::TileType::STAIRS &&
+			App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id != ModuleTileset::TileType::EMPTY)
 		{
+
 			position.x += speed;
+			collider->SetPos(position.x, position.y);
 
 			if (currentAnimation != &rightAnim)
 			{
 				rightAnim.Reset();
 				currentAnimation = &rightAnim;
-			}
 
+			}
 		}
 
 		upStairs();
@@ -447,25 +444,35 @@ update_status ModulePlayer::Update()
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT &&
 			App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 		{
-			//idleAnim.Reset();
+			idleAnim.Reset();
 			currentAnimation = &idleAnim;
 			position.x = position.x;
 		}
 		// If no up/down movement detected, set the current animation back to idle
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
-			&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE)
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE &&
+			App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE &&
+			App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_IDLE &&
+			App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE &&
+			App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE)
 		{
 			currentAnimation = &idleAnim;
 		}
 
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+		//Animation if no up/down movement on stairs
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE &&
+			App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE &&
+			App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
 		{
-			collider->SetPos(position.x, position.y);
+			currentAnimation = &idleStairs;
 		}
-		else
+
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT &&
+			App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT &&
+			App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
 		{
-			collider->SetPos(position.x, position.y);
+			currentAnimation = &idleStairs;
 		}
+		
 
 		currentAnimation->Update();
 

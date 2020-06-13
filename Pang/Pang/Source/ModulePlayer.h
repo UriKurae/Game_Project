@@ -57,7 +57,7 @@ public:
 	SDL_Texture* timeTexture = nullptr;
 	SDL_Texture* gameOverTexture = nullptr;
 	SDL_Texture* readyTexture = nullptr;
-	
+
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimation = nullptr;
@@ -66,12 +66,13 @@ public:
 	Animation idleAnim;
 	Animation upAnim;
 	Animation downAnim;
-	Animation stairsAnim;
 	Animation leftAnim;
 	Animation rightAnim;
 	Animation shotAnim;
 	Animation deadAnimLeft;
 	Animation deadAnimRight;
+	Animation idleStairs;
+	Animation idleTopStairs;
 
 	// The player's collider
 	Collider* collider = nullptr;
@@ -128,7 +129,7 @@ public:
 	//Dynamite Booster
 
 	bool dynamite = false;
-	
+
 	//Doubleshot Booster
 	bool doubleshot = false;
 
