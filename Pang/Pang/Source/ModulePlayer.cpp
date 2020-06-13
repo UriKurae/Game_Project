@@ -90,9 +90,6 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	//shot animation
 	shotAnim.PushBack({ 32, 113, 27, 33 });
 
-
-
-
 }
 
 ModulePlayer::~ModulePlayer()
@@ -242,7 +239,7 @@ void ModulePlayer::downStairs()
 				currentAnimation = &idleAnim;
 			}
 			//position.y = SCREEN_HEIGHT - 77;
-			speed = 2;
+			//speed = 2;
 		}
 		collider->SetPos(position.x, position.y);
 
@@ -348,6 +345,25 @@ update_status ModulePlayer::Update()
 
 		if (App->enemies->balloon.balloonsOnScene == 0) {
 			timeBonus = time * 100;
+		}
+
+		if (App->input->keys[SDL_SCANCODE_LALT] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN) {
+			
+			if (currWeapon == 0) {
+				currWeapon = 1;
+			}
+
+			else if (currWeapon == 1) {
+				currWeapon = 2;
+			}
+
+			else if (currWeapon == 2) {
+				currWeapon = 3;
+			}
+
+			else if (currWeapon == 3) {
+				currWeapon = 0;
+			}
 		}
 
 		//Detect inputs
@@ -480,6 +496,7 @@ update_status ModulePlayer::Update()
 
 		if (stopTime > 0) { stopTime--; }
 
+		collider->SetPos(position.x, position.y);
 	}
 
 

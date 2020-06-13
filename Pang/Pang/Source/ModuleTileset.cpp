@@ -143,14 +143,14 @@ void ModuleTileset::changeTile(iPoint tile)
 
 	else if (level == level3)
 	{
-		if (tile.x <= 12) {
+		if (tile.x >= 8 && tile.x <= 13) {
 			levelToTile[tile.y][9].id = TileType::EMPTY;
 			levelToTile[tile.y][10].id = TileType::EMPTY;
 			levelToTile[tile.y][11].id = TileType::EMPTY;
 			levelToTile[tile.y][12].id = TileType::EMPTY;
 			App->scene3->destroyedBlockLeft = true;
 		}
-		if (tile.x >= 22 && tile.x <= 25) {
+		if (tile.x >= 21 && tile.x <= 26) {
 			levelToTile[tile.y][22].id = TileType::EMPTY;
 			levelToTile[tile.y][23].id = TileType::EMPTY;
 			levelToTile[tile.y][24].id = TileType::EMPTY;
@@ -162,7 +162,7 @@ void ModuleTileset::changeTile(iPoint tile)
 				App->scene3->destroyedBlockBottom = true;
 			}
 		}
-		if (tile.x >= 35 && tile.x <= 38) {
+		if (tile.x >= 34 && tile.x <= 39) {
 			levelToTile[tile.y][35].id = TileType::EMPTY;
 			levelToTile[tile.y][36].id = TileType::EMPTY;
 			levelToTile[tile.y][37].id = TileType::EMPTY;
@@ -173,7 +173,7 @@ void ModuleTileset::changeTile(iPoint tile)
 
 	else if (level == level5) {
 
-		if (tile.x == 12) {
+		if (tile.x == 11 || tile.x == 12 || tile.x == 13) {
 			if (tile.y == 9) {
 				levelToTile[7][12].id = TileType::EMPTY;
 				levelToTile[8][12].id = TileType::EMPTY;
@@ -191,7 +191,7 @@ void ModuleTileset::changeTile(iPoint tile)
 			
 		}
 
-		if (tile.x == 24) {
+		if (tile.x == 23 || tile.x == 24 || tile.x == 25) {
 			if (tile.y == 9) {
 				levelToTile[7][24].id = TileType::EMPTY;
 				levelToTile[8][24].id = TileType::EMPTY;
@@ -201,13 +201,12 @@ void ModuleTileset::changeTile(iPoint tile)
 			}
 		}
 
-		if (tile.x == 36) {
+		if (tile.x == 35 || tile.x == 36 || tile.x == 37) {
 			if (tile.y == 9) {
 				levelToTile[7][36].id = TileType::EMPTY;
 				levelToTile[8][36].id = TileType::EMPTY;
 				levelToTile[9][36].id = TileType::EMPTY;
 				App->scene5->destroyedBlockTopRight = true;
-			
 			}
 
 			else if (tile.y == 12) {
@@ -222,7 +221,7 @@ void ModuleTileset::changeTile(iPoint tile)
 	}
 
 	if (level == level6) {
-		if (tile.x >= 23 && tile.x <=24) {
+		if (tile.x >= 22 && tile.x <=25) {
 			levelToTile[tile.y][23].id = TileType::EMPTY;
 			levelToTile[tile.y][24].id = TileType::EMPTY;
 			App->scene6->destroyedBlockCentral = true;

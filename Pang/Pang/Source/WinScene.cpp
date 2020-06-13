@@ -19,6 +19,41 @@
 WinScene::WinScene(bool startEnabled) : Module(startEnabled)
 {
 	name = "WIN SCENE";
+
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 5; j++) {
+			winAnim.PushBack({ 192 * j, 98 * i, 192, 98 });
+		}
+	}
+	winAnim.speed = 0.1f;
+	winAnim.loop = true;
+
+
+	winAnim2.PushBack({ 384, 98, 192, 98 });
+	winAnim2.speed = 0.1f;
+	winAnim2.loop = true;
+
+
+	for (int i = 0; i < 6; i++) {
+		for (int j = 0; j < 6; j++) {
+			winAnim3.PushBack({ j * 384, i * 245, 384, 245 });
+		}
+	}
+	winAnim3.speed = 0.1f;
+	winAnim3.loop = false;
+
+
+
+	winAnim4.PushBack({ 0, 0, 192, 98 });
+	winAnim4.PushBack({ 192, 0, 192, 98 });
+	winAnim4.PushBack({ 0, 98, 192, 98 });
+	winAnim4.PushBack({ 192, 98, 192, 98 });
+	winAnim4.speed = 0.1f;
+	winAnim4.loop = true;
+
+	winAnim5.PushBack({ 384, 0, 192, 98 });
+	winAnim5.speed = 0.1f;
+	winAnim5.loop = true;
 }
 
 WinScene::~WinScene()
@@ -49,45 +84,6 @@ bool WinScene::Start()
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
-
-	if (App->player->scene1 == true) {
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 5; j++) {
-				winAnim.PushBack({ 192 * j, 98 * i, 192, 98 });
-			}
-		}
-		winAnim.speed = 0.1f;
-		winAnim.loop = true;
-	}
-	else if (App->player->scene2 == true) {
-		winAnim2.PushBack({ 384, 98, 192, 98 });
-		winAnim2.speed = 0.1f;
-		winAnim2.loop = true;
-	}
-	else if (App->player->scene3 == true) {
-		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < 6; j++) {
-				winAnim3.PushBack({ j * 384, i * 245, 384, 245 });
-			}
-		}
-		winAnim3.speed = 0.1f;
-		winAnim3.loop = false;
-	}
-
-	else if (App->player->scene4 == true) {
-		winAnim4.PushBack({ 0, 0, 192, 98 });
-		winAnim4.PushBack({ 192, 0, 192, 98 });
-		winAnim4.PushBack({ 0, 98, 192, 98 });
-		winAnim4.PushBack({ 192, 98, 192, 98 });
-		winAnim4.speed = 0.1f;
-		winAnim4.loop = true;
-	}
-
-	else if (App->player->scene5 == true) {
-		winAnim5.PushBack({ 384, 0, 192, 98 });
-		winAnim5.speed = 0.1f;
-		winAnim5.loop = true;
-	}
 	
 	App->player->score += App->player->timeBonus;
 

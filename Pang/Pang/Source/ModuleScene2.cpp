@@ -30,6 +30,20 @@
 ModuleScene2::ModuleScene2(bool startEnabled) : Module(startEnabled)
 {
 	name = "LEVEL 2";
+
+	blockDestroyLeft.PushBack({ 88, 158, 32, 8 });
+	blockDestroyLeft.PushBack({ 122, 158, 32, 8 });
+	blockDestroyLeft.PushBack({ 156, 158, 32, 8 });
+	blockDestroyLeft.PushBack({ 123, 142, 32, 8 });
+	blockDestroyLeft.speed = 0.1f;
+	blockDestroyLeft.loop = false;
+
+	blockDestroyRight.PushBack({ 88, 158, 32, 8 });
+	blockDestroyRight.PushBack({ 122, 158, 32, 8 });
+	blockDestroyRight.PushBack({ 156, 158, 32, 8 });
+	blockDestroyRight.PushBack({ 123, 142, 32, 8 });
+	blockDestroyRight.speed = 0.1f;
+	blockDestroyRight.loop = false;
 }
 
 ModuleScene2::~ModuleScene2()
@@ -51,8 +65,7 @@ bool ModuleScene2::Start()
 	fgTexture = App->textures->Load("Assets/Items&Weapons/BlockSprites.png"); //fg on 2st Level is invisible
 	++activeTextures; ++totalTextures;
 
-	blockDestroy.PushBack({48, 158, 32, 8});
-	blockDestroy.PushBack({88, 158, 32, 8});
+
 
 	block.PushBack({8, 158, 32, 8});
 
@@ -139,6 +152,9 @@ update_status ModuleScene2::Update()
 		App->audio->PlayMusic("Assets/Sound/Soundtracks/OutOfTime!.ogg", 0.0f);
 	}
 
+	blockDestroyLeft.Update();
+	blockDestroyRight.Update();
+
 	return update_status::UPDATE_CONTINUE; 
 }
 
@@ -148,11 +164,19 @@ update_status ModuleScene2::PostUpdate()
 	if (destroyedBlockLeft == false) 
 	{
 		App->render->Blit(fgTexture, 160, 80, &(block.GetCurrentFrame()), 1.0f);
+		blockDestroyLeft.Reset();
+	}
+	else {
+		App->render->Blit(fgTexture, 160, 80, &(blockDestroyLeft.GetCurrentFrame()), 1.0f);
 	}
 	
 	if (destroyedBlockRight == false)
 	{
 		App->render->Blit(fgTexture, 192, 80, &(block.GetCurrentFrame()), 1.0f);
+		blockDestroyRight.Reset();
+	}
+	else {
+		App->render->Blit(fgTexture, 192, 80, &(blockDestroyRight.GetCurrentFrame()), 1.0f);
 	}
 	
 	if (App->player->lifes == 0) {

@@ -27,10 +27,21 @@
 ModuleScene6::ModuleScene6(bool startEnabled) : Module(startEnabled)
 {
 	name = "LEVEL 6";
+
+	block.PushBack({ 8, 220, 16, 8 });
+	unBlock.PushBack({ 26, 220, 16, 8 });
+
+	blockDestroy.PushBack({44, 220, 16, 8});
+	blockDestroy.PushBack({62, 220, 16, 8});
+	blockDestroy.PushBack({80, 220, 16, 8});
+	blockDestroy.PushBack({98, 220, 16, 8});
+	blockDestroy.speed = 0.1f;
+	blockDestroy.loop = false;
 }
 
 ModuleScene6::~ModuleScene6()
 {
+
 }
 
 bool ModuleScene6::Start()
@@ -41,10 +52,6 @@ bool ModuleScene6::Start()
 
 	fgTexture = App->textures->Load("Assets/Items&Weapons/BlockSprites.png"); //fg on 2st Level is invisible
 	++activeTextures; ++totalTextures;
-
-	block.PushBack({ 8, 220, 16, 8 });
-	unBlock.PushBack({ 26, 220, 16, 8 });
-	
 
 	countDownToFade = 300;
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Keirin(Night).png");
@@ -89,6 +96,8 @@ bool ModuleScene6::Start()
 	App->player->score = 0;
 
 	App->enemies->balloon.balloonsOnScene = 2;
+
+	destroyedBlockCentral = false;
 
 	App->player->scene1 = false;
 	App->player->scene2 = false;
@@ -136,6 +145,8 @@ update_status ModuleScene6::Update()
 		App->audio->PlayMusic("Assets/Sound/Soundtracks/OutOfTime!.ogg", 0.0f);
 	}
 
+	blockDestroy.Update();
+
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -149,6 +160,10 @@ update_status ModuleScene6::PostUpdate()
 	if (destroyedBlockCentral == false)
 	{
 		App->render->Blit(fgTexture, 184, 64, &(block.GetCurrentFrame()), 1.0f);
+		blockDestroy.Reset();
+	}
+	else {
+		App->render->Blit(fgTexture, 184, 64, &(blockDestroy.GetCurrentFrame()), 1.0f);
 	}
 
 	if (App->player->lifes == 0) {

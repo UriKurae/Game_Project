@@ -43,7 +43,8 @@ public:
 
 		Animation block;
 
-		Animation blockDestroy;
+		Animation blockDestroyLeft;
+		Animation blockDestroyRight;
 
 		Animation* currentAnim = nullptr;
 

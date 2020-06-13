@@ -19,16 +19,16 @@ public:
 
 	int shotsOnScreen = 0;
 
-	float speed = 2.0f;
+	int speed = 2;
 
 	//texture for all the harpoons sprites
 	SDL_Texture* texture = nullptr;
 
 	struct DoubleShot
 	{
-		float x = 0;
-		float y = 0;
-		float h = 34;
+		int x = 0;
+		int y = 0;
+		int h = 34;
 		Collider* colliderH = nullptr;
 		Animation DoubleShot;
 		bool destroyed = true;
@@ -49,6 +49,12 @@ public:
 	bool Start();
 
 	update_status Update() override;
+
+	void breakableCollision();
+
+	void unbreakableCollision();
+
+	void wallCollision();
 
 	update_status PostUpdate() override;
 

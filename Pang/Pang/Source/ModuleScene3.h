@@ -47,7 +47,10 @@ public:
 
 	Animation redBlock;
 
-	Animation blockDestroy;
+	Animation blockDestroyBottom;
+	Animation blockDestroyTop;
+	Animation blockDestroyRight;
+	Animation blockDestroyLeft;
 
 	Animation* currentAnim = nullptr;
 
