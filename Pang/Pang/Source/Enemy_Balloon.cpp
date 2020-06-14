@@ -282,7 +282,7 @@ void Enemy_Balloon::bigBalloonBounce()
 		for (int i = 0; i < 4; ++i)
 		{
 			//FLOOR COLLISION
-			if (App->tileset->getTileLevel(tile.y + 3, tile.x + i).id == ModuleTileset::TileType::WALL && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY)
+			if (App->tileset->getTileLevel(tile.y + 3, tile.x + i).id == ModuleTileset::TileType::WALL && (App->tileset->getTileLevel(tile.y + 2, tile.x + i).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::TOP_STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE))
 			{
 				if (speedY < 0)
 				{
@@ -417,6 +417,108 @@ void Enemy_Balloon::bigBalloonBounce()
 				speedX = speedX;
 			}
 		}
+
+
+		//--------------------------------------------------------------------------------------------------//
+
+
+		//TOP FACE UNBREAKABLE
+		if ((App->tileset->getTileLevel(tile.y + 3, tile.x + 2).id == ModuleTileset::TileType::UNBREAKABLE ||
+			App->tileset->getTileLevel(tile.y + 3, tile.x + 3).id == ModuleTileset::TileType::UNBREAKABLE ||
+			App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE) &&
+			(App->tileset->getTileLevel(tile.y + 2, tile.x + 2).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 2, tile.x + 2).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 2, tile.x + 2).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedY < 0)
+			{
+				speedY = 1.8f;
+			}
+		}
+
+		//BOTTOM FACE UNBREAKABLE
+		if ((App->tileset->getTileLevel(tile.y, tile.x + 2).id == ModuleTileset::TileType::UNBREAKABLE ||
+			App->tileset->getTileLevel(tile.y, tile.x + 3).id == ModuleTileset::TileType::UNBREAKABLE ||
+			App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE) &&
+			(App->tileset->getTileLevel(tile.y + 1, tile.x + 2).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 2, tile.x + 2).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 2, tile.x + 2).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedY > 0)
+			{
+				speedY = -speedY;
+			}
+		}
+
+		//LEFT FACE UNBREAKABLE
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x + 4).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y + 1, tile.x + 3).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 1, tile.x + 3).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 1, tile.x + 3).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedX > 0)
+			{
+				speedX = -speedX;
+			}
+			else
+			{
+				speedX = speedX;
+			}
+		}
+
+		//RIGHT FACE UNBREAKABLE
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedX < 0)
+			{
+				speedX = -speedX;
+			}
+		}
+
+		//TOP LEFT CORNER UNBREAKABLE
+		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 4).id == ModuleTileset::TileType::UNBREAKABLE && //App->tileset->getTileLevel(tile.y + 3, tile.x + 3).id == ModuleTileset::TileType::EMPTY)
+			App->tileset->getTileLevel(tile.y + 3, tile.x + 3).id == ModuleTileset::TileType::EMPTY &&
+			App->tileset->getTileLevel(tile.y + 2, tile.x + 4).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX > 0)
+			{
+				speedX = -speedX;
+			}
+			else {
+				speedX = speedX;
+			}
+		}
+
+		//TOP RIGHT CORNER UNBREAKABLE
+		if (speedX < 0)
+		{
+			if (App->tileset->getTileLevel(tile.y + 3, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && //App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+				App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::EMPTY &&
+				App->tileset->getTileLevel(tile.y + 2, tile.x).id == ModuleTileset::TileType::EMPTY)
+			{
+				speedX = -speedX;
+			}
+			else {
+				speedX = speedX;
+			}
+		}
+
+		//BOTTOM LEFT CORNER UNBREAKABLE
+		if (App->tileset->getTileLevel(tile.y, tile.x + 4).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 3).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX > 0)
+			{
+				speedX = -speedX;
+			}
+			else {
+				speedX = speedX;
+			}
+		}
+
+		//BOTTOM RIGHT CORNER UNBREAKABLE
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX < 0)
+			{
+				speedX = -speedX;
+			}
+			else {
+				speedX = speedX;
+			}
+		}
 	}
 }
 
@@ -428,7 +530,7 @@ void Enemy_Balloon::bigBalloonBounce2()
 		for (int i = 0; i < 4; ++i)
 		{
 			//FLOOR COLLISION
-			if (App->tileset->getTileLevel(tile.y + 3, tile.x + i).id == ModuleTileset::TileType::WALL && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY)
+			if (App->tileset->getTileLevel(tile.y + 3, tile.x + i).id == ModuleTileset::TileType::WALL && (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::TOP_STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE))
 			{
 				if (speedY2 < 0)
 				{
@@ -561,11 +663,106 @@ void Enemy_Balloon::bigBalloonBounce2()
 				speedX2 = speedX2;
 			}
 		}
+
+		//--------------------------------------------------------------------------------------------------//
+
+		//TOP FACE UNBREAKABLE
+		if ((App->tileset->getTileLevel(tile.y + 3, tile.x + 2).id == ModuleTileset::TileType::UNBREAKABLE ||
+			App->tileset->getTileLevel(tile.y + 3, tile.x + 3).id == ModuleTileset::TileType::UNBREAKABLE ||
+			App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE) &&
+			(App->tileset->getTileLevel(tile.y + 2, tile.x + 2).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 2, tile.x + 2).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 2, tile.x + 2).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedY2 < 0)
+			{
+				speedY2 = 1.8f;
+			}
+		}
+
+		//BOTTOM FACE
+		if ((App->tileset->getTileLevel(tile.y, tile.x + 2).id == ModuleTileset::TileType::UNBREAKABLE ||
+			App->tileset->getTileLevel(tile.y, tile.x + 3).id == ModuleTileset::TileType::UNBREAKABLE ||
+			App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE) &&
+			(App->tileset->getTileLevel(tile.y + 1, tile.x + 2).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 1, tile.x + 2).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 1, tile.x + 2).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedY2 > 0)
+			{
+				speedY2 = -speedY2;
+			}
+		}
+
+		//LEFT FACE
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x + 4).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y + 1, tile.x + 3).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 1, tile.x + 3).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 1, tile.x + 3).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedX2 > 0)
+			{
+				speedX2 = -speedX2;
+			}
+			else
+			{
+				speedX2 = speedX2;
+			}
+		}
+
+		//RIGHT FACE
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedX2 < 0)
+			{
+				speedX2 = -speedX2;
+			}
+		}
+
+		//TOP LEFT CORNER
+		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 4).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y + 3, tile.x + 3).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX2 > 0)
+			{
+				speedX2 = -speedX2;
+			}
+			else {
+				speedX2 = speedX2;
+			}
+		}
+
+		//TOP RIGHT CORNER
+		if (speedX2 < 0)
+		{
+			if (App->tileset->getTileLevel(tile.y + 3, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && //App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+				App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::EMPTY &&
+				App->tileset->getTileLevel(tile.y + 2, tile.x).id == ModuleTileset::TileType::EMPTY)
+			{
+				speedX2 = -speedX2;
+			}
+			else {
+				speedX2 = speedX2;
+			}
+		}
+
+		//BOTTOM LEFT CORNER
+		if (App->tileset->getTileLevel(tile.y, tile.x + 4).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 3).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX2 > 0)
+			{
+				speedX2 = -speedX2;
+			}
+			else {
+				speedX2 = speedX2;
+			}
+		}
+
+		//BOTTOM RIGHT CORNER
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX2 < 0)
+			{
+				speedX2 = -speedX2;
+			}
+			else {
+				speedX2 = speedX2;
+			}
+		}
 	}
 }
-
-
-
 
 
 void Enemy_Balloon::smallBalloonBounce()
@@ -576,7 +773,7 @@ void Enemy_Balloon::smallBalloonBounce()
 		for (int i = 1; i < 2; ++i)
 		{
 			//FLOOR COLLISION
-			if (App->tileset->getTileLevel(tile.y + 2, tile.x + i).id == ModuleTileset::TileType::WALL && App->tileset->getTileLevel(tile.y + 1, tile.x + i).id == ModuleTileset::TileType::EMPTY)
+			if (App->tileset->getTileLevel(tile.y + 2, tile.x + i).id == ModuleTileset::TileType::WALL && (App->tileset->getTileLevel(tile.y + 1, tile.x + i).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::TOP_STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE))
 			{
 				speedY = 3.5f;
 				break;
@@ -610,7 +807,7 @@ void Enemy_Balloon::smallBalloonBounce()
 		}
 
 		//TOP FACE
-		if (App->tileset->getTileLevel(tile.y + 2, tile.x + 1).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y + 0, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		if (App->tileset->getTileLevel(tile.y + 2, tile.x + 1).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
 		{
 			if (speedY < 0)
 			{
@@ -697,6 +894,98 @@ void Enemy_Balloon::smallBalloonBounce()
 				speedX = speedX;
 			}
 		}
+
+		//----------------------------------------------------------------------------------------------------------------//
+
+
+		//TOP FACE
+		if (App->tileset->getTileLevel(tile.y + 2, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedY < 0)
+			{
+				speedY = 1.8f;
+			}
+		}
+
+		//BOTTOM FACE
+		if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedY > 0 && speedY < 2) {
+				speedY = -(speedY + 1);
+			}
+			else if (speedY > 0) {
+				speedY = -speedY;
+			}
+		}
+
+		//LEFT FACE
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x + 2).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedX > 0) {
+				speedX = -speedX;
+			}
+		}
+
+		//RIGHT FACE
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedX < 0) {
+				speedX = -speedX;
+			}
+		}
+
+		//TOP LEFT
+		if (App->tileset->getTileLevel(tile.y + 2, tile.x + 2).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y + 2, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX > 0)
+			{
+				speedX = -speedX;
+			}
+			else
+			{
+				speedX = speedX;
+			}
+		}
+
+		//TOP RIGHT
+		if (App->tileset->getTileLevel(tile.y + 2, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y + 2, tile.x + 1).id == ModuleTileset::TileType::EMPTY
+			&& App->tileset->getTileLevel(tile.y + 1, tile.x + 2).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX < 0)
+			{
+				speedX = -speedX;
+			}
+			else
+			{
+				speedX = speedX;
+			}
+		}
+
+		//BOTTOM LEFT
+		if (App->tileset->getTileLevel(tile.y, tile.x + 2).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX > 0)
+			{
+				speedX = -speedX;
+			}
+			else
+			{
+				speedX = speedX;
+			}
+		}
+
+		//BOTTOM RIGHT
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX < 0)
+			{
+				speedX = -speedX;
+			}
+			else
+			{
+				speedX = speedX;
+			}
+		}
 	}
 }
 
@@ -709,7 +998,7 @@ void Enemy_Balloon::smallBalloonBounce2()
 		for (int i = 1; i < 2; ++i)
 		{
 			//FLOOR COLLISION
-			if (App->tileset->getTileLevel(tile.y + 2, tile.x + i).id == ModuleTileset::TileType::WALL && App->tileset->getTileLevel(tile.y + 1, tile.x + i).id == ModuleTileset::TileType::EMPTY)
+			if (App->tileset->getTileLevel(tile.y + 2, tile.x + i).id == ModuleTileset::TileType::WALL && (App->tileset->getTileLevel(tile.y + 1, tile.x + i).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::TOP_STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE))
 			{
 				speedY2 = 3.5f;
 				break;
@@ -830,6 +1119,101 @@ void Enemy_Balloon::smallBalloonBounce2()
 				speedX2 = speedX2;
 			}
 		}
+
+
+		//--------------------------------------------------------------------------------------------------------------//
+
+
+		//TOP FACE
+		if (App->tileset->getTileLevel(tile.y + 2, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedY2 < 0)
+			{
+				speedY2 = 1.8f;
+			}
+		}
+
+		//BOTTOM FACE
+		if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedY2 > 0 && speedY2 < 2) {
+				speedY2 = -(speedY2 + 1);
+			}
+			else if (speedY2 > 0) {
+				speedY2 = -speedY2;
+			}
+		}
+
+		//LEFT FACE
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x + 2).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedX2 > 0)
+			{
+				speedX2 = -speedX2;
+			}
+		}
+
+		//RIGHT FACE
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedX2 < 0)
+			{
+				speedX2 = -speedX2;
+			}
+		}
+
+		//TOP LEFT
+		if (App->tileset->getTileLevel(tile.y + 2, tile.x + 2).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y + 2, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX2 > 0)
+			{
+				speedX2 = -speedX2;
+			}
+			else
+			{
+				speedX2 = speedX2;
+			}
+		}
+
+		//TOP RIGHT
+		if (App->tileset->getTileLevel(tile.y + 2, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y + 2, tile.x + 1).id == ModuleTileset::TileType::EMPTY
+			&& App->tileset->getTileLevel(tile.y + 1, tile.x + 2).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX2 < 0)
+			{
+				speedX2 = -speedX2;
+			}
+			else
+			{
+				speedX2 = speedX2;
+			}
+		}
+
+		//BOTTOM LEFT
+		if (App->tileset->getTileLevel(tile.y, tile.x + 2).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX2 > 0)
+			{
+				speedX2 = -speedX2;
+			}
+			else
+			{
+				speedX2 = speedX2;
+			}
+		}
+
+		//BOTTOM RIGHT
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX2 < 0)
+			{
+				speedX2 = -speedX2;
+			}
+			else
+			{
+				speedX2 = speedX2;
+			}
+		}
 	}
 }
 
@@ -844,7 +1228,7 @@ void Enemy_Balloon::verySmallBalloonBounce()
 		iPoint tile = { position.x / TILE_SIZE, position.y / TILE_SIZE };
 
 		//FLOOR COLLISION
-		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::WALL && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY)
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::WALL && (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::TOP_STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE))
 		{
 			if (speedY < 0) {
 				speedY = 2.4f;
@@ -962,6 +1346,108 @@ void Enemy_Balloon::verySmallBalloonBounce()
 				speedX = speedX;
 			}
 		}
+
+
+		//------------------------------------------------------------------------------------------------------------------------//
+
+
+		//TOP FACE
+
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedY < 0)
+			{
+				speedY = 1.8f;
+			}
+		}
+
+		//BOTTOM FACE
+
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedY > 0)
+			{
+				speedY = -speedY;
+			}
+		}
+
+		//LEFT FACE
+
+		if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedX > 0)
+			{
+				speedX = -speedX;
+			}
+		}
+
+		//RIGHT FACE
+
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedX < 0)
+			{
+				speedX = -speedX;
+			}
+		}
+
+		//TOP LEFT CORNER
+
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE &&
+			App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::EMPTY &&
+			App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX > 0)
+			{
+				speedX = -speedX;
+			}
+			else if (speedX < 0)
+			{
+				speedX = speedX;
+			}
+		}
+
+		//TOP RIGHT CORNER
+
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX < 0)
+			{
+				speedX = -speedX;
+			}
+			else if (speedX > 0)
+			{
+				speedX = speedX;
+			}
+		}
+
+		//BOTTOM LEFT CORNER
+
+		if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX > 0)
+			{
+				speedX = -speedX;
+			}
+			else if (speedX < 0)
+			{
+				speedX = speedX;
+			}
+		}
+
+		//BOTTOM RIGHT CORNER
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX < 0)
+			{
+				speedX = -speedX;
+			}
+			else if (speedX > 0)
+			{
+				speedX = speedX;
+			}
+		}
+
 	}
 }
 
@@ -974,7 +1460,7 @@ void Enemy_Balloon::verySmallBalloonBounce2()
 		iPoint tile = { position.x / TILE_SIZE, position.y / TILE_SIZE };
 
 		//FLOOR COLLISION
-		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::WALL && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY)
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::WALL && (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::TOP_STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE))
 		{
 			if (speedY2 < 0) {
 				speedY2 = 2.4f;
@@ -1082,6 +1568,108 @@ void Enemy_Balloon::verySmallBalloonBounce2()
 
 		//BOTTOM RIGHT CORNER
 		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX2 < 0)
+			{
+				speedX2 = -speedX2;
+			}
+			else if (speedX2 > 0)
+			{
+				speedX2 = speedX2;
+			}
+		}
+
+
+		//--------------------------------------------------------------------------------------------------------------------//
+
+
+
+		//TOP FACE
+
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedY2 < 0)
+			{
+				speedY2 = 1.8f;
+			}
+		}
+
+		//BOTTOM FACE
+
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedY2 > 0)
+			{
+				speedY2 = -speedY2;
+			}
+		}
+
+		//LEFT FACE
+
+		if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedX2 > 0)
+			{
+				speedX2 = -speedX2;
+			}
+		}
+
+		//RIGHT FACE
+
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS))
+		{
+			if (speedX2 < 0)
+			{
+				speedX2 = -speedX2;
+			}
+		}
+
+		//TOP LEFT CORNER
+
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE &&
+			App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::EMPTY &&
+			App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX2 > 0)
+			{
+				speedX2 = -speedX2;
+			}
+			else if (speedX < 0)
+			{
+				speedX2 = speedX2;
+			}
+		}
+
+		//TOP RIGHT CORNER
+
+		if (App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX2 < 0)
+			{
+				speedX2 = -speedX2;
+			}
+			else if (speedX2 > 0)
+			{
+				speedX2 = speedX2;
+			}
+		}
+
+		//BOTTOM LEFT CORNER
+
+		if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y + 1, tile.x).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX2 > 0)
+			{
+				speedX2 = -speedX2;
+			}
+			else if (speedX2 < 0)
+			{
+				speedX2 = speedX2;
+			}
+		}
+
+		//BOTTOM RIGHT CORNER
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y + 1, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
 		{
 			if (speedX2 < 0)
 			{
@@ -1280,6 +1868,134 @@ void Enemy_Balloon::balloonBounce()
 	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
 	{
 
+	}
+
+
+	//---------------------------------------------------------------------------------------------//
+
+
+	//top face
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedY < 0)
+		{
+			for (int i = 0; i < 6; ++i)
+			{
+				if (App->tileset->getTileLevel(tile.y + 5, tile.x + i).id == ModuleTileset::TileType::UNBREAKABLE)
+				{
+					speedY = 1.8f;
+					break;
+				}
+			}
+		}
+	}
+
+	//bottom face
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedY > 0)
+		{
+			for (int i = 0; i < 6; ++i)
+			{
+				if (App->tileset->getTileLevel(tile.y, tile.x + i).id == ModuleTileset::TileType::UNBREAKABLE)
+				{
+					speedY = -speedY;
+					break;
+				}
+			}
+		}
+	}
+
+	//left face
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX > 0)
+		{
+			for (int i = 1; i < 5; ++i)
+			{
+				if (App->tileset->getTileLevel(tile.y + i, tile.x + 6).id == ModuleTileset::TileType::UNBREAKABLE)
+				{
+					speedX = -speedX;
+					break;
+				}
+			}
+		}
+	}
+
+	//right face
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX < 0)
+		{
+			for (int i = 1; i < 5; ++i)
+			{
+				if (App->tileset->getTileLevel(tile.y + i, tile.x).id == ModuleTileset::TileType::UNBREAKABLE)
+				{
+					speedX = -speedX;
+					break;
+				}
+			}
+		}
+	}
+
+	//-------------------CORNERS-------------------
+
+	//BLOCK top-left corner
+
+	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX > 0)
+		{
+			if (App->tileset->getTileLevel(tile.y + 5, tile.x + 6).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y + 5, tile.x + 5).id == ModuleTileset::TileType::EMPTY)
+			{
+				speedX = -speedX;
+			}
+		}
+	}
+
+	//BLOCK top-right corner
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (App->tileset->getTileLevel(tile.y + 5, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y + 4, tile.x).id == ModuleTileset::TileType::EMPTY && App->tileset->getTileLevel(tile.y + 5, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX < 0)
+			{
+				speedX = -speedX;
+			}
+		}
+	}
+
+
+	//BLOCK bottom-left corner
+	//---------------------------------------------------------------REVISAR---------------------------------------------------------------
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX > 0)
+		{
+			if (App->tileset->getTileLevel(tile.y, tile.x + 6).id == ModuleTileset::TileType::UNBREAKABLE &&
+				App->tileset->getTileLevel(tile.y, tile.x + 5).id == ModuleTileset::TileType::EMPTY)
+			{
+				speedX = -speedX;
+			}
+		}
+	}
+
+	//BLOCK bottom-right collision
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX < 0)
+		{
+			if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE &&
+				App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+			{
+				speedX = -speedX;
+			}
+		}
 	}
 }
 
