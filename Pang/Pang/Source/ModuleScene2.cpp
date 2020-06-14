@@ -65,8 +65,6 @@ bool ModuleScene2::Start()
 	fgTexture = App->textures->Load("Assets/Items&Weapons/BlockSprites.png"); //fg on 2st Level is invisible
 	++activeTextures; ++totalTextures;
 
-
-
 	block.PushBack({8, 158, 32, 8});
 
 	bgTexture = App->textures->Load("Assets/Backgrounds/Mt.Fuji(Sunset).png");

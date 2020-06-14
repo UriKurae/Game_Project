@@ -601,7 +601,7 @@ update_status ModulePlayer::PostUpdate()
 	if (inmunityTime == 181)
 	{
 		App->boosters->inmunityAnim = &App->boosters->shieldInmunity;
-		App->render->Blit(App->boosters->texture, position.x - 5, position.y - 7, &(App->boosters->inmunityAnim->GetCurrentFrame()), 1.0f);
+		App->render->Blit(App->boosters->texture, position.x - 2, position.y - 7, &(App->boosters->inmunityAnim->GetCurrentFrame()), 1.0f);
 	}
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
@@ -786,21 +786,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		c1->pendingToDelete = true;
 		c2->pendingToDelete = true;
 		lifes--;
-
-		if (App->player->scene1) {
-			App->scene->leftWall->pendingToDelete = true;
-			App->scene->rightWall->pendingToDelete = true;
-			App->scene->upperWall->pendingToDelete = true;
-			App->scene->lowerWall->pendingToDelete = true;
-		}
-		else if (App->player->scene2) {
-			App->scene2->leftWall->pendingToDelete = true;
-			App->scene2->rightWall->pendingToDelete = true;
-			App->scene2->upperWall->pendingToDelete = true;
-			App->scene2->lowerWall->pendingToDelete = true;
-			App->scene2->leftPlatform->pendingToDelete = true;
-			App->scene2->rightPlatform->pendingToDelete = true;
-		}
 	}
 
 	//if (c2->type == Collider::Type::BALLOON && godMode == false && shield == true)

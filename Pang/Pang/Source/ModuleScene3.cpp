@@ -43,21 +43,8 @@ ModuleScene3::ModuleScene3(bool startEnabled) : Module(startEnabled)
 	blockDestroyTop.speed = 0.1f;
 	blockDestroyTop.loop = false;
 
-	blockDestroyLeft.PushBack({ 76, 172, 32, 8 });
-	blockDestroyLeft.PushBack({ 110, 172, 32, 8 });
-	blockDestroyLeft.PushBack({ 144, 172, 32, 8 });
-	blockDestroyLeft.PushBack({ 115, 139, 32, 8 });
-	blockDestroyLeft.speed = 0.1f;
-	blockDestroyLeft.loop = false;
-
-	blockDestroyRight.PushBack({ 76, 172, 32, 8 });
-	blockDestroyRight.PushBack({ 110, 172, 32, 8 });
-	blockDestroyRight.PushBack({ 144, 172, 32, 8 });
-	blockDestroyRight.PushBack({ 115, 139, 32, 8 });
-	blockDestroyRight.speed = 0.1f;
-	blockDestroyRight.loop = false;
-
 	redBlock.PushBack({ 8, 172, 32, 8 });
+	redUnBlock.PushBack({ 42, 172, 32, 8 });
 }
 
 ModuleScene3::~ModuleScene3()
@@ -148,10 +135,8 @@ update_status ModuleScene3::Update()
 		App->audio->PlayMusic("Assets/Sound/Soundtracks/OutOfTime!.ogg", 0.0f);
 	}
 
-	blockDestroyLeft.Update();
 	blockDestroyBottom.Update();
 	blockDestroyTop.Update();
-	blockDestroyRight.Update();
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -163,38 +148,26 @@ update_status ModuleScene3::PostUpdate()
 	App->render->Blit(bgTexture, 0, 0, NULL);
 
 	//Print the blocks on the screen, the ones without if are like this because they're not supposed to break and stay always.
-	if (destroyedBlockLeft == false) {
-		App->render->Blit(fgTexture, 73, 81, &(redBlock.GetCurrentFrame()), 1.0f);
-		blockDestroyLeft.Reset();
-	}
-	else {
-		App->render->Blit(fgTexture, 73, 81, &(blockDestroyLeft.GetCurrentFrame()), 1.0f);
-	}
-	
-	if (destroyedBlockRight == false) {
-		App->render->Blit(fgTexture, 279, 81, &(redBlock.GetCurrentFrame()), 1.0f);
-		blockDestroyRight.Reset();
-	}
-	else {
-		App->render->Blit(fgTexture, 279, 81, &(blockDestroyRight.GetCurrentFrame()), 1.0f);
-	}
-	
+	App->render->Blit(fgTexture, 72, 80, &(redUnBlock.GetCurrentFrame()), 1.0f);
+	App->render->Blit(fgTexture, 280, 80, &(redUnBlock.GetCurrentFrame()), 1.0f);
+
+
 	if (destroyedBlockTop == false)
 	{
-		App->render->Blit(fgTexture, 175, 81, &(redBlock.GetCurrentFrame()), 1.0f);
+		App->render->Blit(fgTexture, 176, 80, &(redBlock.GetCurrentFrame()), 1.0f);
 		blockDestroyTop.Reset();
 	}
 	else {
-		App->render->Blit(fgTexture, 175, 81, &(blockDestroyTop.GetCurrentFrame()), 1.0f);
+		App->render->Blit(fgTexture, 176, 80, &(blockDestroyTop.GetCurrentFrame()), 1.0f);
 	}
 
 	if (destroyedBlockBottom == false)
 	{
-		App->render->Blit(fgTexture, 176, 131, &(redBlock.GetCurrentFrame()), 1.0f);
+		App->render->Blit(fgTexture, 176, 128, &(redBlock.GetCurrentFrame()), 1.0f);
 		blockDestroyBottom.Reset();
 	}
 	else {
-		App->render->Blit(fgTexture, 176, 131, &(blockDestroyBottom.GetCurrentFrame()), 1.0f);
+		App->render->Blit(fgTexture, 176, 128, &(blockDestroyBottom.GetCurrentFrame()), 1.0f);
 	}
 
 

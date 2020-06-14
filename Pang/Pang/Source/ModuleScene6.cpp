@@ -152,16 +152,16 @@ update_status ModuleScene6::PostUpdate()
 {
 	App->render->Blit(bgTexture, 0, 0, NULL);
 	
-	App->render->Blit(fgTexture, 79, 64, &(unBlock.GetCurrentFrame()), 1.0f);
-	App->render->Blit(fgTexture, 296, 64, &(unBlock.GetCurrentFrame()), 1.0f);
+	App->render->Blit(fgTexture, 79, 63, &(unBlock.GetCurrentFrame()), 1.0f);
+	App->render->Blit(fgTexture, 295, 63, &(unBlock.GetCurrentFrame()), 1.0f);
 
 	if (destroyedBlockCentral == false)
 	{
-		App->render->Blit(fgTexture, 184, 64, &(block.GetCurrentFrame()), 1.0f);
+		App->render->Blit(fgTexture, 183, 63, &(block.GetCurrentFrame()), 1.0f);
 		blockDestroy.Reset();
 	}
 	else {
-		App->render->Blit(fgTexture, 184, 64, &(blockDestroy.GetCurrentFrame()), 1.0f);
+		App->render->Blit(fgTexture, 183, 63, &(blockDestroy.GetCurrentFrame()), 1.0f);
 	}
 
 	if (App->player->lifes == 0) {

@@ -190,8 +190,8 @@ void Enemy_Balloon::Update()
 
 		if (App->player->dynamite == true)
 		{
-			App->enemies->destroyDynamiteBalloons();
 			dynamiteDestroy();
+			App->enemies->destroyDynamiteBalloons();
 		}
 
 		if (App->player->destroyed)
@@ -237,7 +237,7 @@ void Enemy_Balloon::dynamiteDestroy()
 			App->player->score += 100;
 			App->player->cont++;
 			if (collider != nullptr) { collider->pendingToDelete = true; }
-
+			hasGeneratedDynamite = true;
 			App->enemies->balloon.balloonsOnScene--;
 		}
 
@@ -250,7 +250,7 @@ void Enemy_Balloon::dynamiteDestroy()
 			App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x + 16, position.y);
 			App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, position.x, position.y);
 			if (collider != nullptr) { collider->pendingToDelete = true; }
-
+			hasGeneratedDynamite = true;
 			App->enemies->balloon.balloonsOnScene--;
 		}
 
@@ -264,27 +264,12 @@ void Enemy_Balloon::dynamiteDestroy()
 			App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x + 8, position.y);
 			App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON2, position.x, position.y);
 			if (collider != nullptr) { collider->pendingToDelete = true; }
-
+			hasGeneratedDynamite = true;
 			App->enemies->balloon.balloonsOnScene--;
 
 		}
-		else if (tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON || tipoBalloon == ENEMY_TYPE::VERYSMALLBALLOON2)
-		{
-			LOG("Not exploding, very small ballon");
-		}
 
-		destroyBalloonsCount++;
-
-		if (destroyBalloonsCount % 60 == 0 && destroyBalloonsTime > 0 && App->enemies->balloon.balloonsOnScene > 0 && App->player->destroyed == false) {
-			destroyBalloonsTime--;
-		}
-
-		if (destroyBalloonsTime == 0)
-		{
-			App->player->dynamite = false;
-			destroyBalloonsCount = 0;
-			destroyBalloonsTime = 3;
-		}
+		App->player->dynamiteBoosterDelay = 10;
 	}
 }
 

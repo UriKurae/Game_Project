@@ -155,7 +155,7 @@ update_status SceneIntro::Update()
 	{
 		if (stage1 == true) {
 			App->fade->FadeToBlack(this, (Module*)App->scene, 30);
-			}
+		}
 		else if (stage2 == true) {
 			App->fade->FadeToBlack(this, (Module*)App->scene4, 30);
 			

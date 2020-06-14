@@ -143,13 +143,6 @@ void ModuleTileset::changeTile(iPoint tile)
 
 	else if (level == level3)
 	{
-		if (tile.x >= 8 && tile.x <= 13) {
-			levelToTile[tile.y][9].id = TileType::EMPTY;
-			levelToTile[tile.y][10].id = TileType::EMPTY;
-			levelToTile[tile.y][11].id = TileType::EMPTY;
-			levelToTile[tile.y][12].id = TileType::EMPTY;
-			App->scene3->destroyedBlockLeft = true;
-		}
 		if (tile.x >= 21 && tile.x <= 26) {
 			levelToTile[tile.y][22].id = TileType::EMPTY;
 			levelToTile[tile.y][23].id = TileType::EMPTY;
@@ -161,13 +154,6 @@ void ModuleTileset::changeTile(iPoint tile)
 			else if (tile.y == 16) {
 				App->scene3->destroyedBlockBottom = true;
 			}
-		}
-		if (tile.x >= 34 && tile.x <= 39) {
-			levelToTile[tile.y][35].id = TileType::EMPTY;
-			levelToTile[tile.y][36].id = TileType::EMPTY;
-			levelToTile[tile.y][37].id = TileType::EMPTY;
-			levelToTile[tile.y][38].id = TileType::EMPTY;
-			App->scene3->destroyedBlockRight = true;
 		}
 	}
 

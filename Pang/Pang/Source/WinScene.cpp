@@ -39,7 +39,7 @@ WinScene::WinScene(bool startEnabled) : Module(startEnabled)
 			winAnim3.PushBack({ j * 384, i * 245, 384, 245 });
 		}
 	}
-	winAnim3.speed = 0.1f;
+	winAnim3.speed = 0.6f;
 	winAnim3.loop = false;
 
 
@@ -75,6 +75,11 @@ bool WinScene::Start()
 	winFx = App->audio->LoadFx("Assets/Sound/Sounds_Gameplay/Level_Complete.ogg");
 	++activeFx; ++totalFx;
 
+	if (App->player->scene3 == true) {
+		planeFx = App->audio->LoadFx("Assets/Sound/Sounds_Gameplay/PlaneFx.ogg");
+		++activeFx; ++totalFx;
+	}
+
 	winScene3 = App->textures->Load("Assets/UI/AnimPlaneScene3.png");
 	++activeTextures; ++totalTextures;
 
@@ -84,6 +89,9 @@ bool WinScene::Start()
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
+
+	countScene3 = 0;
+	timeScene3 = 2;
 	
 	App->player->score += App->player->timeBonus;
 
@@ -107,11 +115,6 @@ update_status WinScene::Update()
 		App->fade->FadeToBlack(this, (Module*)App->scene3, 90);
 	}
 
-	else if ((App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || pad.a) && App->player->scene3 == true)
-	{
-		App->fade->FadeToBlack(this, (Module*)App->scene4, 90);
-	}
-
 	else if ((App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || pad.a) && App->player->scene4 == true)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->scene5, 90);
@@ -125,6 +128,19 @@ update_status WinScene::Update()
 	else if ((App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || pad.a) && App->player->scene6 == true)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 90);
+	}
+	
+	if (App->player->scene3 == true) {
+		countScene3++;
+	}
+
+
+	if (countScene3 % 60 == 0) {
+		timeScene3--;
+	}
+
+	if (timeScene3 == 0) {
+		App->fade->FadeToBlack(this, (Module*)App->scene4, 90);
 	}
 
 	winAnim.Update();
@@ -159,6 +175,11 @@ update_status WinScene::PostUpdate()
 	}
 	else if (App->player->scene3 == true) {
 		App->render->Blit(winScene3, 0, 0, &(winAnim3.GetCurrentFrame()), 0.2f);
+		if (count == 0)
+		{
+			App->audio->PlayFx(planeFx);
+			count++;
+		}
 	}
 	else if (App->player->scene4 == true) {
 		App->render->Blit(winTexture245, 97, 32, &(winAnim4.GetCurrentFrame()), 0.2f);
@@ -204,12 +225,15 @@ bool WinScene::CleanUp()
 	--totalTextures;
 	App->textures->Unload(winScene3);
 	--totalTextures;
-
 	
 	App->fonts->UnLoad(winIndex);
 	--totalFonts;
 	App->audio->UnloadFx(winFx);
-	--totalFonts;
+	--totalFx;
+	if (App->player->scene3 == true) {
+		App->audio->UnloadFx(planeFx);
+		--totalFx;
+	}
 
 	winAnim.Reset();
 	winAnim2.Reset();

@@ -46,11 +46,10 @@ public:
 	SDL_Texture* fgTexture = nullptr;
 
 	Animation redBlock;
+	Animation redUnBlock;
 
 	Animation blockDestroyBottom;
 	Animation blockDestroyTop;
-	Animation blockDestroyRight;
-	Animation blockDestroyLeft;
 
 	Animation* currentAnim = nullptr;
 

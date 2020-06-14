@@ -48,6 +48,10 @@ public:
 	int winIndex;
 
 	uint winFx = 0;
+	uint planeFx = 0;
+
+	int timeScene3;
+	int countScene3;
 
 	int winCountdown = 340;
 
