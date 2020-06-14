@@ -14,6 +14,9 @@
 #include "ModuleAudio.h"
 #include "ModuleTileset.h"
 
+#include "ModuleScene3.h"
+#include "ModuleScene6.h"
+
 #include <SDL\include\SDL_scancode.h>
 
 ModuleHookShot::ModuleHookShot(bool startEnabled) : Module(startEnabled)
@@ -101,6 +104,12 @@ ModuleHookShot::ModuleHookShot(bool startEnabled) : Module(startEnabled)
 	shortIdle.PushBack({ 812, 81, 9, 112 });
 	shortIdle.loop = false;
 	shortIdle.speed = 0.009f;
+
+	shortIdle2.PushBack({ 823, 63, 9, 129 });
+	shortIdle2.PushBack({ 834, 64, 9, 129 });
+	shortIdle2.PushBack({ 845, 64, 9, 129 });
+	shortIdle2.loop = false;
+	shortIdle2.speed = 0.009f;
 
 
 	hookShotParticle.anim.PushBack({ 62, 13, 16, 6 });
@@ -228,6 +237,8 @@ update_status ModuleHookShot::Update()
 		--activeTextures;
 		--activeFx;
 		timeToDestroy = false;
+
+		y -= 10;
 	}
 
 	breakableCollision();
@@ -262,45 +273,94 @@ void ModuleHookShot::breakableCollision()
 void ModuleHookShot::unbreakableCollision()
 {
 	iPoint tile = { x / TILE_SIZE, y / TILE_SIZE };
-
-	if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE)
+	if (App->scene3->IsEnabled())
 	{
-		increment = false;
-		timeToDestroy = true;
-		currentAnimation = &shortIdle;
-		hookShot.Reset();
-		if (hitCount == 0)
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE)
 		{
-			App->audio->PlayFx(HitHookFX);
-			hitCount++;
+			increment = false;
+			timeToDestroy = true;
+			currentAnimation = &shortIdle;
+			hookShot.Reset();
+			if (hitCount == 0)
+			{
+				App->audio->PlayFx(HitHookFX);
+				hitCount++;
+			}
+			touch = true;
 		}
-		touch = true;
-	}
 
-	else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY) {
-		increment = false;
-		currentAnimation = &shortIdle;
-		hookShot.Reset();
-		timeToDestroy = true;
-		if (hitCount == 0)
-		{
-			App->audio->PlayFx(HitHookFX);
-			hitCount++;
+		else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY) {
+			increment = false;
+			currentAnimation = &shortIdle;
+			hookShot.Reset();
+			timeToDestroy = true;
+			if (hitCount == 0)
+			{
+				App->audio->PlayFx(HitHookFX);
+				hitCount++;
+			}
+			touch = true;
 		}
-		touch = true;
-	}
 
-	else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY) {
-		increment = false;
-		currentAnimation = &shortIdle;
-		hookShot.Reset();
-		timeToDestroy = true;
-		if (hitCount == 0)
-		{
-			App->audio->PlayFx(HitHookFX);
-			hitCount++;
+		else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY) {
+			increment = false;
+			currentAnimation = &shortIdle;
+			hookShot.Reset();
+			timeToDestroy = true;
+			if (hitCount == 0)
+			{
+				App->audio->PlayFx(HitHookFX);
+				hitCount++;
+			}
+			touch = true;
 		}
-		touch = true;
+	}
+	if (App->scene6->IsEnabled())
+	{
+		if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE)
+		{
+			increment = false;
+			timeToDestroy = true;
+			currentAnimation = &shortIdle2;
+			hookShot.Reset();
+			if (hitCount == 0)
+			{
+				App->audio->PlayFx(HitHookFX);
+				hitCount++;
+			}
+			touch = true;
+		}
+
+		else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY) {
+			increment = false;
+			currentAnimation = &shortIdle2;
+			hookShot.Reset();
+			timeToDestroy = true;
+			if (hitCount == 0)
+			{
+				App->audio->PlayFx(HitHookFX);
+				hitCount++;
+			}
+			touch = true;
+		}
+
+		else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY) {
+			increment = false;
+			currentAnimation = &shortIdle2;
+			hookShot.Reset();
+			timeToDestroy = true;
+			if (hitCount == 0)
+			{
+				App->audio->PlayFx(HitHookFX);
+				hitCount++;
+			}
+			touch = true;
+		}
+
+
+
+
+
 	}
 }
 
@@ -339,7 +399,7 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == Collider::Type::BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
-		if (currentAnimation == &shortIdle)
+		if (currentAnimation == &shortIdle || currentAnimation == &shortIdle2)
 		{
 			y -= 10;
 		}

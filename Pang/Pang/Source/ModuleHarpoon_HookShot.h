@@ -32,6 +32,7 @@ public:
 	Animation hookShot;
 	Animation idleHookShot;
 	Animation shortIdle;
+	Animation shortIdle2;
 
 	Animation* currentAnimation = nullptr;
 
