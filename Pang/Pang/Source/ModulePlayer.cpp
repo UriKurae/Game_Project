@@ -292,6 +292,18 @@ void ModulePlayer::checkIfNeedToFall()
 	}
 }
 
+void ModulePlayer::checkIfWall()
+{
+	if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::WALL)
+	{
+		position.x += 2;
+	}
+	else if (App->tileset->getTileLevel(tile.y, tile.x + 3).id == ModuleTileset::TileType::WALL)
+	{
+		position.x -= 2;
+	}
+}
+
 update_status ModulePlayer::Update()
 {
 	GamePad& pad = App->input->pads[0];
@@ -559,7 +571,7 @@ update_status ModulePlayer::Update()
 
 		checkIfNeedToFall();
 		checkUnbreakable();
-
+		checkIfWall();
 
 		currentAnimation->Update();
 
