@@ -387,25 +387,6 @@ update_status ModuleDoubleShot::PostUpdate()
 
 void ModuleDoubleShot::OnCollision(Collider* c1, Collider* c2)
 {
-	//if (c2->type == Collider::Type::WALL)
-	//{
-	//	for (uint i = 0; i < SHOTS; i++)
-	//	{
-	//		if (c1 == harpoon[i].colliderH)
-	//		{
-	//			harpoon[i].colliderH->pendingToDelete = true;
-	//			harpoon[i].colliderH = nullptr;
-	//			harpoon[i].destroyed = true;
-	//			harpoon[i].increment = false;
-	//			harpoon[i].DoubleShot.Reset();
-	//			--activeTextures;
-	//			break;
-	//		}
-	//	}
-
-	//	shotsOnScreen--;
-	//}
-
 	if (c2->type == Collider::Type::BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		for (uint i = 0; i < SHOTS; i++)
@@ -424,77 +405,6 @@ void ModuleDoubleShot::OnCollision(Collider* c1, Collider* c2)
 
 		shotsOnScreen--;
 	}
-
-
-	//if (c2->type == Collider::Type::BREAKABLE_BLOCK)
-	//{
-	//	if (c1->Intersects(App->scene2->leftPlatform->rect))
-	//	{
-	//		for (uint i = 0; i < SHOTS; i++)
-	//		{
-	//			if (c1 == harpoon[i].colliderH)
-	//			{
-	//				harpoon[i].colliderH->pendingToDelete = true;
-	//				harpoon[i].colliderH = nullptr;
-	//				harpoon[i].destroyed = true;
-	//				harpoon[i].increment = false;
-	//				harpoon[i].DoubleShot.Reset();
-	//				--activeTextures;
-	//				break;
-	//			}
-	//		}
-
-	//		//App->scene2->leftPlatform->pendingToDelete = true;
-	//		//App->scene2->currentAnim = &App->scene2->blockDestroy;
-	//		//App->scene2->destroyedBlockLeft = true;
-
-	//		shotsOnScreen--;
-	//	}
-	//	if (c1->Intersects(App->scene2->rightPlatform->rect))
-	//	{
-	//		for (uint i = 0; i < SHOTS; i++)
-	//		{
-	//			if (c1 == harpoon[i].colliderH)
-	//			{
-	//				harpoon[i].colliderH->pendingToDelete = true;
-	//				harpoon[i].colliderH = nullptr;
-	//				harpoon[i].destroyed = true;
-	//				harpoon[i].increment = false;
-	//				harpoon[i].DoubleShot.Reset();
-	//				--activeTextures;
-	//				break;
-	//			}
-	//		}
-
-	//		App->scene2->rightPlatform->pendingToDelete = true;
-	//		//App->scene2->currentAnim = &App->scene2->blockDestroy;
-	//		App->scene2->destroyedBlockRight = true;
-
-	//		shotsOnScreen--;
-	//	}
-	//}
-
-	//if (c2->type == Collider::Type::UNBREAKABLE_BLOCK && c1->type == Collider::Type::PLAYER_SHOT)
-	//{
-	//	for (uint i = 0; i < SHOTS; i++)
-	//	{
-	//		if (c1 == harpoon[i].colliderH)
-	//		{
-	//			harpoon[i].colliderH->pendingToDelete = true;
-	//			harpoon[i].colliderH = nullptr;
-	//			harpoon[i].destroyed = true;
-	//			harpoon[i].increment = false;
-	//			harpoon[i].DoubleShot.Reset();
-	//			--activeTextures;
-	//			break;
-	//		}
-	//	}
-
-	//	shotsOnScreen--;
-	//}
-
-	--activeFx;
-
 }
 
 bool ModuleDoubleShot::CleanUp()

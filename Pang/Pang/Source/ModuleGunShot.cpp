@@ -73,8 +73,6 @@ ModuleGunShot::~ModuleGunShot()
 
 bool ModuleGunShot::Start()
 {
-	LOG("LOADING HARPOON TEXTURE");
-
 	gunShotFx = App->audio->LoadFx("Assets/Sound/FX/GunShoot.wav");
 	++totalFx;
 
@@ -129,9 +127,6 @@ update_status ModuleGunShot::PostUpdate()
 {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	//SDL_Rect rect;
-
-	//rect = shotGun.anim.GetCurrentFrame();
 	App->render->Blit(texture, shotGun.position.x, shotGun.position.y, &(shotGun.anim.GetCurrentFrame()));
 
 	return ret;

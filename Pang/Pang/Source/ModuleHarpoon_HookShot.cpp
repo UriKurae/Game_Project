@@ -231,7 +231,6 @@ void ModuleHookShot::breakableCollision()
 		--activeTextures;
 		--activeFx;
 		App->tileset->changeTile(tile);
-		//LOG("%d %d ", tile.x, tile.y);
 	}
 	else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY) {
 		this->colliderH->pendingToDelete = true;
@@ -317,48 +316,6 @@ update_status ModuleHookShot::PostUpdate()
 
 void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 {
-	//if (c2->type == Collider::Type::UNBREAKABLE_BLOCK)
-	//{
-	//	increment = false;
-	//	currentAnimation = &idleHookShot;
-	//	hookShot.Reset();
-	//	currentAnimation->Update();
-	//	count++;
-	//	if (count % 60 == 0 && time > 0 && App->enemies->balloon.balloonsOnScene > 0 && destroyed == false) {
-	//		time--;
-	//	}
-	//	y = 8;
-	//}
-
-	//if (c2->type == Collider::Type::WALL)
-	//{
-	//	increment = false;
-	//	currentAnimation = &idleHookShot;
-	//	hookShot.Reset();
-	//	currentAnimation->Update();
-	//	count++;
-	//	if (count % 60 == 0 && time > 0 && App->enemies->balloon.balloonsOnScene > 0 && destroyed == false) {
-	//		time--;
-	//	}
-	//	y = 8;
-	//}
-
-	//if (c2->type == Collider::Type::BREAKABLE_BLOCK) 
-	//{
-	//	
-	//	this->colliderH->pendingToDelete = true;
-	//	--activeColliders; --totalColliders;
-	//	destroyed = true;
-	//	increment = false;
-	//	currentAnimation->Reset();
-	//	hookShot.Reset();
-	//	idleHookShot.Reset();
-	//	time = 5;
-	//	count = 0;
-	//	--activeTextures;
-	//	LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
-	//}
-
 	if (c2->type == Collider::Type::BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		this->colliderH->pendingToDelete = true;
@@ -374,8 +331,6 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 		--activeTextures;
 		LOG("\n\n\nHARPOON HIT VERY BIG BALLOON\n\n");
 	}
-
-	--activeFx;
 }
 
 bool ModuleHookShot::CleanUp()

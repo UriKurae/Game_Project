@@ -64,23 +64,6 @@ bool ModuleScene6::Start()
 
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtKeirin.ogg", 0.0f);
 
-	//Walls collider
-	/*lowerWall = App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);
-	++activeColliders; ++totalColliders;
-	leftWall = App->collisions->AddCollider({ 0, 0, 8, 208 }, Collider::Type::WALL);
-	++activeColliders; ++totalColliders;
-	upperWall = App->collisions->AddCollider({ 0, 0, 384, 8 }, Collider::Type::WALL);
-	++activeColliders; ++totalColliders;
-	rightWall = App->collisions->AddCollider({ 376, 0, 8, 208 }, Collider::Type::WALL);
-	++activeColliders; ++totalColliders;*/
-
-	/*leftPlatform = App->collisions->AddCollider({ 79,64,16,8 }, Collider::Type::UNBREAKABLE_BLOCK);
-	++activeColliders; ++totalColliders;
-	rightPlatform = App->collisions->AddCollider({ 296,64,16,8 }, Collider::Type::UNBREAKABLE_BLOCK);
-	++activeColliders; ++totalColliders;
-	centralPlatform = App->collisions->AddCollider({ 184,64,16,8 }, Collider::Type::BREAKABLE_BLOCK);
-	++activeColliders; ++totalColliders;*/
-
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
@@ -117,14 +100,6 @@ update_status ModuleScene6::Update()
 	if (App->input->keys[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
 	{
 		App->enemies->balloon.balloonsOnScene = 0;
-		App->collisions->RemoveCollider(leftWall);
-		App->collisions->RemoveCollider(rightWall);
-		App->collisions->RemoveCollider(upperWall);
-		App->collisions->RemoveCollider(lowerWall);
-		--activeColliders; --totalColliders;
-		--activeColliders; --totalColliders;
-		--activeColliders; --totalColliders;
-		--activeColliders; --totalColliders;
 	}
 
 
@@ -222,9 +197,6 @@ bool ModuleScene6::CleanUp()
 
 	App->sceneIntro->countdown = 1;
 
-	App->textures->Unload(App->boosters->texture);
-	--totalTextures;
-
 	App->textures->Unload(bgTexture);
 	--totalTextures;
 	App->textures->Unload(deathTexture1);
@@ -234,25 +206,10 @@ bool ModuleScene6::CleanUp()
 	App->textures->Unload(App->boosters->texture);
 	--totalTextures;
 
-	App->collisions->RemoveCollider(leftWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(rightWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(upperWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(lowerWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(rightPlatform);
-	--totalColliders;
-	App->collisions->RemoveCollider(leftPlatform);
-	--totalColliders;
-	App->collisions->RemoveCollider(centralPlatform);
-	--totalColliders;
-
 	App->collisions->RemoveCollider(App->boosters->typeBooster->collider);
 
 	App->textures->Unload(App->enemies->texture);
-
+	App->audio->UnloadFx(App->enemies->balloon.ballonExplosion);
 
 	return true;
 }

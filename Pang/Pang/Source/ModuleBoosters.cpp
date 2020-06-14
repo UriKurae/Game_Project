@@ -371,10 +371,3 @@ void ModuleBoosters::spawnBooster()
 	}
 
 }
-
-
-void ModuleBoosters::OnCollision(Collider* c1, Collider* c2)
-{
-
-
-}

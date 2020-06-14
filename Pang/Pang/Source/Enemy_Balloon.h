@@ -76,7 +76,6 @@ private:
 	Particle particleDeathSmall;
 	Particle particleDeathVerySmall;
 
-	//uint ballonExplosion = 0;
 	enum class ENEMY_TYPE tipoBalloon;
 };
 

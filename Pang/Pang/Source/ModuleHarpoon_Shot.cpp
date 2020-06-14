@@ -285,18 +285,6 @@ update_status ModuleHarpoon::PostUpdate()
 
 void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 {	
-	//if (c2->type == Collider::Type::WALL) 
-	//{
-	//	//delete colliderH;
-	//	this->colliderH->pendingToDelete = true;
-	//	--activeColliders; --totalColliders;
-	//	destroyed = true;
-	//	increment = false;
-	//	currentAnimation->Reset();
-	//	--activeTextures;
-	//	LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
-	//}
-
 	if (c2->type == Collider::Type::BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
 		this->colliderH->pendingToDelete = true;
@@ -307,55 +295,6 @@ void ModuleHarpoon::OnCollision(Collider* c1, Collider* c2)
 		--activeTextures;
 		LOG("\n\n\nHARPOON HIT VERY BIG BALLOON\n\n");
 	}
-
-
-	//if (c2->type == Collider::Type::BREAKABLE_BLOCK)
-	//{
-	//	if (c1->Intersects(App->scene2->leftPlatform->rect) || c1->Intersects(App->scene6->leftPlatform->rect))
-	//	{
-	//		//delete colliderH;
-	//		this->colliderH->pendingToDelete = true;
-	//		--activeColliders; --totalColliders;
-	//		destroyed = true;
-	//		increment = false;
-	//		currentAnimation->Reset();
-	//		--activeTextures;
-
-	//		App->scene2->leftPlatform->pendingToDelete = true;
-	//		App->scene2->currentAnim = &App->scene2->blockDestroy;
-	//		App->scene2->destroyedBlockLeft = true;
-
-	//		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
-	//	}
-	//	if (c1->Intersects(App->scene2->rightPlatform->rect))
-	//	{
-	//		this->colliderH->pendingToDelete = true;
-	//		--activeColliders; --totalColliders;
-	//		destroyed = true;
-	//		increment = false;
-	//		currentAnimation->Reset();
-	//		--activeTextures;
-
-	//		App->scene2->rightPlatform->pendingToDelete = true;
-	//		App->scene2->currentAnim = &App->scene2->blockDestroy;
-	//		App->scene2->destroyedBlockRight = true;
-
-	//		LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
-	//	}
-	//}
-
-	//if (c2->type == Collider::Type::UNBREAKABLE_BLOCK && c1->type == Collider::Type::PLAYER_SHOT)
-	//{
-	//	//delete colliderH;
-	//	this->colliderH->pendingToDelete = true;
-	//	--activeColliders; --totalColliders;
-	//	destroyed = true;
-	//	increment = false;
-	//	currentAnimation->Reset();
-	//	--activeTextures;
-	//	
-	//	LOG("\n\n\nHARPOON HIT UPPER WALL\n\n\n");
-	//}
 }
 
 bool ModuleHarpoon::CleanUp()

@@ -93,14 +93,6 @@ update_status ModuleScene5::Update()
 	if (App->input->keys[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
 	{
 		App->enemies->balloon.balloonsOnScene = 0;
-		App->collisions->RemoveCollider(leftWall);
-		App->collisions->RemoveCollider(rightWall);
-		App->collisions->RemoveCollider(upperWall);
-		App->collisions->RemoveCollider(lowerWall);
-		--activeColliders; --totalColliders;
-		--activeColliders; --totalColliders;
-		--activeColliders; --totalColliders;
-		--activeColliders; --totalColliders;
 	}
 
 
@@ -286,11 +278,6 @@ bool ModuleScene5::CleanUp()
 
 	App->sceneIntro->countdown = 1;
 
-	App->textures->Unload(App->boosters->texture);
-	--totalTextures;
-
-	App->textures->Unload(App->harpoon->texture);
-	--totalTextures;
 	App->textures->Unload(bgTexture);
 	--totalTextures;
 	App->textures->Unload(fgTexture);
@@ -302,12 +289,11 @@ bool ModuleScene5::CleanUp()
 	--totalTextures;
 	App->textures->Unload(App->boosters->texture);
 	--totalTextures;
-	App->audio->UnloadFx(App->harpoon->HarpoonFx);
-	App->harpoon->totalFx--;
 
 	App->collisions->RemoveCollider(App->boosters->typeBooster->collider);
 
 	App->textures->Unload(App->enemies->texture);
+	App->audio->UnloadFx(App->enemies->balloon.ballonExplosion);
 
 	return true;
 }
