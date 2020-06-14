@@ -25,7 +25,7 @@ WinScene::WinScene(bool startEnabled) : Module(startEnabled)
 			winAnim.PushBack({ 192 * j, 98 * i, 192, 98 });
 		}
 	}
-	winAnim.speed = 0.1f;
+	winAnim.speed = 0.5f;
 	winAnim.loop = true;
 
 

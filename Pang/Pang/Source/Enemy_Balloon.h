@@ -33,6 +33,7 @@ public:
 
 	uint ballonExplosion = 0;
 
+	//Count of balloons on scene
 	uint balloonsOnScene = 0;
 
 	uint destroyBalloonsTime = 3;

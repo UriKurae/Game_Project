@@ -100,9 +100,6 @@ bool SceneIntro::Start()
 	bgTexture = App->textures->Load("Assets/UI/AnimationPangBalls.png");
 	++activeTextures; ++totalTextures;
 
-	coinTexture = App->textures->Load("Assets/UI/insertCoin.png");
-	++activeTextures; ++totalTextures;
-
 	intro_1 = App->textures->Load("Assets/UI/Intro_1.png");
 	++activeTextures; ++totalTextures;
 	intro_2 = App->textures->Load("Assets/UI/Intro_2.png");
@@ -142,14 +139,6 @@ update_status SceneIntro::Update()
 	}
 
 	if (mapBool) { countMap++; }
-
-	if (countdown == 0) {
-		timer--;
-	}
-
-	if (timer == 0) {
-		insertCoin++;
-	}
 
 	if (countMap % 60 == 0 && countdownMap > 0 && mapBool == true) {
 		App->audio->PlayFx(mapFx);
@@ -227,10 +216,6 @@ update_status SceneIntro::PostUpdate()
 		App->render->Blit(bgTexture, 0, 0, &(intro.GetCurrentFrame()), 0.2f);
 		//App->fonts->BlitText(90, 181, introIndex, "©MITCHELL");
 		//App->fonts->BlitText(240, 181, introIndex, "1989");
-
-		if (insertCoin % 60 == 0) {
-			App->render->Blit(coinTexture, 108, 202, NULL);
-		}
 	}
 	if (countdown == 1 && mapBool == false) {
 		intro.Reset();
@@ -266,9 +251,6 @@ bool SceneIntro::CleanUp()
 	--activeTextures; --totalTextures;
 
 	App->textures->Unload(selectTexture);
-	--activeTextures; --totalTextures;
-
-	App->textures->Unload(coinTexture);
 	--activeTextures; --totalTextures;
 
 	App->textures->Unload(mapTexture);

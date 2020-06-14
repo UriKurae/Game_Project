@@ -76,6 +76,8 @@ bool ModuleScene6::Start()
 
 	App->player->uiIndex = 0;
 
+	App->enemies->balloon.balloonsOnScene = 2;
+
 	App->player->score = 0;
 
 	destroyedBlockCentral = false;

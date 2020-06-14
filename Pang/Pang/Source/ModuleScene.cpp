@@ -77,6 +77,8 @@ bool ModuleScene::Start()
 	musicBool1 = true;
 	musicBool2 = true;
 
+	App->enemies->balloon.balloonsOnScene = 1;
+
 	//Buff=App->collisions->AddCollider({ 20, 190, 10, 10 }, Collider::Type::PLAYER); FOR TESTS DON'T ERASE PLS
 
 	return ret;

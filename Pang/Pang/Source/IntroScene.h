@@ -42,7 +42,6 @@ public:
 	SDL_Texture* mapTexture = nullptr;
 	SDL_Texture* mapAnimTexture = nullptr;
 	SDL_Texture* selectTexture = nullptr;
-	SDL_Texture* coinTexture = nullptr;
 
 	uint introFx = 0;
 	uint mapFx = 0;
@@ -50,9 +49,6 @@ public:
 	int countdown = 1260;
 	int countMap = 0;
 	int countdownMap = 9;
-	
-	int insertCoin = 1;
-	int timer = 300;
 
 	bool mapBool = false;
 	bool stage1 = false;

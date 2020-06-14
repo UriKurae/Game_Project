@@ -89,6 +89,8 @@ bool ModuleScene3::Start()
 
 	App->player->uiIndex = 0;
 
+	App->enemies->balloon.balloonsOnScene = 2;
+
 	App->player->scene1 = false;
 	App->player->scene2 = false;
 	App->player->scene3 = true;

@@ -497,7 +497,6 @@ update_status ModulePlayer::Update()
 		else
 		{
 			dynamite = false;
-
 		}
 
 	}

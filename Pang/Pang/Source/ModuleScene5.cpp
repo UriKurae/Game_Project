@@ -58,7 +58,6 @@ bool ModuleScene5::Start()
 	deathTexture2 = App->textures->Load("Assets/Foregrounds/Foreground_Death_2.png");
 	++activeTextures; ++totalTextures;
 
-
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtKeirin.ogg", 0.0f);
 
 	App->player->Enable();
@@ -72,7 +71,7 @@ bool ModuleScene5::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, 200, 58);	
 
 	App->player->uiIndex = 0;
-
+	App->enemies->balloon.balloonsOnScene = 2;
 	App->player->score = 0;
 
 	App->player->scene1 = false;
