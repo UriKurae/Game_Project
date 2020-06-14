@@ -227,7 +227,8 @@ void ModuleHarpoon::breakableCollision()
 void ModuleHarpoon::unbreakableCollision()
 {
 	iPoint tile = { x / TILE_SIZE, y / TILE_SIZE };
-	if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE) {
+	if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE)
+	{
 		this->colliderH->pendingToDelete = true;
 		--activeColliders; --totalColliders;
 		destroyed = true;
@@ -236,7 +237,8 @@ void ModuleHarpoon::unbreakableCollision()
 		--activeTextures;
 		--activeFx;
 	}
-	else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY) {
+	else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY) 
+	{
 		this->colliderH->pendingToDelete = true;
 		--activeColliders; --totalColliders;
 		destroyed = true;
@@ -245,7 +247,8 @@ void ModuleHarpoon::unbreakableCollision()
 		--activeTextures;
 		--activeFx;
 	}
-	else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY) {
+	else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY) 
+	{
 		this->colliderH->pendingToDelete = true;
 		--activeColliders; --totalColliders;
 		destroyed = true;

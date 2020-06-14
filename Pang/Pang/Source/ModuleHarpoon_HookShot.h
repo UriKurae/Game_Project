@@ -24,11 +24,14 @@ public:
 
 	bool increment = false;
 
+	bool touch = false;
+
 	//texture for all the harpoons sprites
 	SDL_Texture* texture = nullptr;
 
 	Animation hookShot;
 	Animation idleHookShot;
+	Animation shortIdle;
 
 	Animation* currentAnimation = nullptr;
 

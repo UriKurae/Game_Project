@@ -96,6 +96,13 @@ ModuleHookShot::ModuleHookShot(bool startEnabled) : Module(startEnabled)
 	idleHookShot.loop = false;
 	idleHookShot.speed = 0.009f;
 
+	shortIdle.PushBack({ 790, 80, 9, 112 });
+	shortIdle.PushBack({ 801, 81, 9, 112 });
+	shortIdle.PushBack({ 812, 81, 9, 112 });
+	shortIdle.loop = false;
+	shortIdle.speed = 0.009f;
+
+
 	hookShotParticle.anim.PushBack({ 62, 13, 16, 6 });
 	hookShotParticle.anim.PushBack({ 76, 8, 16, 11 });
 	hookShotParticle.anim.PushBack({ 95, 9, 16, 10 });
@@ -114,7 +121,7 @@ bool ModuleHookShot::Start()
 {
 	LOG("LOADING HARPOON TEXTURE");
 
-	texture = App->textures->Load("Assets/Items&Weapons/HookShot.png");
+	texture = App->textures->Load("Assets/Items&Weapons/HookShot2.png");
 	++totalTextures;
 
 	HarpoonFx = App->audio->LoadFx("Assets/Sound/FX/NormalShoot.wav");
@@ -124,7 +131,7 @@ bool ModuleHookShot::Start()
 	++totalFx;
 
 	x = App->player->position.x;
-	y = App->player->position.y - speed;
+	y = App->player->position.y;
 
 	time = 5;
 	count = 0;
@@ -140,6 +147,7 @@ update_status ModuleHookShot::Update()
 	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || pad.a) && destroyed == true && App->player->destroyed == false && App->player->currWeapon == 1 &&
 		App->enemies->balloon.balloonsOnScene > 0 && App->player->ready == 0)
 	{
+		hookShot.Reset();
 		App->audio->PlayFx(HarpoonFx);
 		++activeFx;
 
@@ -149,7 +157,16 @@ update_status ModuleHookShot::Update()
 
 		h = 34;
 		x = App->player->position.x + 10;
-		y = App->player->position.y - 2;
+		//y = App->player->position.y - 2;
+		if (touch)
+		{
+			y = App->player->position.y - 2;
+		}
+		else
+		{
+			y = App->player->position.y - 2;
+		}
+
 		destroyed = false;
 
 		colliderH = App->collisions->AddCollider({ (int)x, (int)y, 9, (int)h }, Collider::Type::PLAYER_SHOT, (Module*)App->hookShot);
@@ -169,6 +186,7 @@ update_status ModuleHookShot::Update()
 		colliderH->SetH(h);
 		colliderH->SetPos(x, y);
 		currentAnimation->Update();
+
 	}
 
 	if (App->player->destroyed == true)
@@ -197,6 +215,8 @@ update_status ModuleHookShot::Update()
 		if (colliderH != nullptr) {
 			this->colliderH->pendingToDelete = true;
 		}
+		if (currentAnimation == &shortIdle) { shortIdle.Reset(); }
+
 		--activeColliders; --totalColliders;
 		destroyed = true;
 		increment = false;
@@ -221,35 +241,9 @@ void ModuleHookShot::breakableCollision()
 {
 	iPoint tile = { x / TILE_SIZE, y / TILE_SIZE };
 
-	if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE) {
-		this->colliderH->pendingToDelete = true;
-		--activeColliders; --totalColliders;
-		destroyed = true;
-		increment = false;
-		currentAnimation->Reset();
-		hookShot.Reset();
-		idleHookShot.Reset();
-		time = 5;
-		count = 0;
-		--activeTextures;
-		--activeFx;
-		App->tileset->changeTile(tile);
-	}
-	else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY) {
-		this->colliderH->pendingToDelete = true;
-		--activeColliders; --totalColliders;
-		destroyed = true;
-		increment = false;
-		currentAnimation->Reset();
-		hookShot.Reset();
-		idleHookShot.Reset();
-		time = 5;
-		count = 0;
-		--activeTextures;
-		--activeFx;
-		App->tileset->changeTile(tile);
-	}
-	else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY) {
+	if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE &&
+		(App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY)) {
+		
 		this->colliderH->pendingToDelete = true;
 		--activeColliders; --totalColliders;
 		destroyed = true;
@@ -269,20 +263,23 @@ void ModuleHookShot::unbreakableCollision()
 {
 	iPoint tile = { x / TILE_SIZE, y / TILE_SIZE };
 
-	if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE) {
+	if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE)
+	{
 		increment = false;
-		currentAnimation = &idleHookShot;
-		hookShot.Reset();
 		timeToDestroy = true;
+		currentAnimation = &shortIdle;
+		hookShot.Reset();
 		if (hitCount == 0)
 		{
 			App->audio->PlayFx(HitHookFX);
 			hitCount++;
 		}
+		touch = true;
 	}
+
 	else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY) {
 		increment = false;
-		currentAnimation = &idleHookShot;
+		currentAnimation = &shortIdle;
 		hookShot.Reset();
 		timeToDestroy = true;
 		if (hitCount == 0)
@@ -290,10 +287,12 @@ void ModuleHookShot::unbreakableCollision()
 			App->audio->PlayFx(HitHookFX);
 			hitCount++;
 		}
+		touch = true;
 	}
+
 	else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY) {
 		increment = false;
-		currentAnimation = &idleHookShot;
+		currentAnimation = &shortIdle;
 		hookShot.Reset();
 		timeToDestroy = true;
 		if (hitCount == 0)
@@ -301,6 +300,7 @@ void ModuleHookShot::unbreakableCollision()
 			App->audio->PlayFx(HitHookFX);
 			hitCount++;
 		}
+		touch = true;
 	}
 }
 
@@ -329,6 +329,7 @@ update_status ModuleHookShot::PostUpdate()
 	if (App->player->destroyed == false && destroyed == false)
 	{
 		App->render->Blit(texture, x, y, &(currentAnimation->GetCurrentFrame()), 1.0f);
+
 	}
 
 	return ret;
@@ -338,6 +339,10 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == Collider::Type::BALLOON && c1->type == Collider::Type::PLAYER_SHOT)
 	{
+		if (currentAnimation == &shortIdle)
+		{
+			y -= 10;
+		}
 		this->colliderH->pendingToDelete = true;
 		
 		destroyed = true;
@@ -345,6 +350,7 @@ void ModuleHookShot::OnCollision(Collider* c1, Collider* c2)
 		currentAnimation->Reset();
 		hookShot.Reset();
 		idleHookShot.Reset();
+		shortIdle.Reset();
 		time = 5;
 		count = 0;
 		timeToDestroy = false;

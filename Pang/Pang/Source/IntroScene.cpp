@@ -165,7 +165,7 @@ update_status SceneIntro::Update()
 	else if ((App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || pad.a) && mapBool == true || mapBool == true && countdownMap == 0)
 	{
 		if (stage1 == true) {
-			App->fade->FadeToBlack(this, (Module*)App->scene, 30);
+			App->fade->FadeToBlack(this, (Module*)App->scene3, 30);
 		}
 		else if (stage2 == true) {
 			App->fade->FadeToBlack(this, (Module*)App->scene4, 30);

@@ -285,7 +285,7 @@ void Enemy_Balloon::dynamiteDestroy()
 			countDestroyBalloons = 0;
 		}
 	}
-	else if (App->player->destroyed == false)
+	else if (App->player->destroyed == true)
 	{
 		App->player->dynamite = false;
 		timeDestroyBalloons = 3;
