@@ -770,7 +770,7 @@ void Enemy_Balloon::smallBalloonBounce()
 	if (this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON)
 	{
 		iPoint tile = { position.x / TILE_SIZE, position.y / TILE_SIZE };
-		for (int i = 1; i < 2; ++i)
+		for (int i = 0; i < 2; ++i)
 		{
 			//FLOOR COLLISION
 			if (App->tileset->getTileLevel(tile.y + 2, tile.x + i).id == ModuleTileset::TileType::WALL && (App->tileset->getTileLevel(tile.y + 1, tile.x + i).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::TOP_STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE))
@@ -995,7 +995,7 @@ void Enemy_Balloon::smallBalloonBounce2()
 	if (this->tipoBalloon == ENEMY_TYPE::SMALLBALLOON2)
 	{
 		iPoint tile = { position.x / TILE_SIZE, position.y / TILE_SIZE };
-		for (int i = 1; i < 2; ++i)
+		for (int i = 0; i < 2; ++i)
 		{
 			//FLOOR COLLISION
 			if (App->tileset->getTileLevel(tile.y + 2, tile.x + i).id == ModuleTileset::TileType::WALL && (App->tileset->getTileLevel(tile.y + 1, tile.x + i).id == ModuleTileset::TileType::EMPTY || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::TOP_STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::STAIRS || App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE))
