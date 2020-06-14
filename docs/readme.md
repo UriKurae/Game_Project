@@ -57,7 +57,9 @@ SPAWN EXTRA LIFE BOOSTER ON MOUSE POSITION: ALT + 8
 
 ## GAMEPLAY
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/watch?v=f5--zNF3FdY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+If the video does not work click [HERE](https://www.youtube.com/watch?v=f5--zNF3FdY&feature=youtu.be) 
 
 ## MIDDLE AMBIENT STUDIOS
 
