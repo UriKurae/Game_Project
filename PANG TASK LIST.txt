@@ -1,15 +1,36 @@
 TASK LIST:
 
 Oriol:
-	-Boosters included, enemy spawning at the cursor pointer, Scene 5 implemented, adjustments to scene 3, god mode added,
+	-Boosters included
+	-Enemy and boosters spawning at the cursor pointer
+	-Scene 2,3,5 implemented, adjustments to scene 3
+	-God mode added
 	-Inmunity shield booster added with animation(With Lucas)
-
+	-Added dynamite behaviour. 
+	-Blocks funcionality.
+		
 Lucas:
-	-Win scene 2 done, colliders fixed on scene 2, balloons sprite on scene 2 fixed, blocks funcionality added on scene2.
+	-Win scene(s) done
+	-Colliders fixed on scene 2
+	-Balloons sprite on scene 2 fixed
+	-Blocks funcionality added on scene2. 
+	-Boosters. 
+	-Added colors for the particle sprites
+	-Added plane animation for the map.
+	-Tiles(help).
 
 Carlos:
-	-Module Hookshot completely (ayuda del David), Gunshot, Double Wire,
+	-Module Hookshot
+	-Gunshot
+	-Double Wire
+	-Help boosters
+	-Help Gamepad
+	-Colisions by tiles shots
+	-Web and video gameplay
 
 David:
 	-Fixed some spritesheets with the objective to order everything
-	-Added Tileset functionality and collisions balloon-wall
+	-Added all Tileset functionality
+	-Added stair mechanics
+	-GamePad added
+	-Help hookshot
