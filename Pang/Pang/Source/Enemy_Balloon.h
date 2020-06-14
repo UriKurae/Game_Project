@@ -49,7 +49,7 @@ private:
 	iPoint tile;
 
 	void balloonBounce();
-	//void balloonBounce2();
+	void balloonBounce2();
 
 	void bigBalloonBounce();
 	void bigBalloonBounce2();

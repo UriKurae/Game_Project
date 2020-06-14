@@ -87,9 +87,6 @@ public:
 	// A countdown to when the player gets destroyed. After a while, the game exits
 	uint destroyedCountdown = 180;
 
-	// Sound effects indices
-	uint explosionFx = 0;
-
 	// Font score index
 	uint score = 000;
 	uint time = 100;
@@ -102,8 +99,6 @@ public:
 	char timeText[3] = { "\0" };
 	char lifeText[3] = { "\0" };
 	uint timeBonus = 0;
-
-
 
 	//Lifes and management
 	int lifes = 3;
@@ -127,7 +122,6 @@ public:
 	bool inmunity = false;
 
 	//Clock booster
-
 	int stopTime = 0;
 
 	//Dynamite Booster

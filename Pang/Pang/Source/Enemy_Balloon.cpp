@@ -181,6 +181,7 @@ void Enemy_Balloon::Update()
 	if (App->player->ready == 0 && App->player->stopTime == 0) {
 		MRUA();
 		balloonBounce();
+		balloonBounce2();
 		bigBalloonBounce();
 		bigBalloonBounce2();
 		smallBalloonBounce();
@@ -1710,7 +1711,7 @@ void Enemy_Balloon::balloonBounce()
 	iPoint tile = { position.x / TILE_SIZE, position.y / TILE_SIZE };
 
 	//FLOOR COLLISION
-	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
 		for (int i = 1; i < 6; ++i)
 		{
@@ -1723,7 +1724,7 @@ void Enemy_Balloon::balloonBounce()
 	}
 
 	//ROOF COLLISION
-	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
 		if (speedY > 0)
 		{
@@ -1740,7 +1741,7 @@ void Enemy_Balloon::balloonBounce()
 
 	//RIGHT WALL COLLISION
 
-	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
 
 		for (int i = 0; i < 5; ++i)
@@ -1757,7 +1758,7 @@ void Enemy_Balloon::balloonBounce()
 
 	//LEFT WALL COLLISION
 
-	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
 		for (int i = 0; i < 5; ++i)
 		{
@@ -1773,7 +1774,7 @@ void Enemy_Balloon::balloonBounce()
 	//BREAKABLE BLOCK COLLISION
 
 	//top face
-	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
 		if (speedY < 0)
 		{
@@ -1789,7 +1790,7 @@ void Enemy_Balloon::balloonBounce()
 	}
 
 	//bottom face
-	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
 		if (speedY > 0)
 		{
@@ -1806,7 +1807,7 @@ void Enemy_Balloon::balloonBounce()
 
 	//left face
 
-	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
 		if (speedX > 0)
 		{
@@ -1823,7 +1824,7 @@ void Enemy_Balloon::balloonBounce()
 
 	//right face
 
-	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
 		if (speedX < 0)
 		{
@@ -1842,7 +1843,7 @@ void Enemy_Balloon::balloonBounce()
 
 	//BLOCK top-left corner
 
-	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
 		if (speedX > 0)
 		{
@@ -1855,7 +1856,7 @@ void Enemy_Balloon::balloonBounce()
 
 	//BLOCK top-right corner
 
-	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
 		if (App->tileset->getTileLevel(tile.y + 5, tile.x).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y + 4, tile.x).id == ModuleTileset::TileType::EMPTY && App->tileset->getTileLevel(tile.y + 5, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
 		{
@@ -1870,7 +1871,7 @@ void Enemy_Balloon::balloonBounce()
 	//BLOCK bottom-left corner
 	//---------------------------------------------------------------REVISAR---------------------------------------------------------------
 
-	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
 		if (speedX > 0)
 		{
@@ -1884,9 +1885,16 @@ void Enemy_Balloon::balloonBounce()
 
 	//BLOCK bottom-right collision
 
-	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON || this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON)
 	{
-
+		if (speedX > 0)
+		{
+			if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE &&
+				App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+			{
+				speedX = -speedX;
+			}
+		}
 	}
 
 
@@ -2018,7 +2026,325 @@ void Enemy_Balloon::balloonBounce()
 	}
 }
 
+void Enemy_Balloon::balloonBounce2()
+{
+	iPoint tile = { position.x / TILE_SIZE, position.y / TILE_SIZE };
 
+	//FLOOR COLLISION
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		for (int i = 1; i < 6; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y + 5, tile.x + i).id == ModuleTileset::TileType::WALL)
+			{
+				speedY2 = 4.8f;
+				break;
+			}
+		}
+	}
+
+	//ROOF COLLISION
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedY2 > 0)
+		{
+			for (int i = 1; i < 6; ++i)
+			{
+				if (App->tileset->getTileLevel(tile.y, tile.x + i).id == ModuleTileset::TileType::WALL)
+				{
+					speedY2 = -speedY2;
+					break;
+				}
+			}
+		}
+	}
+
+	//RIGHT WALL COLLISION
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+
+		for (int i = 0; i < 5; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y + i, tile.x + 6).id == ModuleTileset::TileType::WALL)
+			{
+				speedX2 = -speedX2;
+				break;
+			}
+		}
+
+	}
+
+
+	//LEFT WALL COLLISION
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		for (int i = 0; i < 5; ++i)
+		{
+			if (App->tileset->getTileLevel(tile.y + i, tile.x).id == ModuleTileset::TileType::WALL)
+			{
+				speedX2 = -speedX2;
+				break;
+			}
+		}
+	}
+
+
+	//BREAKABLE BLOCK COLLISION
+
+	//top face
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedY2 < 0)
+		{
+			for (int i = 0; i < 6; ++i)
+			{
+				if (App->tileset->getTileLevel(tile.y + 5, tile.x + i).id == ModuleTileset::TileType::BREAKABLE)
+				{
+					speedY2 = 1.8f;
+					break;
+				}
+			}
+		}
+	}
+
+	//bottom face
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedY2 > 0)
+		{
+			for (int i = 0; i < 6; ++i)
+			{
+				if (App->tileset->getTileLevel(tile.y, tile.x + i).id == ModuleTileset::TileType::BREAKABLE)
+				{
+					speedY2 = -speedY2;
+					break;
+				}
+			}
+		}
+	}
+
+	//left face
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX2 > 0)
+		{
+			for (int i = 1; i < 5; ++i)
+			{
+				if (App->tileset->getTileLevel(tile.y + i, tile.x + 6).id == ModuleTileset::TileType::BREAKABLE)
+				{
+					speedX2 = -speedX2;
+					break;
+				}
+			}
+		}
+	}
+
+	//right face
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX2 < 0)
+		{
+			for (int i = 1; i < 5; ++i)
+			{
+				if (App->tileset->getTileLevel(tile.y + i, tile.x).id == ModuleTileset::TileType::BREAKABLE)
+				{
+					speedX2 = -speedX2;
+					break;
+				}
+			}
+		}
+	}
+
+	//-------------------CORNERS-------------------
+
+	//BLOCK top-left corner
+
+	if (tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX2 > 0)
+		{
+			if (App->tileset->getTileLevel(tile.y + 5, tile.x + 6).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y + 5, tile.x + 5).id == ModuleTileset::TileType::EMPTY)
+			{
+				speedX2 = -speedX2;
+			}
+		}
+	}
+
+	//BLOCK top-right corner
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (App->tileset->getTileLevel(tile.y + 5, tile.x).id == ModuleTileset::TileType::BREAKABLE && App->tileset->getTileLevel(tile.y + 4, tile.x).id == ModuleTileset::TileType::EMPTY && App->tileset->getTileLevel(tile.y + 5, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX2 < 0)
+			{
+				speedX2 = -speedX2;
+			}
+		}
+	}
+
+
+	//BLOCK bottom-left corner
+	//---------------------------------------------------------------REVISAR---------------------------------------------------------------
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX2 > 0)
+		{
+			if (App->tileset->getTileLevel(tile.y, tile.x + 6).id == ModuleTileset::TileType::BREAKABLE &&
+				App->tileset->getTileLevel(tile.y, tile.x + 5).id == ModuleTileset::TileType::EMPTY)
+			{
+				speedX2 = -speedX2;
+			}
+		}
+	}
+
+	//BLOCK bottom-right collision
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX2 < 0)
+		{
+			if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE &&
+				App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+			{
+				speedX2 = -speedX2;
+			}
+		}
+	}
+
+
+	//---------------------------------------------------------------------------------------------//
+
+
+	//top face
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedY2 < 0)
+		{
+			for (int i = 0; i < 6; ++i)
+			{
+				if (App->tileset->getTileLevel(tile.y + 5, tile.x + i).id == ModuleTileset::TileType::UNBREAKABLE)
+				{
+					speedY2 = 1.8f;
+					break;
+				}
+			}
+		}
+	}
+
+	//bottom face
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedY2 > 0)
+		{
+			for (int i = 0; i < 6; ++i)
+			{
+				if (App->tileset->getTileLevel(tile.y, tile.x + i).id == ModuleTileset::TileType::UNBREAKABLE)
+				{
+					speedY2 = -speedY2;
+					break;
+				}
+			}
+		}
+	}
+
+	//left face
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX2 > 0)
+		{
+			for (int i = 1; i < 5; ++i)
+			{
+				if (App->tileset->getTileLevel(tile.y + i, tile.x + 6).id == ModuleTileset::TileType::UNBREAKABLE)
+				{
+					speedX2 = -speedX2;
+					break;
+				}
+			}
+		}
+	}
+
+	//right face
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX2 < 0)
+		{
+			for (int i = 1; i < 5; ++i)
+			{
+				if (App->tileset->getTileLevel(tile.y + i, tile.x).id == ModuleTileset::TileType::UNBREAKABLE)
+				{
+					speedX2 = -speedX2;
+					break;
+				}
+			}
+		}
+	}
+
+	//-------------------CORNERS-------------------
+
+	//BLOCK top-left corner
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX2 > 0)
+		{
+			if (App->tileset->getTileLevel(tile.y + 5, tile.x + 6).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y + 5, tile.x + 5).id == ModuleTileset::TileType::EMPTY)
+			{
+				speedX2 = -speedX2;
+			}
+		}
+	}
+
+	//BLOCK top-right corner
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (App->tileset->getTileLevel(tile.y + 5, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y + 4, tile.x).id == ModuleTileset::TileType::EMPTY && App->tileset->getTileLevel(tile.y + 5, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+		{
+			if (speedX2 < 0)
+			{
+				speedX2 = -speedX2;
+			}
+		}
+	}
+
+
+	//BLOCK bottom-left corner
+	//---------------------------------------------------------------REVISAR---------------------------------------------------------------
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX2 > 0)
+		{
+			if (App->tileset->getTileLevel(tile.y, tile.x + 6).id == ModuleTileset::TileType::UNBREAKABLE &&
+				App->tileset->getTileLevel(tile.y, tile.x + 5).id == ModuleTileset::TileType::EMPTY)
+			{
+				speedX2 = -speedX2;
+			}
+		}
+	}
+
+	//BLOCK bottom-right collision
+
+	if (this->tipoBalloon == ENEMY_TYPE::VERYBIGBALLOON2)
+	{
+		if (speedX2 < 0)
+		{
+			if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE &&
+				App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY)
+			{
+				speedX2 = -speedX2;
+			}
+		}
+	}
+}
 
 
 void Enemy_Balloon::OnCollision(Collider* c2) {
