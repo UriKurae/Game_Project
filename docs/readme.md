@@ -88,7 +88,7 @@ If the video does not work click [HERE](https://www.youtube.com/watch?v=f5--zNF3
 
 # Latest version of PANG 
 
-### [Download]()
+### [Download](https://github.com/UriKurae/Pang/releases/tag/v1.0)
 
 
 ## More Information
