@@ -95,33 +95,33 @@ bool WinScene::Start()
 
 update_status WinScene::Update()
 {
-
-	if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene1 == true)
+	GamePad& pad = App->input->pads[0];
+	if ((App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || pad.a) && App->player->scene1 == true)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->scene2, 90);
 	}
 
-	else if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene2 == true)
+	else if ((App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || pad.a) && App->player->scene2 == true)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->scene3, 90);
 	}
 
-	else if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene3 == true)
+	else if ((App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || pad.a) && App->player->scene3 == true)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->scene4, 90);
 	}
 
-	else if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene4 == true)
+	else if ((App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || pad.a) && App->player->scene4 == true)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->scene5, 90);
 	}
 
-	else if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene5 == true)
+	else if ((App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || pad.a) && App->player->scene5 == true)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->scene6, 90);
 	}
 
-	else if (App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN && App->player->scene6 == true)
+	else if ((App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN || pad.a) && App->player->scene6 == true)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 90);
 	}
