@@ -200,10 +200,16 @@ update_status WinScene::PostUpdate()
 		}
 	}
 	else if (App->player->scene6 == true) {
-		App->render->Blit(winScene3, 0, 0, &(winAnim3.GetCurrentFrame()), 0.2f);
+		App->render->Blit(winTexture1, 97, 32, &(winAnim.GetCurrentFrame()), 0.2f);
+		App->fonts->BlitText(168, 145, winIndex, "6STAGE");
+		if (count == 0)
+		{
+			App->audio->PlayFx(winFx);
+			count++;
+		}
 	}
 
-	if (App->player->scene1 == true || App->player->scene2 == true || App->player->scene4 == true || App->player->scene5 == true) {
+	if (App->player->scene1 == true || App->player->scene2 == true || App->player->scene4 == true || App->player->scene5 == true || App->player->scene6 == true) {
 		App->fonts->BlitText(102, 170, winIndex, "TIME BONUS");
 		App->fonts->BlitText(214, 170, winIndex, bonusText);
 		App->fonts->BlitText(263, 170, winIndex, "PTS.");

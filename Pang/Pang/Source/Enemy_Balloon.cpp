@@ -232,7 +232,6 @@ void Enemy_Balloon::dynamiteDestroy()
 			App->player->lastBalloon = ENEMY_TYPE::VERYBIGBALLOON;
 			App->particles->AddParticle(particleDeathVeryBig, position.x, position.y, Collider::Type::NONE, 0);
 			App->audio->PlayFx(ballonExplosion);
-			App->boosters->balloonD = true;
 			App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON, position.x, position.y);
 			App->enemies->AddEnemy(ENEMY_TYPE::BIGBALLOON2, position.x, position.y);
 			App->player->score += 100;
@@ -247,8 +246,7 @@ void Enemy_Balloon::dynamiteDestroy()
 			App->player->lastBalloon = ENEMY_TYPE::BIGBALLOON;
 			App->particles->AddParticle(particleDeathBig, position.x, position.y, Collider::Type::NONE, 0);
 			App->audio->PlayFx(ballonExplosion);
-			App->boosters->balloonD = true;
-			App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x + 16, position.y);
+			App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x, position.y);
 			App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, position.x, position.y);
 			if (collider != nullptr) { collider->pendingToDelete = true; }
 			hasGeneratedDynamite = true;
@@ -261,8 +259,7 @@ void Enemy_Balloon::dynamiteDestroy()
 			App->player->lastBalloon = ENEMY_TYPE::SMALLBALLOON;
 			App->particles->AddParticle(particleDeathSmall, position.x, position.y, Collider::Type::NONE, 0);
 			App->audio->PlayFx(ballonExplosion);
-			App->boosters->balloonD = true;
-			App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x + 8, position.y);
+			App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x, position.y);
 			App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON2, position.x, position.y);
 			if (collider != nullptr) { collider->pendingToDelete = true; }
 			hasGeneratedDynamite = true;
@@ -2390,7 +2387,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 				App->particles->AddParticle(particleDeathBig, position.x, position.y, Collider::Type::NONE, 0);
 				App->audio->PlayFx(ballonExplosion);
 				App->boosters->balloonD = true;
-				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x + 16, position.y);
+				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON, position.x, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::SMALLBALLOON2, position.x, position.y);
 
 			}
@@ -2413,7 +2410,7 @@ void Enemy_Balloon::OnCollision(Collider* c2) {
 				App->particles->AddParticle(particleDeathSmall, position.x, position.y, Collider::Type::NONE, 0);
 				App->audio->PlayFx(ballonExplosion);
 				App->boosters->balloonD = true;
-				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x + 8, position.y);
+				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON, position.x, position.y);
 				App->enemies->AddEnemy(ENEMY_TYPE::VERYSMALLBALLOON2, position.x, position.y);
 
 			}

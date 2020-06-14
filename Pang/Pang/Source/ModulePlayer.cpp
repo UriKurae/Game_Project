@@ -29,6 +29,7 @@
 
 
 #include <stdio.h>
+#include "ModuleWindow.h"
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
@@ -224,11 +225,9 @@ update_status ModulePlayer::Update()
 	//TO GET THE MOUSE POSITION, SDL_GETMouseState, MUST FIX THE FOR SOME FUCKING REASON THE BALLS WONT SPAWN.
 	if (App->input->keys[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
 	{
-
 		SDL_GetMouseState(&mouseX, &mouseY);
 
-
-		App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, (mouseX / SCREEN_SIZE), (mouseY / SCREEN_SIZE));
+		App->enemies->AddEnemy(ENEMY_TYPE::VERYBIGBALLOON, (mouseX), (mouseY));
 	}
 
 	//Debug key for gamepad rumble testing purposes
@@ -494,7 +493,6 @@ update_status ModulePlayer::Update()
 		if (dynamiteBoosterStop > 0)
 		{
 			dynamiteBoosterStop--;
-
 		}
 		else
 		{
@@ -660,7 +658,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		if (c2 == App->boosters->typeBooster[DYNAMITE].collider)
 		{
 			dynamite = true;
-			dynamiteBoosterStop = 700;
+			dynamiteBoosterStop = 100;
 		}
 
 		if (c2 == App->boosters->typeBooster[DOUBLESHOT].collider)
