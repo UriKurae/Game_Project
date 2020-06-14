@@ -72,7 +72,7 @@ bool WinScene::Start()
 	++activeTextures; ++totalTextures;
 	winTexture245 = App->textures->Load("Assets/UI/WinScene245.png");
 	++activeTextures; ++totalTextures;
-	winFx = App->audio->LoadFx("Assets/Sound/Sounds_Gameplay/LevelComplete.ogg");
+	winFx = App->audio->LoadFx("Assets/Sound/Sounds_Gameplay/Level_Complete.ogg");
 	++activeFx; ++totalFx;
 
 	winScene3 = App->textures->Load("Assets/UI/AnimPlaneScene3.png");
@@ -89,6 +89,7 @@ bool WinScene::Start()
 
 	App->input->Enable();
 	
+	count = 0;
 
 	return ret;
 }
@@ -141,12 +142,20 @@ update_status WinScene::PostUpdate()
 	if (App->player->scene1 == true) {
 		App->render->Blit(winTexture1, 97, 32, &(winAnim.GetCurrentFrame()), 0.2f);
 		App->fonts->BlitText(168, 145, winIndex, "1STAGE");
-		App->audio->PlayFx(winFx);
+		if (count == 0)
+		{
+			App->audio->PlayFx(winFx);
+			count++;
+		}
 	}
 	else if (App->player->scene2 == true) {
 		App->render->Blit(winTexture245, 97, 32, &(winAnim2.GetCurrentFrame()), 0.2f);
 		App->fonts->BlitText(168, 145, winIndex, "2STAGE");
-		App->audio->PlayFx(winFx);
+		if (count == 0)
+		{
+			App->audio->PlayFx(winFx);
+			count++;
+		}
 	}
 	else if (App->player->scene3 == true) {
 		App->render->Blit(winScene3, 0, 0, &(winAnim3.GetCurrentFrame()), 0.2f);
@@ -154,12 +163,20 @@ update_status WinScene::PostUpdate()
 	else if (App->player->scene4 == true) {
 		App->render->Blit(winTexture245, 97, 32, &(winAnim4.GetCurrentFrame()), 0.2f);
 		App->fonts->BlitText(168, 145, winIndex, "4STAGE");
-		App->audio->PlayFx(winFx);
+		if (count == 0)
+		{
+			App->audio->PlayFx(winFx);
+			count++;
+		}
 	}
 	else if (App->player->scene5 == true) {
 		App->render->Blit(winTexture245, 97, 32, &(winAnim5.GetCurrentFrame()), 0.2f);
 		App->fonts->BlitText(168, 145, winIndex, "5STAGE");
-		App->audio->PlayFx(winFx);
+		if (count == 0)
+		{
+			App->audio->PlayFx(winFx);
+			count++;
+		}
 	}
 	else if (App->player->scene6 == true) {
 		App->render->Blit(winScene3, 0, 0, &(winAnim3.GetCurrentFrame()), 0.2f);

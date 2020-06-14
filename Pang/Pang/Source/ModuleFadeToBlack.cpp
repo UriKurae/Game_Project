@@ -7,6 +7,7 @@
 #include "ModuleHarpoon_HookShot.h"
 #include "ModuleHarpoon_DoubleShot.h"
 #include "ModuleGunShot.h"
+#include "ModuleAudio.h"
 
 #include "SDL/include/SDL_render.h"
 
@@ -28,6 +29,7 @@ bool ModuleFadeToBlack::Start()
 
 	// Enable blending mode for transparency
 	SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
+
 	return true;
 }
 
@@ -91,6 +93,8 @@ bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEna
 
 		ret = true;
 	}
+
+	App->audio->PlayMusic("Assets/Sound/Soundtracks/Silence.ogg", 0.0f);
 
 	return ret;
 }

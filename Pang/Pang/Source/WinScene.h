@@ -50,6 +50,8 @@ public:
 	uint winFx = 0;
 
 	int winCountdown = 340;
+
+	int count = 0;
 };
 
 #endif
