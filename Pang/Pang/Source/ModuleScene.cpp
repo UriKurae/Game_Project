@@ -54,7 +54,6 @@ bool ModuleScene::Start()
 
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 0.0f);
 
-
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
@@ -173,7 +172,7 @@ bool ModuleScene::CleanUp()
 	App->sceneIntro->countdown = 1;
 	
 	App->textures->Unload(App->boosters->texture);
-	--totalTextures;
+	--App->boosters->totalTextures;
 
 	App->textures->Unload(bgTexture);
 	--totalTextures;
@@ -181,20 +180,12 @@ bool ModuleScene::CleanUp()
 	--totalTextures;
 	App->textures->Unload(deathTexture2);
 	--totalTextures;
-	
-	App->collisions->RemoveCollider(leftWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(rightWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(upperWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(lowerWall);
-	--totalColliders;
 
 	App->collisions->RemoveCollider(App->boosters->typeBooster->collider);
+	--App->boosters->totalColliders;
 
 	App->textures->Unload(App->enemies->texture);
-
+	--App->enemies->totalTextures;
 
 	return true;
 

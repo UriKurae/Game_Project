@@ -144,6 +144,7 @@ bool ModulePlayer::Start()
 
 	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!✕-:©✕ " };
 	uiIndex = App->fonts->Load("Assets/UI/Fonts/Pang_font.png", lookupTable, 1);
+	++activeFonts; ++totalFonts;
 	char timeTable[] = { "0123456789" };
 	timeIndex = App->fonts->Load("Assets/UI/CountdownNumbers.png", timeTable, 1);
 	++activeFonts; ++totalFonts;
@@ -161,95 +162,6 @@ bool ModulePlayer::Start()
 	return ret;
 }
 
-
-/*void ModulePlayer::upStairs()
-{
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || pad.l_y < 0 || pad.up)
-	{
-		if (!destroyed)
-		{
-
-			if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
-			{
-				if (currentAnimation != &upAnim)
-				{
-					upAnim.Reset();
-					currentAnimation = &upAnim;
-
-				}
-
-				position.y--;
-			}
-
-
-			if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS)
-			{
-				if (currentAnimation != &idleAnim)
-				{
-					idleAnim.Reset();
-					currentAnimation = &idleAnim;
-				}
-				position.y = 124;
-			}
-			collider->SetPos(position.x, position.y);
-			checkIfNeedToFall();
-		}
-	}
-
-	checkIfNeedToFall();
-
-}
-
-
-void ModulePlayer::downStairs()
-{
-	LOG("%i  %i", position.x, position.y);
-
-	if ((App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || pad.l_y > 0 || pad.down) && !destroyed)
-	{
-		
-		if (App->tileset->getTileLevel(tile.y + 3, tile.x + 1).id == ModuleTileset::TileType::STAIRS &&
-			position.y < SCREEN_HEIGHT - 77)
-		{
-			if (currentAnimation != &downAnim)
-			{
-				downAnim.Reset();
-				currentAnimation = &downAnim;
-
-			}
-			position.y++;
-		}
-
-		if (App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::TOP_STAIRS ||
-			App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::STAIRS)
-		{
-			if (currentAnimation != &downAnim)
-			{
-				downAnim.Reset();
-				currentAnimation = &downAnim;
-			}
-
-			position.y++;
-		}
-
-		if (App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::WALL)
-		{
-			if (currentAnimation != &idleAnim)
-			{
-				idleAnim.Reset();
-				currentAnimation = &idleAnim;
-			}
-		}
-		collider->SetPos(position.x, position.y);
-
-		checkIfNeedToFall();
-
-	}
-
-	checkIfNeedToFall();
-
-}
-*/
 void ModulePlayer::checkUnbreakable()
 {
 	LOG("%i  %i", tile.x, tile.y);
@@ -703,14 +615,7 @@ update_status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	/*if (c2->type == Collider::Type::PLAYER)
-	{
-		App->harpoon->Disable();
-		App->hookShot->Enable();
-	}*/
-
-
-	if (c2->type == Collider::Type::WALL /*|| c2->type == Collider::Type::UNBREAKABLE_BLOCK*/) {
+	if (c2->type == Collider::Type::WALL) {
 		if (c1->rect.x > c2->rect.x && c1->rect.x < c2->rect.x + c2->rect.w) {
 			position.x = position.x + 2;
 		}
@@ -726,59 +631,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		collider->SetPos(position.x, position.y);
 	}
 
-	/*if (c2->type == Collider::Type::STAIR) {
-		if (c1->rect.y <= c2->rect.y) {
-			if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
-				position.y -= 0.2f;
-				stairsAnim.Reset();
-				currentAnimation = &stairsAnim;
-			}
-		}
-
-		else if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !destroyed)
-		{
-			position.y -= 0.5f;
-
-			if (currentAnimation != &upAnim)
-			{
-				upAnim.Reset();
-				currentAnimation = &upAnim;
-			}
-
-		}
-
-		if (c1->rect.y + c1->rect.h >= c2->rect.y) {
-			if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) {
-				position.y += 0.2f;
-				stairsAnim.Reset();
-				currentAnimation = &stairsAnim;
-			}
-		}
-
-		else if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !destroyed)
-		{
-			position.y += 1;
-
-			if (currentAnimation != &downAnim)
-			{
-				downAnim.Reset();
-				currentAnimation = &downAnim;
-			}
-
-		}
-	}*/
-
-	//if (c2->type == Collider::Type::UNBREAKABLE_BLOCK) {
-	//	if (c1->rect.x > c2->rect.x && c1->rect.x < c2->rect.x + c2->rect.w) {
-	//		position.x = 30;
-	//	}
-
-	//	if (c1->rect.x + c1->rect.w > c2->rect.x && c1->rect.x + c1->rect.w < c2->rect.x + c2->rect.w) {
-	//		position.x = 30;
-	//	}
-
-	//}
-
 	if (c2->type == Collider::Type::BALLOON && godMode == false && inmunityTime == 0)
 	{
 		destroyed = true;
@@ -788,26 +640,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		lifes--;
 	}
 
-	//if (c2->type == Collider::Type::BALLOON && godMode == false && shield == true)
-	//{
-	//	shield = false;
-	//}
-
 	if (c2->type == Collider::Type::BALLOON && godMode == false && inmunityTime == 181)
 	{
 		inmunityTime--;
 	}
 	if (c2->type == Collider::Type::BOOSTERS) {
-
-		//if (App->boosters->booster[CLOCK] == true) {
-		//	App->boosters->collider[CLOCK]->pendingToDelete = true;
-		//	App->boosters->booster[CLOCK] == false;
-		//}
-		//
-		//if (App->boosters->booster[] == true) {
-		//	App->boosters->collider[CLOCK]->pendingToDelete = true;
-		//	App->boosters->booster[CLOCK] == false;
-		//}
 
 		//Normal boosters
 		if (c2 == App->boosters->typeBooster[SHIELD].collider)
@@ -876,6 +713,12 @@ bool ModulePlayer::CleanUp()
 	App->collisions->RemoveCollider(collider);
 	--totalColliders;
 	App->textures->Unload(lifesTexture1);
+	--totalTextures;
+	App->textures->Unload(readyTexture);
+	--totalTextures;
+	App->textures->Unload(gameOverTexture);
+	--totalTextures;
+	App->textures->Unload(timeTexture);
 	--totalTextures;
 
 	App->harpoon->Disable();

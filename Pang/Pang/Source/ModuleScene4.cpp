@@ -189,11 +189,6 @@ bool ModuleScene4::CleanUp()
 
 	App->sceneIntro->countdown = 1;
 
-	App->textures->Unload(App->boosters->texture);
-	--totalTextures;
-
-	App->textures->Unload(App->harpoon->texture);
-	--totalTextures;
 	App->textures->Unload(bgTexture);
 	--totalTextures;
 	App->textures->Unload(deathTexture1);
@@ -202,26 +197,12 @@ bool ModuleScene4::CleanUp()
 	--totalTextures;
 	App->textures->Unload(App->boosters->texture);
 	--totalTextures;
-	App->audio->UnloadFx(App->harpoon->HarpoonFx);
-	App->harpoon->totalFx--;
-
-	App->collisions->RemoveCollider(leftWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(rightWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(upperWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(lowerWall);
-	--totalColliders;
-	App->collisions->RemoveCollider(rightPlatform);
-	--totalColliders;
-	App->collisions->RemoveCollider(leftPlatform);
-	--totalColliders;
 
 	App->collisions->RemoveCollider(App->boosters->typeBooster->collider);
+	--App->boosters->totalColliders;
 
 	App->textures->Unload(App->enemies->texture);
-
+	--App->enemies->totalTextures;
 
 	return true;
 }

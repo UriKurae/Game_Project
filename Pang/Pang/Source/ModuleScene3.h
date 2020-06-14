@@ -57,20 +57,6 @@ public:
 	SDL_Texture* deathTexture1 = nullptr;
 	SDL_Texture* deathTexture2 = nullptr;
 
-	// The sprite rectangle for the ground
-
-	Collider* collider = nullptr;
-	Collider* rightWall = nullptr;
-	Collider* leftWall = nullptr;
-	Collider* upperWall = nullptr;
-	Collider* lowerWall = nullptr;
-
-	//Colliders for each block platform
-	Collider* leftUnDestroyablePlatform = nullptr;
-	Collider* rightUnDestroyablePlatform = nullptr;
-	Collider* topDestroyablePlatform = nullptr;
-	Collider* bottomDestroyablePlatform = nullptr;
-
 	//Change the music
 	bool musicBool1 = false;
 	bool musicBool2 = false;
