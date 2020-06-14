@@ -120,7 +120,8 @@ bool ModuleHookShot::Start()
 	HarpoonFx = App->audio->LoadFx("Assets/Sound/FX/NormalShoot.wav");
 	++totalFx;
 
-	//HitHookFX = App->audio->LoadFx("Assets/Sound/FX/")
+	HitHookFX = App->audio->LoadFx("Assets/Sound/FX/HookShot.wav");
+	++totalFx;
 
 	x = App->player->position.x;
 	y = App->player->position.y - speed;
@@ -141,6 +142,8 @@ update_status ModuleHookShot::Update()
 	{
 		App->audio->PlayFx(HarpoonFx);
 		++activeFx;
+
+		hitCount = 0;
 
 		currentAnimation = &hookShot;
 
@@ -271,21 +274,33 @@ void ModuleHookShot::unbreakableCollision()
 		currentAnimation = &idleHookShot;
 		hookShot.Reset();
 		timeToDestroy = true;
-		y = 8;
+		if (hitCount == 0)
+		{
+			App->audio->PlayFx(HitHookFX);
+			hitCount++;
+		}
 	}
 	else if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::EMPTY) {
 		increment = false;
 		currentAnimation = &idleHookShot;
 		hookShot.Reset();
 		timeToDestroy = true;
-		y = 8;
+		if (hitCount == 0)
+		{
+			App->audio->PlayFx(HitHookFX);
+			hitCount++;
+		}
 	}
 	else if (App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::UNBREAKABLE && App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::EMPTY) {
 		increment = false;
 		currentAnimation = &idleHookShot;
 		hookShot.Reset();
 		timeToDestroy = true;
-		y = 8;
+		if (hitCount == 0)
+		{
+			App->audio->PlayFx(HitHookFX);
+			hitCount++;
+		}
 	}
 }
 
@@ -299,6 +314,11 @@ void ModuleHookShot::wallCollision()
 		hookShot.Reset();
 		timeToDestroy = true;
 		y = 8;
+		if (hitCount == 0)
+		{
+			App->audio->PlayFx(HitHookFX);
+			hitCount++;
+		}
 	}
 }
 
@@ -342,6 +362,8 @@ bool ModuleHookShot::CleanUp()
 		App->textures->Unload(texture);
 		totalTextures--;
 		App->audio->UnloadFx(HarpoonFx);
+		--totalFx;
+		App->audio->UnloadFx(HitHookFX);
 		--totalFx;
 
 		if (!destroyed)

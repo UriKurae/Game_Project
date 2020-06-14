@@ -38,6 +38,7 @@ public:
 
 	uint HarpoonFx = 0;
 	uint HitHookFX = 0;
+	int hitCount = 0;
 
 	uint time = 5;
 	uint count = 0;
