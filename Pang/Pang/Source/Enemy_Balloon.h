@@ -28,6 +28,8 @@ public:
 	float speedY = 0.05f;
 	float gravity = 0.1f;
 	float speedX = 1.0f;
+	float speedX2 = -speedX;
+	float speedY2 = speedY;
 
 	uint ballonExplosion = 0;
 
@@ -35,13 +37,26 @@ public:
 
 	uint destroyBalloonsTime = 3;
 	uint destroyBalloonsCount = 0;
-	
+
 private:
 	// A set of steps that define the position in the screen
 	// And an animation for each step
 	Path path;
-	
+
+	iPoint tile;
+
 	void balloonBounce();
+	//void balloonBounce2();
+
+	void bigBalloonBounce();
+	void bigBalloonBounce2();
+
+	void smallBalloonBounce();
+	void smallBalloonBounce2();
+
+	void verySmallBalloonBounce();
+	void verySmallBalloonBounce2();
+
 	void MRUA();
 	void dynamiteDestroy();
 
