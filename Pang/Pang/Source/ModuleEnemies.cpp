@@ -100,31 +100,6 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPE type, int x, int y)
 
 		if(spawnQueue[i].type == ENEMY_TYPE::NO_TYPE)
 		{
-			//if (App->player->scene1 == true) 
-			//{
-			//	App->scene->balloonsOnScene++;
-			//}
-			//else if (App->player->scene2 == true) 
-			//{
-			//	App->scene2->balloonsOnScene++;
-			//}
-			//else if (App->player->scene3 == true)
-			//{
-			//	App->scene3->balloonsOnScene++;
-			//}
-			//else if (App->player->scene4 == true)
-			//{
-			//	App->scene4->balloonsOnScene++;
-			//}
-			//else if (App->player->scene5 == true)
-			//{
-			//	App->scene5->balloonsOnScene++;
-			//}
-			//else if (App->player->scene6 == true)
-			//{
-			//	App->scene6->balloonsOnScene++;
-			//}
-
 			App->enemies->balloon.balloonsOnScene++;
 
 			spawnQueue[i].type = type;

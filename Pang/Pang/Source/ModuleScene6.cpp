@@ -65,21 +65,21 @@ bool ModuleScene6::Start()
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtKeirin.ogg", 0.0f);
 
 	//Walls collider
-	lowerWall = App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);
+	/*lowerWall = App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);
 	++activeColliders; ++totalColliders;
 	leftWall = App->collisions->AddCollider({ 0, 0, 8, 208 }, Collider::Type::WALL);
 	++activeColliders; ++totalColliders;
 	upperWall = App->collisions->AddCollider({ 0, 0, 384, 8 }, Collider::Type::WALL);
 	++activeColliders; ++totalColliders;
 	rightWall = App->collisions->AddCollider({ 376, 0, 8, 208 }, Collider::Type::WALL);
-	++activeColliders; ++totalColliders;
+	++activeColliders; ++totalColliders;*/
 
-	leftPlatform = App->collisions->AddCollider({ 79,64,16,8 }, Collider::Type::UNBREAKABLE_BLOCK);
+	/*leftPlatform = App->collisions->AddCollider({ 79,64,16,8 }, Collider::Type::UNBREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 	rightPlatform = App->collisions->AddCollider({ 296,64,16,8 }, Collider::Type::UNBREAKABLE_BLOCK);
 	++activeColliders; ++totalColliders;
 	centralPlatform = App->collisions->AddCollider({ 184,64,16,8 }, Collider::Type::BREAKABLE_BLOCK);
-	++activeColliders; ++totalColliders;
+	++activeColliders; ++totalColliders;*/
 
 	App->player->Enable();
 	App->enemies->Enable();
@@ -94,8 +94,6 @@ bool ModuleScene6::Start()
 	App->player->uiIndex = 0;
 
 	App->player->score = 0;
-
-	App->enemies->balloon.balloonsOnScene = 2;
 
 	destroyedBlockCentral = false;
 
@@ -227,8 +225,6 @@ bool ModuleScene6::CleanUp()
 	App->textures->Unload(App->boosters->texture);
 	--totalTextures;
 
-	App->textures->Unload(App->harpoon->texture);
-	--totalTextures;
 	App->textures->Unload(bgTexture);
 	--totalTextures;
 	App->textures->Unload(deathTexture1);
@@ -237,8 +233,6 @@ bool ModuleScene6::CleanUp()
 	--totalTextures;
 	App->textures->Unload(App->boosters->texture);
 	--totalTextures;
-	App->audio->UnloadFx(App->harpoon->HarpoonFx);
-	App->harpoon->totalFx--;
 
 	App->collisions->RemoveCollider(leftWall);
 	--totalColliders;

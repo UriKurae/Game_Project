@@ -97,8 +97,6 @@ bool ModuleScene5::Start()
 
 	App->player->score = 0;
 
-	balloonsOnScene = 2;
-
 	App->player->scene1 = false;
 	App->player->scene2 = false;
 	App->player->scene3 = false;

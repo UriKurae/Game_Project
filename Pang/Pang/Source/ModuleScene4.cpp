@@ -98,8 +98,6 @@ bool ModuleScene4::Start()
 
 	App->player->score = 0;
 
-	App->enemies->balloon.balloonsOnScene = 1;
-
 	//Buff=App->collisions->AddCollider({ 20, 190, 10, 10 }, Collider::Type::PLAYER); FOR TESTS DON'T ERASE PLS
 
 	musicBool1 = true;

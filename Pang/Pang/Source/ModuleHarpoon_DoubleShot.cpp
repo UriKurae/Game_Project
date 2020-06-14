@@ -507,17 +507,16 @@ bool ModuleDoubleShot::CleanUp()
 
 	for (uint i = 0; i < SHOTS; i++)
 	{
-		if (harpoon[i].destroyed == true)
+
+
+		if (harpoon[i].colliderH != nullptr)
 		{
-
-			if (!harpoon[i].destroyed)
-			{
-				App->collisions->RemoveCollider(harpoon[i].colliderH);
-				totalColliders--;
-				activeColliders = 0;
-			}
-
+			App->collisions->RemoveCollider(harpoon[i].colliderH);
+			totalColliders--;
+			activeColliders = 0;
 		}
+
+
 	}
 
 	return true;

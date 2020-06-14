@@ -53,6 +53,9 @@ bool ModuleParticles::CleanUp()
 		}
 	}
 
+	App->audio->UnloadFx(gunShotHit);
+	App->textures->Unload(texture);
+
 	return true;
 }
 
