@@ -131,6 +131,8 @@ public:
 	//Dynamite Booster
 
 	bool dynamite = false;
+	int dynamiteBoosterDelay = 0;
+	int dynamiteBoosterStop = 0;
 
 	//Doubleshot Booster
 	bool doubleshot = false;

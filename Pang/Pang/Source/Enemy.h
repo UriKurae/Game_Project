@@ -33,6 +33,8 @@ public:
 	virtual void OnCollision(Collider* collider);
 
 public:
+
+	bool hasGeneratedDynamite = false;
 	// The current position in the world
 	iPoint position;
 

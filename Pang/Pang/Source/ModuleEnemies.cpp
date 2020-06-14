@@ -198,21 +198,21 @@ void ModuleEnemies::destroyDynamiteBalloons()
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		int notSmallBalloons = 0;
-		if (enemies[i] != nullptr && enemies[i]->collider->rect.h == 40)
+		if (enemies[i] != nullptr && enemies[i]->collider->rect.h == 40 && enemies[i]->hasGeneratedDynamite == true)
 		{
 			enemies[i]->collider->pendingToDelete = true;
 			enemies[i] = nullptr;
 			notSmallBalloons++;
 			break;
 		}
-		else if (enemies[i] != nullptr && enemies[i]->collider->rect.h == 26)
+		else if (enemies[i] != nullptr && enemies[i]->collider->rect.h == 26 && enemies[i]->hasGeneratedDynamite == true)
 		{
 			enemies[i]->collider->pendingToDelete = true;
 			enemies[i] = nullptr;
 			notSmallBalloons++;
 			break;
 		}
-		else if (enemies[i] != nullptr && enemies[i]->collider->rect.h == 14)
+		else if (enemies[i] != nullptr && enemies[i]->collider->rect.h == 14 && enemies[i]->hasGeneratedDynamite == true)
 		{
 			enemies[i]->collider->pendingToDelete = true;
 			enemies[i] = nullptr;

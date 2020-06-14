@@ -567,6 +567,16 @@ update_status ModulePlayer::Update()
 
 		if (stopTime > 0) { stopTime--; }
 
+		if (dynamiteBoosterStop > 0)
+		{
+			dynamiteBoosterStop--;
+
+		}
+		else
+		{
+			dynamite = false;
+
+		}
 
 	}
 
@@ -816,6 +826,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		if (c2 == App->boosters->typeBooster[DYNAMITE].collider)
 		{
 			dynamite = true;
+			dynamiteBoosterStop = 700;
 		}
 
 		if (c2 == App->boosters->typeBooster[DOUBLESHOT].collider)
