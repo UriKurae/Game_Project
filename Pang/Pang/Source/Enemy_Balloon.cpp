@@ -270,6 +270,25 @@ void Enemy_Balloon::dynamiteDestroy()
 		}
 
 		App->player->dynamiteBoosterDelay = 10;
+
+		countDestroyBalloons++;
+
+		if (countDestroyBalloons % 60 == 0 && timeDestroyBalloons > 0 && App->enemies->balloon.balloonsOnScene > 0 && App->player->destroyed == false) {
+			timeDestroyBalloons--;
+		}
+
+		if (timeDestroyBalloons == 0)
+		{
+			App->player->dynamite = false;
+			timeDestroyBalloons = 3;
+			countDestroyBalloons = 0;
+		}
+	}
+	else if (App->player->destroyed == false)
+	{
+		App->player->dynamite = false;
+		timeDestroyBalloons = 3;
+		countDestroyBalloons = 0;
 	}
 }
 

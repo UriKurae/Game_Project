@@ -67,11 +67,7 @@ update_status ModuleDebugInfo::Update()
 
 update_status ModuleDebugInfo::PostUpdate()
 {
-	if (!debugMemLeaks)
-	{
-		App->fonts->BlitText(10, 1, debugFont, "PRESS F2 TO OPEN MEM LEAKS DEBUG INFO");
-	}
-	else
+	if (debugMemLeaks == true)
 	{
 		App->fonts->BlitText(10, 1, debugFont, "PRESS F2 TO CLOSE MEM LEAKS DEBUG INFO");
 

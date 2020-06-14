@@ -232,9 +232,6 @@ update_status ModuleBoosters::PostUpdate()
 	{
 		if (typeBooster[i].booster == true)
 		{
-			if (typeBooster[SHIELD].booster == true) {
-				typeBooster[SHIELD].posX += 5;
-			}
 			App->render->Blit(texture, typeBooster[i].posX, typeBooster[i].posY, &(typeBooster[i].anim.GetCurrentFrame()), 1.0f);
 		}
 	}

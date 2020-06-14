@@ -38,6 +38,9 @@ public:
 	uint destroyBalloonsTime = 3;
 	uint destroyBalloonsCount = 0;
 
+	int countDestroyBalloons = 0;
+	int timeDestroyBalloons = 3;
+
 private:
 	// A set of steps that define the position in the screen
 	// And an animation for each step
