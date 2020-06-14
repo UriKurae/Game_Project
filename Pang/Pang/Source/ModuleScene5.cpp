@@ -61,28 +61,6 @@ bool ModuleScene5::Start()
 
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtKeirin.ogg", 0.0f);
 
-	//Walls collider
-	lowerWall = App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);
-	++activeColliders; ++totalColliders;
-	leftWall = App->collisions->AddCollider({ 0, 0, 8, 208 }, Collider::Type::WALL);
-	++activeColliders; ++totalColliders;
-	upperWall = App->collisions->AddCollider({ 0, 0, 384, 8 }, Collider::Type::WALL);
-	++activeColliders; ++totalColliders;
-	rightWall = App->collisions->AddCollider({ 376, 0, 8, 208 }, Collider::Type::WALL);
-	++activeColliders; ++totalColliders;
-
-	topLeftBlock = App->collisions->AddCollider({ 96,48,8,22 }, Collider::Type::UNBREAKABLE_BLOCK);
-	++activeColliders; ++totalColliders;
-	bottomLeftBlock = App->collisions->AddCollider({ 96,70,8,22 }, Collider::Type::UNBREAKABLE_BLOCK);
-	++activeColliders; ++totalColliders;
-	midBlock = App->collisions->AddCollider({ 192,48,8,22 }, Collider::Type::UNBREAKABLE_BLOCK);
-	++activeColliders; ++totalColliders;
-	topRightBlock = App->collisions->AddCollider({ 287,48,8,22 }, Collider::Type::UNBREAKABLE_BLOCK);
-	++activeColliders; ++totalColliders;
-	bottomRightBlock = App->collisions->AddCollider({ 287,70,8,22 }, Collider::Type::UNBREAKABLE_BLOCK);
-	++activeColliders; ++totalColliders;
-
-
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();

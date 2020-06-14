@@ -80,21 +80,6 @@ bool ModuleScene2::Start()
 
 	App->audio->PlayMusic("Assets/Sound/Soundtracks/MtFuji.ogg", 0.0f);
 
-	//Walls collider
-	lowerWall = App->collisions->AddCollider({ 0, 200, 384, 8 }, Collider::Type::WALL);
-	++activeColliders; ++totalColliders;
-	leftWall = App->collisions->AddCollider({ 0, 0, 8, 208 }, Collider::Type::WALL);
-	++activeColliders; ++totalColliders;
-	upperWall = App->collisions->AddCollider({ 0, 0, 384, 8 }, Collider::Type::WALL);
-	++activeColliders; ++totalColliders;
-	rightWall = App->collisions->AddCollider({ 376, 0, 8, 208 }, Collider::Type::WALL);
-	++activeColliders; ++totalColliders;
-
-	leftPlatform = App->collisions->AddCollider({ 161,81,31,6 }, Collider::Type::BREAKABLE_BLOCK);
-	++activeColliders; ++totalColliders;
-	rightPlatform = App->collisions->AddCollider({ 192,81,31,6 }, Collider::Type::BREAKABLE_BLOCK);
-	++activeColliders; ++totalColliders;
-
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();

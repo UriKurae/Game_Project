@@ -84,29 +84,40 @@ bool ModuleGunShot::Start()
 	return true;
 }
 
+
+void ModuleGunShot::shot()
+{
+	App->audio->PlayFx(gunShotFx);
+	++activeFx;
+
+	x = App->player->position.x + 10;
+	y = App->player->position.y - 2;
+
+	App->particles->AddParticle(gunShotParticle, x - 3, y - 6, Collider::Type::NONE, 0);
+
+	shotGun.speed.y = -2.0f;
+	App->particles->AddParticle(shotGun, x - 3, y + 2, Collider::Type::PLAYER_SHOT, 0);
+}
+
+
 update_status ModuleGunShot::Update()
 {
 	update_status ret = update_status::UPDATE_CONTINUE;
 	GamePad& pad = App->input->pads[0];
 
-	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || pad.a) && App->player->destroyed == false && App->player->currWeapon == 2 && 
+	if (App->player->destroyed == false && App->player->currWeapon == 2 && 
 		App->enemies->balloon.balloonsOnScene > 0 && !canShot && App->player->ready == 0)
 	{
-		if (canShot == 0)
+		if (canShot == 0 && pad.a)
 		{
-			App->audio->PlayFx(gunShotFx);
-			++activeFx;
+			shot();
+			canShot = 10;
 
-			x = App->player->position.x + 10;
-			y = App->player->position.y - 2;
-
-			App->particles->AddParticle(gunShotParticle, x - 3, y - 6, Collider::Type::NONE, 0);
-
-			shotGun.speed.y = -2.0f;
-			App->particles->AddParticle(shotGun, x - 3, y + 2, Collider::Type::PLAYER_SHOT, 0);
-			canShot = 30;
-
-		}		
+		}
+		else if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+		{
+			shot();
+		}
 	}
 		
 	if (canShot > 0){ canShot--; }

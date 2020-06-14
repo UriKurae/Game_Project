@@ -415,6 +415,38 @@ update_status ModulePlayer::Update()
 				}
 			}
 		}
+		//SOLVED SHOT ANIMATION IF SPACE IS ON REPEAT
+		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT || pad.a)
+		{
+			countForIdleAnim--;
+			if (countForIdleAnim == 0)
+			{
+				currentAnimation = &idleAnim;
+				countForIdleAnim = 10;
+			}
+		}
+
+		//if space is on repeat and movement detected
+		if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT) && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+		{
+			currentAnimation = &leftAnim;
+		}
+		if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT) && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+		{
+			currentAnimation = &rightAnim;
+		}
+
+		
+		//Detect when S and D or S and A are pressed at the same time
+		if ((App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || pad.down) && (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || pad.right))
+		{
+			currentAnimation = &rightAnim;
+		}
+		if ((App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || pad.right) && (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || pad.left))
+		{
+			currentAnimation = &leftAnim;
+		}
+
 
 		//Detect when A and D are pressed at the same time and set the current animation to idle
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT ||
@@ -424,7 +456,7 @@ update_status ModulePlayer::Update()
 			currentAnimation = &idleAnim;
 			position.x = position.x;
 		}
-		// If no up/down movement detected, set the current animation back to idle
+		// If no movement detected, set the current animation back to idle
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE &&
 			App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE &&
 			App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_IDLE &&
@@ -510,7 +542,8 @@ update_status ModulePlayer::Update()
 				position.y++;
 			}
 
-			if (App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::WALL)
+			if (App->tileset->getTileLevel(tile.y + 4, tile.x + 1).id == ModuleTileset::TileType::WALL && 
+				App->tileset->getTileLevel(tile.y+3, tile.x+1).id == ModuleTileset::TileType::STAIRS)
 			{
 				if (currentAnimation != &idleAnim)
 				{

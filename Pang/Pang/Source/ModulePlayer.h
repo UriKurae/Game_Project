@@ -138,6 +138,8 @@ public:
 	//Current weapon Normal Harpoon = 0, Hookshot = 1, Gunshot = 2, DoubleShot = 3.
 	int currWeapon = 0;
 
+	int countForIdleAnim = 10;
+
 
 	//Enum class for Enemy Type
 	enum class ENEMY_TYPE lastBalloon;

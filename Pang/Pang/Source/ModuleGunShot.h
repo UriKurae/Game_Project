@@ -48,4 +48,6 @@ public:
 	update_status PostUpdate() override;
 
 	bool CleanUp() override;
+
+	void shot();
 };

@@ -134,6 +134,8 @@ update_status ModuleHarpoon::Update()
 	update_status ret = update_status::UPDATE_CONTINUE;
 	GamePad& pad = App->input->pads[0];
 
+
+
 	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || pad.a) && destroyed == true && App->player->destroyed == false && App->player->currWeapon == 0 && 
 		App->enemies->balloon.balloonsOnScene > 0 && App->player->ready == 0)
 		{
@@ -148,7 +150,7 @@ update_status ModuleHarpoon::Update()
 		y = App->player->position.y - 2;
 		destroyed = false;
 
-		colliderH = App->collisions->AddCollider({ (int)x, (int)y, 9, (int)h }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
+		colliderH = App->collisions->AddCollider({ x, y, 9, (int)h }, Collider::Type::PLAYER_SHOT, (Module*)App->harpoon);
 		++activeColliders; ++totalColliders;
 
 		App->particles->AddParticle(harpoonShotParticle, x - 3, y - 6, Collider::Type::NONE, 0);
@@ -176,6 +178,8 @@ update_status ModuleHarpoon::Update()
 
 	}
 
+
+
 	breakableCollision();
 	unbreakableCollision();
 	wallCollision();
@@ -183,8 +187,8 @@ update_status ModuleHarpoon::Update()
 	return ret;
 }
 
-void ModuleHarpoon::breakableCollision() {
-
+void ModuleHarpoon::breakableCollision() 
+{
 	iPoint tile = { x / TILE_SIZE, y / TILE_SIZE };
 
 	if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::BREAKABLE) {
@@ -223,7 +227,6 @@ void ModuleHarpoon::breakableCollision() {
 void ModuleHarpoon::unbreakableCollision()
 {
 	iPoint tile = { x / TILE_SIZE, y / TILE_SIZE };
-
 	if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::UNBREAKABLE) {
 		this->colliderH->pendingToDelete = true;
 		--activeColliders; --totalColliders;
@@ -256,8 +259,8 @@ void ModuleHarpoon::unbreakableCollision()
 void ModuleHarpoon::wallCollision()
 {
 	iPoint tile = { x / TILE_SIZE, y / TILE_SIZE };
-
 	if (App->tileset->getTileLevel(tile.y, tile.x).id == ModuleTileset::TileType::WALL && App->tileset->getTileLevel(tile.y, tile.x + 1).id == ModuleTileset::TileType::WALL) {
+		
 		this->colliderH->pendingToDelete = true;
 		--activeColliders; --totalColliders;
 		destroyed = true;
